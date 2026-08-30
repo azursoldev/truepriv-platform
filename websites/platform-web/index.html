@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DPODPCO Platform — Automated NDPA Compliance Management SaaS</title>
+  <meta name="description" content="The leading multi-tenant compliance SaaS platform in Nigeria. Automate RoPA generation, DPIA risk scoring, 30-day DSAR pipelines, and statutory NDPC audits.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-accent: #10b981;
+      --bg: #020617;
+      --card-bg: #0f172a;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .header {
+      padding: 1.25rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(12px);
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .logo-badge {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: #fff;
+      font-weight: 800;
+      padding: 0.4rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+    }
+    .brand-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .app-launch-btn {
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.6rem 1.25rem;
+      border-radius: 0.6rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+    }
+    .app-launch-btn:hover {
+      background: #047857;
+      transform: translateY(-1px);
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4.5rem 2rem;
+      flex: 1;
+    }
+    .hero {
+      text-align: center;
+      max-width: 840px;
+      margin: 0 auto 4rem;
+    }
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 0.3rem 0.8rem;
+      border-radius: 9999px;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 2.25rem;
+    }
+    .hero-ctas {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .primary-btn {
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.9rem 2.25rem;
+      border-radius: 0.75rem;
+      text-decoration: none;
+      box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4);
+      transition: transform 0.2s ease;
+    }
+    .primary-btn:hover {
+      transform: translateY(-2px);
+    }
+    .secondary-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.9rem 1.75rem;
+      border-radius: 0.75rem;
+      text-decoration: none;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      border-radius: 1rem;
+    }
+    .feature-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    .feature-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo-container">
+      <div class="logo-badge">DPODPCO</div>
+      <div class="brand-title">Compliance Management SaaS</div>
+    </div>
+    <div class="nav-actions">
+      <!-- Architectural Separation: Direct link to the SaaS application -->
+      <a href="http://127.0.0.1:3000" class="app-launch-btn">Sign In to SaaS App &rarr;</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="badge">NDPA 2023 AUTOMATION PLATFORM</div>
+      <h1>Automate 80% of Repetitive Compliance Work</h1>
+      <p>Purpose-built for Nigerian Corporates, Outsourced DPOs, and Licensed DPCOs. Replace manual spreadsheets with auto-populated RoPA, DPIA risk scoring, and 1-click NDPC audit filing packs.</p>
+      <div class="hero-ctas">
+        <a href="http://127.0.0.1:3000" class="primary-btn">Launch SaaS Application</a>
+        <a href="#features" class="secondary-btn">Explore Platform Features</a>
+      </div>
+    </section>
+
+    <section id="features" class="features-grid">
+      <div class="feature-card">
+        <h3>⚡ 1-Click RoPA Industry Autofill</h3>
+        <p>Pre-populated processing inventories for Fintech, Healthcare, E-Commerce, and Telecoms with automatic NDPA Section 25 legal basis mapping.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🛡️ 5x5 DPIA Risk Matrix & Screening</h3>
+        <p>Interactive inherent vs residual risk calculation with automated high-risk triggers for biometrics and cross-border transfers.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🏛️ NDPC Statutory Audit Filing Generator</h3>
+        <p>Complete GAID 6-domain audit evaluation with real-time scoring and certified PDF filing report generation bearing DPCO digital seals.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 DPODPCO Compliance Platform. All rights reserved. Nigeria Data Protection Act 2023 Compliant.</p>
+  </footer>
+</body>
+</html>
