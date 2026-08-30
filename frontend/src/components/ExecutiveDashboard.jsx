@@ -1,6 +1,7 @@
 import React from 'react';
 import { 
   ShieldCheck, 
+  ShieldAlert,
   AlertTriangle, 
   Clock, 
   Flame, 
