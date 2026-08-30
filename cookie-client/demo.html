@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NDPA Cookie Consent SDK Demo — DPODPCO Platform</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      max-width: 720px;
+      width: 100%;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
+    }
+    h1 { color: #38bdf8; font-size: 24px; margin-top: 0; }
+    p { color: #94a3b8; line-height: 1.6; }
+    .badge {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .card {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 24px;
+    }
+    pre {
+      background: #090d16;
+      color: #a5f3fc;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      overflow-x: auto;
+    }
+    button {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+    button:hover { background: #0369a1; }
+    #status-box {
+      margin-top: 16px;
+      padding: 12px;
+      background: #1e293b;
+      border: 1px dashed #475569;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 13px;
+      color: #38bdf8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="badge">🇳🇬 NDPA 2023 Statutory Compliance</div>
+    <h1>DPODPCO Cookie Consent SDK</h1>
+    <p>
+      This demonstration shows how client corporate websites integrate the ultra-lightweight Vanilla JS cookie consent banner. It automatically records consent logs to the DPODPCO platform for NDPC regulatory audit defense.
+    </p>
+
+    <div class="card">
+      <h3 style="margin-top:0; color:#f1f5f9;">1. How to Embed on Client Websites</h3>
+      <p>Simply paste this snippet before the closing <code>&lt;/body&gt;</code> tag:</p>
+      <pre>&lt;script 
+  src="http://127.0.0.1:8000/embeds/dp-consent.js" 
+  data-tenant-id="tenant-uuid-12345" 
+  data-company-name="First National Fintech Ltd"
+  data-primary-color="#059669"
+  data-privacy-url="/privacy-policy"&gt;
+&lt;/script&gt;</pre>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0; color:#f1f5f9;">2. Interactive SDK Controls</h3>
+      <button onclick="DPConsent.openPreferences()">Open Cookie Preferences</button>
+      <button onclick="localStorage.removeItem('dp_consent_tenant-demo-fintech'); location.reload();" style="background:#475569;">Reset Stored Consent</button>
+      
+      <div id="status-box">Listening for consent events...</div>
+    </div>
+  </div>
+
+  <!-- Include Local SDK Script -->
+  <script 
+    src="./dp-consent.js" 
+    data-tenant-id="tenant-demo-fintech" 
+    data-company-name="First Atlantic Fintech Nigeria Ltd"
+    data-primary-color="#059669"
+    data-privacy-url="#privacy">
+  </script>
+
+  <script>
+    function updateStatus(consent) {
+      document.getElementById('status-box').innerHTML = 
+        '<strong>Current Consent State:</strong><br>' + 
+        JSON.stringify(consent, null, 2).replace(/\n/g, '<br>').replace(/ /g, '&nbsp;');
+    }
+    window.addEventListener('dpConsentUpdated', function(e) {
+      updateStatus(e.detail);
+    });
+    window.addEventListener('DOMContentLoaded', function() {
+      var existing = DPConsent.getConsent();
+      if (existing) updateStatus(existing);
+    });
+  </script>
+</body>
+</html>
