@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Models;
+
+use App\Traits\BelongsToTenant;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class Notification extends Model
+{
+    use HasFactory, HasUuids, BelongsToTenant;
+
+    protected $fillable = [
+        'tenant_id',
+        'user_id',
+        'title',
+        'message',
+        'type',
+        'action_url',
+        'is_read',
+        'read_at',
+    ];
+
+    protected $casts = [
+        'is_read' => 'boolean',
+        'read_at' => 'datetime',
+    ];
+
+    public function tenant(): BelongsTo
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+}

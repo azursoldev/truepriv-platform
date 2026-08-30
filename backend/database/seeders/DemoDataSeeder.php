@@ -6,13 +6,19 @@ use App\Models\AuditChecklistItem;
 use App\Models\AuditEvidence;
 use App\Models\AuditFinding;
 use App\Models\AuditProject;
+use App\Models\CompanyProfile;
 use App\Models\CookieBanner;
 use App\Models\CookieConsent;
 use App\Models\DataBreach;
+use App\Models\DataControllerClassification;
+use App\Models\DpcoProfile;
 use App\Models\DpiaAssessment;
+use App\Models\DpoProfile;
 use App\Models\DsarRequest;
+use App\Models\OnboardingQuestion;
 use App\Models\Policy;
 use App\Models\RopaActivity;
+use App\Models\Subscription;
 use App\Models\Tenant;
 use App\Models\TenantClientOrganization;
 use App\Models\User;
@@ -61,6 +67,42 @@ class DemoDataSeeder extends Seeder
             'is_active' => true,
         ]);
 
+        CompanyProfile::create([
+            'tenant_id' => $apexTenant->id,
+            'cac_rc_number' => 'RC-1489201',
+            'tax_identification_number' => 'TIN-29104918-0001',
+            'sector' => 'Banking & Financial Technology',
+            'data_protection_officer_name' => 'Amina Bello',
+            'data_protection_officer_email' => 'dpo@apexmfb.ng',
+            'mdc_classification_tier' => 'mdc_high',
+            'employee_count_bracket' => '100-250 employees',
+            'annual_data_subjects_processed' => 150000,
+            'registered_office_address' => 'Plot 12, Adeola Odeku Street, Victoria Island, Lagos State',
+        ]);
+
+        DataControllerClassification::create([
+            'tenant_id' => $apexTenant->id,
+            'calculated_tier' => 'mdc_high',
+            'criteria_evaluated' => [
+                'financial_data' => true,
+                'biometric_kyc' => true,
+                'records_volume' => 150000,
+            ],
+            'annual_filing_fee_applicable' => 250000.00,
+            'mandatory_dpo_required' => true,
+            'statutory_audit_mandatory' => true,
+        ]);
+
+        Subscription::create([
+            'tenant_id' => $apexTenant->id,
+            'plan_tier' => 'growth_enterprise',
+            'billing_cycle' => 'annual',
+            'price_ngn' => 1500000.00,
+            'status' => 'active',
+            'current_period_start' => now()->startOfYear(),
+            'current_period_end' => now()->endOfYear(),
+        ]);
+
         $apexAdmin = User::create([
             'tenant_id' => $apexTenant->id,
             'name' => 'Tunde Bakare',
@@ -98,6 +140,15 @@ class DemoDataSeeder extends Seeder
             'is_active' => true,
         ]);
 
+        DpoProfile::create([
+            'tenant_id' => $fortressTenant->id,
+            'lead_consultant_name' => 'Barrister Chukwuma Obi',
+            'lead_consultant_email' => 'lead.dpo@fortressadvisory.ng',
+            'professional_certifications' => ['CDPO (Certified Data Protection Officer)', 'CIPM', 'LLM Cyberlaw'],
+            'consulting_tier' => 'executive_partner',
+            'active_client_capacity' => 15,
+        ]);
+
         $fortressDpoUser = User::create([
             'tenant_id' => $fortressTenant->id,
             'name' => 'Barrister Chukwuma Obi (Lead DPO)',
@@ -123,6 +174,16 @@ class DemoDataSeeder extends Seeder
             'address' => '24A Glover Road, Ikoyi',
             'state' => 'Lagos',
             'is_active' => true,
+        ]);
+
+        DpcoProfile::create([
+            'tenant_id' => $vanguardTenant->id,
+            'ndpc_license_number' => 'NDPC/DPCO/2026/042',
+            'managing_partner_name' => 'Dr. Folake Adeleke',
+            'managing_partner_email' => 'lead.partner@vanguarddpco.ng',
+            'accreditation_year' => 2026,
+            'digital_seal_signature_hash' => 'SHA256:88391AC9901482E198305F9A88710B6C',
+            'license_status' => 'active',
         ]);
 
         $vanguardLeadAuditor = User::create([
@@ -539,5 +600,53 @@ class DemoDataSeeder extends Seeder
             'published_at' => now()->subDays(15),
             'created_by' => $apexDpo->id,
         ]);
+
+        // 14. Standard NDPA Onboarding Assessment Baseline Questions
+        $onboardingQuestions = [
+            [
+                'category' => 'Governance & Leadership',
+                'question_text' => 'Has your organization formally designated a certified Data Protection Officer (DPO) and registered them with the NDPC?',
+                'explanation_guide' => 'Required under NDPA Section 24 & 32 for Major Data Controllers processing significant volumes of personal data.',
+                'weight_points' => 10,
+                'is_mandatory' => true,
+                'display_order' => 1,
+            ],
+            [
+                'category' => 'Inventory & RoPA',
+                'question_text' => 'Does your organization maintain an up-to-date Record of Processing Activities (RoPA) specifying lawful bases and retention schedules?',
+                'explanation_guide' => 'Mandated by NDPA Section 24 across all departments handling customer, employee, or vendor data.',
+                'weight_points' => 10,
+                'is_mandatory' => true,
+                'display_order' => 2,
+            ],
+            [
+                'category' => 'Data Subject Rights',
+                'question_text' => 'Do you have an established pipeline to fulfill Data Subject Access Requests (DSARs) within the statutory 30-calendar-day SLA?',
+                'explanation_guide' => 'Pursuant to NDPA Sections 34-38, data subjects have enforceable rights to access, rectify, or erase their records.',
+                'weight_points' => 10,
+                'is_mandatory' => true,
+                'display_order' => 3,
+            ],
+            [
+                'category' => 'Incident Response',
+                'question_text' => 'Is there a documented 72-hour Data Breach Response Protocol for notifying the NDPC upon discovery of a high-risk security breach?',
+                'explanation_guide' => 'NDPA Section 40 requires notification to the Commission within 72 hours where feasible.',
+                'weight_points' => 10,
+                'is_mandatory' => true,
+                'display_order' => 4,
+            ],
+            [
+                'category' => 'Third-Party Processors',
+                'question_text' => 'Do all third-party cloud hosting, payment gateway, and software vendors have executed Data Processing Agreements (DPAs)?',
+                'explanation_guide' => 'NDPA Section 29 requires binding contractual guarantees from all data processors.',
+                'weight_points' => 10,
+                'is_mandatory' => true,
+                'display_order' => 5,
+            ],
+        ];
+
+        foreach ($onboardingQuestions as $q) {
+            OnboardingQuestion::create($q);
+        }
     }
 }

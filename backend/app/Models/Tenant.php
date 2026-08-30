@@ -84,6 +84,41 @@ class Tenant extends Model
         return $this->hasMany(Policy::class);
     }
 
+    public function companyProfile(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(CompanyProfile::class);
+    }
+
+    public function dpoProfile(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(DpoProfile::class);
+    }
+
+    public function dpcoProfile(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(DpcoProfile::class);
+    }
+
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function classifications(): HasMany
+    {
+        return $this->hasMany(DataControllerClassification::class);
+    }
+
+    public function guestInvitations(): HasMany
+    {
+        return $this->hasMany(GuestInvitation::class);
+    }
+
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
+
     /**
      * If this tenant is a DPCO firm or Outsourced DPO, get managed client organizations.
      */
