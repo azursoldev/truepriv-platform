@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('tenant_id')->constrained('tenants')->cascadeOnDelete();
             $table->uuidMorphs('signable'); // signable_type, signable_id
-            $table->foreignId('signer_user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignUuid('signer_user_id')->constrained('users')->cascadeOnDelete();
             $table->string('signer_role', 50);
             $table->string('signature_hash', 64)->nullable();
             $table->string('ip_address', 45)->nullable();
@@ -31,7 +31,7 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('tenant_id')->constrained('tenants')->cascadeOnDelete();
-            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('title', 255);
             $table->text('message');
             $table->enum('type', ['breach_urgent_72h', 'dsar_sla_urgent', 'audit_deadline_march15', 'dpa_missing', 'approval_request', 'general'])->default('general');
@@ -47,7 +47,7 @@ return new class extends Migration
         Schema::create('audit_logs', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('tenant_id')->nullable()->constrained('tenants')->cascadeOnDelete();
-            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('action', 100);
             $table->string('entity_type', 255)->nullable();
             $table->string('entity_id', 255)->nullable();

@@ -29,13 +29,12 @@ return new class extends Migration
             $table->text('dpo_recommendations')->nullable();
             $table->enum('dpo_sign_off_status', ['pending', 'approved', 'requires_consultation_ndpc', 'rejected'])->default('pending');
             $table->text('dpco_review_notes')->nullable();
-            $table->unsignedBigInteger('approved_by')->nullable();
+            $table->foreignUuid('approved_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamp('approved_at')->nullable();
             $table->timestamps();
 
             $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
             $table->foreign('ropa_id')->references('id')->on('ropa_activities')->onDelete('set null');
-            $table->foreign('approved_by')->references('id')->on('users')->onDelete('set null');
             $table->index(['tenant_id', 'dpo_sign_off_status', 'residual_risk_level'], 'dpia_tenant_status_risk_idx');
         });
     }

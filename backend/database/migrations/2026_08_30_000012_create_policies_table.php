@@ -24,11 +24,10 @@ return new class extends Migration
             $table->string('version')->default('1.0');
             $table->enum('status', ['draft', 'published', 'archived'])->default('draft');
             $table->timestamp('published_at')->nullable();
-            $table->unsignedBigInteger('created_by')->nullable();
+            $table->foreignUuid('created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
 
             $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
             $table->index(['tenant_id', 'type', 'status']);
         });
     }

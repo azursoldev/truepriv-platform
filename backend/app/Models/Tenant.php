@@ -23,6 +23,7 @@ class Tenant extends Model
         'contact_phone',
         'address',
         'state',
+        'data_residency',
         'compliance_score',
         'settings',
         'is_active',
@@ -133,5 +134,41 @@ class Tenant extends Model
     public function managingFirms(): HasMany
     {
         return $this->hasMany(TenantClientOrganization::class, 'client_tenant_id');
+    }
+
+    /**
+     * Check if tenant has an entitled active paid subscription to export official compliance reports (PDF/CSV).
+     * Starter / Trial tiers cannot trigger official compliance report exports.
+     */
+    public function canExportComplianceReports(): bool
+    {
+        return $this->subscriptions()
+            ->where('status', 'active')
+            ->whereIn('plan_tier', ['growth_enterprise', 'dpo_unlimited', 'dpco_audit_suite'])
+            ->exists();
+    }
+
+    /**
+     * Resolve the active database connection name for this tenant based on data residency.
+     */
+    public function getDatabaseConnection(): string
+    {
+        // When dual residency is disabled, always route to local_nigeria connection
+        if (!config('residency.enabled', false)) {
+            return config('residency.default_residency', 'local_nigeria');
+        }
+
+        return $this->data_residency === 'global_aws' ? 'global_aws' : 'local_nigeria';
+    }
+
+    /**
+     * Get human-readable description of the tenant's data residency infrastructure.
+     */
+    public function getDataResidencyLabel(): string
+    {
+        $residency = $this->data_residency ?? 'local_nigeria';
+        $regionConfig = config("residency.regions.{$residency}");
+
+        return $regionConfig['name'] ?? 'Primary Nigerian Onshore Cloud';
     }
 }

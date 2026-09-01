@@ -22,9 +22,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
 
-    // 1. Public Authentication & Scaffolding Endpoints
+    // 1. Public Authentication, Feature Flags & Scaffolding Endpoints
     Route::post('/auth/login', [AuthController::class, 'login']);
     Route::post('/auth/register', [AuthController::class, 'register']);
+    Route::get('/features', [AuthController::class, 'getFeatures']);
     Route::get('/templates', [TemplateController::class, 'index']);
     Route::get('/templates/{slug}', [TemplateController::class, 'show']);
 
@@ -33,7 +34,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/cookie-consent/log', [CookieController::class, 'logConsent']);
 
     // 3. Authenticated API Routes
-    Route::middleware('auth:sanctum')->group(function () {
+    Route::middleware(['auth:sanctum', 'idle_timeout'])->group(function () {
 
         Route::get('/auth/me', [AuthController::class, 'me']);
         Route::post('/auth/logout', [AuthController::class, 'logout']);

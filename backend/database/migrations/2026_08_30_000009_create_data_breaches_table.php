@@ -50,11 +50,10 @@ return new class extends Migration
                 'ndpc_notified',
                 'closed'
             ])->default('reported_triage');
-            $table->unsignedBigInteger('lead_responder_id')->nullable();
+            $table->foreignUuid('lead_responder_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
 
             $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
-            $table->foreign('lead_responder_id')->references('id')->on('users')->onDelete('set null');
             $table->index(['tenant_id', 'status', 'ndpc_notification_deadline'], 'breach_tenant_status_sla_idx');
         });
     }

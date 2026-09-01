@@ -33,8 +33,20 @@ export default function Header({ user, tenant, accessibleClients, onSwitchTenant
         </div>
       </div>
 
-      {/* Active Workspace / Tenant Context Switcher */}
+      {/* Active Workspace / Tenant Context Switcher & Infrastructure Badge */}
       <div className="flex items-center gap-3">
+        {tenant && (
+          <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-slate-800/80 border border-slate-700/80 rounded-xl text-xs text-slate-300">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="text-slate-400">Residency:</span>
+            <strong className="text-emerald-400 font-semibold">
+              {tenant.data_residency === 'global_aws' 
+                ? '☁️ Global AWS (eu-west-1)' 
+                : '🇳🇬 Local Onshore (Galaxy Backbone)'}
+            </strong>
+          </div>
+        )}
+
         {tenant && (
           <div className="relative">
             <button 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\IndustryTemplate;
 use App\Models\RopaActivity;
+use App\Models\Subscription;
 use App\Models\Tenant;
 use App\Models\TenantClientOrganization;
 use App\Models\User;
@@ -62,7 +63,8 @@ class AuthController extends Controller
             });
         }
 
-        $token = $user->createToken('auth-token')->plainTextToken;
+        // Enforce 12-hour absolute token expiration
+        $token = $user->createToken('auth-token', ['*'], now()->addHours(12))->plainTextToken;
 
         return response()->json([
             'success' => true,
@@ -120,6 +122,9 @@ class AuthController extends Controller
             }
         }
 
+        $residencyService = app(\App\Services\DataResidencyService::class);
+        $resolvedResidency = $residencyService->resolveTenantResidency($request->data_residency);
+
         $tenant = Tenant::create([
             'name' => $request->organization_name,
             'slug' => $tenantSlug,
@@ -127,6 +132,7 @@ class AuthController extends Controller
             'industry' => $industryName,
             'rc_number' => $request->rc_number,
             'state' => $request->state ?? 'Lagos',
+            'data_residency' => $resolvedResidency,
             'compliance_score' => 20.00,
             'is_active' => true,
         ]);
@@ -175,7 +181,23 @@ class AuthController extends Controller
             }
         }
 
-        $token = $user->createToken('auth-token')->plainTextToken;
+        // Create default onboarding trial subscription
+        Subscription::create([
+            'tenant_id' => $tenant->id,
+            'plan_tier' => match ($request->tenant_type) {
+                'dpco_firm' => 'dpco_audit_suite',
+                'outsourced_dpo' => 'dpo_unlimited',
+                default => 'starter_corporate',
+            },
+            'billing_cycle' => 'annual',
+            'price_ngn' => 0.00,
+            'status' => 'trialing',
+            'current_period_start' => now(),
+            'current_period_end' => now()->addDays(14),
+        ]);
+
+        // Enforce 12-hour absolute token expiration
+        $token = $user->createToken('auth-token', ['*'], now()->addHours(12))->plainTextToken;
 
         return response()->json([
             'success' => true,
@@ -211,6 +233,17 @@ class AuthController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Logged out successfully.'
+        ]);
+    }
+
+    /**
+     * Get active platform feature flags (e.g. Dual-Residency multi-region routing).
+     */
+    public function getFeatures(\App\Services\DataResidencyService $residencyService): JsonResponse
+    {
+        return response()->json([
+            'success' => true,
+            'features' => $residencyService->getResidencyFeatureMetadata(),
         ]);
     }
 }

@@ -45,12 +45,11 @@ return new class extends Migration
             ])->default('submitted');
             $table->text('response_summary')->nullable();
             $table->text('rejection_reason')->nullable();
-            $table->unsignedBigInteger('assigned_dpo_id')->nullable();
+            $table->foreignUuid('assigned_dpo_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamp('completed_at')->nullable();
             $table->timestamps();
 
             $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
-            $table->foreign('assigned_dpo_id')->references('id')->on('users')->onDelete('set null');
             $table->index(['tenant_id', 'status', 'sla_deadline']);
         });
     }

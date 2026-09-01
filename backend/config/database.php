@@ -64,6 +64,42 @@ return [
             ]) : [],
         ],
 
+        // 1. Primary Onshore Nigerian Database Connection (Galaxy Backbone / MainOne)
+        'local_nigeria' => [
+            'driver' => env('DB_LOCAL_DRIVER', env('DB_CONNECTION', 'mysql')),
+            'url' => env('DB_LOCAL_URL'),
+            'host' => env('DB_LOCAL_HOST', env('DB_HOST', '127.0.0.1')),
+            'port' => env('DB_LOCAL_PORT', env('DB_PORT', '3306')),
+            'database' => env('DB_LOCAL_DATABASE', env('DB_DATABASE', 'laravel')),
+            'username' => env('DB_LOCAL_USERNAME', env('DB_USERNAME', 'root')),
+            'password' => env('DB_LOCAL_PASSWORD', env('DB_PASSWORD', '')),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => env('DB_CHARSET', 'utf8mb4'),
+            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+        ],
+
+        // 2. Global AWS Offshore Database Connection (AWS eu-west-1 Ireland)
+        'global_aws' => [
+            'driver' => env('DB_AWS_DRIVER', env('DB_CONNECTION', 'mysql')),
+            'url' => env('DB_AWS_URL'),
+            'host' => env('DB_AWS_HOST', env('DB_HOST', '127.0.0.1')),
+            'port' => env('DB_AWS_PORT', env('DB_PORT', '3306')),
+            'database' => env('DB_AWS_DATABASE', env('DB_DATABASE', 'laravel')),
+            'username' => env('DB_AWS_USERNAME', env('DB_USERNAME', 'root')),
+            'password' => env('DB_AWS_PASSWORD', env('DB_PASSWORD', '')),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => env('DB_CHARSET', 'utf8mb4'),
+            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+        ],
+
         'mariadb' => [
             'driver' => 'mariadb',
             'url' => env('DB_URL'),

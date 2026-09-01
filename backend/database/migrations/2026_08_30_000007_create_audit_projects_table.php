@@ -13,7 +13,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('tenant_id'); // Corporate company being audited
             $table->uuid('dpco_firm_id')->nullable(); // Conducting DPCO firm
-            $table->unsignedBigInteger('lead_auditor_id')->nullable();
+            $table->foreignUuid('lead_auditor_id')->nullable()->constrained('users')->nullOnDelete();
             $table->integer('audit_year')->default(2026);
             $table->string('title'); // e.g. NDPC Statutory Annual Compliance Audit 2026
             $table->text('scope_description')->nullable();
@@ -42,7 +42,6 @@ return new class extends Migration
 
             $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
             $table->foreign('dpco_firm_id')->references('id')->on('tenants')->onDelete('set null');
-            $table->foreign('lead_auditor_id')->references('id')->on('users')->onDelete('set null');
             $table->index(['tenant_id', 'audit_year', 'status']);
         });
 
@@ -88,7 +87,7 @@ return new class extends Migration
             $table->enum('severity', ['critical', 'high', 'medium', 'low', 'observation'])->default('medium');
             $table->text('recommendation');
             $table->text('remediation_plan')->nullable();
-            $table->unsignedBigInteger('assigned_to')->nullable();
+            $table->foreignUuid('assigned_to')->nullable()->constrained('users')->nullOnDelete();
             $table->date('target_resolution_date')->nullable();
             $table->timestamp('resolved_at')->nullable();
             $table->enum('status', ['open', 'in_remediation', 'resolved', 'verified_closed'])->default('open');
@@ -96,7 +95,6 @@ return new class extends Migration
 
             $table->foreign('audit_project_id')->references('id')->on('audit_projects')->onDelete('cascade');
             $table->foreign('checklist_item_id')->references('id')->on('audit_checklist_items')->onDelete('set null');
-            $table->foreign('assigned_to')->references('id')->on('users')->onDelete('set null');
             $table->index(['audit_project_id', 'severity', 'status']);
         });
 
@@ -109,12 +107,11 @@ return new class extends Migration
             $table->string('file_path');
             $table->string('file_type')->nullable();
             $table->integer('file_size')->nullable(); // bytes
-            $table->unsignedBigInteger('uploaded_by')->nullable();
+            $table->foreignUuid('uploaded_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
 
             $table->foreign('audit_project_id')->references('id')->on('audit_projects')->onDelete('cascade');
             $table->foreign('checklist_item_id')->references('id')->on('audit_checklist_items')->onDelete('set null');
-            $table->foreign('uploaded_by')->references('id')->on('users')->onDelete('set null');
         });
     }
 

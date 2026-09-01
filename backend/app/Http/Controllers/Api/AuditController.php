@@ -204,16 +204,55 @@ class AuditController extends Controller
     /**
      * Generate official NDPC Statutory Audit Filing Report.
      */
-    public function generateReport(string $projectId)
+    public function generateReport(Request $request, string $projectId)
     {
-        $project = AuditProject::with([
-            'tenant',
-            'dpcoFirm',
+        $user = $request->user();
+        $activeTenant = app()->bound('current_tenant') ? app('current_tenant') : ($user ? $user->tenant : null);
+
+        if (!$activeTenant && (!$user || $user->role !== 'super_admin')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Tenant context missing.',
+            ], 400);
+        }
+
+        $project = AuditProject::withoutGlobalScopes()->with([
+            'tenant.subscriptions',
+            'dpcoFirm.subscriptions',
             'leadAuditor',
             'checklistItems',
             'findings',
             'evidences'
-        ])->findOrFail($projectId);
+        ])->find($projectId);
+
+        if (!$project) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Audit project not found.',
+            ], 404);
+        }
+
+        // 1. Multi-Tenant Isolation Check
+        $isDirectOwner = $activeTenant && $project->tenant_id === $activeTenant->id;
+        $isAssignedDpco = $activeTenant && $project->dpco_firm_id === $activeTenant->id;
+        $isSuperAdmin = $user && $user->role === 'super_admin';
+
+        if (!$isDirectOwner && !$isAssignedDpco && !$isSuperAdmin) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthorized. This audit project belongs to another organization.',
+            ], 403);
+        }
+
+        // 2. Subscription Entitlement Gate: Restrict official PDF/CSV export for Trial / Starter tier
+        if (!$isSuperAdmin && (!$activeTenant || !$activeTenant->canExportComplianceReports())) {
+            return response()->json([
+                'success' => false,
+                'error' => 'trial_export_restricted',
+                'message' => 'Official compliance report export (PDF/CSV) is restricted on the Starter Trial tier. Please upgrade to a paid subscription (Growth Enterprise or DPO Unlimited) to download official statutory audit filings.',
+                'upgrade_required' => true,
+            ], 403);
+        }
 
         $html = view('reports.ndpc_audit_report', [
             'project' => $project,

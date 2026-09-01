@@ -28,7 +28,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('tenant_id')->constrained('tenants')->cascadeOnDelete();
             $table->foreignUuid('question_id')->constrained('onboarding_questions')->cascadeOnDelete();
-            $table->foreignId('answered_by_user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('answered_by_user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->boolean('response_boolean')->nullable();
             $table->text('response_text')->nullable();
             $table->timestamps();

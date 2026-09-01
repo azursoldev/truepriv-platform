@@ -51,9 +51,10 @@ async function request(endpoint, options = {}) {
 }
 
 export const api = {
-  // Auth
+  // Auth & Platform Features
   login: (credentials) => request('/auth/login', { method: 'POST', body: JSON.stringify(credentials) }),
   register: (payload) => request('/auth/register', { method: 'POST', body: JSON.stringify(payload) }),
+  getFeatures: () => request('/features'),
   getMe: () => request('/auth/me'),
   logout: () => request('/auth/logout', { method: 'POST' }),
 

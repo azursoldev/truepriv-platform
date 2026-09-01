@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('dsar_actions', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('dsar_request_id')->constrained('dsar_requests')->cascadeOnDelete();
-            $table->foreignId('performed_by_user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('performed_by_user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->enum('action_type', ['id_verified', 'records_retrieved', 'redaction_applied', 'response_dispatched', 'rejected', 'sla_extended', 'note_logged'])->default('note_logged');
             $table->text('action_notes');
             $table->timestamps();
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('audit_project_id')->constrained('audit_projects')->cascadeOnDelete();
             $table->foreignUuid('finding_id')->nullable()->constrained('audit_findings')->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete();
             $table->text('comment_text');
             $table->timestamps();
 

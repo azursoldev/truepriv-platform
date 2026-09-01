@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('guest_invitations', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('tenant_id')->constrained('tenants')->cascadeOnDelete();
-            $table->foreignId('invited_by_user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('invited_by_user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('email', 255);
             $table->string('assigned_role', 50)->default('dept_champion');
             $table->string('target_department', 100)->nullable();

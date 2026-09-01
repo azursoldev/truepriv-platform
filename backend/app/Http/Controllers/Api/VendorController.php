@@ -38,6 +38,27 @@ class VendorController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
+        $tenant = app()->bound('current_tenant') ? app('current_tenant') : $request->user()->tenant;
+
+        if ($tenant) {
+            $hasPaidActivePlan = $tenant->subscriptions()
+                ->where('status', 'active')
+                ->whereIn('plan_tier', ['growth_enterprise', 'dpo_unlimited', 'dpco_audit_suite'])
+                ->exists();
+
+            if (!$hasPaidActivePlan) {
+                $vendorCount = Vendor::count();
+                if ($vendorCount >= 3) {
+                    return response()->json([
+                        'success' => false,
+                        'error' => 'trial_quota_exceeded',
+                        'message' => 'Starter Trial is restricted to a maximum of 3 third-party processors. Please upgrade your plan to register additional vendors.',
+                        'upgrade_required' => true,
+                    ], 403);
+                }
+            }
+        }
+
         $validated = $request->validate([
             'vendor_name' => 'required|string|max:255',
             'service_category' => 'required|string|max:255',

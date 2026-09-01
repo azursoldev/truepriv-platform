@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'tenant' => \App\Http\Middleware\ResolveTenantContext::class,
             'role' => \App\Http\Middleware\EnsureTenantRole::class,
+            'idle_timeout' => \App\Http\Middleware\EnforceTokenInactivityTimeout::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

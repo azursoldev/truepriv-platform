@@ -19,7 +19,7 @@ return new class extends Migration
                 'advisory_gap_assessment',
                 'incident_response_support'
             ])->default('annual_audit_filing');
-            $table->unsignedBigInteger('assigned_lead_auditor_id')->nullable();
+            $table->foreignUuid('assigned_lead_auditor_id')->nullable()->constrained('users')->nullOnDelete();
             $table->enum('status', ['active', 'pending_approval', 'completed', 'suspended'])->default('active');
             $table->date('engagement_start_date')->nullable();
             $table->date('engagement_end_date')->nullable();
@@ -27,7 +27,6 @@ return new class extends Migration
 
             $table->foreign('parent_tenant_id')->references('id')->on('tenants')->onDelete('cascade');
             $table->foreign('client_tenant_id')->references('id')->on('tenants')->onDelete('cascade');
-            $table->foreign('assigned_lead_auditor_id')->references('id')->on('users')->onDelete('set null');
             
             $table->unique(['parent_tenant_id', 'client_tenant_id'], 'tco_parent_client_unique');
         });

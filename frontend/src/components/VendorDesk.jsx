@@ -108,13 +108,18 @@ export default function VendorDesk({ onRefreshMetrics }) {
           </p>
         </div>
 
-        <button
-          onClick={() => setShowCreateModal(true)}
-          className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg shadow-purple-950/50 transition-all"
-        >
-          <Plus className="w-4 h-4" />
-          <span>Register Processor</span>
-        </button>
+        <div className="flex items-center gap-3">
+          <span className="text-[11px] bg-slate-800/80 text-slate-300 border border-slate-700 px-2.5 py-1 rounded-lg font-mono font-semibold">
+            Capacity: <strong className={vendors.length >= 3 ? "text-amber-400 font-bold" : "text-brand-400"}>{vendors.length}</strong> / 3 (Starter Quota)
+          </span>
+          <button
+            onClick={() => setShowCreateModal(true)}
+            className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg shadow-purple-950/50 transition-all"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Register Processor</span>
+          </button>
+        </div>
       </div>
 
       {/* Vendors Table */}

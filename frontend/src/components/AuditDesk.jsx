@@ -12,7 +12,7 @@ import {
   Sparkles,
   Award
 } from 'lucide-react';
-import { api } from '../lib/api';
+import { api, getAuthToken, getActiveTenantId } from '../lib/api';
 
 export default function AuditDesk({ onRefreshMetrics }) {
   const [projects, setProjects] = useState([]);
@@ -92,9 +92,46 @@ export default function AuditDesk({ onRefreshMetrics }) {
     }
   };
 
-  const handleDownloadPdf = () => {
+  const handleDownloadPdf = async () => {
     if (!activeProject) return;
-    window.open(`/api/v1/audits/${activeProject.id}/report`, '_blank');
+    try {
+      const token = getAuthToken();
+      const activeTenantId = getActiveTenantId();
+      const headers = {
+        'Accept': 'application/json, application/pdf',
+      };
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+      if (activeTenantId) headers['X-Tenant-ID'] = activeTenantId;
+
+      const response = await fetch(`/api/v1/audits/${activeProject.id}/report`, {
+        headers
+      });
+
+      if (response.status === 403) {
+        const data = await response.json();
+        setNotification({
+          type: 'error',
+          message: data.message || 'Official compliance report export (PDF) is restricted on the Starter Trial tier. Please upgrade to Growth Enterprise or DPO Unlimited.'
+        });
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error('Failed to generate audit report');
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `NDPC_Statutory_Audit_Report_${activeProject.audit_year}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      setNotification({ type: 'error', message: err.message });
+    }
   };
 
   const getDomainTitle = (domain) => {

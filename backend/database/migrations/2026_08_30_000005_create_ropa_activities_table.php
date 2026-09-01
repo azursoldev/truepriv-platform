@@ -43,12 +43,11 @@ return new class extends Migration
             $table->text('security_measures')->nullable(); // e.g. AES-256 encryption at rest, TLS 1.3, RBAC, MFA
             $table->boolean('requires_dpia')->default(false);
             $table->enum('status', ['draft', 'reviewed_by_dept', 'verified_by_dpo', 'approved_active'])->default('draft');
-            $table->unsignedBigInteger('reviewed_by')->nullable();
+            $table->foreignUuid('reviewed_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamp('approved_at')->nullable();
             $table->timestamps();
 
             $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
-            $table->foreign('reviewed_by')->references('id')->on('users')->onDelete('set null');
             $table->index(['tenant_id', 'department', 'status']);
         });
     }
