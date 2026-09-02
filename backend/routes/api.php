@@ -7,6 +7,9 @@ use App\Http\Controllers\Api\CookieController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\DpiaController;
 use App\Http\Controllers\Api\DsarController;
+use App\Http\Controllers\Api\ChampionInvitationController;
+use App\Http\Controllers\Api\LocalizationController;
+use App\Http\Controllers\Api\OnboardingController;
 use App\Http\Controllers\Api\PolicyController;
 use App\Http\Controllers\Api\RopaController;
 use App\Http\Controllers\Api\TemplateController;
@@ -29,9 +32,11 @@ Route::prefix('v1')->group(function () {
     Route::get('/templates', [TemplateController::class, 'index']);
     Route::get('/templates/{slug}', [TemplateController::class, 'show']);
 
-    // 2. Public Self-Service Endpoints (DSAR Portal & Cookie SDK)
+    // 2. Public Self-Service Endpoints (DSAR Portal, Cookie SDK & Champion Intake)
     Route::post('/public/dsar/submit', [DsarController::class, 'publicSubmit']);
     Route::post('/cookie-consent/log', [CookieController::class, 'logConsent']);
+    Route::get('/public/invitations/{token}', [ChampionInvitationController::class, 'resolvePublicToken']);
+    Route::post('/public/invitations/{token}/submit', [ChampionInvitationController::class, 'submitDepartmentData']);
 
     // 3. Authenticated API Routes
     Route::middleware(['auth:sanctum', 'idle_timeout'])->group(function () {
@@ -47,6 +52,19 @@ Route::prefix('v1')->group(function () {
 
             // Executive Dashboard & NDPA Readiness Score
             Route::get('/dashboard/metrics', [DashboardController::class, 'metrics']);
+
+            // Onboarding & MDC Classification Wizard
+            Route::get('/onboarding/questions', [OnboardingController::class, 'getQuestions']);
+            Route::post('/onboarding/submit', [OnboardingController::class, 'submitAnswers']);
+            Route::get('/onboarding/classification', [OnboardingController::class, 'getClassification']);
+
+            // Department Champion Invitations
+            Route::get('/invitations', [ChampionInvitationController::class, 'index']);
+            Route::post('/invitations', [ChampionInvitationController::class, 'store']);
+
+            // Dual-Residency Data Localization
+            Route::get('/localization/status', [LocalizationController::class, 'getStatus']);
+            Route::put('/localization/switch', [LocalizationController::class, 'switchResidency']);
 
             // RoPA (Record of Processing Activities)
             Route::get('/ropa', [RopaController::class, 'index']);

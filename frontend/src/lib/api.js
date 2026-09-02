@@ -115,4 +115,19 @@ export const api = {
   getPolicies: () => request('/policies'),
   generatePolicy: (data) => request('/policies/generate', { method: 'POST', body: JSON.stringify(data) }),
   updatePolicy: (id, data) => request(`/policies/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+
+  // Milestone 2: Onboarding & Classification
+  getOnboardingQuestions: () => request('/onboarding/questions'),
+  submitOnboardingAnswers: (data) => request('/onboarding/submit', { method: 'POST', body: JSON.stringify(data) }),
+  getOnboardingClassification: () => request('/onboarding/classification'),
+
+  // Milestone 2: Department Champion Invitations
+  getInvitations: () => request('/invitations'),
+  createInvitation: (data) => request('/invitations', { method: 'POST', body: JSON.stringify(data) }),
+  resolvePublicInvitation: (token) => request(`/public/invitations/${token}`),
+  submitPublicChampionData: (token, data) => request(`/public/invitations/${token}/submit`, { method: 'POST', body: JSON.stringify(data) }),
+
+  // Milestone 2: Dual-Residency Data Localization
+  getLocalizationStatus: () => request('/localization/status'),
+  switchLocalizationResidency: (residency) => request('/localization/switch', { method: 'PUT', body: JSON.stringify({ data_residency: residency }) }),
 };

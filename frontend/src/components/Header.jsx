@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Shield, Building2, User, ChevronDown, Check, LogOut, Globe, AlertTriangle, Clock } from 'lucide-react';
+import { Shield, Building2, User, ChevronDown, Check, LogOut, Globe, AlertTriangle, Clock, Scale, Users } from 'lucide-react';
 
-export default function Header({ user, tenant, accessibleClients, onSwitchTenant, onLogout, onOpenPublicPortal }) {
+export default function Header({ user, tenant, accessibleClients, onSwitchTenant, onLogout, onOpenPublicPortal, onOpenOnboarding, onOpenChampions }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const getTenantTypeBadge = (type) => {
@@ -106,6 +106,26 @@ export default function Header({ user, tenant, accessibleClients, onSwitchTenant
           </div>
         )}
 
+        {/* NDPA Assessment Wizard Launcher */}
+        <button
+          onClick={onOpenOnboarding}
+          title="Run NDPA Statutory Readiness & Section 48 MDC Classification Wizard"
+          className="hidden md:flex items-center gap-1.5 text-xs bg-brand-950/80 hover:bg-brand-900 border border-brand-700/60 text-brand-300 px-3 py-2 rounded-xl transition-all shadow-sm"
+        >
+          <Scale className="w-3.5 h-3.5 text-brand-400" />
+          <span>NDPA Wizard</span>
+        </button>
+
+        {/* Department Champions Inviter */}
+        <button
+          onClick={onOpenChampions}
+          title="Invite Department Champions (HR, IT, Finance, Operations)"
+          className="hidden md:flex items-center gap-1.5 text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 px-3 py-2 rounded-xl transition-all"
+        >
+          <Users className="w-3.5 h-3.5 text-purple-400" />
+          <span>Champions</span>
+        </button>
+
         {/* Public DSAR Portal Launcher */}
         <button
           onClick={onOpenPublicPortal}
@@ -113,7 +133,7 @@ export default function Header({ user, tenant, accessibleClients, onSwitchTenant
           className="hidden md:flex items-center gap-1.5 text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 px-3 py-2 rounded-xl transition-all"
         >
           <Globe className="w-3.5 h-3.5 text-sky-400" />
-          <span>Public DSAR Portal</span>
+          <span>Public DSAR</span>
         </button>
 
         {/* User Profile & Logout */}

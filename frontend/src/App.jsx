@@ -13,6 +13,8 @@ import PolicyDesk from './components/PolicyDesk';
 import PortfolioDesk from './components/PortfolioDesk';
 import PublicDsarPortal from './components/PublicDsarPortal';
 import AuthModal from './components/AuthModal';
+import OnboardingWizard from './components/OnboardingWizard';
+import ChampionInviteModal from './components/ChampionInviteModal';
 import { api, getAuthToken, removeAuthToken, setActiveTenantId } from './lib/api';
 
 export default function App() {
@@ -24,6 +26,8 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showPublicPortal, setShowPublicPortal] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [showChampions, setShowChampions] = useState(false);
 
   const initApp = async () => {
     setLoading(true);
@@ -135,6 +139,8 @@ export default function App() {
         onSwitchTenant={handleSwitchTenant}
         onLogout={handleLogout}
         onOpenPublicPortal={() => setShowPublicPortal(true)}
+        onOpenOnboarding={() => setShowOnboarding(true)}
+        onOpenChampions={() => setShowChampions(true)}
       />
 
       {/* Main Layout */}
@@ -154,6 +160,7 @@ export default function App() {
               metrics={metrics}
               onNavigate={setActiveTab}
               onAutoFillRopa={() => setActiveTab('ropa')}
+              onOpenOnboarding={() => setShowOnboarding(true)}
             />
           )}
 
@@ -200,6 +207,25 @@ export default function App() {
           )}
         </main>
       </div>
+
+      {/* Onboarding & MDC Classification Wizard Overlay */}
+      {showOnboarding && (
+        <OnboardingWizard
+          isOpen={showOnboarding}
+          onClose={() => setShowOnboarding(false)}
+          onComplete={async () => {
+            await refreshMetrics();
+          }}
+        />
+      )}
+
+      {/* Department Champion Invites Overlay */}
+      {showChampions && (
+        <ChampionInviteModal
+          isOpen={showChampions}
+          onClose={() => setShowChampions(false)}
+        />
+      )}
 
       {/* Public DSAR Portal Overlay */}
       {showPublicPortal && (
