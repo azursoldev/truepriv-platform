@@ -26,10 +26,10 @@ export default function Header({ user, tenant, accessibleClients, onSwitchTenant
         </div>
         <div>
           <div className="flex items-center gap-2">
-            <span className="font-bold text-lg text-white tracking-tight">DPODPCO</span>
+            <span className="font-extrabold text-lg text-white tracking-tight">TRUEPRIV</span>
             <span className="text-[10px] bg-brand-900/80 text-brand-300 border border-brand-700/50 px-1.5 py-0.5 rounded font-mono font-bold tracking-wider">NDPA 2023</span>
           </div>
-          <p className="text-[11px] text-slate-400 -mt-0.5">Nigeria Data Protection Compliance Platform</p>
+          <p className="text-[11px] text-slate-400 -mt-0.5">Truepriv Technologies Limited &bull; truepriv.com</p>
         </div>
       </div>
 

@@ -12,7 +12,11 @@ import {
   ArrowRight,
   TrendingUp,
   Sparkles,
-  ExternalLink
+  ExternalLink,
+  Trophy,
+  Zap,
+  Award,
+  Star
 } from 'lucide-react';
 
 export default function ExecutiveDashboard({ metrics, onNavigate, onAutoFillRopa }) {
@@ -165,7 +169,79 @@ export default function ExecutiveDashboard({ metrics, onNavigate, onAutoFillRopa
             <span className="font-semibold text-brand-400">Review → Verify → Approve</span>
           </div>
         </div>
+      </div>
 
+      {/* Gamification: Compliance Level, Streaks & Achievement Badges */}
+      <div className="glass-panel p-6 rounded-3xl relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-900/90 to-brand-950/40 border border-slate-800">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          
+          {/* Level Info & Streak */}
+          <div className="space-y-2">
+            <div className="flex items-center gap-2.5">
+              <span className="text-xs font-mono font-bold bg-amber-950 text-amber-300 border border-amber-800 px-3 py-1 rounded-full flex items-center gap-1.5 shadow-sm">
+                <Trophy className="w-3.5 h-3.5 text-amber-400" />
+                <span>LEVEL 3 &bull; NDPA ASSURANCE CHAMPION</span>
+              </span>
+              <span className="text-xs font-mono font-bold bg-orange-950/80 text-orange-400 border border-orange-800 px-2.5 py-1 rounded-full flex items-center gap-1">
+                <Zap className="w-3.5 h-3.5" />
+                <span>🔥 14-DAY COMPLIANCE STREAK</span>
+              </span>
+            </div>
+
+            <h3 className="text-lg font-bold text-white tracking-tight">Compliance Gamification & Mastery Quest</h3>
+            <p className="text-xs text-slate-300 max-w-xl">
+              Earn compliance XP, unlock regulatory armor badges, and level up your organization towards certified <strong>NDPC Audit Mastery</strong>.
+            </p>
+
+            {/* Level XP Progress Bar */}
+            <div className="pt-2 max-w-md">
+              <div className="flex items-center justify-between text-xs font-mono mb-1 text-slate-300">
+                <span>XP Progress to Level 4 (Certified Master):</span>
+                <strong className="text-brand-400">{Math.round(score * 10)} / 1000 XP</strong>
+              </div>
+              <div className="w-full bg-slate-950 h-3 rounded-full overflow-hidden border border-slate-800 p-0.5">
+                <div 
+                  className="h-full bg-gradient-to-r from-brand-500 to-emerald-400 rounded-full transition-all duration-1000"
+                  style={{ width: `${score}%` }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Unlocked Badges Showcase */}
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-2.5 flex-shrink-0">
+            <div className="p-3 bg-slate-950/80 border border-brand-500/40 rounded-2xl text-center flex flex-col items-center justify-center hover:scale-105 transition-transform group">
+              <div className="text-2xl mb-1 group-hover:rotate-6 transition-transform">🏆</div>
+              <div className="text-[11px] font-bold text-white">RoPA Master</div>
+              <div className="text-[9px] text-brand-400 font-mono">Unlocked</div>
+            </div>
+
+            <div className="p-3 bg-slate-950/80 border border-sky-500/40 rounded-2xl text-center flex flex-col items-center justify-center hover:scale-105 transition-transform group">
+              <div className="text-2xl mb-1 group-hover:rotate-6 transition-transform">🛡️</div>
+              <div className="text-[11px] font-bold text-white">DPIA Shield</div>
+              <div className="text-[9px] text-sky-400 font-mono">Unlocked</div>
+            </div>
+
+            <div className="p-3 bg-slate-950/80 border border-red-500/40 rounded-2xl text-center flex flex-col items-center justify-center hover:scale-105 transition-transform group">
+              <div className="text-2xl mb-1 group-hover:rotate-6 transition-transform">⚡</div>
+              <div className="text-[11px] font-bold text-white">72h Sentinel</div>
+              <div className="text-[9px] text-red-400 font-mono">Unlocked</div>
+            </div>
+
+            <div className="p-3 bg-slate-950/80 border border-purple-500/40 rounded-2xl text-center flex flex-col items-center justify-center hover:scale-105 transition-transform group">
+              <div className="text-2xl mb-1 group-hover:rotate-6 transition-transform">🤝</div>
+              <div className="text-[11px] font-bold text-white">DPA Guardian</div>
+              <div className="text-[9px] text-purple-400 font-mono">Unlocked</div>
+            </div>
+
+            <div className="p-3 bg-slate-950/40 border border-slate-800 rounded-2xl text-center flex flex-col items-center justify-center opacity-60">
+              <div className="text-2xl mb-1">👑</div>
+              <div className="text-[11px] font-bold text-slate-400">NDPC Master</div>
+              <div className="text-[9px] text-amber-500 font-mono font-semibold">Unlock @ 90%</div>
+            </div>
+          </div>
+
+        </div>
       </div>
 
       {/* 4 Operations Quadrants */}

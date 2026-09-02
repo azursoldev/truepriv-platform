@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DPODPCO Platform — Automated NDPA Compliance Management SaaS</title>
-  <meta name="description" content="The leading multi-tenant compliance SaaS platform in Nigeria. Automate RoPA generation, DPIA risk scoring, 30-day DSAR pipelines, and statutory NDPC audits.">
+  <title>Truepriv Technologies Limited — Automated NDPA 2023 Compliance Management SaaS</title>
+  <meta name="description" content="Truepriv Technologies Limited is Nigeria's enterprise compliance SaaS platform. Automate RoPA, 5x5 DPIA risk scoring, 30-day DSAR pipelines, and statutory NDPC annual audits.">
+  <link rel="canonical" href="https://truepriv.com/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -52,9 +53,13 @@
       letter-spacing: 0.05em;
     }
     .brand-title {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 700;
       letter-spacing: -0.02em;
+    }
+    .company-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
     }
     .nav-actions {
       display: flex;
@@ -142,26 +147,29 @@
       border-radius: 0.75rem;
       text-decoration: none;
     }
-    .features-grid {
+    .pricing-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
+      margin-top: 3rem;
     }
-    .feature-card {
+    .pricing-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       padding: 2rem;
       border-radius: 1rem;
+      text-align: left;
     }
-    .feature-card h3 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
+    .pricing-card.featured {
+      border-color: rgba(16, 185, 129, 0.5);
+      box-shadow: 0 10px 30px rgba(5, 150, 105, 0.15);
+    }
+    .price-tag {
+      font-size: 1.75rem;
+      font-weight: 800;
       color: #fff;
-    }
-    .feature-card p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      margin: 1rem 0;
     }
     .footer {
       border-top: 1px solid var(--border);
@@ -175,44 +183,71 @@
 <body>
   <header class="header">
     <div class="logo-container">
-      <div class="logo-badge">DPODPCO</div>
-      <div class="brand-title">Compliance Management SaaS</div>
+      <div class="logo-badge">TRUEPRIV</div>
+      <div>
+        <div class="brand-title">Truepriv Technologies Limited</div>
+        <div class="company-sub">Enterprise NDPA 2023 Compliance SaaS</div>
+      </div>
     </div>
     <div class="nav-actions">
       <!-- Architectural Separation: Direct link to the SaaS application -->
-      <a href="http://127.0.0.1:3000" class="app-launch-btn">Sign In to SaaS App &rarr;</a>
+      <a href="http://127.0.0.1:3000" class="app-launch-btn">Sign In to Truepriv SaaS Portal &rarr;</a>
     </div>
   </header>
 
   <main class="container">
     <section class="hero">
-      <div class="badge">NDPA 2023 AUTOMATION PLATFORM</div>
-      <h1>Automate 80% of Repetitive Compliance Work</h1>
-      <p>Purpose-built for Nigerian Corporates, Outsourced DPOs, and Licensed DPCOs. Replace manual spreadsheets with auto-populated RoPA, DPIA risk scoring, and 1-click NDPC audit filing packs.</p>
+      <div class="badge">TRUEPRIV.COM — NIGERIA DATA PROTECTION PLATFORM</div>
+      <h1>Automate 80% of Regulatory Compliance Operations</h1>
+      <p>Truepriv Technologies Limited provides corporate Data Controllers, Outsourced DPOs, and Licensed DPCOs with high-velocity RoPA automation, 5x5 DPIA risk scoring, 30-day DSAR pipelines, and certified NDPC audit packs.</p>
       <div class="hero-ctas">
-        <a href="http://127.0.0.1:3000" class="primary-btn">Launch SaaS Application</a>
-        <a href="#features" class="secondary-btn">Explore Platform Features</a>
+        <a href="http://127.0.0.1:3000" class="primary-btn">Launch Truepriv Portal</a>
+        <a href="#pricing" class="secondary-btn">View Enterprise Pricing</a>
       </div>
     </section>
 
-    <section id="features" class="features-grid">
-      <div class="feature-card">
-        <h3>⚡ 1-Click RoPA Industry Autofill</h3>
-        <p>Pre-populated processing inventories for Fintech, Healthcare, E-Commerce, and Telecoms with automatic NDPA Section 25 legal basis mapping.</p>
+    <section id="pricing" class="pricing-grid">
+      <div class="pricing-card">
+        <h3>🏢 Corporate Starter</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">For single-entity Data Controllers</p>
+        <div class="price-tag">₦750,000 <span style="font-size: 0.8rem; color: var(--text-muted);">/ year</span></div>
+        <ul style="font-size: 0.85rem; color: var(--text-muted); line-height: 2; padding-left: 1.25rem;">
+          <li>Automated RoPA Generation</li>
+          <li>30-Day DSAR Pipeline</li>
+          <li>72-Hour Breach Clock</li>
+          <li>Zero-Dependency Cookie SDK</li>
+        </ul>
       </div>
-      <div class="feature-card">
-        <h3>🛡️ 5x5 DPIA Risk Matrix & Screening</h3>
-        <p>Interactive inherent vs residual risk calculation with automated high-risk triggers for biometrics and cross-border transfers.</p>
+
+      <div class="pricing-card featured">
+        <div style="font-size: 0.75rem; font-weight: 700; color: #10b981; text-transform: uppercase;">Most Popular</div>
+        <h3>🛡️ Outsourced DPO Hub</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Multi-client advisory firm plan</p>
+        <div class="price-tag">₦2,500,000 <span style="font-size: 0.8rem; color: var(--text-muted);">/ year</span></div>
+        <ul style="font-size: 0.85rem; color: var(--text-muted); line-height: 2; padding-left: 1.25rem;">
+          <li>Up to 15 Corporate Sub-Workspaces</li>
+          <li>5x5 DPIA Risk Scoring Matrix</li>
+          <li>AI Decision Recommendation Logs</li>
+          <li>Omnichannel Consent Ledger</li>
+        </ul>
       </div>
-      <div class="feature-card">
-        <h3>🏛️ NDPC Statutory Audit Filing Generator</h3>
-        <p>Complete GAID 6-domain audit evaluation with real-time scoring and certified PDF filing report generation bearing DPCO digital seals.</p>
+
+      <div class="pricing-card">
+        <h3>🏛️ Licensed DPCO Suite</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Full assurance & audit practice</p>
+        <div class="price-tag">₦4,500,000 <span style="font-size: 0.8rem; color: var(--text-muted);">/ year</span></div>
+        <ul style="font-size: 0.85rem; color: var(--text-muted); line-height: 2; padding-left: 1.25rem;">
+          <li>Unlimited Audit Projects</li>
+          <li>GAID 6-Domain Dynamic Scoring</li>
+          <li>Official NDPC PDF Filing Generator</li>
+          <li>Digital Seal Verification Code</li>
+        </ul>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>&copy; 2026 DPODPCO Compliance Platform. All rights reserved. Nigeria Data Protection Act 2023 Compliant.</p>
+    <p>&copy; 2026 Truepriv Technologies Limited (truepriv.com). All rights reserved. Operating under NDPA 2023 regulations.</p>
   </footer>
 </body>
 </html>
