@@ -3,251 +3,1075 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Truepriv Technologies Limited — Automated NDPA 2023 Compliance Management SaaS</title>
-  <meta name="description" content="Truepriv Technologies Limited is Nigeria's enterprise compliance SaaS platform. Automate RoPA, 5x5 DPIA risk scoring, 30-day DSAR pipelines, and statutory NDPC annual audits.">
+  <title>Truepriv Technologies Limited — Enterprise NDPA 2023 Compliance Management SaaS</title>
+  <meta name="description" content="Truepriv Technologies Limited is Nigeria's premier compliance SaaS platform. Automate 80% of NDPA operations: 1-Click RoPA, 5x5 DPIA risk scoring, 72-Hour breach playbooks, and certified DPCO statutory audits.">
   <link rel="canonical" href="https://truepriv.com/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #059669;
-      --primary-accent: #10b981;
-      --bg: #020617;
-      --card-bg: #0f172a;
+      --primary-glow: #10b981;
+      --primary-light: #34d399;
+      --bg: #030712;
+      --bg-surface: #0b1329;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover-border: rgba(16, 185, 129, 0.4);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      --border: rgba(255, 255, 255, 0.08);
+      --text-dim: #64748b;
+      --accent-purple: #a855f7;
+      --accent-blue: #38bdf8;
+      --accent-amber: #f59e0b;
+      --accent-red: #ef4444;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: var(--bg);
       color: var(--text-main);
       line-height: 1.6;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(5, 150, 105, 0.18) 0%, transparent 60%),
+        radial-gradient(circle at 85% 30%, rgba(56, 189, 248, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 15% 70%, rgba(168, 85, 247, 0.06) 0%, transparent 50%);
+      background-attachment: fixed;
     }
+
+    /* Ambient Subtle Grid Pattern */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Header Navigation */
     .header {
-      padding: 1.25rem 2.5rem;
-      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 1rem 2.5rem;
+      border-bottom: 1px solid var(--card-border);
+      background: rgba(3, 7, 18, 0.85);
+      backdrop-filter: blur(16px);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(12px);
     }
-    .logo-container {
+
+    .brand-group {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.85rem;
+      text-decoration: none;
     }
-    .logo-badge {
-      background: linear-gradient(135deg, #059669, #10b981);
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
       color: #fff;
       font-weight: 800;
-      padding: 0.4rem 0.75rem;
-      border-radius: 0.5rem;
-      font-size: 0.9rem;
-      letter-spacing: 0.05em;
+      font-size: 1.1rem;
     }
-    .brand-title {
-      font-size: 1.15rem;
-      font-weight: 700;
+
+    .brand-text h1 {
+      font-size: 1.2rem;
+      font-weight: 800;
       letter-spacing: -0.02em;
+      color: #fff;
     }
-    .company-sub {
-      font-size: 0.75rem;
+
+    .brand-text p {
+      font-size: 0.72rem;
       color: var(--text-muted);
+      font-weight: 500;
     }
-    .nav-actions {
+
+    .nav-links {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 2rem;
+      list-style: none;
     }
-    .app-launch-btn {
-      background: var(--primary);
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
       color: #fff;
-      font-weight: 700;
-      font-size: 0.85rem;
-      padding: 0.6rem 1.25rem;
-      border-radius: 0.6rem;
+    }
+
+    .nav-cta {
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      color: #fff !important;
+      font-weight: 700 !important;
+      font-size: 0.85rem !important;
+      padding: 0.65rem 1.35rem;
+      border-radius: 0.75rem;
       text-decoration: none;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+      box-shadow: 0 4px 20px rgba(5, 150, 105, 0.35);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
-    .app-launch-btn:hover {
-      background: #047857;
+
+    .nav-cta:hover {
       transform: translateY(-1px);
+      box-shadow: 0 6px 25px rgba(16, 185, 129, 0.5);
     }
+
+    /* Container */
     .container {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 4.5rem 2rem;
-      flex: 1;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
     }
+
+    /* Hero Section */
     .hero {
       text-align: center;
-      max-width: 840px;
-      margin: 0 auto 4rem;
+      padding: 5.5rem 0 3.5rem;
+      max-width: 900px;
+      margin: 0 auto;
     }
-    .badge {
-      display: inline-block;
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-weight: 700;
-      background: rgba(16, 185, 129, 0.15);
+      background: rgba(16, 185, 129, 0.12);
       color: #34d399;
       border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 0.3rem 0.8rem;
+      padding: 0.35rem 0.95rem;
       border-radius: 9999px;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.75rem;
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.15);
     }
-    .hero h1 {
-      font-size: 3rem;
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #10b981;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
       font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 1.25rem;
-      background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(180deg, #ffffff 40%, #94a3b8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .hero p {
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      margin-bottom: 2.25rem;
+
+    .hero-title span {
+      background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .hero-ctas {
+
+    .hero-subtitle {
+      font-size: 1.18rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 780px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-actions {
       display: flex;
       justify-content: center;
-      gap: 1rem;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
     }
-    .primary-btn {
+
+    .btn-primary {
       background: linear-gradient(135deg, #059669 0%, #10b981 100%);
       color: #fff;
       font-weight: 700;
-      font-size: 1rem;
-      padding: 0.9rem 2.25rem;
-      border-radius: 0.75rem;
+      font-size: 1.05rem;
+      padding: 0.95rem 2.25rem;
+      border-radius: 0.85rem;
       text-decoration: none;
-      box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4);
-      transition: transform 0.2s ease;
+      box-shadow: 0 10px 30px rgba(5, 150, 105, 0.4);
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
     }
-    .primary-btn:hover {
+
+    .btn-primary:hover {
       transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(16, 185, 129, 0.5);
     }
-    .secondary-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
       color: var(--text-main);
       font-weight: 600;
-      font-size: 1rem;
-      padding: 0.9rem 1.75rem;
-      border-radius: 0.75rem;
+      font-size: 1.05rem;
+      padding: 0.95rem 2rem;
+      border-radius: 0.85rem;
       text-decoration: none;
+      backdrop-filter: blur(8px);
+      transition: all 0.2s ease;
     }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Metrics Strip */
+    .metrics-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin: 3.5rem 0 5rem;
+      padding: 1.75rem;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 1.25rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .metric-item {
+      text-align: center;
+      padding: 0 0.5rem;
+      border-right: 1px solid var(--card-border);
+    }
+
+    .metric-item:last-child {
+      border-right: none;
+    }
+
+    .metric-val {
+      font-size: 2.25rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: #fff;
+      margin-bottom: 0.2rem;
+    }
+
+    .metric-val.green { color: #10b981; }
+    .metric-val.amber { color: #f59e0b; }
+    .metric-val.blue { color: #38bdf8; }
+    .metric-val.purple { color: #c084fc; }
+
+    .metric-lbl {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Section Title */
+    .section-header {
+      text-align: center;
+      max-width: 750px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .section-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #10b981;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: 2.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+    }
+
+    /* 4 Pillars Grid */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 6rem;
+    }
+
+    .pillar-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1.25rem;
+      padding: 2.25rem;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .pillar-card:hover {
+      border-color: var(--card-hover-border);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+
+    .pillar-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .pillar-icon.green { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .pillar-icon.blue { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .pillar-icon.red { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .pillar-icon.purple { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+
+    .pillar-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+
+    .pillar-card p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .pillar-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .pillar-tag {
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      color: var(--text-muted);
+    }
+
+    /* PRICING SECTION - Perfectly Balanced 3-Column Grid */
+    .pricing-section {
+      padding: 2rem 0 6rem;
+    }
+
     .pricing-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+      align-items: stretch;
     }
+
     .pricing-card {
       background: var(--card-bg);
-      border: 1px solid var(--border);
-      padding: 2rem;
-      border-radius: 1rem;
-      text-align: left;
+      border: 1px solid var(--card-border);
+      border-radius: 1.5rem;
+      padding: 2.5rem 2rem;
+      backdrop-filter: blur(16px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: all 0.3s ease;
     }
+
+    .pricing-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+    }
+
     .pricing-card.featured {
-      border-color: rgba(16, 185, 129, 0.5);
-      box-shadow: 0 10px 30px rgba(5, 150, 105, 0.15);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.9) 0%, rgba(6, 78, 59, 0.25) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.5);
+      box-shadow: 0 20px 45px rgba(5, 150, 105, 0.2);
+      transform: scale(1.02);
     }
-    .price-tag {
-      font-size: 1.75rem;
+
+    .pricing-card.featured:hover {
+      border-color: rgba(16, 185, 129, 0.8);
+      transform: scale(1.02) translateY(-4px);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 1rem;
+      border-radius: 9999px;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    }
+
+    .plan-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .plan-name {
+      font-size: 1.35rem;
       font-weight: 800;
       color: #fff;
-      font-family: 'JetBrains Mono', monospace;
-      margin: 1rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.35rem;
     }
-    .footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem;
-      text-align: center;
+
+    .plan-desc {
       font-size: 0.85rem;
       color: var(--text-muted);
+      min-height: 40px;
+    }
+
+    .plan-price-wrap {
+      margin: 1.25rem 0 1.75rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .plan-price {
+      font-size: 2.25rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .plan-period {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-left: 0.25rem;
+    }
+
+    .plan-features {
+      list-style: none;
+      margin-bottom: 2rem;
+      flex: 1;
+    }
+
+    .plan-features li {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      line-height: 1.45;
+    }
+
+    .plan-features li svg {
+      width: 17px;
+      height: 17px;
+      color: #10b981;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .plan-btn {
+      display: block;
+      text-align: center;
+      width: 100%;
+      padding: 0.85rem;
+      border-radius: 0.75rem;
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .plan-btn-default {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      color: #fff;
+    }
+
+    .plan-btn-default:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .plan-btn-featured {
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(5, 150, 105, 0.35);
+    }
+
+    .plan-btn-featured:hover {
+      box-shadow: 0 6px 25px rgba(16, 185, 129, 0.55);
+      transform: translateY(-1px);
+    }
+
+    /* Trust & Sovereignty Banner */
+    .trust-banner {
+      background: linear-gradient(90deg, rgba(6, 78, 59, 0.3) 0%, rgba(15, 23, 42, 0.8) 50%, rgba(6, 78, 59, 0.3) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 1.25rem;
+      padding: 2.5rem;
+      text-align: center;
+      margin-bottom: 6rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .trust-banner h4 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .trust-banner p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .trust-badge-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--card-border);
+      background: rgba(3, 7, 18, 0.95);
+      padding: 3.5rem 0 2rem;
+      font-size: 0.88rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+      max-width: 320px;
+    }
+
+    .footer-col h5 {
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-col a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--card-border);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+      .pricing-card.featured {
+        transform: none;
+      }
+      .pillars-grid {
+        grid-template-columns: 1fr;
+      }
+      .metrics-strip {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+      .metric-item:nth-child(2) {
+        border-right: none;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 1rem 1.25rem;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero-title {
+        font-size: 2.35rem;
+      }
+      .metrics-strip {
+        grid-template-columns: 1fr;
+      }
+      .metric-item {
+        border-right: none;
+        border-bottom: 1px solid var(--card-border);
+        padding-bottom: 1rem;
+      }
+      .metric-item:last-child {
+        border-bottom: none;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 0.75rem;
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
+
+  <!-- Top Navigation Header -->
   <header class="header">
-    <div class="logo-container">
-      <div class="logo-badge">TRUEPRIV</div>
-      <div>
-        <div class="brand-title">Truepriv Technologies Limited</div>
-        <div class="company-sub">Enterprise NDPA 2023 Compliance SaaS</div>
+    <a href="https://truepriv.com/" class="brand-group">
+      <div class="brand-icon">🛡️</div>
+      <div class="brand-text">
+        <h1>TRUEPRIV</h1>
+        <p>Truepriv Technologies Limited</p>
       </div>
-    </div>
-    <div class="nav-actions">
-      <!-- Architectural Separation: Direct link to the SaaS application -->
-      <a href="http://127.0.0.1:3000" class="app-launch-btn">Sign In to Truepriv SaaS Portal &rarr;</a>
-    </div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#features">Platform Pillars</a></li>
+      <li><a href="#automation">Automation</a></li>
+      <li><a href="#pricing">Enterprise Pricing</a></li>
+      <li><a href="#sovereignty">Data Residency</a></li>
+    </ul>
+
+    <a href="http://127.0.0.1:3000" class="nav-cta">
+      <span>Launch SaaS Portal</span>
+      <span>&rarr;</span>
+    </a>
   </header>
 
   <main class="container">
+    
+    <!-- Hero Section -->
     <section class="hero">
-      <div class="badge">TRUEPRIV.COM — NIGERIA DATA PROTECTION PLATFORM</div>
-      <h1>Automate 80% of Regulatory Compliance Operations</h1>
-      <p>Truepriv Technologies Limited provides corporate Data Controllers, Outsourced DPOs, and Licensed DPCOs with high-velocity RoPA automation, 5x5 DPIA risk scoring, 30-day DSAR pipelines, and certified NDPC audit packs.</p>
-      <div class="hero-ctas">
-        <a href="http://127.0.0.1:3000" class="primary-btn">Launch Truepriv Portal</a>
-        <a href="#pricing" class="secondary-btn">View Enterprise Pricing</a>
+      <div class="hero-pill">
+        <span class="pulse-dot"></span>
+        <span>TRUEPRIV.COM &bull; NIGERIA DATA PROTECTION SAAS &bull; NDPA 2023</span>
+      </div>
+
+      <h2 class="hero-title">
+        Automate <span>80%</span> of Regulatory Compliance Operations
+      </h2>
+
+      <p class="hero-subtitle">
+        Truepriv Technologies Limited provides corporate Data Controllers, Outsourced DPOs, and Licensed DPCOs with high-velocity RoPA automation, 5&times;5 DPIA risk matrices, 72-Hour breach playbooks, and certified NDPC statutory audit packs.
+      </p>
+
+      <div class="hero-actions">
+        <a href="http://127.0.0.1:3000" class="btn-primary">
+          <span>Launch Truepriv Portal</span>
+          <span>&rarr;</span>
+        </a>
+        <a href="#pricing" class="btn-secondary">
+          <span>View Enterprise Pricing</span>
+        </a>
       </div>
     </section>
 
-    <section id="pricing" class="pricing-grid">
-      <div class="pricing-card">
-        <h3>🏢 Corporate Starter</h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted);">For single-entity Data Controllers</p>
-        <div class="price-tag">₦750,000 <span style="font-size: 0.8rem; color: var(--text-muted);">/ year</span></div>
-        <ul style="font-size: 0.85rem; color: var(--text-muted); line-height: 2; padding-left: 1.25rem;">
-          <li>Automated RoPA Generation</li>
-          <li>30-Day DSAR Pipeline</li>
-          <li>72-Hour Breach Clock</li>
-          <li>Zero-Dependency Cookie SDK</li>
-        </ul>
+    <!-- Operational Metrics Strip -->
+    <section class="metrics-strip">
+      <div class="metric-item">
+        <div class="metric-val green">70–80%</div>
+        <div class="metric-lbl">Routine Compliance Operations Automated</div>
       </div>
-
-      <div class="pricing-card featured">
-        <div style="font-size: 0.75rem; font-weight: 700; color: #10b981; text-transform: uppercase;">Most Popular</div>
-        <h3>🛡️ Outsourced DPO Hub</h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted);">Multi-client advisory firm plan</p>
-        <div class="price-tag">₦2,500,000 <span style="font-size: 0.8rem; color: var(--text-muted);">/ year</span></div>
-        <ul style="font-size: 0.85rem; color: var(--text-muted); line-height: 2; padding-left: 1.25rem;">
-          <li>Up to 15 Corporate Sub-Workspaces</li>
-          <li>5x5 DPIA Risk Scoring Matrix</li>
-          <li>AI Decision Recommendation Logs</li>
-          <li>Omnichannel Consent Ledger</li>
-        </ul>
+      <div class="metric-item">
+        <div class="metric-val red">72-Hour</div>
+        <div class="metric-lbl">NDPA Sec 40 Breach Notification Clock</div>
       </div>
-
-      <div class="pricing-card">
-        <h3>🏛️ Licensed DPCO Suite</h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted);">Full assurance & audit practice</p>
-        <div class="price-tag">₦4,500,000 <span style="font-size: 0.8rem; color: var(--text-muted);">/ year</span></div>
-        <ul style="font-size: 0.85rem; color: var(--text-muted); line-height: 2; padding-left: 1.25rem;">
-          <li>Unlimited Audit Projects</li>
-          <li>GAID 6-Domain Dynamic Scoring</li>
-          <li>Official NDPC PDF Filing Generator</li>
-          <li>Digital Seal Verification Code</li>
-        </ul>
+      <div class="metric-item">
+        <div class="metric-val blue">30-Day</div>
+        <div class="metric-lbl">Statutory DSAR SLA Tracking Engine</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-val purple">100%</div>
+        <div class="metric-lbl">NDPC Annual Filing & March 15 Deadline Ready</div>
       </div>
     </section>
+
+    <!-- 4 Core Platform Pillars -->
+    <section id="features">
+      <div class="section-header">
+        <div class="section-tag">Enterprise Capabilities</div>
+        <h2 class="section-title">Built for the Nigerian Compliance Ecosystem</h2>
+        <p class="section-desc">Move away from blank manual form fatigue. Our intelligence engine auto-generates your regulatory records so you simply <strong>Review &rarr; Verify &rarr; Correct &rarr; Approve</strong>.</p>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div>
+            <div class="pillar-icon green">⚡</div>
+            <h3>1-Click RoPA Generation (NDPA Sec 24)</h3>
+            <p>Pre-populated data processing inventories for Fintech, Healthcare, E-Commerce, Telecoms, and EduTech. Auto-assigns lawful bases, special category PII flags, and retention rules.</p>
+          </div>
+          <div class="pillar-tags">
+            <span class="pillar-tag">5 Industry Pre-sets</span>
+            <span class="pillar-tag">Review &rarr; Verify &rarr; Approve</span>
+            <span class="pillar-tag">Lawful Basis Mapping</span>
+          </div>
+        </div>
+
+        <div class="pillar-card">
+          <div>
+            <div class="pillar-icon blue">🛡️</div>
+            <h3>5×5 DPIA Risk Scoring Matrix (NDPA Sec 28)</h3>
+            <p>Automated screening triggers for high-risk processing (biometrics, AI profiling, minors). Calculates Inherent vs. Residual risk scores with formal DPO and DPCO digital sign-off seals.</p>
+          </div>
+          <div class="pillar-tags">
+            <span class="pillar-tag">High-Risk Triggers</span>
+            <span class="pillar-tag">5x5 Risk Matrix</span>
+            <span class="pillar-tag">Digital Sign-off</span>
+          </div>
+        </div>
+
+        <div class="pillar-card">
+          <div>
+            <div class="pillar-icon red">⏱️</div>
+            <h3>72-Hour Breach Playbook (NDPA Sec 40)</h3>
+            <p>Live countdown clocks, severity assessment wizards, and 1-click generation of the official <strong>NDPC Form 1 Notification Pack</strong> in standardized JSON/PDF export.</p>
+          </div>
+          <div class="pillar-tags">
+            <span class="pillar-tag">72h Regulatory Timer</span>
+            <span class="pillar-tag">NDPC Form 1 Pack</span>
+            <span class="pillar-tag">Atomic Timestamp Audit</span>
+          </div>
+        </div>
+
+        <div class="pillar-card">
+          <div>
+            <div class="pillar-icon purple">🏛️</div>
+            <h3>Licensed DPCO Statutory Audit Desk</h3>
+            <p>Designed for accredited DPCO firms. Full GAID 6-domain checklist scoring, evidence vault, remediation action tracker, and 1-click certified statutory PDF audit report generator.</p>
+          </div>
+          <div class="pillar-tags">
+            <span class="pillar-tag">GAID 6-Domain Audit</span>
+            <span class="pillar-tag">March 15 Deadline</span>
+            <span class="pillar-tag">DPCO Seal Verification</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Balanced 3-Column Enterprise Pricing Matrix -->
+    <section id="pricing" class="pricing-section">
+      <div class="section-header">
+        <div class="section-tag">Predictable Tiered Plans</div>
+        <h2 class="section-title">Transparent Pricing for Nigerian Organizations</h2>
+        <p class="section-desc">Tailored capacity tiers for single-entity Corporate Controllers, Outsourced DPO practices, and Licensed DPCO audit firms.</p>
+      </div>
+
+      <div class="pricing-grid">
+        
+        <!-- Tier 1: Corporate Starter -->
+        <div class="pricing-card">
+          <div>
+            <div class="plan-header">
+              <div class="plan-name">🏢 Corporate Starter</div>
+              <div class="plan-desc">For single-entity Nigerian Data Controllers</div>
+            </div>
+            
+            <div class="plan-price-wrap">
+              <span class="plan-price">₦750,000</span>
+              <span class="plan-period">/ year</span>
+            </div>
+
+            <ul class="plan-features">
+              <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                <span><strong>Single Corporate Workspace</strong></span>
+              </li>
+              <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                <span>Automated 1-Click RoPA Generation</span>
+              </li>
+              <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                <span>30-Day Statutory DSAR Pipeline</span>
+              </li>
+              <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                <span>72-Hour Breach Emergency Clock</span>
+              </li>
+              <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                <span>Zero-Dependency Cookie Consent SDK</span>
+              </li>
+              <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                <span>Up to 50,000 Data Subject Records</span>
+              </li>
+            </ul>
+          </div>
+
+          <a href="http://127.0.0.1:3000" class="plan-btn plan-btn-default">Get Started with Starter &rarr;</a>
+        </div>
+
+        <!-- Tier 2: Outsourced DPO Hub (Featured) -->
+        <div class="pricing-card featured">
+          <div class="popular-badge">⭐ Most Popular</div>
+          <div>
+            <div class="plan-header">
+              <div class="plan-name">🛡️ Outsourced DPO Hub</div>
+              <div class="plan-desc">For independent DPO consultants & advisory firms</div>
+            </div>
+            
+            <div class="plan-price-wrap">
+              <span class="plan-price">₦2,500,000</span>
+              <span class="plan-period">/ year</span>
+            </div>
+
+            <ul class="plan-features">
+              <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                <span><strong>Multi-Tenant Portfolio (15 Sub-Workspaces)</strong></span>
+              </li>
+              <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                <span>5×5 DPIA Risk Scoring Matrix</span>
+              </li>
+              <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                <span>AI Decision Recommendation Logs</span>
+              </li>
+              <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                <span>Omnichannel Consent Ledger (USSD/SMS/Web)</span>
+              </li>
+              <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                <span>Cross-Border Transfer Tracker (NDPC Sec 41)</span>
+              </li>
+              <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                <span>Department Champion Invitations</span>
+              </li>
+            </ul>
+          </div>
+
+          <a href="http://127.0.0.1:3000" class="plan-btn plan-btn-featured">Launch DPO Hub &rarr;</a>
+        </div>
+
+        <!-- Tier 3: Licensed DPCO Suite -->
+        <div class="pricing-card">
+          <div>
+            <div class="plan-header">
+              <div class="plan-name">🏛️ Licensed DPCO Suite</div>
+              <div class="plan-desc">For accredited audit firms with assurance practices</div>
+            </div>
+            
+            <div class="plan-price-wrap">
+              <span class="plan-price">₦4,500,000</span>
+              <span class="plan-period">/ year</span>
+            </div>
+
+            <ul class="plan-features">
+              <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                <span><strong>Unlimited Client Audit Engagements</strong></span>
+              </li>
+              <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                <span>Full GAID 6-Domain Dynamic Checklist</span>
+              </li>
+              <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                <span>Official NDPC PDF Filing Generator</span>
+              </li>
+              <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                <span>Digital DPCO Audit Seal Verification</span>
+              </li>
+              <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                <span>Dedicated Statutory March 15 Pipeline</span>
+              </li>
+              <li>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                <span>Immutable System Audit Trail Ledger</span>
+              </li>
+            </ul>
+          </div>
+
+          <a href="http://127.0.0.1:3000" class="plan-btn plan-btn-default">Activate DPCO Suite &rarr;</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Trust & Sovereignty Section -->
+    <section id="sovereignty" class="trust-banner">
+      <h4>Data Sovereignty & Regulatory Alignment</h4>
+      <p>Truepriv is architected to satisfy strict Nigerian regulatory requirements under the Nigeria Data Protection Act 2023 and the Nigeria Data Protection Commission (NDPC).</p>
+      
+      <div class="trust-badges">
+        <div class="trust-badge-item">🇳🇬 Onshore Data Residency (Galaxy Backbone)</div>
+        <div class="trust-badge-item">🔒 AES-256 & TLS 1.3 Encryption</div>
+        <div class="trust-badge-item">📜 NDPC GAID Compliance Verified</div>
+        <div class="trust-badge-item">⚖️ Section 34 DSAR SLA Guard</div>
+      </div>
+    </section>
+
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2026 Truepriv Technologies Limited (truepriv.com). All rights reserved. Operating under NDPA 2023 regulations.</p>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-group">
+            <div class="brand-icon" style="width: 34px; height: 34px; font-size: 0.95rem;">🛡️</div>
+            <div class="brand-text">
+              <h2 style="font-size: 1.05rem; font-weight: 800; color: #fff;">TRUEPRIV</h2>
+            </div>
+          </div>
+          <p>Truepriv Technologies Limited provides automated compliance management solutions for Nigerian corporate enterprises, DPOs, and licensed DPCO audit firms.</p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Platform</h5>
+          <ul>
+            <li><a href="#features">1-Click RoPA</a></li>
+            <li><a href="#features">5x5 DPIA Risk Matrix</a></li>
+            <li><a href="#features">72h Breach Playbook</a></li>
+            <li><a href="#features">NDPC Audit Desk</a></li>
+            <li><a href="#pricing">Enterprise Pricing</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Regulatory</h5>
+          <ul>
+            <li><a href="https://truepriv.com/">NDPA 2023 Overview</a></li>
+            <li><a href="https://truepriv.com/">NDPC GAID Regulations</a></li>
+            <li><a href="https://truepriv.com/">March 15 Audit Deadline</a></li>
+            <li><a href="https://truepriv.com/">Data Subject Rights</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="https://truepriv.com/">About Truepriv</a></li>
+            <li><a href="https://truepriv.com/">Contact Advisory</a></li>
+            <li><a href="https://truepriv.com/">Privacy Policy</a></li>
+            <li><a href="https://truepriv.com/">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Truepriv Technologies Limited (truepriv.com). All rights reserved.</div>
+        <div>Primary Marketing: <strong>truepriv.com</strong> &bull; Regional: <strong>truepriv.ng</strong></div>
+      </div>
+    </div>
   </footer>
+
 </body>
 </html>
