@@ -121,6 +121,39 @@ class Tenant extends Model
     }
 
     /**
+     * Monetization & Tier Enforcement Guards
+     */
+    public function canExportReports(): bool
+    {
+        $sub = $this->subscriptions()->latest()->first();
+        if (!$sub || $sub->status === 'trialing') {
+            return false; // Trial tier users can view templates in UI but cannot export official PDF/CSV files
+        }
+        return in_array($sub->status, ['active', 'past_due']);
+    }
+
+    public function getMaxVendorsAllowed(): int
+    {
+        $sub = $this->subscriptions()->latest()->first();
+        if (!$sub || $sub->status === 'trialing' || $sub->plan_tier === 'trial') {
+            return 3; // Restrict starter trial to max 3 vendors
+        }
+        return 999999;
+    }
+
+    public function getMaxWorkspacesAllowed(): int
+    {
+        $sub = $this->subscriptions()->latest()->first();
+        if (!$sub || $sub->status === 'trialing' || $sub->plan_tier === 'corporate_starter') {
+            return 1; // Restrict starter trial to max 1 workspace
+        }
+        if ($sub->plan_tier === 'dpo_hub') {
+            return 15;
+        }
+        return 999999; // Unlimited for DPCO Suite
+    }
+
+    /**
      * If this tenant is a DPCO firm or Outsourced DPO, get managed client organizations.
      */
     public function clientEngagements(): HasMany
