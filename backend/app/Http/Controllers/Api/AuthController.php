@@ -97,18 +97,26 @@ class AuthController extends Controller
     public function register(Request $request): JsonResponse
     {
         $request->validate([
-            'organization_name' => 'required|string|max:255',
+            'organization_name' => 'nullable|string|max:255',
             'tenant_type' => 'required|in:corporate,outsourced_dpo,dpco_firm',
             'industry_slug' => 'nullable|string',
             'rc_number' => 'nullable|string',
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8',
+            'phone' => 'nullable|string|max:50',
             'state' => 'nullable|string',
             'auto_populate_ropa' => 'boolean',
         ]);
 
-        $tenantSlug = Str::slug($request->organization_name);
+        $orgName = $request->organization_name;
+        if (!$orgName) {
+            $domain = substr(strrchr($request->email, "@"), 1);
+            $domainName = explode('.', $domain)[0];
+            $orgName = ucwords(str_replace(['-', '_'], ' ', $domainName)) . ' Organization';
+        }
+
+        $tenantSlug = Str::slug($orgName);
         if (Tenant::where('slug', $tenantSlug)->exists()) {
             $tenantSlug .= '-' . Str::random(4);
         }
@@ -126,10 +134,10 @@ class AuthController extends Controller
         $resolvedResidency = $residencyService->resolveTenantResidency($request->data_residency);
 
         $tenant = Tenant::create([
-            'name' => $request->organization_name,
+            'name' => $orgName,
             'slug' => $tenantSlug,
             'type' => $request->tenant_type,
-            'industry' => $industryName,
+            'industry' => $industryName ?? 'Corporate Compliance',
             'rc_number' => $request->rc_number,
             'state' => $request->state ?? 'Lagos',
             'data_residency' => $resolvedResidency,
@@ -138,8 +146,8 @@ class AuthController extends Controller
         ]);
 
         $userRole = match ($request->tenant_type) {
-            'dpco_firm' => 'dpco_lead_auditor',
             'outsourced_dpo' => 'outsourced_dpo',
+            'dpco_firm' => 'dpco_lead_auditor',
             default => 'corporate_admin',
         };
 
@@ -149,7 +157,8 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $userRole,
-            'department' => 'Executive & Compliance',
+            'department' => 'Compliance & Risk',
+            'phone' => $request->phone,
             'is_active' => true,
         ]);
 
