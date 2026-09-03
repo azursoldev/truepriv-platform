@@ -11,6 +11,7 @@ import VendorDesk from './components/VendorDesk';
 import CookieDesk from './components/CookieDesk';
 import PolicyDesk from './components/PolicyDesk';
 import PortfolioDesk from './components/PortfolioDesk';
+import AdminUserDesk from './components/AdminUserDesk';
 import PublicDsarPortal from './components/PublicDsarPortal';
 import AuthModal from './components/AuthModal';
 import OnboardingWizard from './components/OnboardingWizard';
@@ -210,6 +211,10 @@ export default function App() {
 
           {activeTab === 'policies' && (
             <PolicyDesk tenant={tenant} />
+          )}
+
+          {activeTab === 'admin-users' && (
+            <AdminUserDesk currentUser={user} onRefreshMetrics={refreshMetrics} />
           )}
         </main>
       </div>

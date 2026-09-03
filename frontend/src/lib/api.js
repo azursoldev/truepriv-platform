@@ -130,4 +130,11 @@ export const api = {
   // Milestone 2: Dual-Residency Data Localization
   getLocalizationStatus: () => request('/localization/status'),
   switchLocalizationResidency: (residency) => request('/localization/switch', { method: 'PUT', body: JSON.stringify({ data_residency: residency }) }),
+
+  // User & Role Management / Administration
+  getUsers: (params = '') => request(`/users${params}`),
+  createUser: (data) => request('/users', { method: 'POST', body: JSON.stringify(data) }),
+  updateUser: (id, data) => request(`/users/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  deleteUser: (id) => request(`/users/${id}`, { method: 'DELETE' }),
+  getRolesMatrix: () => request('/roles/matrix'),
 };

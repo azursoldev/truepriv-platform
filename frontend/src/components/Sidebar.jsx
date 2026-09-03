@@ -18,6 +18,7 @@ export default function Sidebar({
     { id: 'vendors', label: 'Vendor & TPRM Risk', icon: 'fa-solid fa-handshake-simple', count: metrics?.vendors?.total_processors },
     { id: 'cookies', label: 'Cookie Consent SDK', icon: 'fa-solid fa-cookie-bite' },
     { id: 'policies', label: 'Policy Auto-Generator', icon: 'fa-solid fa-file-contract' },
+    { id: 'admin-users', label: 'User & Role Governance', icon: 'fa-solid fa-users-gear' },
   ];
 
   // If user is Outsourced DPO or Licensed DPCO Firm, show Portfolio Desk tab
