@@ -139,26 +139,25 @@ export default function AuthModal({ onLoginSuccess }) {
         {/* =========================================================================
            LEFT COLUMN: PROFESSIONAL DATA PROTECTION IMAGE HERO BANNER
            ========================================================================= */}
-        <div className="lg:col-span-5 relative text-white p-8 lg:p-10 flex flex-col justify-between overflow-hidden bg-slate-900">
+        <div className="lg:col-span-5 relative text-white p-8 lg:p-10 flex flex-col justify-between overflow-hidden bg-slate-950">
           
           {/* High-Resolution Enterprise Cybersecurity / Data Protection Background Image */}
           <div 
-            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 scale-105"
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 scale-105 opacity-40"
             style={{
               backgroundImage: `url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80')`
             }}
           />
 
-          {/* Deep Slate / Emerald High-Contrast Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/92 via-slate-900/88 to-emerald-950/92 backdrop-blur-[1px]" />
+          {/* Deep Slate / Emerald Rich High-Contrast Gradient & Backdrop Blur */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/95 via-slate-900/90 to-emerald-950/95 backdrop-blur-[2px]" />
 
           {/* Topographic Vector Art & Glowing Accents */}
-          <div className="absolute inset-0 opacity-15 pointer-events-none">
+          <div className="absolute inset-0 opacity-10 pointer-events-none">
             <svg className="w-full h-full" viewBox="0 0 400 600" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M-50 100 C 100 200, 300 50, 450 150 C 600 250, 350 450, 450 550" stroke="white" strokeWidth="2" fill="none" />
               <path d="M-100 250 C 50 350, 250 200, 400 300 C 550 400, 300 600, 400 700" stroke="white" strokeWidth="1.5" fill="none" />
               <path d="M-20 400 C 120 500, 280 380, 480 480" stroke="white" strokeWidth="2" fill="none" />
-              {/* Modern geometric dots */}
               <circle cx="50" cy="80" r="3" fill="white" />
               <circle cx="70" cy="80" r="3" fill="white" />
               <circle cx="90" cy="80" r="3" fill="white" />
@@ -167,34 +166,32 @@ export default function AuthModal({ onLoginSuccess }) {
               <circle cx="90" cy="100" r="3" fill="white" />
               <circle cx="340" cy="380" r="4" stroke="white" strokeWidth="1.5" />
               <circle cx="300" cy="120" r="6" stroke="white" strokeWidth="1.5" />
-              <path d="M 320 80 L 340 80 M 330 70 L 330 90" stroke="white" strokeWidth="2" />
-              <path d="M 80 480 L 100 480 M 90 470 L 90 490" stroke="white" strokeWidth="2" />
             </svg>
           </div>
 
           {/* Top Brand Logo */}
           <div className="relative z-10">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-11 h-11 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-md">
+              <div className="w-11 h-11 rounded-2xl bg-slate-900/80 backdrop-blur-md border border-emerald-500/40 flex items-center justify-center text-white shadow-lg">
                 <i className="fa-solid fa-shield-halved text-emerald-400 text-xl"></i>
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="font-extrabold text-lg tracking-tight font-sans">TRUEPRIV</span>
-                  <span className="text-[8px] font-extrabold tracking-wider uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-1.5 py-0.2 rounded font-mono">
+                  <span className="font-extrabold text-lg tracking-tight font-sans text-white drop-shadow-sm">TRUEPRIV</span>
+                  <span className="text-[8px] font-extrabold tracking-wider uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 px-1.5 py-0.2 rounded font-mono shadow-xs">
                     NDPA 2023
                   </span>
                 </div>
-                <div className="text-[10px] text-slate-300">Truepriv Technologies Limited</div>
+                <div className="text-[10px] text-slate-300 font-medium">Truepriv Technologies Limited</div>
               </div>
             </div>
 
-            {/* Main Welcome Message */}
+            {/* Main Welcome Message with High Contrast Drop Shadows */}
             <div className="mt-8 space-y-3">
-              <h2 className="text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight">
+              <h2 className="text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight text-white drop-shadow-md">
                 {mode === 'login' ? 'Welcome back!' : 'Join Truepriv'}
               </h2>
-              <p className="text-xs text-slate-300 leading-relaxed max-w-sm">
+              <p className="text-xs text-slate-200 font-medium leading-relaxed max-w-sm drop-shadow-xs">
                 {mode === 'login'
                   ? 'Sign in to access your statutory compliance workspace, manage RoPA inventories, DPIAs, and NDPC filings.'
                   : 'Get started with rule-based automated compliance, multi-tenant advisory, and statutory GAID audit filing.'}
@@ -202,30 +199,32 @@ export default function AuthModal({ onLoginSuccess }) {
             </div>
           </div>
 
-          {/* Feature Highlights on Left Panel */}
-          <div className="relative z-10 my-6 space-y-2.5 text-xs text-slate-200">
-            <div className="flex items-center gap-2.5">
-              <div className="w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-[10px] text-emerald-300">
+          {/* Feature Highlights with Frosted Glass Badges for Crystal Clear Readability */}
+          <div className="relative z-10 my-6 space-y-2.5">
+            <div className="flex items-center gap-3 bg-slate-950/75 backdrop-blur-md border border-white/15 rounded-xl px-3.5 py-2.5 shadow-md">
+              <div className="w-5 h-5 rounded-full bg-emerald-500/30 border border-emerald-400/50 flex items-center justify-center text-[10px] text-emerald-300 flex-shrink-0">
                 <i className="fa-solid fa-check"></i>
               </div>
-              <span>80% Automated Rule-Based RoPA Engine</span>
+              <span className="text-xs font-semibold text-white tracking-tight">80% Automated Rule-Based RoPA Engine</span>
             </div>
-            <div className="flex items-center gap-2.5">
-              <div className="w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-[10px] text-emerald-300">
+
+            <div className="flex items-center gap-3 bg-slate-950/75 backdrop-blur-md border border-white/15 rounded-xl px-3.5 py-2.5 shadow-md">
+              <div className="w-5 h-5 rounded-full bg-emerald-500/30 border border-emerald-400/50 flex items-center justify-center text-[10px] text-emerald-300 flex-shrink-0">
                 <i className="fa-solid fa-check"></i>
               </div>
-              <span>72-Hour Statutory Breach Incident Clock</span>
+              <span className="text-xs font-semibold text-white tracking-tight">72-Hour Statutory Breach Incident Clock</span>
             </div>
-            <div className="flex items-center gap-2.5">
-              <div className="w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-[10px] text-emerald-300">
+
+            <div className="flex items-center gap-3 bg-slate-950/75 backdrop-blur-md border border-white/15 rounded-xl px-3.5 py-2.5 shadow-md">
+              <div className="w-5 h-5 rounded-full bg-emerald-500/30 border border-emerald-400/50 flex items-center justify-center text-[10px] text-emerald-300 flex-shrink-0">
                 <i className="fa-solid fa-check"></i>
               </div>
-              <span>GAID 5-Domain NDPC Filing Pack Generator</span>
+              <span className="text-xs font-semibold text-white tracking-tight">GAID 5-Domain NDPC Filing Pack Generator</span>
             </div>
           </div>
 
           {/* Bottom Residency Badge */}
-          <div className="relative z-10 pt-4 border-t border-white/10 flex items-center justify-between text-[10px] text-slate-400 font-mono">
+          <div className="relative z-10 pt-4 border-t border-white/15 flex items-center justify-between text-[10px] text-slate-300 font-mono font-medium">
             <span>🇳🇬 Galaxy Tier-III Sovereign DC</span>
             <span>v1.0.0 Enterprise</span>
           </div>
