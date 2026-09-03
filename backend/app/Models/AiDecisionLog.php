@@ -24,6 +24,7 @@ class AiDecisionLog extends Model
         'ai_output_payload',
         'human_override_status',
         'human_override_rationale',
+        'ledger_hash',
     ];
 
     protected $casts = [

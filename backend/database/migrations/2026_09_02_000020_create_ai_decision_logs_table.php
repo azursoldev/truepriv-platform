@@ -25,6 +25,7 @@ return new class extends Migration
             $table->json('ai_output_payload');
             $table->enum('human_override_status', ['pending', 'accepted', 'modified', 'rejected'])->default('accepted');
             $table->text('human_override_rationale')->nullable();
+            $table->string('ledger_hash', 128)->nullable(); // SHA-256 cryptographic chain hash for tamper-proof regulatory audit trails
             $table->timestamps();
 
             $table->index(['tenant_id', 'decision_type'], 'ai_logs_tenant_decision_idx');
