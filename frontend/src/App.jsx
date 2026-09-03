@@ -122,15 +122,15 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-slate-300 space-y-3">
-        <div className="w-10 h-10 rounded-xl border-2 border-brand-500 border-t-transparent animate-spin" />
-        <div className="text-xs font-mono tracking-wider text-slate-400">Loading DPODPCO Platform...</div>
+      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center text-slate-700 space-y-3">
+        <div className="w-10 h-10 rounded-xl border-2 border-emerald-600 border-t-transparent animate-spin" />
+        <div className="text-xs font-mono tracking-wider text-slate-500">Loading Truepriv Platform...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col selection:bg-emerald-500 selection:text-white">
       {/* Top Navigation */}
       <Header
         user={user}

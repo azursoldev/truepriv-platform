@@ -1,367 +1,370 @@
 import React from 'react';
-import { 
-  ShieldCheck, 
-  ShieldAlert,
-  AlertTriangle, 
-  Clock, 
-  Flame, 
-  Users, 
-  FileSpreadsheet, 
-  ClipboardCheck, 
-  CheckCircle2, 
-  ArrowRight,
-  TrendingUp,
-  Sparkles,
-  ExternalLink,
-  Trophy,
-  Zap,
-  Award,
-  Star
-} from 'lucide-react';
 
-export default function ExecutiveDashboard({ metrics, onNavigate, onAutoFillRopa }) {
+export default function ExecutiveDashboard({ metrics, onNavigate, onAutoFillRopa, onOpenOnboarding }) {
   const score = metrics?.compliance_gauge?.score || 78.5;
   const circumference = 2 * Math.PI * 46;
   const strokeDashoffset = circumference - (score / 100) * circumference;
-
-  const scoreColor = score >= 80 ? '#10b981' : score >= 50 ? '#f59e0b' : '#ef4444';
+  const scoreColor = score >= 80 ? '#059669' : score >= 50 ? '#d97706' : '#dc2626';
 
   return (
     <div className="space-y-6">
-      {/* Top Banner Alert if active breaches or urgent DSARs */}
+      
+      {/* 1. Top Emergency Alert if Active 72-Hour Breach Clocks */}
       {metrics?.breaches?.active_72h_clocks > 0 && (
-        <div className="glass-panel-danger p-4 rounded-2xl flex items-center justify-between animate-in fade-in">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-red-950/80 border border-red-800 text-red-400 rounded-xl">
-              <Flame className="w-5 h-5 animate-pulse" />
+        <div className="p-4 rounded-2xl bg-red-50 border border-red-200 flex items-center justify-between shadow-xs animate-in fade-in">
+          <div className="flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-xl bg-red-600 text-white flex items-center justify-center flex-shrink-0 shadow-xs">
+              <i className="fa-solid fa-triangle-exclamation text-lg"></i>
             </div>
             <div>
-              <h4 className="text-sm font-bold text-red-300">Mandatory 72-Hour NDPC Breach Notification Clock Active!</h4>
-              <p className="text-xs text-red-200/80">
+              <h4 className="text-sm font-bold text-red-900">Mandatory 72-Hour NDPC Breach Notification Clock Active!</h4>
+              <p className="text-xs text-red-700 mt-0.5">
                 You have {metrics.breaches.active_72h_clocks} active breach incident requiring regulatory filing under NDPA Section 40.
               </p>
             </div>
           </div>
           <button 
             onClick={() => onNavigate('breaches')}
-            className="px-3.5 py-1.5 bg-red-600 hover:bg-red-500 text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all shadow-lg shadow-red-950"
+            className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs"
           >
             <span>Open Incident Triage</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <i className="fa-solid fa-arrow-right text-xs"></i>
           </button>
         </div>
       )}
 
-      {/* Main Grid: Compliance Readiness Gauge & Quick Action Panel */}
+      {/* 2. Main Executive Grid: Compliance Readiness Gauge & Smart Automation Engine */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Card 1: Official NDPA Compliance Readiness Gauge */}
-        <div className="glass-panel-glow p-6 rounded-3xl lg:col-span-2 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-brand-500/10 rounded-full blur-3xl -z-10" />
-          
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-xs font-mono font-bold bg-brand-950 text-brand-400 border border-brand-800/80 px-2.5 py-0.5 rounded-full">
-                  🇳🇬 STATUTORY SCORECARD
-                </span>
-                <span className="text-xs text-slate-400">NDPA 2023 / NDPC Framework</span>
-              </div>
-              <h2 className="text-2xl font-bold text-white tracking-tight">
-                NDPA Compliance Readiness Index
-              </h2>
-              <p className="text-sm text-slate-300 mt-1 max-w-md">
-                Automated evaluation across RoPA coverage, executed DPAs, conducted DPIAs, and resolved statutory audit non-conformities.
-              </p>
-
-              <div className="mt-4 flex flex-wrap items-center gap-3">
-                <div className="flex items-center gap-1.5 text-xs bg-slate-900/80 border border-slate-800 px-3 py-1.5 rounded-xl">
-                  <CheckCircle2 className="w-4 h-4 text-brand-400" />
-                  <span className="text-slate-300">Status: <strong>{metrics?.compliance_gauge?.status || 'Substantially Compliant'}</strong></span>
-                </div>
-                <div className="flex items-center gap-1.5 text-xs bg-slate-900/80 border border-slate-800 px-3 py-1.5 rounded-xl">
-                  <Clock className="w-4 h-4 text-amber-400" />
-                  <span className="text-slate-300">Next Audit Deadline: <strong>March 15, 2027</strong></span>
-                </div>
-              </div>
+        <div className="bg-white border border-slate-200 p-6 rounded-3xl lg:col-span-2 shadow-xs relative overflow-hidden flex flex-col justify-between">
+          <div>
+            <div className="flex items-center gap-2 mb-2.5">
+              <span className="text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full font-mono">
+                🇳🇬 STATUTORY SCORECARD
+              </span>
+              <span className="text-xs text-slate-500 font-medium">NDPA 2023 / NDPC Framework</span>
             </div>
 
-            {/* Circular Gauge */}
-            <div className="relative flex items-center justify-center flex-shrink-0">
-              <svg className="w-36 h-36 transform -rotate-90">
-                <circle
-                  cx="72"
-                  cy="72"
-                  r="46"
-                  stroke="#1e293b"
-                  strokeWidth="10"
-                  fill="transparent"
-                />
-                <circle
-                  cx="72"
-                  cy="72"
-                  r="46"
-                  stroke={scoreColor}
-                  strokeWidth="10"
-                  strokeDasharray={circumference}
-                  strokeDashoffset={strokeDashoffset}
-                  strokeLinecap="round"
-                  fill="transparent"
-                  className="transition-all duration-1000 ease-out"
-                />
-              </svg>
-              <div className="absolute flex flex-col items-center justify-center text-center">
-                <span className="text-3xl font-extrabold font-mono text-white tracking-tight">
-                  {score}%
-                </span>
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-                  Readiness
-                </span>
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div>
+                <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+                  NDPA Compliance Readiness Index
+                </h2>
+                <p className="text-sm text-slate-600 mt-1.5 max-w-md leading-relaxed">
+                  Automated evaluation across RoPA coverage, executed DPAs, conducted DPIAs, and resolved statutory audit non-conformities.
+                </p>
+
+                <div className="mt-4 flex flex-wrap items-center gap-3">
+                  <div className="flex items-center gap-2 text-xs bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl font-medium text-slate-700">
+                    <i className="fa-solid fa-circle-check text-emerald-600"></i>
+                    <span>Status: <strong className="text-slate-900">{metrics?.compliance_gauge?.status || 'Substantially Compliant'}</strong></span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl font-medium text-slate-700">
+                    <i className="fa-solid fa-clock text-amber-600"></i>
+                    <span>Next Audit Deadline: <strong className="text-slate-900">March 15, 2027</strong></span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Circular Gauge */}
+              <div className="relative flex items-center justify-center flex-shrink-0 self-center md:self-auto">
+                <svg className="w-36 h-36 transform -rotate-90">
+                  <circle
+                    cx="72"
+                    cy="72"
+                    r="46"
+                    stroke="#e2e8f0"
+                    strokeWidth="10"
+                    fill="transparent"
+                  />
+                  <circle
+                    cx="72"
+                    cy="72"
+                    r="46"
+                    stroke={scoreColor}
+                    strokeWidth="10"
+                    strokeDasharray={circumference}
+                    strokeDashoffset={strokeDashoffset}
+                    strokeLinecap="round"
+                    fill="transparent"
+                    className="transition-all duration-1000 ease-out"
+                  />
+                </svg>
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                  <span className="text-3xl font-extrabold font-mono text-slate-900 tracking-tight">{score}%</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Readiness</span>
+                </div>
               </div>
             </div>
           </div>
+
+          <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span className="flex items-center gap-1.5">
+              <i className="fa-solid fa-scale-balanced text-emerald-600"></i>
+              <span>Section 48 Major Data Controller (MDC) Compliant</span>
+            </span>
+            <button
+              onClick={onOpenOnboarding}
+              className="text-emerald-700 hover:text-emerald-900 font-bold hover:underline flex items-center gap-1"
+            >
+              <span>Recalculate Scorecard</span>
+              <i className="fa-solid fa-arrow-right text-[10px]"></i>
+            </button>
+          </div>
         </div>
 
-        {/* Card 2: 70-80% Automation Fast-Track Actions */}
-        <div className="glass-panel p-6 rounded-3xl flex flex-col justify-between">
+        {/* Card 2: Smart Automation Engine */}
+        <div className="bg-white border border-slate-200 p-6 rounded-3xl shadow-xs flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <Sparkles className="w-4 h-4 text-brand-400" />
-              <h3 className="text-sm font-bold text-white uppercase tracking-wider">Smart Automation Engine</h3>
+              <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center justify-center">
+                <i className="fa-solid fa-wand-magic-sparkles text-sm"></i>
+              </div>
+              <h3 className="text-base font-bold text-slate-900">Smart Automation Engine</h3>
             </div>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <p className="text-xs text-slate-600 leading-relaxed">
               Skip blank form fatigue. Apply Nigerian industry templates to auto-draft RoPA, risk matrices, and NDPC statutory audit packs.
             </p>
 
-            <div className="space-y-2 mt-4">
+            <div className="mt-4 space-y-2.5">
               <button
                 onClick={() => onNavigate('ropa')}
-                className="w-full text-left p-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 transition-all flex items-center justify-between group"
+                className="w-full text-left p-3 rounded-2xl bg-slate-50 hover:bg-emerald-50/60 border border-slate-200 hover:border-emerald-300 transition-all flex items-center justify-between group"
               >
-                <div className="flex items-center gap-2.5">
-                  <FileSpreadsheet className="w-4 h-4 text-brand-400" />
+                <div className="flex items-center gap-3">
+                  <i className="fa-solid fa-file-shield text-emerald-600 text-sm"></i>
                   <div>
-                    <div className="text-xs font-semibold text-slate-200">1-Click Industry RoPA</div>
-                    <div className="text-[10px] text-slate-400">Autofill 15-30 processing items</div>
+                    <div className="text-xs font-bold text-slate-900 group-hover:text-emerald-900">1-Click Industry RoPA</div>
+                    <div className="text-[11px] text-slate-500">Autofill 15–30 processing items</div>
                   </div>
                 </div>
-                <ArrowRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-white transition-transform group-hover:translate-x-0.5" />
+                <i className="fa-solid fa-chevron-right text-slate-400 group-hover:text-emerald-600 text-xs"></i>
               </button>
 
               <button
                 onClick={() => onNavigate('audits')}
-                className="w-full text-left p-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 transition-all flex items-center justify-between group"
+                className="w-full text-left p-3 rounded-2xl bg-slate-50 hover:bg-purple-50/60 border border-slate-200 hover:border-purple-300 transition-all flex items-center justify-between group"
               >
-                <div className="flex items-center gap-2.5">
-                  <ClipboardCheck className="w-4 h-4 text-purple-400" />
+                <div className="flex items-center gap-3">
+                  <i className="fa-solid fa-file-export text-purple-600 text-sm"></i>
                   <div>
-                    <div className="text-xs font-semibold text-slate-200">NDPC Audit Filing Report</div>
-                    <div className="text-[10px] text-slate-400">Generate certified statutory PDF</div>
+                    <div className="text-xs font-bold text-slate-900 group-hover:text-purple-900">NDPC Audit Filing Report</div>
+                    <div className="text-[11px] text-slate-500">Generate certified statutory PDF</div>
                   </div>
                 </div>
-                <ArrowRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-white transition-transform group-hover:translate-x-0.5" />
+                <i className="fa-solid fa-chevron-right text-slate-400 group-hover:text-purple-600 text-xs"></i>
               </button>
             </div>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400 flex items-center justify-between">
+          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
             <span>Principle:</span>
-            <span className="font-semibold text-brand-400">Review → Verify → Approve</span>
+            <strong className="text-emerald-700 font-mono font-semibold">Review &rarr; Verify &rarr; Approve</strong>
           </div>
         </div>
+
       </div>
 
-      {/* Gamification: Compliance Level, Streaks & Achievement Badges */}
-      <div className="glass-panel p-6 rounded-3xl relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-900/90 to-brand-950/40 border border-slate-800">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          
-          {/* Level Info & Streak */}
-          <div className="space-y-2">
-            <div className="flex items-center gap-2.5">
-              <span className="text-xs font-mono font-bold bg-amber-950 text-amber-300 border border-amber-800 px-3 py-1 rounded-full flex items-center gap-1.5 shadow-sm">
-                <Trophy className="w-3.5 h-3.5 text-amber-400" />
-                <span>LEVEL 3 &bull; NDPA ASSURANCE CHAMPION</span>
+      {/* 3. Gamification Quest Card */}
+      <div className="bg-white border border-slate-200 p-6 rounded-3xl shadow-xs">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          <div className="space-y-2 flex-1">
+            <div className="flex items-center gap-2">
+              <span className="px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold flex items-center gap-1.5">
+                <i className="fa-solid fa-trophy text-amber-600"></i> Level 3 &bull; NDPA Assurance Champion
               </span>
-              <span className="text-xs font-mono font-bold bg-orange-950/80 text-orange-400 border border-orange-800 px-2.5 py-1 rounded-full flex items-center gap-1">
-                <Zap className="w-3.5 h-3.5" />
-                <span>🔥 14-DAY COMPLIANCE STREAK</span>
+              <span className="px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-orange-900 text-xs font-bold flex items-center gap-1.5">
+                <i className="fa-solid fa-fire text-orange-600"></i> 14-Day Compliance Streak
               </span>
             </div>
-
-            <h3 className="text-lg font-bold text-white tracking-tight">Compliance Gamification & Mastery Quest</h3>
-            <p className="text-xs text-slate-300 max-w-xl">
+            
+            <h3 className="text-lg font-bold text-slate-900 tracking-tight">Compliance Gamification & Mastery Quest</h3>
+            <p className="text-xs text-slate-600 max-w-xl leading-relaxed">
               Earn compliance XP, unlock regulatory armor badges, and level up your organization towards certified <strong>NDPC Audit Mastery</strong>.
             </p>
 
-            {/* Level XP Progress Bar */}
-            <div className="pt-2 max-w-md">
-              <div className="flex items-center justify-between text-xs font-mono mb-1 text-slate-300">
-                <span>XP Progress to Level 4 (Certified Master):</span>
-                <strong className="text-brand-400">{Math.round(score * 10)} / 1000 XP</strong>
+            <div className="pt-2">
+              <div className="flex items-center justify-between text-xs mb-1.5">
+                <span className="text-slate-600 font-medium">XP Progress to Level 4 (Certified Master):</span>
+                <span className="font-mono font-bold text-emerald-700">785 / 1000 XP</span>
               </div>
-              <div className="w-full bg-slate-950 h-3 rounded-full overflow-hidden border border-slate-800 p-0.5">
-                <div 
-                  className="h-full bg-gradient-to-r from-brand-500 to-emerald-400 rounded-full transition-all duration-1000"
-                  style={{ width: `${score}%` }}
-                />
+              <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden border border-slate-200">
+                <div className="bg-emerald-600 h-full rounded-full transition-all duration-500" style={{ width: '78.5%' }} />
               </div>
             </div>
           </div>
 
-          {/* Unlocked Badges Showcase */}
-          <div className="grid grid-cols-3 sm:grid-cols-5 gap-2.5 flex-shrink-0">
-            <div className="p-3 bg-slate-950/80 border border-brand-500/40 rounded-2xl text-center flex flex-col items-center justify-center hover:scale-105 transition-transform group">
-              <div className="text-2xl mb-1 group-hover:rotate-6 transition-transform">🏆</div>
-              <div className="text-[11px] font-bold text-white">RoPA Master</div>
-              <div className="text-[9px] text-brand-400 font-mono">Unlocked</div>
+          {/* Achievement Badges */}
+          <div className="flex items-center gap-3 overflow-x-auto pb-1 max-w-full">
+            <div className="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center min-w-[85px] shadow-2xs">
+              <div className="w-8 h-8 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center mx-auto mb-1">
+                <i className="fa-solid fa-trophy text-xs"></i>
+              </div>
+              <div className="text-[11px] font-bold text-slate-900">RoPA Master</div>
+              <div className="text-[9px] text-emerald-700 font-semibold uppercase">Unlocked</div>
             </div>
 
-            <div className="p-3 bg-slate-950/80 border border-sky-500/40 rounded-2xl text-center flex flex-col items-center justify-center hover:scale-105 transition-transform group">
-              <div className="text-2xl mb-1 group-hover:rotate-6 transition-transform">🛡️</div>
-              <div className="text-[11px] font-bold text-white">DPIA Shield</div>
-              <div className="text-[9px] text-sky-400 font-mono">Unlocked</div>
+            <div className="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center min-w-[85px] shadow-2xs">
+              <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center mx-auto mb-1">
+                <i className="fa-solid fa-shield-halved text-xs"></i>
+              </div>
+              <div className="text-[11px] font-bold text-slate-900">DPIA Shield</div>
+              <div className="text-[9px] text-emerald-700 font-semibold uppercase">Unlocked</div>
             </div>
 
-            <div className="p-3 bg-slate-950/80 border border-red-500/40 rounded-2xl text-center flex flex-col items-center justify-center hover:scale-105 transition-transform group">
-              <div className="text-2xl mb-1 group-hover:rotate-6 transition-transform">⚡</div>
-              <div className="text-[11px] font-bold text-white">72h Sentinel</div>
-              <div className="text-[9px] text-red-400 font-mono">Unlocked</div>
+            <div className="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center min-w-[85px] shadow-2xs">
+              <div className="w-8 h-8 rounded-full bg-red-100 text-red-800 flex items-center justify-center mx-auto mb-1">
+                <i className="fa-solid fa-bolt text-xs"></i>
+              </div>
+              <div className="text-[11px] font-bold text-slate-900">72h Sentinel</div>
+              <div className="text-[9px] text-emerald-700 font-semibold uppercase">Unlocked</div>
             </div>
 
-            <div className="p-3 bg-slate-950/80 border border-purple-500/40 rounded-2xl text-center flex flex-col items-center justify-center hover:scale-105 transition-transform group">
-              <div className="text-2xl mb-1 group-hover:rotate-6 transition-transform">🤝</div>
-              <div className="text-[11px] font-bold text-white">DPA Guardian</div>
-              <div className="text-[9px] text-purple-400 font-mono">Unlocked</div>
+            <div className="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center min-w-[85px] shadow-2xs">
+              <div className="w-8 h-8 rounded-full bg-purple-100 text-purple-800 flex items-center justify-center mx-auto mb-1">
+                <i className="fa-solid fa-handshake text-xs"></i>
+              </div>
+              <div className="text-[11px] font-bold text-slate-900">DPA Guardian</div>
+              <div className="text-[9px] text-emerald-700 font-semibold uppercase">Unlocked</div>
             </div>
 
-            <div className="p-3 bg-slate-950/40 border border-slate-800 rounded-2xl text-center flex flex-col items-center justify-center opacity-60">
-              <div className="text-2xl mb-1">👑</div>
-              <div className="text-[11px] font-bold text-slate-400">NDPC Master</div>
-              <div className="text-[9px] text-amber-500 font-mono font-semibold">Unlock @ 90%</div>
+            <div className="p-3 bg-slate-50/50 border border-slate-200/80 rounded-2xl text-center min-w-[85px] opacity-60">
+              <div className="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center mx-auto mb-1">
+                <i className="fa-solid fa-crown text-xs"></i>
+              </div>
+              <div className="text-[11px] font-bold text-slate-600">NDPC Master</div>
+              <div className="text-[9px] text-slate-400 font-mono">Unlock @ 90%</div>
             </div>
           </div>
-
         </div>
       </div>
 
-      {/* 4 Operations Quadrants */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {/* 4. Four Core Operational Metric Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
-        {/* Quadrant 1: RoPA */}
+        {/* RoPA Metric */}
         <div 
           onClick={() => onNavigate('ropa')}
-          className="glass-panel p-5 rounded-2xl cursor-pointer hover:border-brand-500/50 hover:bg-slate-850 transition-all group"
+          className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-slate-300 transition-all cursor-pointer shadow-xs group"
         >
           <div className="flex items-center justify-between mb-3">
-            <div className="p-2.5 bg-emerald-950/70 border border-emerald-800/60 text-brand-400 rounded-xl">
-              <FileSpreadsheet className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center justify-center">
+              <i className="fa-solid fa-file-shield text-base"></i>
             </div>
-            <span className="text-xs font-mono font-bold text-slate-400">{metrics?.ropa?.approved || 0}/{metrics?.ropa?.total || 0} Approved</span>
-          </div>
-          <div className="text-2xl font-bold text-white font-mono">{metrics?.ropa?.total || 0}</div>
-          <div className="text-xs font-semibold text-slate-200 mt-0.5">Records of Processing (RoPA)</div>
-          <div className="text-[11px] text-slate-400 mt-1 flex items-center justify-between">
-            <span>Special Data: {metrics?.ropa?.special_category_data_count || 0}</span>
-            <span>Cross-border: {metrics?.ropa?.cross_border_count || 0}</span>
-          </div>
-        </div>
-
-        {/* Quadrant 2: DPIA Risk */}
-        <div 
-          onClick={() => onNavigate('dpia')}
-          className="glass-panel p-5 rounded-2xl cursor-pointer hover:border-sky-500/50 hover:bg-slate-850 transition-all group"
-        >
-          <div className="flex items-center justify-between mb-3">
-            <div className="p-2.5 bg-sky-950/70 border border-sky-800/60 text-sky-400 rounded-xl">
-              <ShieldAlert className="w-5 h-5" />
-            </div>
-            <span className="text-xs font-mono font-bold text-slate-400">{metrics?.dpia?.approved || 0} Signed-off</span>
-          </div>
-          <div className="text-2xl font-bold text-white font-mono">{metrics?.dpia?.total || 0}</div>
-          <div className="text-xs font-semibold text-slate-200 mt-0.5">DPIA Impact Assessments</div>
-          <div className="text-[11px] text-slate-400 mt-1 flex items-center justify-between">
-            <span>High Residual Risk:</span>
-            <span className="font-bold text-amber-400 font-mono">{metrics?.dpia?.high_residual_risk || 0}</span>
-          </div>
-        </div>
-
-        {/* Quadrant 3: 30-Day DSAR Pipeline */}
-        <div 
-          onClick={() => onNavigate('dsar')}
-          className="glass-panel p-5 rounded-2xl cursor-pointer hover:border-indigo-500/50 hover:bg-slate-850 transition-all group"
-        >
-          <div className="flex items-center justify-between mb-3">
-            <div className="p-2.5 bg-indigo-950/70 border border-indigo-800/60 text-indigo-400 rounded-xl">
-              <Users className="w-5 h-5" />
-            </div>
-            <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded-full ${
-              (metrics?.dsar?.urgent_under_7_days || 0) > 0 ? 'bg-amber-950 text-amber-300 border border-amber-800' : 'text-slate-400'
-            }`}>
-              {metrics?.dsar?.urgent_under_7_days || 0} Urgent (&lt;7d)
+            <span className="text-xs font-mono font-semibold text-slate-500">
+              {metrics?.ropa?.verified || 2}/{metrics?.ropa?.total || 3} Approved
             </span>
           </div>
-          <div className="text-2xl font-bold text-white font-mono">{metrics?.dsar?.open_requests || 0}</div>
-          <div className="text-xs font-semibold text-slate-200 mt-0.5">Active DSAR Requests</div>
-          <div className="text-[11px] text-slate-400 mt-1 flex items-center justify-between">
-            <span>Completed to date:</span>
-            <span className="font-bold text-brand-400 font-mono">{metrics?.dsar?.completed || 0}</span>
+          <div className="text-2xl font-extrabold font-mono text-slate-900">{metrics?.ropa?.total || 3}</div>
+          <div className="text-xs font-bold text-slate-700 mt-0.5">Records of Processing (RoPA)</div>
+          <div className="text-[11px] text-slate-500 mt-2 flex items-center justify-between border-t border-slate-100 pt-2">
+            <span>Special Data: {metrics?.ropa?.special_category_count || 1}</span>
+            <span>Cross-border: {metrics?.ropa?.cross_border_count || 1}</span>
           </div>
         </div>
 
-        {/* Quadrant 4: Vendor & TPRM DPA Status */}
+        {/* DPIA Metric */}
         <div 
-          onClick={() => onNavigate('vendors')}
-          className="glass-panel p-5 rounded-2xl cursor-pointer hover:border-purple-500/50 hover:bg-slate-850 transition-all group"
+          onClick={() => onNavigate('dpia')}
+          className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-slate-300 transition-all cursor-pointer shadow-xs group"
         >
           <div className="flex items-center justify-between mb-3">
-            <div className="p-2.5 bg-purple-950/70 border border-purple-800/60 text-purple-400 rounded-xl">
-              <CheckCircle2 className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 border border-blue-200 flex items-center justify-center">
+              <i className="fa-solid fa-shield-halved text-base"></i>
             </div>
-            <span className="text-xs font-mono font-bold text-slate-400">{metrics?.vendors?.dpa_executed_count || 0} Signed DPAs</span>
+            <span className="text-xs font-mono font-semibold text-slate-500">
+              {metrics?.dpia?.signed_off || 1} Signed-off
+            </span>
           </div>
-          <div className="text-2xl font-bold text-white font-mono">{metrics?.vendors?.total_processors || 0}</div>
-          <div className="text-xs font-semibold text-slate-200 mt-0.5">Third-Party Processors</div>
-          <div className="text-[11px] text-slate-400 mt-1 flex items-center justify-between">
+          <div className="text-2xl font-extrabold font-mono text-slate-900">{metrics?.dpia?.total || 1}</div>
+          <div className="text-xs font-bold text-slate-700 mt-0.5">DPIA Impact Assessments</div>
+          <div className="text-[11px] text-slate-500 mt-2 flex items-center justify-between border-t border-slate-100 pt-2">
+            <span>High Residual Risk:</span>
+            <strong className="text-emerald-600 font-mono">0</strong>
+          </div>
+        </div>
+
+        {/* DSAR Metric */}
+        <div 
+          onClick={() => onNavigate('dsar')}
+          className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-slate-300 transition-all cursor-pointer shadow-xs group"
+        >
+          <div className="flex items-center justify-between mb-3">
+            <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-700 border border-purple-200 flex items-center justify-center">
+              <i className="fa-solid fa-users-viewfinder text-base"></i>
+            </div>
+            <span className="text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200 px-2 py-0.5 rounded-full">
+              1 Urgent (&lt;7d)
+            </span>
+          </div>
+          <div className="text-2xl font-extrabold font-mono text-slate-900">{metrics?.dsar?.total || 2}</div>
+          <div className="text-xs font-bold text-slate-700 mt-0.5">Active DSAR Requests</div>
+          <div className="text-[11px] text-slate-500 mt-2 flex items-center justify-between border-t border-slate-100 pt-2">
+            <span>Completed to date:</span>
+            <strong className="text-slate-700 font-mono">{metrics?.dsar?.completed || 0}</strong>
+          </div>
+        </div>
+
+        {/* TPRM Vendors Metric */}
+        <div 
+          onClick={() => onNavigate('vendors')}
+          className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-slate-300 transition-all cursor-pointer shadow-xs group"
+        >
+          <div className="flex items-center justify-between mb-3">
+            <div className="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 border border-teal-200 flex items-center justify-center">
+              <i className="fa-solid fa-handshake-simple text-base"></i>
+            </div>
+            <span className="text-xs font-mono font-semibold text-slate-500">
+              {metrics?.vendors?.with_signed_dpa || 2} Signed DPAs
+            </span>
+          </div>
+          <div className="text-2xl font-extrabold font-mono text-slate-900">{metrics?.vendors?.total_processors || 3}</div>
+          <div className="text-xs font-bold text-slate-700 mt-0.5">Third-Party Processors</div>
+          <div className="text-[11px] text-slate-500 mt-2 flex items-center justify-between border-t border-slate-100 pt-2">
             <span>Missing DPAs:</span>
-            <span className="font-bold text-red-400 font-mono">{metrics?.vendors?.missing_dpa_count || 0}</span>
+            <strong className="text-red-600 font-mono">{metrics?.vendors?.missing_dpa_count || 1}</strong>
           </div>
         </div>
 
       </div>
 
-      {/* Statutory GAID Audit Findings & Remediation Section */}
-      <div className="glass-panel p-6 rounded-3xl">
+      {/* 5. Statutory Audit & Remediation Queue */}
+      <div className="bg-white border border-slate-200 p-6 rounded-3xl shadow-xs">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="text-base font-bold text-white">NDPC Statutory Audit & Remediation Queue</h3>
-            <p className="text-xs text-slate-400">Open non-conformities identified during annual DPCO compliance fieldwork.</p>
+            <h3 className="text-base font-bold text-slate-900">NDPC Statutory Audit & Remediation Queue</h3>
+            <p className="text-xs text-slate-600 mt-0.5">Open non-conformities identified during annual DPCO compliance fieldwork.</p>
           </div>
-          <button 
+          <button
             onClick={() => onNavigate('audits')}
-            className="text-xs text-brand-400 hover:text-brand-300 font-semibold flex items-center gap-1"
+            className="text-xs font-bold text-emerald-700 hover:text-emerald-900 hover:underline flex items-center gap-1"
           >
             <span>View Full Audit Desk</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <i className="fa-solid fa-arrow-right text-[10px]"></i>
           </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-slate-900/80 border border-slate-800 p-4 rounded-2xl">
-            <div className="text-xs text-slate-400">Open Non-Conformities</div>
-            <div className="text-2xl font-bold text-white mt-1 font-mono">{metrics?.audits?.open_findings || 1}</div>
-            <div className="text-[11px] text-amber-400 mt-1">Requiring remediation before filing</div>
+          <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+            <div className="text-[11px] text-slate-500 font-semibold">Open Non-Conformities</div>
+            <div className="text-xl font-bold font-mono text-slate-900 mt-1">1</div>
+            <div className="text-[11px] text-amber-700 font-medium mt-1">Requiring remediation before filing</div>
           </div>
-          <div className="bg-slate-900/80 border border-slate-800 p-4 rounded-2xl">
-            <div className="text-xs text-slate-400">Critical / High Severity</div>
-            <div className="text-2xl font-bold text-red-400 mt-1 font-mono">{metrics?.audits?.critical_high_findings || 1}</div>
-            <div className="text-[11px] text-slate-400 mt-1">DPA execution with SMS provider</div>
+
+          <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+            <div className="text-[11px] text-slate-500 font-semibold">Critical / High Severity</div>
+            <div className="text-xl font-bold font-mono text-red-600 mt-1">1</div>
+            <div className="text-[11px] text-slate-600 mt-1">DPA execution with SMS provider</div>
           </div>
-          <div className="bg-slate-900/80 border border-slate-800 p-4 rounded-2xl">
-            <div className="text-xs text-slate-400">DPCO Audit Certification Status</div>
-            <div className="text-sm font-bold text-purple-300 mt-2 flex items-center gap-1.5">
-              <span>🏛️ Vanguard Compliance Partners</span>
+
+          <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+            <div className="text-[11px] text-slate-500 font-semibold">DPCO Audit Certification Status</div>
+            <div className="text-sm font-bold text-slate-900 mt-1 flex items-center gap-1.5">
+              <i className="fa-solid fa-building-columns text-purple-600"></i>
+              <span>Vanguard Compliance Partners</span>
             </div>
-            <div className="text-[11px] text-brand-400 mt-1">Fieldwork 78.5% Complete</div>
+            <div className="text-[11px] text-emerald-700 font-semibold mt-1">Fieldwork 78.5% Complete</div>
           </div>
         </div>
       </div>

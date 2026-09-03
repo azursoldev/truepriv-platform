@@ -1,17 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  ClipboardCheck, 
-  Download, 
-  Upload, 
-  CheckCircle2, 
-  AlertTriangle, 
-  FileText, 
-  ShieldCheck, 
-  Plus,
-  ArrowRight,
-  Sparkles,
-  Award
-} from 'lucide-react';
 import { api, getAuthToken, getActiveTenantId } from '../lib/api';
 
 export default function AuditDesk({ onRefreshMetrics }) {
@@ -82,7 +69,7 @@ export default function AuditDesk({ onRefreshMetrics }) {
     try {
       const res = await api.storeFinding(activeProject.id, findingForm);
       if (res.success) {
-        setNotification({ type: 'success', message: 'Audit finding added to remediation tracker.' });
+        setNotification({ type: 'success', message: 'Non-conformity finding recorded.' });
         setShowFindingModal(false);
         loadProjectDetails(activeProject.id);
         if (onRefreshMetrics) onRefreshMetrics();
@@ -92,302 +79,160 @@ export default function AuditDesk({ onRefreshMetrics }) {
     }
   };
 
-  const handleDownloadPdf = async () => {
-    if (!activeProject) return;
+  const handleCertify = async () => {
+    if (!confirm('Are you sure you want to issue certified audit sign-off for this client?')) return;
     try {
-      const token = getAuthToken();
-      const activeTenantId = getActiveTenantId();
-      const headers = {
-        'Accept': 'application/json, application/pdf',
-      };
-      if (token) headers['Authorization'] = `Bearer ${token}`;
-      if (activeTenantId) headers['X-Tenant-ID'] = activeTenantId;
-
-      const response = await fetch(`/api/v1/audits/${activeProject.id}/report`, {
-        headers
+      const res = await api.certifyAudit(activeProject.id, {
+        dpco_managing_partner: 'Lead Audit Partner',
+        ndpc_license_number: 'DPCO/2026/0491',
+        overall_opinion: 'Satisfactory & Substantially Compliant under NDPA 2023',
       });
-
-      if (response.status === 403) {
-        const data = await response.json();
-        setNotification({
-          type: 'error',
-          message: data.message || 'Official compliance report export (PDF) is restricted on the Starter Trial tier. Please upgrade to Growth Enterprise or DPO Unlimited.'
-        });
-        return;
+      if (res.success) {
+        setNotification({ type: 'success', message: res.message });
+        loadProjectDetails(activeProject.id);
+        if (onRefreshMetrics) onRefreshMetrics();
       }
-
-      if (!response.ok) {
-        throw new Error('Failed to generate audit report');
-      }
-
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `NDPC_Statutory_Audit_Report_${activeProject.audit_year}.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      window.URL.revokeObjectURL(url);
     } catch (err) {
       setNotification({ type: 'error', message: err.message });
     }
   };
 
-  const getDomainTitle = (domain) => {
-    switch (domain) {
-      case 'governance_accountability':
-        return '🏛️ Governance, DPO & Accountability (NDPA Sec 24)';
-      case 'lawfulness_consent':
-        return '📜 Lawfulness, Legal Bases & Consent (NDPA Sec 25)';
-      case 'data_subject_rights':
-        return '👤 Data Subject Access Rights & 30d SLA (NDPA Sec 34-38)';
-      case 'security_measures':
-        return '🔒 Technical Security & Encryption (NDPA Sec 39)';
-      case 'third_party_processors':
-        return '🤝 Third-Party Processors & DPA (NDPA Sec 29)';
-      case 'cross_border_transfers':
-        return '🌐 International Data Transfers & Safeguards (NDPA Sec 41-43)';
-      default:
-        return domain;
-    }
-  };
-
   return (
     <div className="space-y-6">
-      {/* Toast */}
+      {/* Toast Notification */}
       {notification && (
-        <div className={`p-4 rounded-2xl flex items-center justify-between text-xs font-semibold ${
-          notification.type === 'success' ? 'bg-brand-950/90 text-brand-300 border border-brand-800' : 'bg-red-950/90 text-red-300 border border-red-800'
+        <div className={`p-4 rounded-2xl flex items-center justify-between text-xs font-semibold shadow-xs ${
+          notification.type === 'success' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-800 border border-red-200'
         }`}>
           <span>{notification.message}</span>
-          <button onClick={() => setNotification(null)} className="text-slate-400 hover:text-white">&times;</button>
+          <button onClick={() => setNotification(null)} className="text-slate-400 hover:text-slate-700 font-bold">&times;</button>
         </div>
       )}
 
-      {/* Audit Header Banner */}
-      <div className="glass-panel p-6 rounded-3xl relative overflow-hidden">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-xs font-mono font-bold bg-purple-950 text-purple-300 border border-purple-800 px-2.5 py-0.5 rounded-full">
-                🏛️ NDPC STATUTORY AUDIT DESK
-              </span>
-              <span className="text-xs text-slate-400">Audit Year {activeProject?.audit_year || 2026}</span>
-            </div>
-            <h2 className="text-2xl font-bold text-white tracking-tight">
-              {activeProject?.title || 'NDPC Statutory Compliance Audit 2026'}
-            </h2>
-            <p className="text-xs text-slate-300 mt-1 max-w-xl">
-              Conduct official assurance against the Nigeria Data Protection Commission GAID guidelines.
-              DPCO Firm: <strong className="text-purple-300">{activeProject?.dpco_firm?.name || 'Vanguard Compliance & Audit Partners DPCO'}</strong>
-            </p>
-
-            <div className="flex items-center gap-3 mt-4">
-              <div className="text-xs bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-800 text-slate-300">
-                Seal Code: <strong className="font-mono text-brand-400">{activeProject?.dpco_seal_code || 'DPCO-SEAL-2026-APX-883'}</strong>
-              </div>
-              <div className="text-xs bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-800 text-slate-300">
-                Score: <strong className="font-mono text-brand-400">{activeProject?.overall_score || 78.5}%</strong>
-              </div>
-            </div>
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Statutory NDPC Compliance Audit & Remediation Desk</h2>
+            <span className="text-[11px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded font-mono font-bold">
+              GAID v1.2
+            </span>
           </div>
+          <p className="text-xs text-slate-600 mt-0.5">
+            Annual statutory verification, 5-domain checklist scoring, evidence vault, and certified NDPC filing packs.
+          </p>
+        </div>
 
-          <div className="flex flex-col items-end gap-3 flex-shrink-0">
-            {/* 1-Click Official NDPC PDF Export */}
+        <div className="flex items-center gap-2">
+          {activeProject && (
             <button
-              onClick={handleDownloadPdf}
-              className="px-5 py-2.5 bg-gradient-to-r from-brand-600 to-emerald-500 hover:from-brand-500 hover:to-emerald-400 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg shadow-brand-950/60 transition-all"
+              onClick={handleCertify}
+              className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all"
             >
-              <Download className="w-4 h-4" />
-              <span>Download NDPC Statutory Report (PDF)</span>
+              <i className="fa-solid fa-stamp text-xs"></i>
+              <span>Certify Audit Filing</span>
             </button>
-
-            <button
-              onClick={() => setShowFindingModal(true)}
-              className="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all"
-            >
-              <Plus className="w-3.5 h-3.5 text-brand-400" />
-              <span>Log Non-Conformity</span>
-            </button>
-          </div>
+          )}
         </div>
       </div>
 
-      {/* GAID Audit Checklist Framework */}
-      <div className="space-y-6">
-        <h3 className="text-base font-bold text-white tracking-tight">NDPC GAID Checklist Domains & Evaluation</h3>
-
-        {Object.keys(groupedChecklist).map((domainKey) => {
-          const items = groupedChecklist[domainKey];
-          return (
-            <div key={domainKey} className="glass-panel rounded-3xl overflow-hidden">
-              <div className="bg-slate-900/90 px-6 py-3.5 border-b border-slate-800 flex items-center justify-between">
-                <span className="text-sm font-bold text-slate-200">{getDomainTitle(domainKey)}</span>
-                <span className="text-xs text-slate-400 font-mono">{items.length} Verification Clauses</span>
-              </div>
-
-              <div className="divide-y divide-slate-800/60">
-                {items.map((item) => (
-                  <div key={item.id} className="p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:bg-slate-850/40 transition-colors">
-                    <div className="space-y-1 max-w-2xl">
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-mono font-bold text-brand-400 bg-brand-950 px-2 py-0.5 rounded border border-brand-800">
-                          {item.section_code}
-                        </span>
-                        <span className="text-xs text-slate-400">Awarded: <strong>{item.awarded_points} / {item.max_points} pts</strong></span>
-                      </div>
-                      <h4 className="text-sm font-semibold text-white">{item.question}</h4>
-                      {item.auditor_findings && (
-                        <p className="text-xs text-slate-400 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800/80">
-                          <strong className="text-purple-300">DPCO Finding:</strong> {item.auditor_findings}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Quick Scoring Status Radios */}
-                    <div className="flex items-center gap-2 flex-shrink-0">
-                      <button
-                        onClick={() => handleUpdateItemStatus(item.id, 'compliant', item.max_points)}
-                        className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                          item.status === 'compliant'
-                            ? 'bg-emerald-950 text-brand-400 border border-brand-500 shadow-md shadow-brand-950'
-                            : 'bg-slate-800 text-slate-400 hover:text-white'
-                        }`}
-                      >
-                        ✓ Compliant
-                      </button>
-
-                      <button
-                        onClick={() => handleUpdateItemStatus(item.id, 'partially_compliant', item.max_points)}
-                        className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                          item.status === 'partially_compliant'
-                            ? 'bg-amber-950 text-amber-400 border border-amber-500 shadow-md shadow-amber-950'
-                            : 'bg-slate-800 text-slate-400 hover:text-white'
-                        }`}
-                      >
-                        Partially
-                      </button>
-
-                      <button
-                        onClick={() => handleUpdateItemStatus(item.id, 'non_compliant', item.max_points)}
-                        className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                          item.status === 'non_compliant'
-                            ? 'bg-red-950 text-red-400 border border-red-500 shadow-md shadow-red-950'
-                            : 'bg-slate-800 text-slate-400 hover:text-white'
-                        }`}
-                      >
-                        ✕ Non-Compliant
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Non-Conformities & Remediation Tracker */}
-      {activeProject?.findings && activeProject.findings.length > 0 && (
-        <div className="glass-panel p-6 rounded-3xl">
-          <h3 className="text-base font-bold text-white mb-3">Audit Non-Conformities & Action Tracker</h3>
-          <div className="space-y-3">
-            {activeProject.findings.map((f) => (
-              <div key={f.id} className="p-4 bg-slate-900/80 rounded-2xl border border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-red-400 uppercase font-mono bg-red-950 px-2 py-0.5 rounded border border-red-800">
-                      {f.severity} Severity
-                    </span>
-                    <span className="text-xs text-slate-400">Status: <strong className="text-amber-400">{f.status}</strong></span>
-                  </div>
-                  <h4 className="text-sm font-bold text-white mt-1.5">{f.title}</h4>
-                  <p className="text-xs text-slate-300 mt-0.5">{f.description}</p>
-                  <p className="text-xs text-brand-400 mt-1"><strong>Action Plan:</strong> {f.remediation_plan || f.recommendation}</p>
+      {loading ? (
+        <div className="py-16 text-center text-slate-500 text-xs font-medium">Loading statutory audit project...</div>
+      ) : !activeProject ? (
+        <div className="bg-white border border-slate-200 rounded-3xl p-12 text-center shadow-xs">
+          <i className="fa-solid fa-clipboard-check text-slate-300 text-3xl mb-2"></i>
+          <h4 className="text-sm font-bold text-slate-800">No active audit projects found</h4>
+        </div>
+      ) : (
+        <div className="space-y-6">
+          
+          {/* Active Audit Overview Card */}
+          <div className="bg-white border border-slate-200 p-6 rounded-3xl shadow-xs">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+              <div>
+                <span className="text-[10px] font-mono text-slate-500 uppercase font-bold">Audit Project #{activeProject.id.substring(0, 8)}</span>
+                <h3 className="text-lg font-bold text-slate-900 mt-0.5">{activeProject.title}</h3>
+                <div className="flex items-center gap-3 text-xs text-slate-600 mt-1">
+                  <span>Audit Year: <strong className="text-slate-900">{activeProject.audit_year}</strong></span>
+                  <span>&bull;</span>
+                  <span>DPCO: <strong className="text-purple-700 font-semibold">{activeProject.dpco_license_number || 'Vanguard Partners'}</strong></span>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      )}
 
-      {/* Modal to log finding */}
-      {showFindingModal && (
-        <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 shadow-2xl">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-bold text-white">Log Audit Non-Conformity</h3>
-              <button onClick={() => setShowFindingModal(false)} className="text-slate-400 hover:text-white">&times;</button>
+              <div className="flex items-center gap-4">
+                <div className="text-right">
+                  <div className="text-[10px] text-slate-500 uppercase font-bold">Audit Completion Score</div>
+                  <div className="text-2xl font-extrabold font-mono text-emerald-700 mt-0.5">
+                    {activeProject.overall_audit_score}%
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <form onSubmit={handleCreateFinding} className="space-y-4 text-xs">
-              <div>
-                <label className="block text-slate-300 font-semibold mb-1">Finding Title *</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Missing DPA with SMS Provider"
-                  value={findingForm.title}
-                  onChange={(e) => setFindingForm({ ...findingForm, title: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-brand-500 focus:outline-none"
-                />
+            {/* Statutory Filing Deadline Alert */}
+            <div className="mt-4 p-3.5 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-between text-xs">
+              <div className="flex items-center gap-2">
+                <i className="fa-solid fa-clock text-amber-600 text-sm"></i>
+                <span className="text-slate-700">Mandatory Annual Filing Deadline: <strong className="text-slate-900">March 15, 2027</strong></span>
               </div>
-
-              <div>
-                <label className="block text-slate-300 font-semibold mb-1">Severity *</label>
-                <select
-                  value={findingForm.severity}
-                  onChange={(e) => setFindingForm({ ...findingForm, severity: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-brand-500 focus:outline-none"
-                >
-                  <option value="critical">Critical</option>
-                  <option value="high">High</option>
-                  <option value="medium">Medium</option>
-                  <option value="low">Low</option>
-                  <option value="observation">Observation</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-slate-300 font-semibold mb-1">Description *</label>
-                <textarea
-                  rows="2"
-                  required
-                  value={findingForm.description}
-                  onChange={(e) => setFindingForm({ ...findingForm, description: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-brand-500 focus:outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-slate-300 font-semibold mb-1">Auditor Recommendation *</label>
-                <textarea
-                  rows="2"
-                  required
-                  value={findingForm.recommendation}
-                  onChange={(e) => setFindingForm({ ...findingForm, recommendation: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-brand-500 focus:outline-none"
-                />
-              </div>
-
-              <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-800">
-                <button
-                  type="button"
-                  onClick={() => setShowFindingModal(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-5 py-2 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-xs font-bold"
-                >
-                  Save Finding
-                </button>
-              </div>
-            </form>
+              <span className="text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full">
+                Audit Status: {activeProject.status?.replace(/_/g, ' ').toUpperCase()}
+              </span>
+            </div>
           </div>
+
+          {/* 5-Domain Checklist & Evidence Scoring */}
+          <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs space-y-6">
+            <div className="flex items-center justify-between">
+              <h3 className="text-base font-bold text-slate-900">GAID Statutory Audit Checklist & Controls</h3>
+              <span className="text-xs text-slate-500">5 Regulatory Domains</span>
+            </div>
+
+            <div className="space-y-6">
+              {Object.keys(groupedChecklist).map((domain) => (
+                <div key={domain} className="space-y-3">
+                  <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                    {domain}
+                  </h4>
+
+                  <div className="space-y-2">
+                    {groupedChecklist[domain].map((item) => (
+                      <div key={item.id} className="p-4 bg-white border border-slate-200 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-3 shadow-2xs">
+                        <div className="flex-1">
+                          <div className="text-xs font-bold text-slate-900">{item.requirement_title}</div>
+                          <div className="text-[11px] text-slate-600 mt-0.5">{item.statutory_reference}</div>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-mono font-bold text-slate-600 px-2">
+                            {item.awarded_points}/{item.max_points} pts
+                          </span>
+                          {['compliant', 'partially_compliant', 'non_compliant'].map((st) => (
+                            <button
+                              key={st}
+                              onClick={() => handleUpdateItemStatus(item.id, st, item.max_points)}
+                              className={`px-2.5 py-1 rounded-lg text-xs font-bold capitalize border transition-all ${
+                                item.status === st
+                                  ? st === 'compliant'
+                                    ? 'bg-emerald-600 text-white border-emerald-700 shadow-2xs'
+                                    : st === 'partially_compliant'
+                                    ? 'bg-amber-500 text-white border-amber-600 shadow-2xs'
+                                    : 'bg-red-600 text-white border-red-700 shadow-2xs'
+                                  : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                              }`}
+                            >
+                              {st.replace(/_/g, ' ')}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       )}
     </div>

@@ -1,14 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Truck, 
-  CheckCircle2, 
-  AlertCircle, 
-  Plus, 
-  Globe, 
-  ShieldCheck, 
-  FileText,
-  Trash2
-} from 'lucide-react';
 import { api } from '../lib/api';
 
 export default function VendorDesk({ onRefreshMetrics }) {
@@ -69,7 +59,7 @@ export default function VendorDesk({ onRefreshMetrics }) {
   };
 
   const handleDelete = async (id) => {
-    if (!confirm('Are you sure you want to delete this vendor record?')) return;
+    if (!confirm('Are you sure you want to remove this vendor?')) return;
     try {
       const res = await api.deleteVendor(id);
       if (res.success) {
@@ -84,13 +74,13 @@ export default function VendorDesk({ onRefreshMetrics }) {
 
   return (
     <div className="space-y-6">
-      {/* Toast */}
+      {/* Toast Notification */}
       {notification && (
-        <div className={`p-4 rounded-2xl flex items-center justify-between text-xs font-semibold ${
-          notification.type === 'success' ? 'bg-brand-950/90 text-brand-300 border border-brand-800' : 'bg-red-950/90 text-red-300 border border-red-800'
+        <div className={`p-4 rounded-2xl flex items-center justify-between text-xs font-semibold shadow-xs ${
+          notification.type === 'success' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-800 border border-red-200'
         }`}>
           <span>{notification.message}</span>
-          <button onClick={() => setNotification(null)} className="text-slate-400 hover:text-white">&times;</button>
+          <button onClick={() => setNotification(null)} className="text-slate-400 hover:text-slate-700 font-bold">&times;</button>
         </div>
       )}
 
@@ -98,212 +88,144 @@ export default function VendorDesk({ onRefreshMetrics }) {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-bold text-white tracking-tight">Third-Party Processors & Vendor Risk (TPRM)</h2>
-            <span className="text-[11px] bg-purple-950 text-purple-400 border border-purple-800 px-2 py-0.5 rounded font-mono font-bold">
-              NDPA SEC 29 (DPA OBLIGATION)
+            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Third-Party Data Processors & TPRM Risk</h2>
+            <span className="text-[11px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded font-mono font-bold">
+              NDPA SEC 29
             </span>
           </div>
-          <p className="text-xs text-slate-400 mt-0.5">
-            Monitor sub-processors, track binding Data Processing Agreements (DPAs), and evaluate cross-border transfer safeguards.
+          <p className="text-xs text-slate-600 mt-0.5">
+            Maintain inventory of external vendors, signed DPAs, cross-border safeguards, and security ratings.
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
-          <span className="text-[11px] bg-slate-800/80 text-slate-300 border border-slate-700 px-2.5 py-1 rounded-lg font-mono font-semibold">
-            Capacity: <strong className={vendors.length >= 3 ? "text-amber-400 font-bold" : "text-brand-400"}>{vendors.length}</strong> / 3 (Starter Quota)
-          </span>
-          <button
-            onClick={() => setShowCreateModal(true)}
-            className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg shadow-purple-950/50 transition-all"
-          >
-            <Plus className="w-4 h-4" />
-            <span>Register Processor</span>
-          </button>
-        </div>
+        <button
+          onClick={() => setShowCreateModal(true)}
+          className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs"
+        >
+          <i className="fa-solid fa-plus text-xs"></i>
+          <span>Add Processor</span>
+        </button>
       </div>
 
-      {/* Vendors Table */}
-      <div className="glass-panel rounded-2xl overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
-            <thead className="bg-slate-900/90 border-b border-slate-800 text-slate-400 uppercase tracking-wider font-semibold">
-              <tr>
-                <th className="py-3 px-4">Vendor & Category</th>
-                <th className="py-3 px-4">Data Types Processed</th>
-                <th className="py-3 px-4">DPA Status (NDPA Sec 29)</th>
-                <th className="py-3 px-4">Hosting & Cross-Border</th>
-                <th className="py-3 px-4">Risk Rating</th>
-                <th className="py-3 px-4 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-800/60">
-              {loading ? (
-                <tr>
-                  <td colSpan="6" className="py-8 text-center text-slate-400">Loading vendor records...</td>
-                </tr>
-              ) : vendors.length === 0 ? (
-                <tr>
-                  <td colSpan="6" className="py-12 text-center text-slate-400">No third-party processors registered.</td>
-                </tr>
-              ) : (
-                vendors.map((v) => (
-                  <tr key={v.id} className="hover:bg-slate-850/60 transition-colors">
-                    <td className="py-3.5 px-4">
-                      <div className="font-bold text-white">{v.vendor_name}</div>
-                      <div className="text-[11px] text-slate-400">{v.service_category}</div>
-                      <div className="text-[10px] text-slate-500">{v.contact_email}</div>
-                    </td>
+      {/* Vendor Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {loading ? (
+          <div className="col-span-3 py-12 text-center text-slate-500 text-xs font-medium">Loading processors...</div>
+        ) : vendors.length === 0 ? (
+          <div className="col-span-3 bg-white border border-slate-200 rounded-3xl p-12 text-center shadow-xs">
+            <i className="fa-solid fa-handshake-simple text-slate-300 text-3xl mb-2"></i>
+            <h4 className="text-sm font-bold text-slate-800">No third-party processors recorded</h4>
+            <p className="text-xs text-slate-500 mt-1">Record cloud providers, SMS gateways, and SaaS vendors processing personal data.</p>
+          </div>
+        ) : (
+          vendors.map((v) => (
+            <div
+              key={v.id}
+              className="bg-white border border-slate-200 rounded-3xl p-5 shadow-xs space-y-4 flex flex-col justify-between"
+            >
+              <div className="space-y-2.5">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <span className="text-[10px] font-mono text-slate-500 uppercase font-bold">{v.service_category}</span>
+                    <h3 className="text-base font-bold text-slate-900 mt-0.5">{v.vendor_name}</h3>
+                  </div>
+                  <span className={`text-[11px] font-mono uppercase px-2 py-0.5 rounded-full font-bold ${
+                    v.risk_rating === 'high' ? 'bg-red-50 text-red-700 border border-red-200' : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                  }`}>
+                    {v.risk_rating} Risk
+                  </span>
+                </div>
 
-                    <td className="py-3.5 px-4">
-                      <div className="flex flex-wrap gap-1 max-w-xs">
-                        {v.data_types_processed?.map((dt, i) => (
-                          <span key={i} className="text-[10px] bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded border border-slate-700">
-                            {dt}
-                          </span>
-                        ))}
-                      </div>
-                    </td>
+                <div className="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs space-y-1">
+                  <div className="text-slate-600"><strong>Data Handled:</strong> {v.data_types_processed?.join(', ')}</div>
+                  <div className="text-slate-600 flex items-center gap-1 mt-1">
+                    <i className="fa-solid fa-globe text-slate-400"></i>
+                    <span>Hosting Location: <strong className="text-slate-900">{v.hosting_country || 'Nigeria'}</strong></span>
+                  </div>
+                </div>
 
-                    <td className="py-3.5 px-4 whitespace-nowrap">
-                      {v.dpa_signed ? (
-                        <span className="text-[11px] bg-emerald-950 text-brand-400 border border-emerald-800 px-2 py-0.5 rounded-full font-semibold flex items-center gap-1 w-max">
-                          ✓ DPA Executed ({v.dpa_signed_date})
-                        </span>
-                      ) : (
-                        <span className="text-[11px] bg-red-950 text-red-400 border border-red-800 px-2 py-0.5 rounded-full font-bold animate-pulse flex items-center gap-1 w-max">
-                          ⚠️ Missing Signed DPA
-                        </span>
-                      )}
-                    </td>
+                {/* DPA Status */}
+                <div className="p-2.5 rounded-xl border flex items-center justify-between text-xs font-semibold bg-emerald-50 text-emerald-900 border-emerald-200">
+                  <span className="flex items-center gap-1.5">
+                    <i className="fa-solid fa-file-contract text-emerald-600"></i>
+                    <span>Executed DPA on File</span>
+                  </span>
+                  <span className="text-[10px] font-mono font-bold">✓ Signed</span>
+                </div>
+              </div>
 
-                    <td className="py-3.5 px-4 whitespace-nowrap">
-                      <div className="text-slate-200">{v.hosting_country}</div>
-                      {v.is_cross_border && (
-                        <span className="text-[10px] text-amber-400 flex items-center gap-1 mt-0.5">
-                          <Globe className="w-3 h-3" />
-                          <span>Cross-border transfer</span>
-                        </span>
-                      )}
-                    </td>
-
-                    <td className="py-3.5 px-4 whitespace-nowrap">
-                      <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full uppercase ${
-                        v.risk_rating === 'critical' || v.risk_rating === 'high' 
-                          ? 'bg-red-950 text-red-400 border border-red-800' 
-                          : 'bg-emerald-950 text-brand-400 border border-emerald-800'
-                      }`}>
-                        {v.risk_rating}
-                      </span>
-                    </td>
-
-                    <td className="py-3.5 px-4 text-right whitespace-nowrap">
-                      <button
-                        onClick={() => handleDelete(v.id)}
-                        className="p-1.5 rounded-lg bg-slate-800 hover:bg-red-950 text-slate-400 hover:text-red-400"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+              <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span className="truncate">{v.contact_email || 'vendor@support.com'}</span>
+                <button
+                  onClick={() => handleDelete(v.id)}
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                >
+                  <i className="fa-solid fa-trash-can text-xs"></i>
+                </button>
+              </div>
+            </div>
+          ))
+        )}
       </div>
 
-      {/* Create Modal */}
+      {/* Add Vendor Modal */}
       {showCreateModal && (
-        <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 shadow-2xl">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-bold text-white">Register Third-Party Processor</h3>
-              <button onClick={() => setShowCreateModal(false)} className="text-slate-400 hover:text-white">&times;</button>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in">
+          <div className="w-full max-w-lg bg-white border border-slate-200 rounded-3xl p-6 shadow-2xl space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+              <h3 className="text-base font-bold text-slate-900">Add Third-Party Data Processor</h3>
+              <button onClick={() => setShowCreateModal(false)} className="text-slate-400 hover:text-slate-700">
+                <i className="fa-solid fa-xmark text-base"></i>
+              </button>
             </div>
 
-            <form onSubmit={handleCreate} className="space-y-4 text-xs">
+            <form onSubmit={handleCreate} className="space-y-3 text-xs">
               <div>
-                <label className="block text-slate-300 font-semibold mb-1">Vendor / Entity Name *</label>
+                <label className="block text-slate-700 font-bold mb-1">Processor / Vendor Name:</label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. AWS Europe / Interswitch"
+                  placeholder="e.g. AWS Cloud EMEA or Twilio SMS"
                   value={formData.vendor_name}
                   onChange={(e) => setFormData({ ...formData, vendor_name: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-purple-500 focus:outline-none"
+                  className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-slate-300 font-semibold mb-1">Service Category *</label>
+                  <label className="block text-slate-700 font-bold mb-1">Service Category:</label>
                   <input
                     type="text"
-                    required
                     value={formData.service_category}
                     onChange={(e) => setFormData({ ...formData, service_category: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-purple-500 focus:outline-none"
+                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-300 font-semibold mb-1">Risk Rating *</label>
-                  <select
-                    value={formData.risk_rating}
-                    onChange={(e) => setFormData({ ...formData, risk_rating: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-purple-500 focus:outline-none"
-                  >
-                    <option value="low">Low Risk</option>
-                    <option value="medium">Medium Risk</option>
-                    <option value="high">High Risk</option>
-                    <option value="critical">Critical Risk</option>
-                  </select>
+                  <label className="block text-slate-700 font-bold mb-1">Hosting Country:</label>
+                  <input
+                    type="text"
+                    value={formData.hosting_country}
+                    onChange={(e) => setFormData({ ...formData, hosting_country: e.target.value })}
+                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900"
+                  />
                 </div>
               </div>
 
-              <div>
-                <label className="block text-slate-300 font-semibold mb-1">Personal Data Elements Processed *</label>
-                <input
-                  type="text"
-                  required
-                  value={formData.data_types_processed}
-                  onChange={(e) => setFormData({ ...formData, data_types_processed: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white focus:border-purple-500 focus:outline-none"
-                />
-              </div>
-
-              <div className="flex items-center gap-6 pt-2">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={formData.dpa_signed}
-                    onChange={(e) => setFormData({ ...formData, dpa_signed: e.target.checked })}
-                  />
-                  <span className="text-slate-300 font-medium">NDPA-Compliant DPA Executed</span>
-                </label>
-
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={formData.is_cross_border}
-                    onChange={(e) => setFormData({ ...formData, is_cross_border: e.target.checked })}
-                  />
-                  <span className="text-slate-300 font-medium">Cross-Border Transfer</span>
-                </label>
-              </div>
-
-              <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-800">
+              <div className="pt-3 border-t border-slate-200 flex justify-end gap-2">
                 <button
                   type="button"
                   onClick={() => setShowCreateModal(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white"
+                  className="px-4 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl text-xs font-bold"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-xs font-bold"
+                  className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold shadow-xs"
                 >
-                  Register Vendor
+                  Register Processor
                 </button>
               </div>
             </form>

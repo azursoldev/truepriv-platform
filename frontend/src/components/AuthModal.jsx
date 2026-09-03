@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, Lock, Building2, User, Sparkles, ArrowRight, Globe, Server, CheckCircle2, Check } from 'lucide-react';
 import { api, setAuthToken, setActiveTenantId } from '../lib/api';
 
 export default function AuthModal({ onLoginSuccess }) {
@@ -26,7 +25,7 @@ export default function AuthModal({ onLoginSuccess }) {
       role: 'Corporate Admin / DPO',
       email: 'compliance@apexmfb.ng',
       desc: 'Manages internal NDPA RoPA, DPIAs, 30d DSAR pipeline, 72h breach clock, and vendor risk.',
-      color: 'border-emerald-500/50 bg-emerald-950/20 text-emerald-300'
+      color: 'border-emerald-200 bg-emerald-50/70 text-emerald-900'
     },
     {
       title: '🛡️ Outsourced DPO Firm',
@@ -34,7 +33,7 @@ export default function AuthModal({ onLoginSuccess }) {
       role: 'Lead DPO Consultant',
       email: 'lead.dpo@fortressadvisory.ng',
       desc: 'Multi-client portfolio desk managing DPO advisory for 4 corporate client organizations.',
-      color: 'border-blue-500/50 bg-blue-950/20 text-blue-300'
+      color: 'border-blue-200 bg-blue-50/70 text-blue-900'
     },
     {
       title: '🏛️ Licensed DPCO Firm',
@@ -42,7 +41,7 @@ export default function AuthModal({ onLoginSuccess }) {
       role: 'Managing Audit Partner',
       email: 'lead.partner@vanguarddpco.ng',
       desc: 'Conducts statutory GAID annual compliance audits and issues certified NDPC filing packs.',
-      color: 'border-purple-500/50 bg-purple-950/20 text-purple-300'
+      color: 'border-purple-200 bg-purple-50/70 text-purple-900'
     },
     {
       title: '👑 System Super Administrator',
@@ -50,7 +49,7 @@ export default function AuthModal({ onLoginSuccess }) {
       role: 'Platform Super Admin',
       email: 'admin@dpodpco.ng',
       desc: 'Global multi-tenant governance, industry template management, and audit licensing.',
-      color: 'border-amber-500/50 bg-amber-950/20 text-amber-300'
+      color: 'border-amber-200 bg-amber-50/70 text-amber-900'
     }
   ];
 
@@ -122,27 +121,25 @@ export default function AuthModal({ onLoginSuccess }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in">
-      <div className="w-full max-w-xl glass-panel bg-slate-900 border border-slate-700/80 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden max-h-[95vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in">
+      <div className="w-full max-w-xl bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden max-h-[95vh] overflow-y-auto">
         
         {/* Top Header Section */}
         {mode === 'login' ? (
           <div className="text-center mb-6">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-700 via-brand-500 to-emerald-400 p-0.5 shadow-lg shadow-brand-900/40 mx-auto flex items-center justify-center mb-3">
-              <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-                <Shield className="w-6 h-6 text-brand-400" />
-              </div>
+            <div className="w-12 h-12 rounded-2xl bg-slate-900 text-white mx-auto flex items-center justify-center mb-3 shadow-md">
+              <i className="fa-solid fa-shield-halved text-emerald-400 text-xl"></i>
             </div>
-            <h2 className="text-2xl font-bold text-white tracking-tight">TRUEPRIV PLATFORM</h2>
-            <p className="text-xs text-slate-400 mt-1">Multi-Tenant NDPA 2023 Compliance & Statutory Auditing Suite</p>
+            <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">TRUEPRIV PLATFORM</h2>
+            <p className="text-xs text-slate-500 mt-1">Multi-Tenant NDPA 2023 Compliance & Statutory Auditing Suite</p>
           </div>
         ) : (
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-xs font-mono text-slate-400">§24</span>
-              <h2 className="text-2xl font-serif font-bold text-white tracking-tight">Create your account</h2>
+              <span className="text-xs font-mono text-slate-400 font-bold">§24</span>
+              <h2 className="text-2xl font-serif font-bold text-slate-900 tracking-tight">Create your account</h2>
             </div>
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-xs text-slate-600 leading-relaxed">
               Your answers here decide which product you receive, so take the profile question slowly. Everything else can be changed later.
             </p>
           </div>
@@ -150,7 +147,7 @@ export default function AuthModal({ onLoginSuccess }) {
 
         {/* Error Alert */}
         {error && (
-          <div className="mb-4 p-3 bg-red-950/60 border border-red-800/80 rounded-xl text-xs text-red-300">
+          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 font-medium">
             {error}
           </div>
         )}
@@ -162,52 +159,52 @@ export default function AuthModal({ onLoginSuccess }) {
           <div className="space-y-6">
             <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }} className="space-y-3">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Official Email</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Official Email</label>
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-brand-500"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Password</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Password</label>
                 <input
                   type="password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-brand-500"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-xs font-bold transition-all shadow-lg shadow-brand-900/30 disabled:opacity-50"
+                className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all shadow-md disabled:opacity-50"
               >
                 {loading ? 'Authenticating...' : 'Sign In to Workspace'}
               </button>
             </form>
 
-            <div className="flex items-center justify-between text-xs pt-2 border-t border-slate-800">
-              <span className="text-slate-400">Need a new workspace?</span>
+            <div className="flex items-center justify-between text-xs pt-2 border-t border-slate-200">
+              <span className="text-slate-500">Need a new workspace?</span>
               <button
                 type="button"
                 onClick={() => { setMode('register'); setError(null); }}
-                className="text-brand-400 font-bold hover:underline"
+                className="text-emerald-700 font-bold hover:underline"
               >
                 Create your account
               </button>
             </div>
 
             {/* Quick Demo Personas */}
-            <div className="pt-3 border-t border-slate-800">
-              <div className="flex items-center justify-between text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+            <div className="pt-3 border-t border-slate-200">
+              <div className="flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                 <span>Instant Multi-Tenant Personas</span>
-                <span className="text-[10px] text-brand-400">1-Click Login</span>
+                <span className="text-[10px] text-emerald-700 font-bold">1-Click Login</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -219,8 +216,8 @@ export default function AuthModal({ onLoginSuccess }) {
                     className={`text-left p-2.5 rounded-xl border ${p.color} hover:scale-[1.01] transition-transform`}
                   >
                     <div className="font-bold text-xs">{p.title}</div>
-                    <div className="text-[11px] text-slate-200 truncate mt-0.5">{p.org}</div>
-                    <div className="text-[10px] text-slate-400 mt-1 truncate">{p.desc}</div>
+                    <div className="text-[11px] text-slate-700 truncate mt-0.5">{p.org}</div>
+                    <div className="text-[10px] text-slate-500 mt-1 truncate">{p.desc}</div>
                   </button>
                 ))}
               </div>
@@ -235,7 +232,7 @@ export default function AuthModal({ onLoginSuccess }) {
             {/* 1. FULL NAME */}
             <div>
               <div className="flex items-center justify-between mb-1">
-                <label className="text-[11px] font-bold text-slate-300 uppercase tracking-wider">FULL NAME</label>
+                <label className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">FULL NAME</label>
                 <span className="text-[11px] text-slate-400">Required</span>
               </div>
               <input
@@ -244,14 +241,14 @@ export default function AuthModal({ onLoginSuccess }) {
                 placeholder="Bisi Adeyemi"
                 value={regData.name}
                 onChange={(e) => setRegData({ ...regData, name: e.target.value })}
-                className="w-full bg-slate-950 border border-slate-700/90 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-brand-500 shadow-inner"
+                className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-emerald-600 shadow-2xs"
               />
             </div>
 
             {/* 2. WORK EMAIL */}
             <div>
               <div className="flex items-center justify-between mb-1">
-                <label className="text-[11px] font-bold text-slate-300 uppercase tracking-wider">WORK EMAIL</label>
+                <label className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">WORK EMAIL</label>
                 <span className="text-[11px] text-slate-400">Required</span>
               </div>
               <input
@@ -260,9 +257,9 @@ export default function AuthModal({ onLoginSuccess }) {
                 placeholder="b.adeyemi@alphaltd.ng"
                 value={regData.email}
                 onChange={(e) => setRegData({ ...regData, email: e.target.value })}
-                className="w-full bg-slate-950 border border-slate-700/90 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-brand-500 shadow-inner"
+                className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-emerald-600 shadow-2xs"
               />
-              <p className="text-[11px] text-slate-400 mt-1">
+              <p className="text-[11px] text-slate-500 mt-1">
                 We use this address for filing receipts, so use one that will outlive the project.
               </p>
             </div>
@@ -271,7 +268,7 @@ export default function AuthModal({ onLoginSuccess }) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <div className="flex items-center justify-between mb-1">
-                  <label className="text-[11px] font-bold text-slate-300 uppercase tracking-wider">PHONE</label>
+                  <label className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">PHONE</label>
                   <span className="text-[11px] text-slate-400">Required</span>
                 </div>
                 <input
@@ -280,13 +277,13 @@ export default function AuthModal({ onLoginSuccess }) {
                   placeholder="+234 803 114 2290"
                   value={regData.phone}
                   onChange={(e) => setRegData({ ...regData, phone: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-700/90 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-brand-500 shadow-inner"
+                  className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-emerald-600 shadow-2xs"
                 />
               </div>
 
               <div>
                 <div className="flex items-center justify-between mb-1">
-                  <label className="text-[11px] font-bold text-slate-300 uppercase tracking-wider">PASSWORD</label>
+                  <label className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">PASSWORD</label>
                   <span className="text-[11px] text-slate-400">Required</span>
                 </div>
                 <input
@@ -295,52 +292,52 @@ export default function AuthModal({ onLoginSuccess }) {
                   placeholder="••••••••••••••••"
                   value={regData.password}
                   onChange={(e) => setRegData({ ...regData, password: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-700/90 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-brand-500 shadow-inner"
+                  className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-emerald-600 shadow-2xs"
                 />
                 <div className="flex items-center gap-1.5 mt-1.5">
                   <div className="flex items-center gap-1">
-                    <span className="w-4 h-1 rounded-full bg-emerald-500"></span>
-                    <span className="w-4 h-1 rounded-full bg-emerald-500"></span>
-                    <span className="w-4 h-1 rounded-full bg-emerald-500"></span>
+                    <span className="w-4 h-1 rounded-full bg-emerald-600"></span>
+                    <span className="w-4 h-1 rounded-full bg-emerald-600"></span>
+                    <span className="w-4 h-1 rounded-full bg-emerald-600"></span>
                   </div>
-                  <span className="text-[11px] font-medium text-emerald-400">Strong</span>
+                  <span className="text-[11px] font-semibold text-emerald-700">Strong</span>
                 </div>
               </div>
             </div>
 
             {/* 4. WHICH DESCRIBES YOU? RADIO CARDS */}
             <div className="pt-2">
-              <label className="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">
+              <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2">
                 WHICH DESCRIBES YOU?
               </label>
 
-              <div className="border border-slate-700/80 rounded-2xl overflow-hidden divide-y divide-slate-800 bg-slate-950/60">
+              <div className="border border-slate-300 rounded-2xl overflow-hidden divide-y divide-slate-200 bg-white">
                 
                 {/* Option 1: A corporate company */}
                 <div
                   onClick={() => setRegData({ ...regData, tenant_type: 'corporate' })}
                   className={`p-3.5 flex items-center justify-between cursor-pointer transition-all ${
                     regData.tenant_type === 'corporate'
-                      ? 'bg-slate-800/80 border-l-4 border-amber-600'
-                      : 'hover:bg-slate-900/60'
+                      ? 'bg-sky-50/70 border-l-4 border-amber-600'
+                      : 'hover:bg-slate-50'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${
                       regData.tenant_type === 'corporate'
-                        ? 'border-brand-500 bg-brand-500'
-                        : 'border-slate-600 bg-transparent'
+                        ? 'border-slate-900 bg-slate-900'
+                        : 'border-slate-400 bg-transparent'
                     }`}>
                       {regData.tenant_type === 'corporate' && (
-                        <div className="w-1.5 h-1.5 rounded-full bg-slate-950"></div>
+                        <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
                       )}
                     </div>
                     <div>
-                      <div className="text-xs font-bold text-white">A corporate company</div>
-                      <div className="text-[11px] text-slate-400">We handle our own compliance in-house.</div>
+                      <div className="text-xs font-bold text-slate-900">A corporate company</div>
+                      <div className="text-[11px] text-slate-600">We handle our own compliance in-house.</div>
                     </div>
                   </div>
-                  <span className="text-[10px] font-mono font-bold text-slate-400 tracking-wider">
+                  <span className="text-[10px] font-mono font-bold text-slate-600 tracking-wider">
                     ENTERPRISE
                   </span>
                 </div>
@@ -350,26 +347,26 @@ export default function AuthModal({ onLoginSuccess }) {
                   onClick={() => setRegData({ ...regData, tenant_type: 'outsourced_dpo' })}
                   className={`p-3.5 flex items-center justify-between cursor-pointer transition-all ${
                     regData.tenant_type === 'outsourced_dpo'
-                      ? 'bg-slate-800/80 border-l-4 border-amber-600'
-                      : 'hover:bg-slate-900/60'
+                      ? 'bg-sky-50/70 border-l-4 border-amber-600'
+                      : 'hover:bg-slate-50'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${
                       regData.tenant_type === 'outsourced_dpo'
-                        ? 'border-brand-500 bg-brand-500'
-                        : 'border-slate-600 bg-transparent'
+                        ? 'border-slate-900 bg-slate-900'
+                        : 'border-slate-400 bg-transparent'
                     }`}>
                       {regData.tenant_type === 'outsourced_dpo' && (
-                        <div className="w-1.5 h-1.5 rounded-full bg-slate-950"></div>
+                        <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
                       )}
                     </div>
                     <div>
-                      <div className="text-xs font-bold text-white">An independent outsourced DPO</div>
-                      <div className="text-[11px] text-slate-400">I run compliance for several client businesses.</div>
+                      <div className="text-xs font-bold text-slate-900">An independent outsourced DPO</div>
+                      <div className="text-[11px] text-slate-600">I run compliance for several client businesses.</div>
                     </div>
                   </div>
-                  <span className="text-[10px] font-mono font-bold text-slate-400 tracking-wider">
+                  <span className="text-[10px] font-mono font-bold text-slate-600 tracking-wider">
                     DPO_CONSOLE
                   </span>
                 </div>
@@ -379,26 +376,26 @@ export default function AuthModal({ onLoginSuccess }) {
                   onClick={() => setRegData({ ...regData, tenant_type: 'dpco_firm' })}
                   className={`p-3.5 flex items-center justify-between cursor-pointer transition-all ${
                     regData.tenant_type === 'dpco_firm'
-                      ? 'bg-slate-800/80 border-l-4 border-amber-600'
-                      : 'hover:bg-slate-900/60'
+                      ? 'bg-sky-50/70 border-l-4 border-amber-600'
+                      : 'hover:bg-slate-50'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${
                       regData.tenant_type === 'dpco_firm'
-                        ? 'border-brand-500 bg-brand-500'
-                        : 'border-slate-600 bg-transparent'
+                        ? 'border-slate-900 bg-slate-900'
+                        : 'border-slate-400 bg-transparent'
                     }`}>
                       {regData.tenant_type === 'dpco_firm' && (
-                        <div className="w-1.5 h-1.5 rounded-full bg-slate-950"></div>
+                        <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
                       )}
                     </div>
                     <div>
-                      <div className="text-xs font-bold text-white">A licensed DPCO firm</div>
-                      <div className="text-[11px] text-slate-400">We are licensed by the NDPC to file audits.</div>
+                      <div className="text-xs font-bold text-slate-900">A licensed DPCO firm</div>
+                      <div className="text-[11px] text-slate-600">We are licensed by the NDPC to file audits.</div>
                     </div>
                   </div>
-                  <span className="text-[10px] font-mono font-bold text-slate-400 tracking-wider">
+                  <span className="text-[10px] font-mono font-bold text-slate-600 tracking-wider">
                     DPCO_MASTER
                   </span>
                 </div>
@@ -406,7 +403,7 @@ export default function AuthModal({ onLoginSuccess }) {
               </div>
 
               {/* Dynamic Footnote */}
-              <p className="text-[11px] text-slate-400 mt-2 leading-relaxed">
+              <p className="text-[11px] text-slate-500 mt-2 leading-relaxed">
                 {getWorkspaceFootnote()}
               </p>
             </div>
@@ -416,17 +413,17 @@ export default function AuthModal({ onLoginSuccess }) {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-6 py-2.5 bg-brand-950 hover:bg-brand-900 border border-brand-700/80 text-white rounded-xl text-xs font-bold transition-all shadow-md disabled:opacity-50"
+                className="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all shadow-md disabled:opacity-50"
               >
                 {loading ? 'Creating account...' : 'Create account'}
               </button>
 
-              <div className="text-xs text-slate-400">
+              <div className="text-xs text-slate-500">
                 Already registered?{' '}
                 <button
                   type="button"
                   onClick={() => { setMode('login'); setError(null); }}
-                  className="text-brand-400 font-semibold hover:underline"
+                  className="text-emerald-700 font-bold hover:underline"
                 >
                   Log in
                 </button>
