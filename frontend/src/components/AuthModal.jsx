@@ -1,6 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { api, setAuthToken, setActiveTenantId } from '../lib/api';
 
+const countryList = [
+  { code: 'NG', name: 'Nigeria', dial: '+234', flag: '🇳🇬', placeholder: '803 114 2290' },
+  { code: 'GH', name: 'Ghana', dial: '+233', flag: '🇬🇭', placeholder: '24 123 4567' },
+  { code: 'KE', name: 'Kenya', dial: '+254', flag: '🇰🇪', placeholder: '712 345 678' },
+  { code: 'ZA', name: 'South Africa', dial: '+27', flag: '🇿🇦', placeholder: '82 123 4567' },
+  { code: 'GB', name: 'United Kingdom', dial: '+44', flag: '🇬🇧', placeholder: '7911 123456' },
+  { code: 'US', name: 'United States', dial: '+1', flag: '🇺🇸', placeholder: '(555) 123-4567' },
+  { code: 'CA', name: 'Canada', dial: '+1', flag: '🇨🇦', placeholder: '(555) 123-4567' },
+  { code: 'AE', name: 'UAE', dial: '+971', flag: '🇦🇪', placeholder: '50 123 4567' },
+  { code: 'PK', name: 'Pakistan', dial: '+92', flag: '🇵🇰', placeholder: '300 1234567' },
+  { code: 'IN', name: 'India', dial: '+91', flag: '🇮🇳', placeholder: '98765 43210' },
+  { code: 'DE', name: 'Germany', dial: '+49', flag: '🇩🇪', placeholder: '151 12345678' },
+  { code: 'FR', name: 'France', dial: '+33', flag: '🇫🇷', placeholder: '6 12 34 56 78' },
+  { code: 'EG', name: 'Egypt', dial: '+20', flag: '🇪🇬', placeholder: '100 123 4567' },
+  { code: 'RW', name: 'Rwanda', dial: '+250', flag: '🇷🇼', placeholder: '788 123 456' },
+];
+
 export default function AuthModal({ onLoginSuccess }) {
   const [mode, setMode] = useState('login'); // 'login' | 'register'
   const [email, setEmail] = useState('compliance@apexmfb.ng');
@@ -8,6 +25,10 @@ export default function AuthModal({ onLoginSuccess }) {
   const [features, setFeatures] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  // Country selector state for phone
+  const [selectedCountry, setSelectedCountry] = useState(countryList[0]);
+  const [localPhone, setLocalPhone] = useState('803 114 2290');
 
   // Exact Registration State Matching Screenshot
   const [regData, setRegData] = useState({
@@ -94,7 +115,8 @@ export default function AuthModal({ onLoginSuccess }) {
     setError(null);
 
     try {
-      const res = await api.register(regData);
+      const fullPhone = `${selectedCountry.dial} ${localPhone}`.trim();
+      const res = await api.register({ ...regData, phone: fullPhone });
       if (res.success) {
         setAuthToken(res.token);
         if (res.tenant) {
@@ -225,7 +247,7 @@ export default function AuthModal({ onLoginSuccess }) {
           </div>
         ) : (
           /* =========================================================================
-             CREATE YOUR ACCOUNT — EXACT REPLICA OF CLIENT'S SPECIFIED SCREENSHOT
+             CREATE YOUR ACCOUNT — WITH COUNTRY CODE SELECTOR & LIVE PHONE FORMATTING
              ========================================================================= */
           <form onSubmit={handleRegister} className="space-y-4">
             
@@ -264,21 +286,45 @@ export default function AuthModal({ onLoginSuccess }) {
               </p>
             </div>
 
-            {/* 3. PHONE & PASSWORD ROW */}
+            {/* 3. PHONE WITH COUNTRY SELECTOR & PASSWORD ROW */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <div className="flex items-center justify-between mb-1">
                   <label className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">PHONE</label>
                   <span className="text-[11px] text-slate-400">Required</span>
                 </div>
-                <input
-                  type="text"
-                  required
-                  placeholder="+234 803 114 2290"
-                  value={regData.phone}
-                  onChange={(e) => setRegData({ ...regData, phone: e.target.value })}
-                  className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-emerald-600 shadow-2xs"
-                />
+                
+                {/* Interactive Country Code Selector + Phone Input */}
+                <div className="flex rounded-xl border border-slate-300 focus-within:border-emerald-600 focus-within:ring-2 focus-within:ring-emerald-500/20 shadow-2xs overflow-hidden bg-white">
+                  <select
+                    value={selectedCountry.code}
+                    onChange={(e) => {
+                      const found = countryList.find(c => c.code === e.target.value) || countryList[0];
+                      setSelectedCountry(found);
+                      setRegData({ ...regData, phone: `${found.dial} ${localPhone}` });
+                    }}
+                    className="bg-slate-50 hover:bg-slate-100 border-r border-slate-200 px-2.5 py-2.5 text-xs text-slate-800 font-bold focus:outline-none cursor-pointer flex-shrink-0"
+                    title="Select Country Dial Code"
+                  >
+                    {countryList.map((c) => (
+                      <option key={c.code} value={c.code}>
+                        {c.flag} {c.dial}
+                      </option>
+                    ))}
+                  </select>
+
+                  <input
+                    type="tel"
+                    required
+                    placeholder={selectedCountry.placeholder}
+                    value={localPhone}
+                    onChange={(e) => {
+                      setLocalPhone(e.target.value);
+                      setRegData({ ...regData, phone: `${selectedCountry.dial} ${e.target.value}` });
+                    }}
+                    className="w-full px-3 py-2.5 text-sm text-slate-900 focus:outline-none bg-transparent"
+                  />
+                </div>
               </div>
 
               <div>
