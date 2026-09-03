@@ -165,6 +165,7 @@ class UserController extends Controller
             'role' => 'sometimes|string|in:corporate_admin,compliance_officer,dept_champion,auditor_viewer,dpco_lead_auditor,dpco_staff,outsourced_dpo,super_admin',
             'department' => 'sometimes|string|max:100',
             'phone' => 'nullable|string|max:30',
+            'avatar_url' => 'nullable|string',
             'is_active' => 'sometimes|boolean',
             'password' => 'nullable|string|min:8',
         ]);

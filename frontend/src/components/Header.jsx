@@ -229,9 +229,17 @@ export default function Header({
             title="Click to Edit My Profile & Account Settings"
             className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-slate-50 hover:bg-slate-100 hover:border-slate-300 border border-slate-200 whitespace-nowrap flex-shrink-0 transition-all cursor-pointer group text-left"
           >
-            <div className="w-7 h-7 rounded-lg bg-slate-900 group-hover:bg-emerald-700 flex items-center justify-center font-bold text-xs text-white flex-shrink-0 transition-colors">
-              {user?.name ? user.name.substring(0, 2).toUpperCase() : 'TU'}
-            </div>
+            {user?.avatar_url ? (
+              <img
+                src={user.avatar_url}
+                alt={user.name}
+                className="w-7 h-7 rounded-lg object-cover border border-emerald-500/50 flex-shrink-0"
+              />
+            ) : (
+              <div className="w-7 h-7 rounded-lg bg-slate-900 group-hover:bg-emerald-700 flex items-center justify-center font-bold text-xs text-white flex-shrink-0 transition-colors">
+                {user?.name ? user.name.substring(0, 2).toUpperCase() : 'TU'}
+              </div>
+            )}
             <div className="hidden lg:flex flex-col justify-center text-left">
               <div className="text-xs font-bold text-slate-900 leading-tight whitespace-nowrap group-hover:text-emerald-700 transition-colors">
                 {user?.name || 'System Administrator'}

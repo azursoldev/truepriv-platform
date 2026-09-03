@@ -16,7 +16,7 @@ import PublicDsarPortal from './components/PublicDsarPortal';
 import AuthModal from './components/AuthModal';
 import OnboardingWizard from './components/OnboardingWizard';
 import ChampionInviteModal from './components/ChampionInviteModal';
-import UserProfileModal from './components/UserProfileModal';
+import MyProfileDetailDesk from './components/MyProfileDetailDesk';
 import { api, getAuthToken, removeAuthToken, setActiveTenantId } from './lib/api';
 
 export default function App() {
@@ -30,7 +30,6 @@ export default function App() {
   const [showPublicPortal, setShowPublicPortal] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showChampions, setShowChampions] = useState(false);
-  const [showProfileModal, setShowProfileModal] = useState(false);
 
   const initApp = async () => {
     setLoading(true);
@@ -151,7 +150,7 @@ export default function App() {
         onOpenPublicPortal={() => setShowPublicPortal(true)}
         onOpenOnboarding={() => setShowOnboarding(true)}
         onOpenChampions={() => setShowChampions(true)}
-        onOpenProfile={() => setShowProfileModal(true)}
+        onOpenProfile={() => setActiveTab('my-profile')}
         isSidebarCollapsed={sidebarCollapsed}
         onToggleSidebar={() => setSidebarCollapsed(!sidebarCollapsed)}
       />
@@ -170,7 +169,7 @@ export default function App() {
         />
 
         {/* Dynamic Main Workspace Content */}
-        <main className="flex-1 p-6 lg:p-8 max-w-7xl mx-auto w-full overflow-y-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
           {activeTab === 'dashboard' && (
             <ExecutiveDashboard
               metrics={metrics}
@@ -227,6 +226,17 @@ export default function App() {
           {activeTab === 'admin-users' && (
             <AdminUserDesk currentUser={user} onRefreshMetrics={refreshMetrics} />
           )}
+
+          {activeTab === 'my-profile' && (
+            <MyProfileDetailDesk
+              user={user}
+              tenant={tenant}
+              onUpdateUser={(updatedUser) => {
+                setUser(updatedUser);
+              }}
+              onNavigateBack={() => setActiveTab('dashboard')}
+            />
+          )}
         </main>
       </div>
 
@@ -254,18 +264,6 @@ export default function App() {
         <PublicDsarPortal
           tenant={tenant}
           onClose={() => setShowPublicPortal(false)}
-        />
-      )}
-
-      {/* User Self Account Profile Modal */}
-      {showProfileModal && (
-        <UserProfileModal
-          isOpen={showProfileModal}
-          onClose={() => setShowProfileModal(false)}
-          user={user}
-          onUpdateUser={(updatedUser) => {
-            setUser(updatedUser);
-          }}
         />
       )}
     </div>

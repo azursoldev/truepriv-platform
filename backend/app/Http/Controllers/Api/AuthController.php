@@ -256,6 +256,7 @@ class AuthController extends Controller
             'name' => 'sometimes|string|max:255',
             'phone' => 'nullable|string|max:50',
             'department' => 'nullable|string|max:100',
+            'avatar_url' => 'nullable|string',
             'password' => 'nullable|string|min:8',
         ]);
 
