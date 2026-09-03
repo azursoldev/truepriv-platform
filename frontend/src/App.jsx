@@ -147,7 +147,7 @@ export default function App() {
         accessibleClients={accessibleClients}
         onSwitchTenant={handleSwitchTenant}
         onLogout={handleLogout}
-        onOpenPublicPortal={() => setShowPublicPortal(true)}
+        onOpenPublicPortal={() => setActiveTab('public-dsar')}
         onOpenOnboarding={() => setActiveTab('ndpa-wizard')}
         onOpenChampions={() => setActiveTab('champions-desk')}
         onOpenProfile={() => setActiveTab('my-profile')}
@@ -202,7 +202,7 @@ export default function App() {
 
           {activeTab === 'dsar' && (
             <DsarDesk
-              onOpenPublicPortal={() => setShowPublicPortal(true)}
+              onOpenPublicPortal={() => setActiveTab('public-dsar')}
               onRefreshMetrics={refreshMetrics}
             />
           )}
@@ -252,16 +252,15 @@ export default function App() {
               onNavigateBack={() => setActiveTab('dashboard')}
             />
           )}
+
+          {activeTab === 'public-dsar' && (
+            <PublicDsarPortal
+              tenant={tenant}
+              onNavigateBack={() => setActiveTab('dashboard')}
+            />
+          )}
         </main>
       </div>
-
-      {/* Public DSAR Portal Overlay */}
-      {showPublicPortal && (
-        <PublicDsarPortal
-          tenant={tenant}
-          onClose={() => setShowPublicPortal(false)}
-        />
-      )}
     </div>
   );
 }
