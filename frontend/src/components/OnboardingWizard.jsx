@@ -135,7 +135,7 @@ export default function OnboardingWizard({ isOpen, onClose, onComplete }) {
                           key={choice}
                           type="button"
                           onClick={() => handleOptionChange(q.id, choice)}
-                          className={`px-3 py-1.5 rounded-xl text-xs font-semibold capitalize border transition-all ${
+                          className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all flex items-center gap-1.5 ${
                             answers[q.id]?.response_choice === choice
                               ? choice === 'yes'
                                 ? 'bg-emerald-600 text-white border-emerald-700 shadow-xs'
@@ -145,7 +145,10 @@ export default function OnboardingWizard({ isOpen, onClose, onComplete }) {
                               : 'bg-white text-slate-700 border-slate-300 hover:border-slate-400'
                           }`}
                         >
-                          {choice === 'yes' ? '✅ Implemented' : choice === 'partial' ? '⏳ In Progress' : '❌ Not Started'}
+                          <i className={`fa-solid ${
+                            choice === 'yes' ? 'fa-circle-check text-emerald-300' : choice === 'partial' ? 'fa-hourglass-half text-amber-200' : 'fa-circle-xmark text-red-300'
+                          } text-xs`}></i>
+                          <span>{choice === 'yes' ? 'Implemented' : choice === 'partial' ? 'In Progress' : 'Not Started'}</span>
                         </button>
                       ))}
                     </div>

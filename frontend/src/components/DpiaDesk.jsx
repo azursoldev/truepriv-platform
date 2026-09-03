@@ -176,17 +176,21 @@ export default function DpiaDesk({ onRefreshMetrics }) {
                   <div className="text-sm font-mono font-extrabold text-emerald-700 mt-0.5">
                     {dpia.residual_risk_score} / 25
                   </div>
-                  <div className="text-[10px] text-emerald-800 font-bold mt-0.5">Safeguards Applied ✓</div>
+                  <div className="text-[10px] text-emerald-800 font-bold mt-0.5 flex items-center gap-1">
+                    <i className="fa-solid fa-shield-check text-emerald-600 text-xs"></i>
+                    <span>Safeguards Applied</span>
+                  </div>
                 </div>
               </div>
 
               {/* DPO Sign-Off Status */}
               <div className="flex items-center justify-between text-xs pt-1 border-t border-slate-100">
                 <span className="text-slate-500">Sign-off Status:</span>
-                <span className={`font-semibold capitalize ${
+                <span className={`font-semibold capitalize flex items-center gap-1.5 ${
                   dpia.dpo_sign_off_status === 'approved' ? 'text-emerald-700 font-bold' : 'text-amber-700 font-bold'
                 }`}>
-                  {dpia.dpo_sign_off_status === 'approved' ? '✓ DPO Approved & Sealed' : '⏳ Pending Review'}
+                  <i className={`fa-solid ${dpia.dpo_sign_off_status === 'approved' ? 'fa-stamp text-emerald-600' : 'fa-clock text-amber-600'} text-xs`}></i>
+                  <span>{dpia.dpo_sign_off_status === 'approved' ? 'DPO Approved & Sealed' : 'Pending Review'}</span>
                 </span>
               </div>
             </div>

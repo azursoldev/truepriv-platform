@@ -104,8 +104,9 @@ export default function Header({
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
             <span className="text-slate-500 text-[10px] font-medium">Residency:</span>
-            <span className="text-slate-800 text-[10px] font-bold">
-              {tenant.data_residency === 'global_aws' ? '☁️ AWS' : '🇳🇬 Galaxy Backbone'}
+            <span className="text-slate-800 text-[10px] font-bold inline-flex items-center gap-1">
+              <i className={`fa-solid ${tenant.data_residency === 'global_aws' ? 'fa-cloud text-sky-600' : 'fa-server text-emerald-600'} text-[9px]`}></i>
+              <span>{tenant.data_residency === 'global_aws' ? 'AWS Global' : 'Galaxy Sovereign'}</span>
             </span>
           </div>
         )}

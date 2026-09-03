@@ -18,7 +18,7 @@ export default function ExecutiveDashboard({
   const scoreColor = score >= 80 ? '#059669' : score >= 50 ? '#d97706' : '#dc2626';
 
   /* =========================================================================
-     1. 👑 SUPER ADMIN GLOBAL GOVERNANCE DASHBOARD
+     1. SUPER ADMIN GLOBAL GOVERNANCE DASHBOARD
      ========================================================================= */
   if (isSuperAdmin) {
     return (
@@ -27,8 +27,9 @@ export default function ExecutiveDashboard({
         <div className="bg-slate-900 text-white p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-                👑 GLOBAL AUTHORITY CONTROL HUB
+              <span className="text-[10px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2.5 py-0.5 rounded-full uppercase tracking-wider inline-flex items-center gap-1.5">
+                <i className="fa-solid fa-crown text-amber-300 text-[10px]"></i>
+                <span>GLOBAL AUTHORITY CONTROL HUB</span>
               </span>
               <span className="text-xs text-slate-400">Master Governance Console</span>
             </div>
@@ -163,7 +164,7 @@ export default function ExecutiveDashboard({
   }
 
   /* =========================================================================
-     2. 🛡️ OUTSOURCED DPO PRACTICE ADVISORY DASHBOARD
+     2. OUTSOURCED DPO PRACTICE ADVISORY DASHBOARD
      ========================================================================= */
   if (isDpo) {
     return (
@@ -171,8 +172,9 @@ export default function ExecutiveDashboard({
         <div className="bg-gradient-to-r from-blue-900 to-slate-900 text-white p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono font-bold bg-blue-400/20 text-blue-300 border border-blue-400/30 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-                🛡️ OUTSOURCED DPO PRACTICE CONSOLE
+              <span className="text-[10px] font-mono font-bold bg-blue-400/20 text-blue-300 border border-blue-400/30 px-2.5 py-0.5 rounded-full uppercase tracking-wider inline-flex items-center gap-1.5">
+                <i className="fa-solid fa-user-shield text-blue-300 text-[10px]"></i>
+                <span>OUTSOURCED DPO PRACTICE CONSOLE</span>
               </span>
               <span className="text-xs text-slate-300">Multi-Client Advisory Desk</span>
             </div>
@@ -234,7 +236,7 @@ export default function ExecutiveDashboard({
   }
 
   /* =========================================================================
-     3. 🏛️ LICENSED DPCO AUDIT PRACTICE DASHBOARD
+     3. LICENSED DPCO AUDIT PRACTICE DASHBOARD
      ========================================================================= */
   if (isDpco) {
     return (
@@ -242,8 +244,9 @@ export default function ExecutiveDashboard({
         <div className="bg-gradient-to-r from-purple-950 to-slate-900 text-white p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono font-bold bg-purple-400/20 text-purple-300 border border-purple-400/30 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-                🏛️ LICENSED DPCO AUDIT SUITE
+              <span className="text-[10px] font-mono font-bold bg-purple-400/20 text-purple-300 border border-purple-400/30 px-2.5 py-0.5 rounded-full uppercase tracking-wider inline-flex items-center gap-1.5">
+                <i className="fa-solid fa-building-columns text-purple-300 text-[10px]"></i>
+                <span>LICENSED DPCO AUDIT SUITE</span>
               </span>
               <span className="text-xs text-slate-300">NDPC License #DPCO-2026-0042</span>
             </div>
@@ -305,7 +308,7 @@ export default function ExecutiveDashboard({
   }
 
   /* =========================================================================
-     4. 🏢 CORPORATE DATA CONTROLLER IN-HOUSE DASHBOARD
+     4. CORPORATE DATA CONTROLLER IN-HOUSE DASHBOARD
      ========================================================================= */
   return (
     <div className="space-y-6">
@@ -341,8 +344,9 @@ export default function ExecutiveDashboard({
         <div className="bg-white border border-slate-200 p-6 rounded-3xl lg:col-span-2 shadow-xs relative overflow-hidden flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2 mb-2.5">
-              <span className="text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full font-mono">
-                🇳🇬 STATUTORY SCORECARD
+              <span className="text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full font-mono inline-flex items-center gap-1.5">
+                <i className="fa-solid fa-shield-halved text-emerald-600 text-[10px]"></i>
+                <span>STATUTORY SCORECARD</span>
               </span>
               <span className="text-xs text-slate-500 font-medium">NDPA 2023 / NDPC Framework</span>
             </div>
@@ -426,8 +430,9 @@ export default function ExecutiveDashboard({
               <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
                 COMPLIANCE QUEST
               </span>
-              <span className="text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200 px-2 py-0.5 rounded-full font-mono">
-                Level 2 &bull; Silver Tier
+              <span className="text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200 px-2 py-0.5 rounded-full font-mono inline-flex items-center gap-1">
+                <i className="fa-solid fa-award text-amber-600 text-[10px]"></i>
+                <span>Level 2 &bull; Silver Tier</span>
               </span>
             </div>
 

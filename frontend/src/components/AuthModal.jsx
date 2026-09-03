@@ -40,7 +40,8 @@ export default function AuthModal({ onLoginSuccess }) {
 
   const demoPersonas = [
     {
-      title: '🏢 Corporate Data Controller',
+      title: 'Corporate Data Controller',
+      icon: 'fa-solid fa-building text-emerald-700',
       org: 'Apex Microfinance Bank Ltd',
       role: 'Corporate Admin / DPO',
       email: 'compliance@apexmfb.ng',
@@ -48,7 +49,8 @@ export default function AuthModal({ onLoginSuccess }) {
       color: 'border-emerald-200 bg-emerald-50/70 text-emerald-900'
     },
     {
-      title: '🛡️ Outsourced DPO Practice',
+      title: 'Outsourced DPO Practice',
+      icon: 'fa-solid fa-user-shield text-blue-700',
       org: 'Fortress Data Protection Advisory',
       role: 'Lead DPO Consultant',
       email: 'lead.dpo@fortressadvisory.ng',
@@ -56,7 +58,8 @@ export default function AuthModal({ onLoginSuccess }) {
       color: 'border-blue-200 bg-blue-50/70 text-blue-900'
     },
     {
-      title: '🏛️ Licensed DPCO Firm',
+      title: 'Licensed DPCO Firm',
+      icon: 'fa-solid fa-building-columns text-purple-700',
       org: 'Vanguard Compliance Partners DPCO',
       role: 'Managing Audit Partner',
       email: 'lead.partner@vanguarddpco.ng',
@@ -64,7 +67,8 @@ export default function AuthModal({ onLoginSuccess }) {
       color: 'border-purple-200 bg-purple-50/70 text-purple-900'
     },
     {
-      title: '👑 System Super Administrator',
+      title: 'System Super Administrator',
+      icon: 'fa-solid fa-crown text-amber-700',
       org: 'Truepriv Platform Authority',
       role: 'Platform Super Admin',
       email: 'admin@dpodpco.ng',
@@ -322,7 +326,10 @@ export default function AuthModal({ onLoginSuccess }) {
                         onClick={() => handleLogin(p.email)}
                         className={`text-left p-2.5 rounded-xl border ${p.color} hover:scale-[1.01] transition-transform`}
                       >
-                        <div className="font-bold text-xs">{p.title}</div>
+                        <div className="font-bold text-xs flex items-center gap-1.5">
+                          <i className={`${p.icon} text-xs`}></i>
+                          <span>{p.title}</span>
+                        </div>
                         <div className="text-[11px] text-slate-700 truncate mt-0.5">{p.org}</div>
                         <div className="text-[10px] text-slate-500 mt-1 truncate">{p.desc}</div>
                       </button>
