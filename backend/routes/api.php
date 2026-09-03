@@ -122,6 +122,7 @@ Route::prefix('v1')->group(function () {
             Route::put('/users/{id}', [UserController::class, 'update']);
             Route::delete('/users/{id}', [UserController::class, 'destroy']);
             Route::get('/roles/matrix', [UserController::class, 'getPermissionsMatrix']);
+            Route::get('/admin/audit-logs', [UserController::class, 'getAuditLogs']);
 
         });
 

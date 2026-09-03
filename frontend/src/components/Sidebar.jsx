@@ -4,6 +4,7 @@ export default function Sidebar({
   activeTab, 
   onTabChange, 
   tenantType, 
+  userRole,
   metrics, 
   isCollapsed, 
   onToggle 
@@ -18,8 +19,17 @@ export default function Sidebar({
     { id: 'vendors', label: 'Vendor & TPRM Risk', icon: 'fa-solid fa-handshake-simple', count: metrics?.vendors?.total_processors },
     { id: 'cookies', label: 'Cookie Consent SDK', icon: 'fa-solid fa-cookie-bite' },
     { id: 'policies', label: 'Policy Auto-Generator', icon: 'fa-solid fa-file-contract' },
-    { id: 'admin-users', label: 'User & Role Governance', icon: 'fa-solid fa-users-gear' },
   ];
+
+  // If user is Admin (Super Admin or Corporate Admin), show Admin Governance & Users
+  if (['super_admin', 'corporate_admin'].includes(userRole)) {
+    navItems.push({
+      id: 'admin-users',
+      label: 'Admin & User Governance',
+      icon: 'fa-solid fa-users-gear',
+      highlight: true,
+    });
+  }
 
   // If user is Outsourced DPO or Licensed DPCO Firm, show Portfolio Desk tab
   if (['outsourced_dpo', 'dpco_firm'].includes(tenantType)) {

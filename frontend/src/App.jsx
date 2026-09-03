@@ -155,6 +155,7 @@ export default function App() {
           activeTab={activeTab}
           onTabChange={setActiveTab}
           tenantType={tenant?.type}
+          userRole={user?.role}
           metrics={metrics}
           isCollapsed={sidebarCollapsed}
           onToggle={() => setSidebarCollapsed(!sidebarCollapsed)}

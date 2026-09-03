@@ -137,4 +137,5 @@ export const api = {
   updateUser: (id, data) => request(`/users/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
   deleteUser: (id) => request(`/users/${id}`, { method: 'DELETE' }),
   getRolesMatrix: () => request('/roles/matrix'),
+  getAdminAuditLogs: () => request('/admin/audit-logs'),
 };

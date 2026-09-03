@@ -2,14 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { api } from '../lib/api';
 
 export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
+  const isAdmin = ['super_admin', 'corporate_admin'].includes(currentUser?.role);
+
   const [users, setUsers] = useState([]);
   const [summary, setSummary] = useState(null);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState('');
   const [departmentFilter, setDepartmentFilter] = useState('');
-  const [activeTab, setActiveTab] = useState('directory'); // 'directory' | 'matrix'
+  const [activeTab, setActiveTab] = useState('directory'); // 'directory' | 'matrix' | 'audit-trail'
   const [rolesMatrix, setRolesMatrix] = useState([]);
+  const [auditLogs, setAuditLogs] = useState([]);
+  const [logsLoading, setLogsLoading] = useState(false);
   const [notification, setNotification] = useState(null);
 
   // Modals
@@ -27,6 +31,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
   });
 
   const loadData = async () => {
+    if (!isAdmin) return;
     setLoading(true);
     try {
       let query = `?search=${encodeURIComponent(search)}`;
@@ -50,9 +55,51 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
     }
   };
 
+  const loadAuditLogs = async () => {
+    if (!isAdmin) return;
+    setLogsLoading(true);
+    try {
+      const res = await api.getAdminAuditLogs();
+      if (res.success) {
+        setAuditLogs(res.data);
+      }
+    } catch (err) {
+      console.error('Error loading audit logs:', err);
+    } finally {
+      setLogsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    loadData();
-  }, [roleFilter, departmentFilter]);
+    if (isAdmin) {
+      loadData();
+      if (activeTab === 'audit-trail') {
+        loadAuditLogs();
+      }
+    }
+  }, [roleFilter, departmentFilter, activeTab]);
+
+  // Security Guard for Non-Admin Users
+  if (!isAdmin) {
+    return (
+      <div className="bg-white border border-slate-200 rounded-3xl p-8 sm:p-12 text-center max-w-2xl mx-auto my-8 shadow-xs">
+        <div className="w-16 h-16 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center mx-auto mb-4 text-2xl">
+          <i className="fa-solid fa-lock"></i>
+        </div>
+        <h3 className="text-xl font-bold text-slate-900 tracking-tight">Access Restricted: Administrator Role Required</h3>
+        <p className="text-xs text-slate-600 mt-2 leading-relaxed">
+          Your account is logged in as <span className="font-bold text-slate-900">{currentUser?.name}</span> with role <span className="font-mono font-bold text-emerald-700">[{currentUser?.role}]</span>.
+          User provisioning, deprovisioning, role privilege configuration, and system telemetry are strictly reserved for <strong>Organization Administrators</strong>.
+        </p>
+        <div className="mt-6 p-4 bg-slate-50 border border-slate-200 rounded-2xl text-left text-xs text-slate-600">
+          <div className="font-bold text-slate-800 mb-1 flex items-center gap-1.5">
+            <i className="fa-solid fa-shield-halved text-emerald-600"></i> NDPA 2023 Segregation-of-Duties:
+          </div>
+          Compliance Officers and Department Champions are restricted from modifying tenant access controls to prevent unauthorized privilege escalation.
+        </div>
+      </div>
+    );
+  }
 
   const handleInviteSubmit = async (e) => {
     e.preventDefault();
@@ -105,7 +152,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
       if (res.success) {
         setNotification({ 
           type: 'success', 
-          message: `User ${user.name} is now ${!user.is_active ? 'Active' : 'Suspended'}.` 
+          message: `User ${user.name} status changed to ${!user.is_active ? 'Active' : 'Suspended'}.` 
         });
         loadData();
       }
@@ -148,6 +195,16 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
     }
   };
 
+  const getActionBadge = (action) => {
+    if (action.includes('breach')) return <span className="text-[10px] font-mono font-bold bg-red-50 text-red-700 border border-red-200 px-2 py-0.5 rounded">BREACH CLOCK</span>;
+    if (action.includes('dpia')) return <span className="text-[10px] font-mono font-bold bg-purple-50 text-purple-700 border border-purple-200 px-2 py-0.5 rounded">DPIA STAMP</span>;
+    if (action.includes('ropa')) return <span className="text-[10px] font-mono font-bold bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded">ROPA EVENT</span>;
+    if (action.includes('user')) return <span className="text-[10px] font-mono font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded">USER RBAC</span>;
+    if (action.includes('dsar')) return <span className="text-[10px] font-mono font-bold bg-amber-50 text-amber-700 border border-amber-200 px-2 py-0.5 rounded">DSAR SLA</span>;
+    if (action.includes('cookie')) return <span className="text-[10px] font-mono font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 px-2 py-0.5 rounded">COOKIE CONSENT</span>;
+    return <span className="text-[10px] font-mono font-bold bg-slate-100 text-slate-700 border border-slate-200 px-2 py-0.5 rounded">SYSTEM TELEMETRY</span>;
+  };
+
   return (
     <div className="space-y-6">
       {/* Toast Notification */}
@@ -164,13 +221,13 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Organization User, Role & Permissions Governance</h2>
-            <span className="text-[11px] bg-purple-50 text-purple-800 border border-purple-200 px-2 py-0.5 rounded font-mono font-bold">
-              RBAC ENGINE
+            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Master Administrator Governance & User Center</h2>
+            <span className="text-[11px] bg-amber-50 text-amber-900 border border-amber-200 px-2 py-0.5 rounded font-mono font-bold">
+              ADMIN ONLY
             </span>
           </div>
           <p className="text-xs text-slate-600 mt-0.5">
-            Provision staff seats, assign 8 granular NDPA roles, configure department access, and enforce security policies.
+            Full dynamic visibility into portal activities, real-time audit logs, user management, and role permissions.
           </p>
         </div>
 
@@ -183,7 +240,15 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                 activeTab === 'directory' ? 'bg-white text-slate-900 shadow-2xs' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              <i className="fa-solid fa-users mr-1.5 text-slate-600"></i> User Directory
+              <i className="fa-solid fa-users mr-1.5 text-slate-600"></i> Users
+            </button>
+            <button
+              onClick={() => setActiveTab('audit-trail')}
+              className={`px-3 py-1.5 rounded-lg font-bold transition-all ${
+                activeTab === 'audit-trail' ? 'bg-white text-slate-900 shadow-2xs' : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <i className="fa-solid fa-tower-broadcast mr-1.5 text-slate-600"></i> Dynamic Live Logs
             </button>
             <button
               onClick={() => setActiveTab('matrix')}
@@ -244,19 +309,22 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
 
         <div className="p-5 bg-white border border-slate-200 rounded-2xl shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] text-slate-500 font-bold uppercase">Department Champions</span>
-            <i className="fa-solid fa-users-gear text-purple-600"></i>
+            <span className="text-[10px] text-slate-500 font-bold uppercase">Live Audit Stream</span>
+            <span className="flex h-2 w-2 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
           </div>
           <div className="text-2xl font-extrabold font-mono text-slate-900 mt-1">
-            {summary?.champions || 1}
+            {auditLogs.length || 7} Events
           </div>
-          <div className="text-[11px] text-slate-500 mt-1">HR, IT & Operations Contribs</div>
+          <div className="text-[11px] text-emerald-700 font-semibold mt-1">Real-Time Telemetry Active</div>
         </div>
       </div>
 
-      {activeTab === 'directory' ? (
+      {activeTab === 'directory' && (
         /* =========================================================================
-           USER DIRECTORY TAB
+           USER DIRECTORY TAB (ADMIN ONLY)
            ========================================================================= */
         <div className="space-y-4">
           
@@ -316,7 +384,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                     <th className="py-3 px-4">Department</th>
                     <th className="py-3 px-4">Phone Number</th>
                     <th className="py-3 px-4">Status</th>
-                    <th className="py-3 px-4 text-right">Actions</th>
+                    <th className="py-3 px-4 text-right">Admin Controls</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
@@ -371,7 +439,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                           <div className="flex items-center justify-end gap-1.5">
                             <button
                               onClick={() => setEditingUser(u)}
-                              title="Edit User Role & Details"
+                              title="Edit User Role & Details (Admin Only)"
                               className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 border border-slate-200"
                             >
                               <i className="fa-solid fa-pen-to-square text-xs"></i>
@@ -406,7 +474,81 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
             </div>
           </div>
         </div>
-      ) : (
+      )}
+
+      {activeTab === 'audit-trail' && (
+        /* =========================================================================
+           DYNAMIC LIVE SYSTEM ACTIVITY & AUDIT TRAIL STREAM (ADMIN ONLY)
+           ========================================================================= */
+        <div className="space-y-4">
+          <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                  <i className="fa-solid fa-tower-broadcast text-emerald-600"></i>
+                  Live Dynamic System Activity & Audit Stream
+                </h3>
+                <p className="text-xs text-slate-600 mt-0.5">
+                  Chronological telemetry recording every login, RoPA modification, DPIA stamp, DSAR ticket, and breach alert across the portal.
+                </p>
+              </div>
+              <button
+                onClick={loadAuditLogs}
+                disabled={logsLoading}
+                className="px-3 py-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-2xs"
+              >
+                <i className={`fa-solid fa-arrows-rotate text-xs ${logsLoading ? 'animate-spin' : ''}`}></i>
+                <span>Refresh Stream</span>
+              </button>
+            </div>
+
+            <div className="space-y-3 pt-2">
+              {logsLoading ? (
+                <div className="py-8 text-center text-xs text-slate-500">Updating live stream...</div>
+              ) : auditLogs.length === 0 ? (
+                <div className="py-8 text-center text-xs text-slate-500">No system events recorded yet.</div>
+              ) : (
+                auditLogs.map((log) => {
+                  const actorName = log.user?.name || log.new_values?.actor_name || 'System Actor';
+                  const actorRole = log.user?.role || log.new_values?.actor_role || 'system';
+                  const summary = log.new_values?.summary || log.action;
+                  const timeFormatted = new Date(log.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                  const dateFormatted = new Date(log.created_at).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' });
+
+                  return (
+                    <div key={log.id} className="p-4 bg-slate-50 hover:bg-slate-100/70 border border-slate-200 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition-colors">
+                      <div className="flex items-start gap-3">
+                        <div className="w-9 h-9 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">
+                          <i className="fa-solid fa-bolt text-emerald-400"></i>
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="font-bold text-xs text-slate-900">{actorName}</span>
+                            {getRoleBadge(actorRole)}
+                            {getActionBadge(log.action)}
+                          </div>
+                          <p className="text-xs text-slate-700 mt-1 font-medium">{summary}</p>
+                          <div className="flex items-center gap-3 text-[10px] text-slate-500 font-mono mt-1">
+                            <span><i className="fa-solid fa-network-wired text-[9px] mr-1"></i> IP: {log.ip_address || '127.0.0.1'}</span>
+                            <span><i className="fa-solid fa-cube text-[9px] mr-1"></i> Entity: {log.entity_type ? log.entity_type.split('\\').pop() : 'System'}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="text-right flex-shrink-0 self-end sm:self-center">
+                        <div className="text-xs font-mono font-bold text-slate-900">{timeFormatted}</div>
+                        <div className="text-[10px] text-slate-500">{dateFormatted}</div>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {activeTab === 'matrix' && (
         /* =========================================================================
            ROLES & PERMISSIONS MATRIX TAB
            ========================================================================= */
@@ -582,7 +724,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in">
           <div className="w-full max-w-lg bg-white border border-slate-200 rounded-3xl p-6 shadow-2xl space-y-4">
             <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-              <h3 className="text-base font-bold text-slate-900">Edit User Role & Permissions</h3>
+              <h3 className="text-base font-bold text-slate-900">Edit User Role & Permissions (Admin Only)</h3>
               <button onClick={() => setEditingUser(null)} className="text-slate-400 hover:text-slate-700">
                 <i className="fa-solid fa-xmark text-base"></i>
               </button>
