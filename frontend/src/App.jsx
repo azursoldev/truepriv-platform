@@ -148,7 +148,7 @@ export default function App() {
         onSwitchTenant={handleSwitchTenant}
         onLogout={handleLogout}
         onOpenPublicPortal={() => setShowPublicPortal(true)}
-        onOpenOnboarding={() => setShowOnboarding(true)}
+        onOpenOnboarding={() => setActiveTab('ndpa-wizard')}
         onOpenChampions={() => setShowChampions(true)}
         onOpenProfile={() => setActiveTab('my-profile')}
         isSidebarCollapsed={sidebarCollapsed}
@@ -177,7 +177,7 @@ export default function App() {
               tenantType={tenant?.type}
               onNavigate={setActiveTab}
               onAutoFillRopa={() => setActiveTab('ropa')}
-              onOpenOnboarding={() => setShowOnboarding(true)}
+              onOpenOnboarding={() => setActiveTab('ndpa-wizard')}
             />
           )}
 
@@ -237,19 +237,17 @@ export default function App() {
               onNavigateBack={() => setActiveTab('dashboard')}
             />
           )}
+
+          {activeTab === 'ndpa-wizard' && (
+            <OnboardingWizard
+              onNavigateBack={() => setActiveTab('dashboard')}
+              onComplete={async () => {
+                await refreshMetrics();
+              }}
+            />
+          )}
         </main>
       </div>
-
-      {/* Onboarding & MDC Classification Wizard Overlay */}
-      {showOnboarding && (
-        <OnboardingWizard
-          isOpen={showOnboarding}
-          onClose={() => setShowOnboarding(false)}
-          onComplete={async () => {
-            await refreshMetrics();
-          }}
-        />
-      )}
 
       {/* Department Champion Invites Overlay */}
       {showChampions && (
