@@ -8,7 +8,9 @@ export default function Header({
   onLogout, 
   onOpenPublicPortal, 
   onOpenOnboarding, 
-  onOpenChampions 
+  onOpenChampions,
+  isSidebarCollapsed,
+  onToggleSidebar
 }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -51,6 +53,15 @@ export default function Header({
       
       {/* 1. Left Brand & Company Identity */}
       <div className="flex items-center gap-2.5 flex-shrink-0">
+        {/* Sidebar Toggle Button */}
+        <button
+          onClick={onToggleSidebar}
+          title={isSidebarCollapsed ? "Open Sidebar Menu" : "Close Sidebar Menu"}
+          className="w-8 h-8 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-slate-300 text-slate-600 hover:text-slate-900 transition-all flex items-center justify-center flex-shrink-0 shadow-2xs"
+        >
+          <i className={`fa-solid ${isSidebarCollapsed ? 'fa-bars' : 'fa-bars-staggered'} text-xs text-slate-700`}></i>
+        </button>
+
         <div className="relative flex-shrink-0">
           <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-900 flex items-center justify-center text-white shadow-xs">
             <i className="fa-solid fa-shield-halved text-emerald-400 text-base"></i>

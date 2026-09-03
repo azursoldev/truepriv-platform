@@ -120,6 +120,8 @@ export default function App() {
     setShowAuthModal(true);
   };
 
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center text-slate-700 space-y-3">
@@ -141,6 +143,8 @@ export default function App() {
         onOpenPublicPortal={() => setShowPublicPortal(true)}
         onOpenOnboarding={() => setShowOnboarding(true)}
         onOpenChampions={() => setShowChampions(true)}
+        isSidebarCollapsed={sidebarCollapsed}
+        onToggleSidebar={() => setSidebarCollapsed(!sidebarCollapsed)}
       />
 
       {/* Main Layout */}
@@ -151,6 +155,8 @@ export default function App() {
           onTabChange={setActiveTab}
           tenantType={tenant?.type}
           metrics={metrics}
+          isCollapsed={sidebarCollapsed}
+          onToggle={() => setSidebarCollapsed(!sidebarCollapsed)}
         />
 
         {/* Dynamic Main Workspace Content */}
