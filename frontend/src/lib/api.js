@@ -56,6 +56,7 @@ export const api = {
   register: (payload) => request('/auth/register', { method: 'POST', body: JSON.stringify(payload) }),
   getFeatures: () => request('/features'),
   getMe: () => request('/auth/me'),
+  updateMyProfile: (data) => request('/auth/profile', { method: 'PUT', body: JSON.stringify(data) }),
   logout: () => request('/auth/logout', { method: 'POST' }),
 
   // Dashboard & Portfolio

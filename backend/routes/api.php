@@ -43,6 +43,7 @@ Route::prefix('v1')->group(function () {
     Route::middleware(['auth:sanctum', 'idle_timeout'])->group(function () {
 
         Route::get('/auth/me', [AuthController::class, 'me']);
+        Route::put('/auth/profile', [AuthController::class, 'updateProfile']);
         Route::post('/auth/logout', [AuthController::class, 'logout']);
 
         // Multi-client Portfolio Desk (For Outsourced DPOs & DPCOs)

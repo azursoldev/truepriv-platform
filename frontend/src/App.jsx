@@ -16,6 +16,7 @@ import PublicDsarPortal from './components/PublicDsarPortal';
 import AuthModal from './components/AuthModal';
 import OnboardingWizard from './components/OnboardingWizard';
 import ChampionInviteModal from './components/ChampionInviteModal';
+import UserProfileModal from './components/UserProfileModal';
 import { api, getAuthToken, removeAuthToken, setActiveTenantId } from './lib/api';
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
   const [showPublicPortal, setShowPublicPortal] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showChampions, setShowChampions] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
 
   const initApp = async () => {
     setLoading(true);
@@ -149,6 +151,7 @@ export default function App() {
         onOpenPublicPortal={() => setShowPublicPortal(true)}
         onOpenOnboarding={() => setShowOnboarding(true)}
         onOpenChampions={() => setShowChampions(true)}
+        onOpenProfile={() => setShowProfileModal(true)}
         isSidebarCollapsed={sidebarCollapsed}
         onToggleSidebar={() => setSidebarCollapsed(!sidebarCollapsed)}
       />
@@ -251,6 +254,18 @@ export default function App() {
         <PublicDsarPortal
           tenant={tenant}
           onClose={() => setShowPublicPortal(false)}
+        />
+      )}
+
+      {/* User Self Account Profile Modal */}
+      {showProfileModal && (
+        <UserProfileModal
+          isOpen={showProfileModal}
+          onClose={() => setShowProfileModal(false)}
+          user={user}
+          onUpdateUser={(updatedUser) => {
+            setUser(updatedUser);
+          }}
         />
       )}
     </div>

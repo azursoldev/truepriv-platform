@@ -246,6 +246,35 @@ class AuthController extends Controller
     }
 
     /**
+     * Update current authenticated user's profile.
+     */
+    public function updateProfile(Request $request): JsonResponse
+    {
+        $user = $request->user();
+
+        $validated = $request->validate([
+            'name' => 'sometimes|string|max:255',
+            'phone' => 'nullable|string|max:50',
+            'department' => 'nullable|string|max:100',
+            'password' => 'nullable|string|min:8',
+        ]);
+
+        if (isset($validated['password']) && !empty($validated['password'])) {
+            $validated['password'] = Hash::make($validated['password']);
+        } else {
+            unset($validated['password']);
+        }
+
+        $user->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Your profile details have been updated successfully.',
+            'user' => $user->load('tenant'),
+        ]);
+    }
+
+    /**
      * Get active platform feature flags (e.g. Dual-Residency multi-region routing).
      */
     public function getFeatures(\App\Services\DataResidencyService $residencyService): JsonResponse

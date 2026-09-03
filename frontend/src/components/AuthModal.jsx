@@ -460,6 +460,42 @@ export default function AuthModal({ onLoginSuccess }) {
                     </div>
                   </div>
 
+                  {/* 4. DEPARTMENT & ORGANIZATION PROFILE ROW */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <label className="text-[10px] font-bold text-slate-700 uppercase tracking-wider">DEPARTMENT</label>
+                        <span className="text-[10px] text-slate-400">Profile</span>
+                      </div>
+                      <select
+                        value={regData.department || 'Compliance & Risk'}
+                        onChange={(e) => setRegData({ ...regData, department: e.target.value })}
+                        className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-emerald-600 shadow-2xs"
+                      >
+                        <option value="Compliance & Risk">Compliance & Risk</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Human Resources">Human Resources</option>
+                        <option value="Finance & Accounting">Finance & Accounting</option>
+                        <option value="Operations">Operations</option>
+                        <option value="Legal">Legal & Regulatory</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <label className="text-[10px] font-bold text-slate-700 uppercase tracking-wider">ORGANIZATION</label>
+                        <span className="text-[10px] text-slate-400">Optional</span>
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="e.g. Alpha Global Ltd"
+                        value={regData.organization_name || ''}
+                        onChange={(e) => setRegData({ ...regData, organization_name: e.target.value })}
+                        className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-emerald-600 shadow-2xs"
+                      />
+                    </div>
+                  </div>
+
                   {/* 4. WHICH DESCRIBES YOU? RADIO CARDS */}
                   <div className="pt-1">
                     <label className="block text-[10px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
