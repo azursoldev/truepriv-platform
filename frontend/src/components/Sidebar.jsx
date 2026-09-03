@@ -9,36 +9,68 @@ export default function Sidebar({
   isCollapsed, 
   onToggle 
 }) {
-  const navItems = [
-    { id: 'dashboard', label: 'Executive Overview', icon: 'fa-solid fa-gauge-high' },
-    { id: 'ropa', label: 'Automated RoPA', icon: 'fa-solid fa-file-shield', count: metrics?.ropa?.total },
-    { id: 'dpia', label: 'DPIA Risk Matrix', icon: 'fa-solid fa-shield-halved', count: metrics?.dpia?.total },
-    { id: 'audits', label: 'NDPC Statutory Audits', icon: 'fa-solid fa-clipboard-check', badge: metrics?.compliance_gauge?.score ? `${metrics.compliance_gauge.score}%` : null },
-    { id: 'dsar', label: '30-Day DSAR Desk', icon: 'fa-solid fa-users-viewfinder', count: metrics?.dsar?.open_requests, urgent: metrics?.dsar?.urgent_under_7_days > 0 },
-    { id: 'breaches', label: '72-Hour Breach Clock', icon: 'fa-solid fa-triangle-exclamation', count: metrics?.breaches?.active_incidents, alert: metrics?.breaches?.active_72h_clocks > 0 },
-    { id: 'vendors', label: 'Vendor & TPRM Risk', icon: 'fa-solid fa-handshake-simple', count: metrics?.vendors?.total_processors },
-    { id: 'cookies', label: 'Cookie Consent SDK', icon: 'fa-solid fa-cookie-bite' },
-    { id: 'policies', label: 'Policy Auto-Generator', icon: 'fa-solid fa-file-contract' },
-  ];
+  const isSuperAdmin = userRole === 'super_admin';
+  const isCorporate = tenantType === 'corporate' || ['corporate_admin', 'compliance_officer', 'dept_champion'].includes(userRole);
+  const isDpo = tenantType === 'outsourced_dpo' || userRole === 'outsourced_dpo';
+  const isDpco = tenantType === 'dpco_firm' || ['dpco_lead_auditor', 'dpco_staff'].includes(userRole);
 
-  // If user is Admin (Super Admin or Corporate Admin), show Admin Governance & Users
-  if (['super_admin', 'corporate_admin'].includes(userRole)) {
-    navItems.push({
-      id: 'admin-users',
-      label: 'Admin & User Governance',
-      icon: 'fa-solid fa-users-gear',
-      highlight: true,
-    });
-  }
+  let navItems = [];
+  let sectionTitle = 'Compliance Operations';
 
-  // If user is Outsourced DPO or Licensed DPCO Firm, show Portfolio Desk tab
-  if (['outsourced_dpo', 'dpco_firm'].includes(tenantType)) {
-    navItems.splice(1, 0, {
-      id: 'portfolio',
-      label: tenantType === 'dpco_firm' ? 'DPCO Client Audit Desk' : 'DPO Multi-Client Portfolio',
-      icon: 'fa-solid fa-network-wired',
-      highlight: true,
-    });
+  if (isSuperAdmin) {
+    sectionTitle = 'Global System Governance';
+    navItems = [
+      { id: 'dashboard', label: 'Global Platform Hub', icon: 'fa-solid fa-gauge-high' },
+      { id: 'portfolio', label: 'Tenant Organizations', icon: 'fa-solid fa-building-columns' },
+      { id: 'admin-users', label: 'Master User Governance', icon: 'fa-solid fa-users-gear', highlight: true },
+      { id: 'ropa', label: 'Industry RoPA Presets', icon: 'fa-solid fa-file-shield' },
+      { id: 'audits', label: 'Statutory Filing Registry', icon: 'fa-solid fa-clipboard-check' },
+      { id: 'breaches', label: 'National Breach Registry', icon: 'fa-solid fa-triangle-exclamation' },
+    ];
+  } else if (isDpo) {
+    sectionTitle = 'DPO Advisory Console';
+    navItems = [
+      { id: 'dashboard', label: 'DPO Practice Overview', icon: 'fa-solid fa-gauge-high' },
+      { id: 'portfolio', label: 'Multi-Client Portfolio', icon: 'fa-solid fa-network-wired', highlight: true },
+      { id: 'ropa', label: 'Client RoPA Inventory', icon: 'fa-solid fa-file-shield', count: metrics?.ropa?.total },
+      { id: 'dpia', label: 'DPIA Sign-Off Desk', icon: 'fa-solid fa-shield-halved', count: metrics?.dpia?.total },
+      { id: 'dsar', label: 'Client DSAR SLA Watch', icon: 'fa-solid fa-users-viewfinder', count: metrics?.dsar?.open_requests },
+      { id: 'breaches', label: 'Client 72h Breach Watch', icon: 'fa-solid fa-triangle-exclamation', count: metrics?.breaches?.active_incidents },
+      { id: 'policies', label: 'Statutory Policy Desk', icon: 'fa-solid fa-file-contract' },
+    ];
+  } else if (isDpco) {
+    sectionTitle = 'DPCO Statutory Suite';
+    navItems = [
+      { id: 'dashboard', label: 'Audit Practice Overview', icon: 'fa-solid fa-gauge-high' },
+      { id: 'portfolio', label: 'Client Audit Projects', icon: 'fa-solid fa-network-wired', highlight: true },
+      { id: 'audits', label: 'GAID 5-Domain Checklist', icon: 'fa-solid fa-clipboard-check', badge: metrics?.compliance_gauge?.score ? `${metrics.compliance_gauge.score}%` : null },
+      { id: 'dpia', label: 'Risk Evaluation Ledger', icon: 'fa-solid fa-shield-halved' },
+      { id: 'ropa', label: 'Client Verified RoPA', icon: 'fa-solid fa-file-shield' },
+      { id: 'policies', label: 'Governance Policies', icon: 'fa-solid fa-file-contract' },
+    ];
+  } else {
+    // Standard Corporate Controller / Enterprise Portal
+    sectionTitle = 'Corporate Operations';
+    navItems = [
+      { id: 'dashboard', label: 'Executive Overview', icon: 'fa-solid fa-gauge-high' },
+      { id: 'ropa', label: 'Automated RoPA', icon: 'fa-solid fa-file-shield', count: metrics?.ropa?.total },
+      { id: 'dpia', label: 'DPIA Risk Matrix', icon: 'fa-solid fa-shield-halved', count: metrics?.dpia?.total },
+      { id: 'audits', label: 'NDPC Statutory Audits', icon: 'fa-solid fa-clipboard-check', badge: metrics?.compliance_gauge?.score ? `${metrics.compliance_gauge.score}%` : null },
+      { id: 'dsar', label: '30-Day DSAR Desk', icon: 'fa-solid fa-users-viewfinder', count: metrics?.dsar?.open_requests, urgent: metrics?.dsar?.urgent_under_7_days > 0 },
+      { id: 'breaches', label: '72-Hour Breach Clock', icon: 'fa-solid fa-triangle-exclamation', count: metrics?.breaches?.active_incidents, alert: metrics?.breaches?.active_72h_clocks > 0 },
+      { id: 'vendors', label: 'Vendor & TPRM Risk', icon: 'fa-solid fa-handshake-simple', count: metrics?.vendors?.total_processors },
+      { id: 'cookies', label: 'Cookie Consent SDK', icon: 'fa-solid fa-cookie-bite' },
+      { id: 'policies', label: 'Policy Auto-Generator', icon: 'fa-solid fa-file-contract' },
+    ];
+
+    if (userRole === 'corporate_admin') {
+      navItems.push({
+        id: 'admin-users',
+        label: 'Team & Role Governance',
+        icon: 'fa-solid fa-users-gear',
+        highlight: true,
+      });
+    }
   }
 
   return (
@@ -53,7 +85,7 @@ export default function Sidebar({
         <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'justify-between px-2'} mb-1`}>
           {!isCollapsed && (
             <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-              Compliance Operations
+              {sectionTitle}
             </span>
           )}
           <button
@@ -134,13 +166,21 @@ export default function Sidebar({
         <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-2 mb-1'}`}>
           <div className="w-2 h-2 rounded-full bg-emerald-500 animate-ping flex-shrink-0" />
           {!isCollapsed && (
-            <span className="text-xs font-bold text-slate-800">NDPA 2023 Active</span>
+            <span className="text-xs font-bold text-slate-800">
+              {isSuperAdmin ? 'Truepriv Authority' : isDpo ? 'DPO Advisory Mode' : isDpco ? 'Licensed DPCO Suite' : 'NDPA 2023 Active'}
+            </span>
           )}
         </div>
         {!isCollapsed && (
           <>
             <p className="text-[10px] text-slate-500 leading-tight mt-1">
-              Rule-based 80% automation engine active. Review &rarr; Verify &rarr; Approve.
+              {isSuperAdmin 
+                ? 'Master authority console with global multi-tenant controls.' 
+                : isDpo
+                ? 'Multi-client data protection officer advisory engine active.'
+                : isDpco
+                ? 'Statutory annual compliance audit & certification active.'
+                : 'Rule-based 80% automation engine active. Review &rarr; Approve.'}
             </p>
             <div className="mt-2 pt-2 border-t border-slate-200/80 flex items-center justify-between text-[9px] text-slate-400 font-mono">
               <span>NDPC GAID v1.2</span>

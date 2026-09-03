@@ -166,6 +166,8 @@ export default function App() {
           {activeTab === 'dashboard' && (
             <ExecutiveDashboard
               metrics={metrics}
+              userRole={user?.role}
+              tenantType={tenant?.type}
               onNavigate={setActiveTab}
               onAutoFillRopa={() => setActiveTab('ropa')}
               onOpenOnboarding={() => setShowOnboarding(true)}

@@ -26,6 +26,14 @@ export default function Header({
   }, []);
 
   const getTenantTypeBadge = (type) => {
+    if (user?.role === 'super_admin') {
+      return (
+        <span className="inline-flex items-center gap-1 text-[9px] font-bold bg-amber-50 text-amber-900 border border-amber-300 px-1.5 py-0.5 rounded whitespace-nowrap">
+          <i className="fa-solid fa-crown text-[8px] text-amber-600"></i> SUPER ADMIN
+        </span>
+      );
+    }
+
     switch (type) {
       case 'dpco_firm':
         return (
