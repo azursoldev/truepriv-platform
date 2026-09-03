@@ -16,9 +16,10 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
   const [logsLoading, setLogsLoading] = useState(false);
   const [notification, setNotification] = useState(null);
 
-  // Modals
+  // Modals & User Detail Page State
   const [showInviteModal, setShowInviteModal] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
+  const [savingUser, setSavingUser] = useState(false);
 
   // Invite Form State
   const [inviteForm, setInviteForm] = useState({
@@ -124,8 +125,9 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
   };
 
   const handleUpdateUser = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     if (!editingUser) return;
+    setSavingUser(true);
 
     try {
       const res = await api.updateUser(editingUser.id, {
@@ -134,113 +136,516 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
         department: editingUser.department,
         phone: editingUser.phone,
         is_active: editingUser.is_active,
+        password: editingUser.new_password || undefined,
       });
 
       if (res.success) {
-        setNotification({ type: 'success', message: res.message });
+        setNotification({ type: 'success', message: res.message || 'User details updated successfully.' });
         setEditingUser(null);
         loadData();
+        if (onRefreshMetrics) onRefreshMetrics();
       }
     } catch (err) {
       setNotification({ type: 'error', message: err.message || 'Failed to update user.' });
+    } finally {
+      setSavingUser(false);
     }
   };
 
   const handleToggleStatus = async (user) => {
     try {
-      const res = await api.updateUser(user.id, { is_active: !user.is_active });
+      const res = await api.updateUser(user.id, {
+        is_active: !user.is_active,
+      });
       if (res.success) {
-        setNotification({ 
-          type: 'success', 
-          message: `User ${user.name} status changed to ${!user.is_active ? 'Active' : 'Suspended'}.` 
+        setNotification({
+          type: 'success',
+          message: `User ${user.name} is now ${!user.is_active ? 'Active' : 'Suspended'}.`,
         });
         loadData();
       }
     } catch (err) {
-      setNotification({ type: 'error', message: err.message });
+      setNotification({ type: 'error', message: err.message || 'Failed to toggle status.' });
     }
   };
 
-  const handleDeleteUser = async (id, name) => {
-    if (!confirm(`Are you sure you want to remove user "${name}" from this workspace?`)) return;
+  const handleDeleteUser = async (user) => {
+    if (!window.confirm(`Are you sure you want to permanently delete user "${user.name}"? This action cannot be undone and is recorded in the NDPA audit trail.`)) {
+      return;
+    }
+
     try {
-      const res = await api.deleteUser(id);
+      const res = await api.deleteUser(user.id);
       if (res.success) {
         setNotification({ type: 'success', message: res.message });
+        if (editingUser?.id === user.id) {
+          setEditingUser(null);
+        }
         loadData();
       }
     } catch (err) {
-      setNotification({ type: 'error', message: err.message });
+      setNotification({ type: 'error', message: err.message || 'Failed to delete user.' });
     }
   };
 
   const getRoleBadge = (role) => {
     switch (role) {
       case 'super_admin':
-        return <span className="inline-flex items-center gap-1 text-[11px] font-bold bg-amber-50 text-amber-900 border border-amber-200 px-2 py-0.5 rounded-full"><i className="fa-solid fa-crown text-amber-600 text-[10px]"></i> Super Admin</span>;
+        return (
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-bold bg-amber-50 text-amber-900 border border-amber-300 px-2.5 py-0.5 rounded-full">
+            <i className="fa-solid fa-crown text-[9px] text-amber-600"></i> Super Admin
+          </span>
+        );
       case 'corporate_admin':
-        return <span className="inline-flex items-center gap-1 text-[11px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded-full"><i className="fa-solid fa-building text-emerald-600 text-[10px]"></i> Corporate Admin</span>;
+        return (
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-bold bg-emerald-50 text-emerald-900 border border-emerald-300 px-2.5 py-0.5 rounded-full">
+            <i className="fa-solid fa-building text-[9px] text-emerald-600"></i> Corporate Admin
+          </span>
+        );
       case 'compliance_officer':
-        return <span className="inline-flex items-center gap-1 text-[11px] font-bold bg-sky-50 text-sky-800 border border-sky-200 px-2 py-0.5 rounded-full"><i className="fa-solid fa-shield-halved text-sky-600 text-[10px]"></i> Compliance Officer</span>;
+        return (
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-bold bg-blue-50 text-blue-900 border border-blue-300 px-2.5 py-0.5 rounded-full">
+            <i className="fa-solid fa-shield-halved text-[9px] text-blue-600"></i> Compliance Officer
+          </span>
+        );
       case 'dept_champion':
-        return <span className="inline-flex items-center gap-1 text-[11px] font-bold bg-purple-50 text-purple-800 border border-purple-200 px-2 py-0.5 rounded-full"><i className="fa-solid fa-users text-purple-600 text-[10px]"></i> Dept Champion</span>;
+        return (
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-bold bg-purple-50 text-purple-900 border border-purple-300 px-2.5 py-0.5 rounded-full">
+            <i className="fa-solid fa-users text-[9px] text-purple-600"></i> Dept Champion
+          </span>
+        );
       case 'dpco_lead_auditor':
-        return <span className="inline-flex items-center gap-1 text-[11px] font-bold bg-purple-100 text-purple-900 border border-purple-300 px-2 py-0.5 rounded-full"><i className="fa-solid fa-building-columns text-purple-700 text-[10px]"></i> DPCO Lead Auditor</span>;
-      case 'dpco_staff':
-        return <span className="inline-flex items-center gap-1 text-[11px] font-bold bg-indigo-50 text-indigo-800 border border-indigo-200 px-2 py-0.5 rounded-full"><i className="fa-solid fa-clipboard-check text-indigo-600 text-[10px]"></i> DPCO Staff</span>;
+        return (
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-bold bg-indigo-50 text-indigo-900 border border-indigo-300 px-2.5 py-0.5 rounded-full">
+            <i className="fa-solid fa-building-columns text-[9px] text-indigo-600"></i> DPCO Lead Auditor
+          </span>
+        );
       case 'outsourced_dpo':
-        return <span className="inline-flex items-center gap-1 text-[11px] font-bold bg-blue-50 text-blue-800 border border-blue-200 px-2 py-0.5 rounded-full"><i className="fa-solid fa-user-shield text-blue-600 text-[10px]"></i> Outsourced DPO</span>;
+        return (
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-bold bg-sky-50 text-sky-900 border border-sky-300 px-2.5 py-0.5 rounded-full">
+            <i className="fa-solid fa-user-shield text-[9px] text-sky-600"></i> Outsourced DPO
+          </span>
+        );
       default:
-        return <span className="inline-flex items-center gap-1 text-[11px] font-bold bg-slate-100 text-slate-700 border border-slate-200 px-2 py-0.5 rounded-full"><i className="fa-solid fa-eye text-slate-500 text-[10px]"></i> Auditor Viewer</span>;
+        return (
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200 px-2.5 py-0.5 rounded-full">
+            <i className="fa-solid fa-eye text-[9px] text-slate-500"></i> Auditor Viewer
+          </span>
+        );
     }
   };
 
-  const getActionBadge = (action) => {
-    if (action.includes('breach')) return <span className="text-[10px] font-mono font-bold bg-red-50 text-red-700 border border-red-200 px-2 py-0.5 rounded">BREACH CLOCK</span>;
-    if (action.includes('dpia')) return <span className="text-[10px] font-mono font-bold bg-purple-50 text-purple-700 border border-purple-200 px-2 py-0.5 rounded">DPIA STAMP</span>;
-    if (action.includes('ropa')) return <span className="text-[10px] font-mono font-bold bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded">ROPA EVENT</span>;
-    if (action.includes('user')) return <span className="text-[10px] font-mono font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded">USER RBAC</span>;
-    if (action.includes('dsar')) return <span className="text-[10px] font-mono font-bold bg-amber-50 text-amber-700 border border-amber-200 px-2 py-0.5 rounded">DSAR SLA</span>;
-    if (action.includes('cookie')) return <span className="text-[10px] font-mono font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 px-2 py-0.5 rounded">COOKIE CONSENT</span>;
-    return <span className="text-[10px] font-mono font-bold bg-slate-100 text-slate-700 border border-slate-200 px-2 py-0.5 rounded">SYSTEM TELEMETRY</span>;
+  const getRolePermissionsList = (role) => {
+    switch (role) {
+      case 'super_admin':
+        return [
+          { name: 'Global Multi-Tenant Authority', allowed: true },
+          { name: 'Tenant Provisioning & Seat Limits', allowed: true },
+          { name: 'System Telemetry & Live Stream', allowed: true },
+          { name: 'Master RoPA Industry Templates', allowed: true },
+          { name: 'National Incident Intake Desk', allowed: true },
+          { name: 'License & Statutory Seal Issuance', allowed: true },
+        ];
+      case 'corporate_admin':
+        return [
+          { name: 'Manage Organization Users & Seats', allowed: true },
+          { name: 'Execute RoPA Mappings & DPIAs', allowed: true },
+          { name: 'Approve 30-Day DSAR Responses', allowed: true },
+          { name: '72-Hour Breach Triage & Filing', allowed: true },
+          { name: 'Vendor TPRM & Contract Execution', allowed: true },
+          { name: 'Invite Department Champions', allowed: true },
+        ];
+      case 'compliance_officer':
+        return [
+          { name: 'Execute RoPA Mappings & DPIAs', allowed: true },
+          { name: 'Process 30-Day DSAR Requests', allowed: true },
+          { name: '72-Hour Breach Triage & Filing', allowed: true },
+          { name: 'Vendor TPRM Risk Questionnaires', allowed: true },
+          { name: 'Manage Organization Users', allowed: false },
+          { name: 'Global Multi-Tenant Authority', allowed: false },
+        ];
+      case 'outsourced_dpo':
+        return [
+          { name: 'Multi-Client Portfolio Switching', allowed: true },
+          { name: 'DPIA 5x5 Digital Sign-off & Seal', allowed: true },
+          { name: 'Cross-Client RoPA Oversight', allowed: true },
+          { name: 'Client Breach SLA Monitoring', allowed: true },
+          { name: 'Manage Internal Client Staff', allowed: false },
+          { name: 'Global Platform Licensing', allowed: false },
+        ];
+      case 'dpco_lead_auditor':
+        return [
+          { name: 'GAID 5-Domain Fieldwork Scoring', allowed: true },
+          { name: 'Collect & Stamp Audit Evidence', allowed: true },
+          { name: 'Issue Certified NDPC Filing Packs', allowed: true },
+          { name: 'March 15 Deadline Submissions', allowed: true },
+          { name: 'Modify Client RoPA Records', allowed: false },
+          { name: 'Delete Client User Accounts', allowed: false },
+        ];
+      default:
+        return [
+          { name: 'Read-Only Audit Pack Inspection', allowed: true },
+          { name: 'Read-Only RoPA Activity Viewing', allowed: true },
+          { name: 'Read-Only DPIA Matrix Viewing', allowed: true },
+          { name: 'Modify System Records', allowed: false },
+          { name: 'Trigger 72h Breach Clocks', allowed: false },
+          { name: 'User Management Privileges', allowed: false },
+        ];
+    }
   };
 
+  /* =========================================================================
+     DEDICATED FULL USER DETAIL & GOVERNANCE PAGE (When editingUser is set)
+     ========================================================================= */
+  if (editingUser) {
+    const permissions = getRolePermissionsList(editingUser.role);
+
+    return (
+      <div className="space-y-6 animate-in fade-in">
+        
+        {/* Top Navigation & Action Header */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white border border-slate-200 p-4 sm:p-6 rounded-3xl shadow-xs">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setEditingUser(null)}
+              className="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5"
+            >
+              <i className="fa-solid fa-arrow-left text-xs"></i>
+              <span>Back to Directory</span>
+            </button>
+            <div className="h-5 w-px bg-slate-200 hidden sm:block"></div>
+            <div>
+              <h2 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
+                <span>User Governance & Access Detail</span>
+                {getRoleBadge(editingUser.role)}
+              </h2>
+              <p className="text-xs text-slate-500">Configure NDPA permissions, contact details, and security controls.</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+            <button
+              type="button"
+              onClick={() => handleToggleStatus(editingUser)}
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 ${
+                editingUser.is_active
+                  ? 'bg-amber-50 hover:bg-amber-100 border-amber-200 text-amber-800'
+                  : 'bg-emerald-50 hover:bg-emerald-100 border-emerald-200 text-emerald-800'
+              }`}
+            >
+              <i className={`fa-solid ${editingUser.is_active ? 'fa-ban' : 'fa-check'}`}></i>
+              <span>{editingUser.is_active ? 'Suspend Account' : 'Activate Account'}</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleDeleteUser(editingUser)}
+              className="px-3.5 py-2 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5"
+            >
+              <i className="fa-solid fa-trash-can"></i>
+              <span className="hidden md:inline">Delete</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={handleUpdateUser}
+              disabled={savingUser}
+              className="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold shadow-md transition-all flex items-center gap-2 disabled:opacity-50"
+            >
+              <i className="fa-solid fa-floppy-disk text-xs"></i>
+              <span>{savingUser ? 'Saving...' : 'Save All Changes'}</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Hero Identity Overview Card */}
+        <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 rounded-2xl bg-slate-900 text-white flex items-center justify-center font-extrabold text-2xl shadow-md flex-shrink-0">
+                {editingUser.name ? editingUser.name.substring(0, 2).toUpperCase() : 'US'}
+              </div>
+              <div>
+                <div className="flex items-center gap-2.5">
+                  <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+                    {editingUser.name}
+                  </h1>
+                  <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-0.5 rounded-full ${
+                    editingUser.is_active ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-800 border border-red-200'
+                  }`}>
+                    <span className={`w-1.5 h-1.5 rounded-full ${editingUser.is_active ? 'bg-emerald-500' : 'bg-red-500'}`}></span>
+                    {editingUser.is_active ? 'Active Account' : 'Suspended Access'}
+                  </span>
+                </div>
+                <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 mt-1">
+                  <span><i className="fa-solid fa-envelope text-slate-400 mr-1"></i> {editingUser.email}</span>
+                  <span>&bull;</span>
+                  <span><i className="fa-solid fa-phone text-slate-400 mr-1"></i> {editingUser.phone || 'No phone recorded'}</span>
+                  <span>&bull;</span>
+                  <span><i className="fa-solid fa-building text-slate-400 mr-1"></i> {editingUser.department || 'Compliance & Risk'}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3 text-xs font-mono bg-slate-50 border border-slate-200 p-3 rounded-2xl">
+              <div>
+                <div className="text-[10px] text-slate-400 uppercase font-bold">User UUID:</div>
+                <div className="text-slate-800 font-semibold truncate max-w-[140px]">{editingUser.id}</div>
+              </div>
+              <div className="border-l border-slate-200 pl-3">
+                <div className="text-[10px] text-slate-400 uppercase font-bold">2FA Security:</div>
+                <div className="text-emerald-700 font-bold">NDPA Enforced</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Main 2-Column Detail Configuration Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          {/* LEFT COLUMN: Personal Details & Role Governance (7 Columns) */}
+          <div className="lg:col-span-7 space-y-6">
+            
+            {/* 1. Personal & Contact Information Card */}
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                  <i className="fa-solid fa-id-card text-emerald-600"></i>
+                  <span>Personal & Professional Profile</span>
+                </h3>
+                <span className="text-[10px] text-slate-400 uppercase font-bold">Editable</span>
+              </div>
+
+              <div className="space-y-3.5 text-xs">
+                <div>
+                  <label className="block text-slate-700 font-bold mb-1">Full Legal Name</label>
+                  <input
+                    type="text"
+                    required
+                    value={editingUser.name}
+                    onChange={(e) => setEditingUser({ ...editingUser, name: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-semibold focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-slate-700 font-bold mb-1">Official Work Email</label>
+                    <input
+                      type="email"
+                      disabled
+                      value={editingUser.email}
+                      className="w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-600 cursor-not-allowed"
+                    />
+                    <span className="text-[10px] text-slate-400 mt-0.5 block">Primary identity handle</span>
+                  </div>
+
+                  <div>
+                    <label className="block text-slate-700 font-bold mb-1">Contact Phone Number</label>
+                    <input
+                      type="text"
+                      placeholder="+234 803 114 2290"
+                      value={editingUser.phone || ''}
+                      onChange={(e) => setEditingUser({ ...editingUser, phone: e.target.value })}
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                    />
+                    <span className="text-[10px] text-slate-400 mt-0.5 block">Statutory SMS alerts</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-slate-700 font-bold mb-1">Assigned Department</label>
+                  <select
+                    value={editingUser.department || 'Compliance & Risk'}
+                    onChange={(e) => setEditingUser({ ...editingUser, department: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-semibold focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                  >
+                    <option value="Compliance & Risk">Compliance & Risk</option>
+                    <option value="Information Technology">Information Technology (IT / SecOps)</option>
+                    <option value="Human Resources">Human Resources (HR / People)</option>
+                    <option value="Finance & Accounting">Finance & Accounting</option>
+                    <option value="Operations">Operations & Business Lines</option>
+                    <option value="Legal">Legal & Regulatory Affairs</option>
+                    <option value="Executive Management">Executive Management</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            {/* 2. Role & Access Privilege Assignment Card */}
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                  <i className="fa-solid fa-shield-halved text-blue-600"></i>
+                  <span>Role & Access Privilege Governance</span>
+                </h3>
+                <span className="text-[10px] text-emerald-700 uppercase font-bold">Admin Authority</span>
+              </div>
+
+              <div className="space-y-3.5 text-xs">
+                <div>
+                  <label className="block text-slate-700 font-bold mb-1">Assigned System Role</label>
+                  <select
+                    value={editingUser.role}
+                    onChange={(e) => setEditingUser({ ...editingUser, role: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-bold focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                  >
+                    <option value="corporate_admin">Corporate Admin (Full Org Control)</option>
+                    <option value="compliance_officer">Compliance Officer (RoPA, DPIA, DSAR)</option>
+                    <option value="dept_champion">Department Champion (Data Inputs)</option>
+                    <option value="auditor_viewer">Auditor Viewer (Read-Only Evidence)</option>
+                    <option value="dpco_lead_auditor">DPCO Lead Auditor (Statutory Audit)</option>
+                    <option value="dpco_staff">DPCO Staff Auditor</option>
+                    <option value="outsourced_dpo">Outsourced DPO Practice</option>
+                    <option value="super_admin">System Super Administrator</option>
+                  </select>
+                </div>
+
+                <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
+                  <div className="font-bold text-slate-900 flex items-center gap-2">
+                    <i className="fa-solid fa-circle-info text-blue-600"></i>
+                    <span>Role Boundary & Scope:</span>
+                  </div>
+                  <p className="text-slate-600 leading-relaxed text-[11px]">
+                    {editingUser.role === 'corporate_admin' && "Full administrative control over tenant workspace, user provisioning, RoPA mapping, DPIA authorizations, and 72h breach filings."}
+                    {editingUser.role === 'compliance_officer' && "Authorizations to create and edit RoPA activities, submit DPIA risk assessments, process DSAR tickets, and handle breach intakes."}
+                    {editingUser.role === 'dept_champion' && "Scoped to department processing inputs (HR, IT, Finance). Cannot modify global compliance settings or delete tenant records."}
+                    {editingUser.role === 'outsourced_dpo' && "Multi-client advisory authority. Digital sign-off seals on DPIA high-risk flows and client compliance oversight."}
+                    {editingUser.role === 'dpco_lead_auditor' && "Accredited DPCO auditor suite: scoring GAID 5-domain checklists, attaching audit evidence, and generating certified NDPC filing packs."}
+                    {editingUser.role === 'super_admin' && "Platform-wide master authority: cross-tenant access, tenant provisioning, system telemetry stream, and industry template management."}
+                    {editingUser.role === 'auditor_viewer' && "Read-only access to compliance scorecards, audit evidence vault, and statutory filing packs."}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* RIGHT COLUMN: Security Controls, Permissions Checklist & Telemetry (5 Columns) */}
+          <div className="lg:col-span-5 space-y-6">
+            
+            {/* 1. Account Security & Password Reset Card */}
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                  <i className="fa-solid fa-lock text-purple-600"></i>
+                  <span>Security & Account Status</span>
+                </h3>
+              </div>
+
+              <div className="space-y-3.5 text-xs">
+                <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-between">
+                  <div>
+                    <div className="font-bold text-slate-900">Account Active State</div>
+                    <div className="text-[11px] text-slate-500">Enable or disable workspace access</div>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={editingUser.is_active}
+                    onChange={(e) => setEditingUser({ ...editingUser, is_active: e.target.checked })}
+                    className="w-5 h-5 accent-emerald-600 rounded cursor-pointer"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-slate-700 font-bold mb-1">Set Temporary Password (Optional)</label>
+                  <input
+                    type="password"
+                    placeholder="Leave blank to preserve existing password"
+                    value={editingUser.new_password || ''}
+                    onChange={(e) => setEditingUser({ ...editingUser, new_password: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                  />
+                  <span className="text-[10px] text-slate-400 mt-0.5 block">Minimum 8 characters</span>
+                </div>
+              </div>
+            </div>
+
+            {/* 2. Effective Role Permissions Checklist */}
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                  <i className="fa-solid fa-list-check text-emerald-600"></i>
+                  <span>Effective Permissions</span>
+                </h3>
+                <span className="text-[10px] font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                  Real-Time
+                </span>
+              </div>
+
+              <div className="space-y-2 text-xs">
+                {permissions.map((p, idx) => (
+                  <div key={idx} className="p-2.5 rounded-xl border border-slate-100 bg-slate-50/60 flex items-center justify-between">
+                    <span className="text-slate-800 font-medium">{p.name}</span>
+                    {p.allowed ? (
+                      <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full flex items-center gap-1">
+                        <i className="fa-solid fa-check text-[9px]"></i> Granted
+                      </span>
+                    ) : (
+                      <span className="text-[10px] font-bold text-slate-400 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full flex items-center gap-1">
+                        <i className="fa-solid fa-xmark text-[9px]"></i> Restricted
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    );
+  }
+
+  /* =========================================================================
+     MAIN USER DIRECTORY & RBAC VIEW
+     ========================================================================= */
   return (
     <div className="space-y-6">
+      
       {/* Toast Notification */}
       {notification && (
-        <div className={`p-4 rounded-2xl flex items-center justify-between text-xs font-semibold shadow-xs ${
-          notification.type === 'success' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-800 border border-red-200'
+        <div className={`p-4 rounded-2xl border text-xs font-semibold flex items-center justify-between shadow-xs animate-in fade-in ${
+          notification.type === 'success' ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-red-50 border-red-200 text-red-900'
         }`}>
-          <span>{notification.message}</span>
+          <div className="flex items-center gap-2">
+            <i className={`fa-solid ${notification.type === 'success' ? 'fa-circle-check text-emerald-600' : 'fa-circle-exclamation text-red-600'}`}></i>
+            <span>{notification.message}</span>
+          </div>
           <button onClick={() => setNotification(null)} className="text-slate-400 hover:text-slate-700 font-bold">&times;</button>
         </div>
       )}
 
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      {/* Header Banner */}
+      <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-7 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xs">
         <div>
-          <div className="flex items-center gap-2">
-            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Master Administrator Governance & User Center</h2>
-            <span className="text-[11px] bg-amber-50 text-amber-900 border border-amber-200 px-2 py-0.5 rounded font-mono font-bold">
-              ADMIN ONLY
+          <div className="flex items-center gap-2 mb-1.5">
+            <span className="text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full font-mono flex items-center gap-1.5">
+              <i className="fa-solid fa-users-gear text-emerald-600 text-[10px]"></i>
+              <span>ADMIN USER & ROLE GOVERNANCE</span>
             </span>
+            <span className="text-xs text-slate-500 font-medium">NDPA 2023 RBAC System</span>
           </div>
-          <p className="text-xs text-slate-600 mt-0.5">
-            Full dynamic visibility into portal activities, real-time audit logs, user management, and role permissions.
+          <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+            User Access & Permissions Desk
+          </h2>
+          <p className="text-xs text-slate-600 mt-1 max-w-xl leading-relaxed">
+            Provision staff accounts, configure role segregation-of-duties under NDPA Section 24 & 48, and inspect immutable system audit telemetry in real time.
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
-          {/* Tabs Switcher */}
-          <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs">
+        {/* Tab Controls */}
+        <div className="flex items-center gap-2 flex-wrap">
+          <div className="bg-slate-100 p-1 rounded-xl flex items-center text-xs">
             <button
               onClick={() => setActiveTab('directory')}
               className={`px-3 py-1.5 rounded-lg font-bold transition-all ${
                 activeTab === 'directory' ? 'bg-white text-slate-900 shadow-2xs' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              <i className="fa-solid fa-users mr-1.5 text-slate-600"></i> Users
+              <i className="fa-solid fa-users mr-1.5 text-slate-600"></i> User Directory
             </button>
             <button
               onClick={() => setActiveTab('audit-trail')}
@@ -401,14 +806,18 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                     </tr>
                   ) : (
                     users.map((u) => (
-                      <tr key={u.id} className="hover:bg-slate-50/80 transition-colors">
+                      <tr 
+                        key={u.id} 
+                        className="hover:bg-slate-50/80 transition-colors cursor-pointer group"
+                        onClick={() => setEditingUser(u)}
+                      >
                         <td className="py-3.5 px-4">
                           <div className="flex items-center gap-2.5">
-                            <div className="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">
+                            <div className="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">
                               {u.name.substring(0, 2).toUpperCase()}
                             </div>
                             <div>
-                              <div className="font-bold text-slate-900">{u.name}</div>
+                              <div className="font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">{u.name}</div>
                               <div className="text-[11px] text-slate-500">{u.email}</div>
                             </div>
                           </div>
@@ -435,14 +844,15 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                           </span>
                         </td>
 
-                        <td className="py-3.5 px-4 text-right whitespace-nowrap">
+                        <td className="py-3.5 px-4 text-right whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
                           <div className="flex items-center justify-end gap-1.5">
                             <button
                               onClick={() => setEditingUser(u)}
-                              title="Edit User Role & Details (Admin Only)"
-                              className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 border border-slate-200"
+                              title="Open User Detail & Governance Page (Admin Only)"
+                              className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 border border-slate-200 font-bold text-[11px] flex items-center gap-1"
                             >
-                              <i className="fa-solid fa-pen-to-square text-xs"></i>
+                              <i className="fa-solid fa-pen-to-square text-xs text-emerald-600"></i>
+                              <span>Detail</span>
                             </button>
 
                             <button
@@ -458,11 +868,11 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                             </button>
 
                             <button
-                              onClick={() => handleDeleteUser(u.id, u.name)}
-                              title="Remove User from Organization"
-                              className="p-1.5 rounded-lg bg-slate-100 hover:bg-red-50 border border-slate-200 hover:border-red-200 text-slate-500 hover:text-red-700"
+                              onClick={() => handleDeleteUser(u)}
+                              title="Permanently Delete User Account"
+                              className="p-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 text-xs"
                             >
-                              <i className="fa-solid fa-trash-can text-xs"></i>
+                              <i className="fa-solid fa-trash-can"></i>
                             </button>
                           </div>
                         </td>
@@ -478,70 +888,66 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
 
       {activeTab === 'audit-trail' && (
         /* =========================================================================
-           DYNAMIC LIVE SYSTEM ACTIVITY & AUDIT TRAIL STREAM (ADMIN ONLY)
+           DYNAMIC LIVE SYSTEM AUDIT TRAIL TAB (ADMIN ONLY)
            ========================================================================= */
         <div className="space-y-4">
-          <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                  <i className="fa-solid fa-tower-broadcast text-emerald-600"></i>
-                  Live Dynamic System Activity & Audit Stream
-                </h3>
-                <p className="text-xs text-slate-600 mt-0.5">
-                  Chronological telemetry recording every login, RoPA modification, DPIA stamp, DSAR ticket, and breach alert across the portal.
-                </p>
-              </div>
-              <button
-                onClick={loadAuditLogs}
-                disabled={logsLoading}
-                className="px-3 py-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-2xs"
-              >
-                <i className={`fa-solid fa-arrows-rotate text-xs ${logsLoading ? 'animate-spin' : ''}`}></i>
-                <span>Refresh Stream</span>
-              </button>
+          <div className="bg-white border border-slate-200 p-4 rounded-2xl flex items-center justify-between shadow-xs">
+            <div>
+              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <i className="fa-solid fa-tower-broadcast text-emerald-600"></i>
+                <span>Live Telemetry & Audit Stream</span>
+              </h3>
+              <p className="text-xs text-slate-500 mt-0.5">Chronological immutable audit records of all user and compliance activities.</p>
             </div>
+            <button
+              onClick={loadAuditLogs}
+              className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center gap-1.5"
+            >
+              <i className="fa-solid fa-arrows-rotate text-xs"></i>
+              <span>Refresh Logs</span>
+            </button>
+          </div>
 
-            <div className="space-y-3 pt-2">
+          <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
+            <div className="divide-y divide-slate-100">
               {logsLoading ? (
-                <div className="py-8 text-center text-xs text-slate-500">Updating live stream...</div>
+                <div className="p-8 text-center text-slate-500 text-xs">Loading live telemetry stream...</div>
               ) : auditLogs.length === 0 ? (
-                <div className="py-8 text-center text-xs text-slate-500">No system events recorded yet.</div>
+                <div className="p-8 text-center text-slate-500 text-xs">No audit logs recorded yet.</div>
               ) : (
-                auditLogs.map((log) => {
-                  const actorName = log.user?.name || log.new_values?.actor_name || 'System Actor';
-                  const actorRole = log.user?.role || log.new_values?.actor_role || 'system';
-                  const summary = log.new_values?.summary || log.action;
-                  const timeFormatted = new Date(log.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-                  const dateFormatted = new Date(log.created_at).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' });
-
-                  return (
-                    <div key={log.id} className="p-4 bg-slate-50 hover:bg-slate-100/70 border border-slate-200 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition-colors">
-                      <div className="flex items-start gap-3">
-                        <div className="w-9 h-9 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">
-                          <i className="fa-solid fa-bolt text-emerald-400"></i>
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-2 flex-wrap">
-                            <span className="font-bold text-xs text-slate-900">{actorName}</span>
-                            {getRoleBadge(actorRole)}
-                            {getActionBadge(log.action)}
-                          </div>
-                          <p className="text-xs text-slate-700 mt-1 font-medium">{summary}</p>
-                          <div className="flex items-center gap-3 text-[10px] text-slate-500 font-mono mt-1">
-                            <span><i className="fa-solid fa-network-wired text-[9px] mr-1"></i> IP: {log.ip_address || '127.0.0.1'}</span>
-                            <span><i className="fa-solid fa-cube text-[9px] mr-1"></i> Entity: {log.entity_type ? log.entity_type.split('\\').pop() : 'System'}</span>
-                          </div>
-                        </div>
+                auditLogs.map((log) => (
+                  <div key={log.id} className="p-4 hover:bg-slate-50/70 transition-colors flex items-start justify-between gap-4 text-xs">
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">
+                        <i className={`fa-solid ${
+                          log.action.includes('user') ? 'fa-user-shield text-emerald-600' :
+                          log.action.includes('ropa') ? 'fa-file-shield text-blue-600' :
+                          log.action.includes('dpia') ? 'fa-shield-halved text-purple-600' :
+                          log.action.includes('breach') ? 'fa-triangle-exclamation text-amber-600' :
+                          'fa-clipboard-check text-slate-600'
+                        }`}></i>
                       </div>
-
-                      <div className="text-right flex-shrink-0 self-end sm:self-center">
-                        <div className="text-xs font-mono font-bold text-slate-900">{timeFormatted}</div>
-                        <div className="text-[10px] text-slate-500">{dateFormatted}</div>
+                      <div>
+                        <div className="font-bold text-slate-900 flex items-center gap-2">
+                          <span>{log.action}</span>
+                          <span className="text-[10px] font-mono text-slate-400">ID: {log.id.substring(0, 8)}</span>
+                        </div>
+                        <div className="text-slate-600 text-[11px] mt-0.5">
+                          Triggered by: <strong>{log.user_name}</strong> ({log.user_email}) &bull; IP: <span className="font-mono">{log.ip_address}</span>
+                        </div>
+                        {log.new_values && Object.keys(log.new_values).length > 0 && (
+                          <div className="mt-1.5 p-2 bg-slate-50 rounded-lg font-mono text-[10px] text-slate-700 border border-slate-200">
+                            {JSON.stringify(log.new_values)}
+                          </div>
+                        )}
                       </div>
                     </div>
-                  );
-                })
+
+                    <div className="text-[10px] font-mono text-slate-400 whitespace-nowrap flex-shrink-0">
+                      {new Date(log.created_at).toLocaleTimeString()}
+                    </div>
+                  </div>
+                ))
               )}
             </div>
           </div>
@@ -550,67 +956,66 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
 
       {activeTab === 'matrix' && (
         /* =========================================================================
-           ROLES & PERMISSIONS MATRIX TAB
+           8-ROLE PERMISSIONS MATRIX TAB (ADMIN ONLY)
            ========================================================================= */
         <div className="space-y-4">
-          <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs space-y-4">
-            <div>
-              <h3 className="text-base font-bold text-slate-900">8 Granular NDPA 2023 System Roles & Permissions Matrix</h3>
-              <p className="text-xs text-slate-600 mt-1">
-                Roles are pre-configured to adhere to the Nigeria Data Protection Act segregation-of-duties mandate.
-              </p>
-            </div>
+          <div className="bg-white border border-slate-200 p-4 rounded-2xl shadow-xs">
+            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+              <i className="fa-solid fa-table-cells text-emerald-600"></i>
+              <span>NDPA 2023 Statutory Role-Based Access Matrix (8 Personas)</span>
+            </h3>
+            <p className="text-xs text-slate-500 mt-0.5">
+              Granular permission allocation enforcing strict separation of duties across controllers, DPOs, and DPCO auditors.
+            </p>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {rolesMatrix.map((r) => (
-                <div key={r.role} className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <div className="text-[10px] uppercase font-bold text-slate-500">{r.category}</div>
-                      <h4 className="text-sm font-bold text-slate-900 mt-0.5">{r.title}</h4>
-                      <div className="text-[11px] font-mono text-emerald-800 font-semibold">{r.role}</div>
-                    </div>
-                    {getRoleBadge(r.role)}
-                  </div>
-
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    {r.description}
-                  </p>
-
-                  <div className="pt-2 border-t border-slate-200/80 grid grid-cols-2 gap-2 text-[11px]">
-                    <div className="flex items-center gap-1.5">
-                      <i className={`fa-solid ${r.permissions.declare_breaches ? 'fa-circle-check text-emerald-600' : 'fa-circle-xmark text-slate-300'}`}></i>
-                      <span className={r.permissions.declare_breaches ? 'text-slate-800 font-medium' : 'text-slate-400'}>72h Breach Triage</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <i className={`fa-solid ${r.permissions.certify_dpco_audits ? 'fa-circle-check text-emerald-600' : 'fa-circle-xmark text-slate-300'}`}></i>
-                      <span className={r.permissions.certify_dpco_audits ? 'text-slate-800 font-medium' : 'text-slate-400'}>Certify NDPC Audits</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <i className={`fa-solid ${r.permissions.manage_users_roles ? 'fa-circle-check text-emerald-600' : 'fa-circle-xmark text-slate-300'}`}></i>
-                      <span className={r.permissions.manage_users_roles ? 'text-slate-800 font-medium' : 'text-slate-400'}>Manage Users & Roles</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <i className={`fa-solid ${r.permissions.edit_industry_templates ? 'fa-circle-check text-emerald-600' : 'fa-circle-xmark text-slate-300'}`}></i>
-                      <span className={r.permissions.edit_industry_templates ? 'text-slate-800 font-medium' : 'text-slate-400'}>Edit Global Templates</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
+          <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 uppercase tracking-wider font-bold">
+                  <tr>
+                    <th className="py-3 px-4">Role Persona</th>
+                    <th className="py-3 px-4">Description</th>
+                    <th className="py-3 px-4">Assigned Active Users</th>
+                    <th className="py-3 px-4">NDPA Statutory Scope</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {rolesMatrix.map((r) => (
+                    <tr key={r.role} className="hover:bg-slate-50/80 transition-colors">
+                      <td className="py-3.5 px-4 font-bold text-slate-900 whitespace-nowrap">
+                        {getRoleBadge(r.role)}
+                      </td>
+                      <td className="py-3.5 px-4 text-slate-600 leading-relaxed max-w-sm">
+                        {r.description}
+                      </td>
+                      <td className="py-3.5 px-4 font-mono font-bold text-emerald-700 whitespace-nowrap">
+                        {r.active_user_count} Users
+                      </td>
+                      <td className="py-3.5 px-4 text-[11px] text-slate-500">
+                        {r.role.includes('admin') ? 'Full System Governance & Provisioning' :
+                         r.role.includes('dpo') ? 'Advisory, RoPA Review & DPIA Digital Seal' :
+                         r.role.includes('dpco') ? 'Accredited Statutory GAID Audit Filing' :
+                         'Department Champion Operations'}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       )}
 
-      {/* Provision New User Modal */}
+      {/* Provision User Modal */}
       {showInviteModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in">
           <div className="w-full max-w-lg bg-white border border-slate-200 rounded-3xl p-6 shadow-2xl space-y-4">
             <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-              <div className="flex items-center gap-2">
+              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
                 <i className="fa-solid fa-user-plus text-emerald-600"></i>
-                <h3 className="text-base font-bold text-slate-900">Provision Organization Team Member</h3>
-              </div>
+                <span>Provision New User Account</span>
+              </h3>
               <button onClick={() => setShowInviteModal(false)} className="text-slate-400 hover:text-slate-700">
                 <i className="fa-solid fa-xmark text-base"></i>
               </button>
@@ -622,7 +1027,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Babatunde Adeyemi"
+                  placeholder="e.g. Babatunde Lawal"
                   value={inviteForm.name}
                   onChange={(e) => setInviteForm({ ...inviteForm, name: e.target.value })}
                   className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
@@ -630,11 +1035,11 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
               </div>
 
               <div>
-                <label className="block text-slate-700 font-bold mb-1">Work Email Address:</label>
+                <label className="block text-slate-700 font-bold mb-1">Official Work Email:</label>
                 <input
                   type="email"
                   required
-                  placeholder="e.g. b.adeyemi@company.ng"
+                  placeholder="b.lawal@organization.ng"
                   value={inviteForm.email}
                   onChange={(e) => setInviteForm({ ...inviteForm, email: e.target.value })}
                   className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
@@ -643,7 +1048,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-slate-700 font-bold mb-1">NDPA Assigned Role:</label>
+                  <label className="block text-slate-700 font-bold mb-1">Assigned Role:</label>
                   <select
                     value={inviteForm.role}
                     onChange={(e) => setInviteForm({ ...inviteForm, role: e.target.value })}
@@ -712,97 +1117,6 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                   className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold shadow-xs"
                 >
                   Provision User Access
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* Edit User Modal */}
-      {editingUser && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in">
-          <div className="w-full max-w-lg bg-white border border-slate-200 rounded-3xl p-6 shadow-2xl space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-              <h3 className="text-base font-bold text-slate-900">Edit User Role & Permissions (Admin Only)</h3>
-              <button onClick={() => setEditingUser(null)} className="text-slate-400 hover:text-slate-700">
-                <i className="fa-solid fa-xmark text-base"></i>
-              </button>
-            </div>
-
-            <form onSubmit={handleUpdateUser} className="space-y-3 text-xs">
-              <div>
-                <label className="block text-slate-700 font-bold mb-1">Full Name:</label>
-                <input
-                  type="text"
-                  required
-                  value={editingUser.name}
-                  onChange={(e) => setEditingUser({ ...editingUser, name: e.target.value })}
-                  className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-2">
-                <div>
-                  <label className="block text-slate-700 font-bold mb-1">Assigned Role:</label>
-                  <select
-                    value={editingUser.role}
-                    onChange={(e) => setEditingUser({ ...editingUser, role: e.target.value })}
-                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900"
-                  >
-                    <option value="corporate_admin">Corporate Admin</option>
-                    <option value="compliance_officer">Compliance Officer</option>
-                    <option value="dept_champion">Department Champion</option>
-                    <option value="auditor_viewer">Auditor Viewer</option>
-                    <option value="dpco_lead_auditor">DPCO Lead Auditor</option>
-                    <option value="dpco_staff">DPCO Staff</option>
-                    <option value="outsourced_dpo">Outsourced DPO</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-slate-700 font-bold mb-1">Department:</label>
-                  <select
-                    value={editingUser.department || 'Compliance & Risk'}
-                    onChange={(e) => setEditingUser({ ...editingUser, department: e.target.value })}
-                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900"
-                  >
-                    <option value="Compliance & Risk">Compliance & Risk</option>
-                    <option value="Information Technology">Information Technology</option>
-                    <option value="Human Resources">Human Resources</option>
-                    <option value="Finance & Accounting">Finance & Accounting</option>
-                    <option value="Operations">Operations</option>
-                    <option value="Legal">Legal</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">
-                <div>
-                  <div className="font-bold text-slate-900">Account Active Status</div>
-                  <div className="text-slate-500">Allow user to sign in and interact with workspace</div>
-                </div>
-                <input
-                  type="checkbox"
-                  checked={editingUser.is_active}
-                  onChange={(e) => setEditingUser({ ...editingUser, is_active: e.target.checked })}
-                  className="w-5 h-5 accent-emerald-600 rounded cursor-pointer"
-                />
-              </div>
-
-              <div className="pt-3 border-t border-slate-200 flex justify-end gap-2">
-                <button
-                  type="button"
-                  onClick={() => setEditingUser(null)}
-                  className="px-4 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl text-xs font-bold"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-xs"
-                >
-                  Save Changes
                 </button>
               </div>
             </form>
