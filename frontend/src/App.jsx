@@ -132,6 +132,11 @@ export default function App() {
     );
   }
 
+  // Standalone Full-Screen 2-Column Authentication Page (Matches User's Mockup)
+  if (!user || showAuthModal) {
+    return <AuthModal onLoginSuccess={handleLoginSuccess} />;
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col selection:bg-emerald-500 selection:text-white">
       {/* Top Navigation */}
@@ -247,11 +252,6 @@ export default function App() {
           tenant={tenant}
           onClose={() => setShowPublicPortal(false)}
         />
-      )}
-
-      {/* Auth & Persona Switcher Modal */}
-      {showAuthModal && (
-        <AuthModal onLoginSuccess={handleLoginSuccess} />
       )}
     </div>
   );

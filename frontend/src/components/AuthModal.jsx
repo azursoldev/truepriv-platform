@@ -22,7 +22,6 @@ export default function AuthModal({ onLoginSuccess }) {
   const [mode, setMode] = useState('login'); // 'login' | 'register'
   const [email, setEmail] = useState('compliance@apexmfb.ng');
   const [password, setPassword] = useState('Password123!');
-  const [features, setFeatures] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -42,18 +41,18 @@ export default function AuthModal({ onLoginSuccess }) {
   const demoPersonas = [
     {
       title: '🏢 Corporate Data Controller',
-      org: 'Apex Microfinance Bank Nigeria Ltd',
+      org: 'Apex Microfinance Bank Ltd',
       role: 'Corporate Admin / DPO',
       email: 'compliance@apexmfb.ng',
-      desc: 'Manages internal NDPA RoPA, DPIAs, 30d DSAR pipeline, 72h breach clock, and vendor risk.',
+      desc: 'Manages internal NDPA RoPA, DPIAs, 30d DSAR pipeline & breach clock.',
       color: 'border-emerald-200 bg-emerald-50/70 text-emerald-900'
     },
     {
-      title: '🛡️ Outsourced DPO Firm',
-      org: 'Fortress Data Protection Advisory LLP',
+      title: '🛡️ Outsourced DPO Practice',
+      org: 'Fortress Data Protection Advisory',
       role: 'Lead DPO Consultant',
       email: 'lead.dpo@fortressadvisory.ng',
-      desc: 'Multi-client portfolio desk managing DPO advisory for 4 corporate client organizations.',
+      desc: 'Multi-client portfolio desk managing advisory for 4 client businesses.',
       color: 'border-blue-200 bg-blue-50/70 text-blue-900'
     },
     {
@@ -61,32 +60,18 @@ export default function AuthModal({ onLoginSuccess }) {
       org: 'Vanguard Compliance Partners DPCO',
       role: 'Managing Audit Partner',
       email: 'lead.partner@vanguarddpco.ng',
-      desc: 'Conducts statutory GAID annual compliance audits and issues certified NDPC filing packs.',
+      desc: 'Conducts statutory GAID annual audits and issues NDPC filing packs.',
       color: 'border-purple-200 bg-purple-50/70 text-purple-900'
     },
     {
       title: '👑 System Super Administrator',
-      org: 'DPODPCO Platform Authority',
+      org: 'Truepriv Platform Authority',
       role: 'Platform Super Admin',
       email: 'admin@dpodpco.ng',
-      desc: 'Global multi-tenant governance, industry template management, and audit licensing.',
+      desc: 'Global multi-tenant governance, live audit stream & template licensing.',
       color: 'border-amber-200 bg-amber-50/70 text-amber-900'
     }
   ];
-
-  useEffect(() => {
-    const fetchFeatures = async () => {
-      try {
-        const res = await api.getFeatures();
-        if (res.success) {
-          setFeatures(res.features);
-        }
-      } catch (err) {
-        console.warn('Feature flags load failed:', err);
-      }
-    };
-    fetchFeatures();
-  }, []);
 
   const handleLogin = async (overrideEmail = null) => {
     setLoading(true);
@@ -143,341 +128,429 @@ export default function AuthModal({ onLoginSuccess }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in">
-      <div className="w-full max-w-xl bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden max-h-[95vh] overflow-y-auto">
+    <div className="min-h-screen bg-slate-100 flex items-center justify-center p-3 sm:p-6 lg:p-8 selection:bg-emerald-500 selection:text-white">
+      {/* 2-Column Auth Container */}
+      <div className="w-full max-w-5xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-h-[620px]">
         
-        {/* Top Header Section */}
-        {mode === 'login' ? (
-          <div className="text-center mb-6">
-            <div className="w-12 h-12 rounded-2xl bg-slate-900 text-white mx-auto flex items-center justify-center mb-3 shadow-md">
-              <i className="fa-solid fa-shield-halved text-emerald-400 text-xl"></i>
-            </div>
-            <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">TRUEPRIV PLATFORM</h2>
-            <p className="text-xs text-slate-500 mt-1">Multi-Tenant NDPA 2023 Compliance & Statutory Auditing Suite</p>
+        {/* =========================================================================
+           LEFT COLUMN: ELEGANT BRANDED VISUAL HERO BANNER (Matches 2nd Screenshot)
+           ========================================================================= */}
+        <div className="lg:col-span-5 bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 text-white p-8 lg:p-10 flex flex-col justify-between relative overflow-hidden">
+          
+          {/* Topographic Vector Art & Glowing Accents */}
+          <div className="absolute inset-0 opacity-15 pointer-events-none">
+            <svg className="w-full h-full" viewBox="0 0 400 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M-50 100 C 100 200, 300 50, 450 150 C 600 250, 350 450, 450 550" stroke="white" strokeWidth="2" fill="none" />
+              <path d="M-100 250 C 50 350, 250 200, 400 300 C 550 400, 300 600, 400 700" stroke="white" strokeWidth="1.5" fill="none" />
+              <path d="M-20 400 C 120 500, 280 380, 480 480" stroke="white" strokeWidth="2" fill="none" />
+              {/* Modern geometric dots */}
+              <circle cx="50" cy="80" r="3" fill="white" />
+              <circle cx="70" cy="80" r="3" fill="white" />
+              <circle cx="90" cy="80" r="3" fill="white" />
+              <circle cx="50" cy="100" r="3" fill="white" />
+              <circle cx="70" cy="100" r="3" fill="white" />
+              <circle cx="90" cy="100" r="3" fill="white" />
+              <circle cx="340" cy="380" r="4" stroke="white" strokeWidth="1.5" />
+              <circle cx="300" cy="120" r="6" stroke="white" strokeWidth="1.5" />
+              <path d="M 320 80 L 340 80 M 330 70 L 330 90" stroke="white" strokeWidth="2" />
+              <path d="M 80 480 L 100 480 M 90 470 L 90 490" stroke="white" strokeWidth="2" />
+            </svg>
           </div>
-        ) : (
-          <div className="mb-6">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-xs font-mono text-slate-400 font-bold">§24</span>
-              <h2 className="text-2xl font-serif font-bold text-slate-900 tracking-tight">Create your account</h2>
-            </div>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Your answers here decide which product you receive, so take the profile question slowly. Everything else can be changed later.
-            </p>
-          </div>
-        )}
 
-        {/* Error Alert */}
-        {error && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 font-medium">
-            {error}
-          </div>
-        )}
-
-        {mode === 'login' ? (
-          /* =========================================================================
-             LOGIN FORM & QUICK PERSONAS
-             ========================================================================= */
-          <div className="space-y-6">
-            <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }} className="space-y-3">
+          {/* Top Brand Logo */}
+          <div className="relative z-10">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-11 h-11 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-md">
+                <i className="fa-solid fa-shield-halved text-emerald-400 text-xl"></i>
+              </div>
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">Official Email</label>
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white"
-                />
+                <div className="flex items-center gap-1.5">
+                  <span className="font-extrabold text-lg tracking-tight font-sans">TRUEPRIV</span>
+                  <span className="text-[8px] font-extrabold tracking-wider uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-1.5 py-0.2 rounded font-mono">
+                    NDPA 2023
+                  </span>
+                </div>
+                <div className="text-[10px] text-slate-300">Truepriv Technologies Limited</div>
               </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">Password</label>
-                <input
-                  type="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white"
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all shadow-md disabled:opacity-50"
-              >
-                {loading ? 'Authenticating...' : 'Sign In to Workspace'}
-              </button>
-            </form>
-
-            <div className="flex items-center justify-between text-xs pt-2 border-t border-slate-200">
-              <span className="text-slate-500">Need a new workspace?</span>
-              <button
-                type="button"
-                onClick={() => { setMode('register'); setError(null); }}
-                className="text-emerald-700 font-bold hover:underline"
-              >
-                Create your account
-              </button>
             </div>
 
-            {/* Quick Demo Personas */}
-            <div className="pt-3 border-t border-slate-200">
-              <div className="flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                <span>Instant Multi-Tenant Personas</span>
-                <span className="text-[10px] text-emerald-700 font-bold">1-Click Login</span>
-              </div>
+            {/* Main Welcome Message */}
+            <div className="mt-8 space-y-3">
+              <h2 className="text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight">
+                {mode === 'login' ? 'Welcome back!' : 'Join Truepriv'}
+              </h2>
+              <p className="text-xs text-slate-300 leading-relaxed max-w-sm">
+                {mode === 'login'
+                  ? 'Sign in to access your statutory compliance workspace, manage RoPA inventories, DPIAs, and NDPC filings.'
+                  : 'Get started with rule-based automated compliance, multi-tenant advisory, and statutory GAID audit filing.'}
+              </p>
+            </div>
+          </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {demoPersonas.map((p, idx) => (
+          {/* Feature Highlights on Left Panel */}
+          <div className="relative z-10 my-6 space-y-2.5 text-xs text-slate-200">
+            <div className="flex items-center gap-2.5">
+              <div className="w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-[10px] text-emerald-300">
+                <i className="fa-solid fa-check"></i>
+              </div>
+              <span>80% Automated Rule-Based RoPA Engine</span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <div className="w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-[10px] text-emerald-300">
+                <i className="fa-solid fa-check"></i>
+              </div>
+              <span>72-Hour Statutory Breach Incident Clock</span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <div className="w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-[10px] text-emerald-300">
+                <i className="fa-solid fa-check"></i>
+              </div>
+              <span>GAID 5-Domain NDPC Filing Pack Generator</span>
+            </div>
+          </div>
+
+          {/* Bottom Residency Badge */}
+          <div className="relative z-10 pt-4 border-t border-white/10 flex items-center justify-between text-[10px] text-slate-400 font-mono">
+            <span>🇳🇬 Galaxy Tier-III Sovereign DC</span>
+            <span>v1.0.0 Enterprise</span>
+          </div>
+        </div>
+
+        {/* =========================================================================
+           RIGHT COLUMN: CLEAN WHITE AUTH FORM & INSTANT MULTI-TENANT PERSONAS
+           ========================================================================= */}
+        <div className="lg:col-span-7 bg-white p-6 sm:p-8 lg:p-10 flex flex-col justify-between overflow-y-auto max-h-[85vh] lg:max-h-none">
+          
+          <div>
+            {/* Error Notification */}
+            {error && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 font-medium flex items-center justify-between">
+                <span>{error}</span>
+                <button onClick={() => setError(null)} className="text-red-400 hover:text-red-700 font-bold">&times;</button>
+              </div>
+            )}
+
+            {mode === 'login' ? (
+              /* =========================================================================
+                 SIGN IN FORM & INSTANT MULTI-TENANT PERSONAS
+                 ========================================================================= */
+              <div className="space-y-5">
+                <div>
+                  <h3 className="text-2xl font-bold text-slate-900 tracking-tight">Sign In</h3>
+                  <p className="text-xs text-slate-500 mt-1">
+                    Enter your official credentials to access your designated workspace.
+                  </p>
+                </div>
+
+                <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Official Email Address</label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                        <i className="fa-solid fa-envelope text-xs"></i>
+                      </div>
+                      <input
+                        type="email"
+                        required
+                        placeholder="compliance@apexmfb.ng"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Password</label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                        <i className="fa-solid fa-lock text-xs"></i>
+                      </div>
+                      <input
+                        type="password"
+                        required
+                        placeholder="••••••••••••"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between text-xs text-slate-500">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" defaultChecked className="w-4 h-4 rounded accent-slate-900" />
+                      <span>Remember me</span>
+                    </label>
+                    <span className="text-slate-400">Default: Password123!</span>
+                  </div>
+
                   <button
-                    key={idx}
-                    type="button"
-                    onClick={() => handleLogin(p.email)}
-                    className={`text-left p-2.5 rounded-xl border ${p.color} hover:scale-[1.01] transition-transform`}
+                    type="submit"
+                    disabled={loading}
+                    className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all shadow-md disabled:opacity-50 flex items-center justify-center gap-2"
                   >
-                    <div className="font-bold text-xs">{p.title}</div>
-                    <div className="text-[11px] text-slate-700 truncate mt-0.5">{p.org}</div>
-                    <div className="text-[10px] text-slate-500 mt-1 truncate">{p.desc}</div>
+                    <span>{loading ? 'Authenticating...' : 'Sign In to Workspace'}</span>
+                    <i className="fa-solid fa-arrow-right text-xs"></i>
                   </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        ) : (
-          /* =========================================================================
-             CREATE YOUR ACCOUNT — WITH COUNTRY CODE SELECTOR & LIVE PHONE FORMATTING
-             ========================================================================= */
-          <form onSubmit={handleRegister} className="space-y-4">
-            
-            {/* 1. FULL NAME */}
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <label className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">FULL NAME</label>
-                <span className="text-[11px] text-slate-400">Required</span>
-              </div>
-              <input
-                type="text"
-                required
-                placeholder="Bisi Adeyemi"
-                value={regData.name}
-                onChange={(e) => setRegData({ ...regData, name: e.target.value })}
-                className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-emerald-600 shadow-2xs"
-              />
-            </div>
+                </form>
 
-            {/* 2. WORK EMAIL */}
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <label className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">WORK EMAIL</label>
-                <span className="text-[11px] text-slate-400">Required</span>
-              </div>
-              <input
-                type="email"
-                required
-                placeholder="b.adeyemi@alphaltd.ng"
-                value={regData.email}
-                onChange={(e) => setRegData({ ...regData, email: e.target.value })}
-                className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-emerald-600 shadow-2xs"
-              />
-              <p className="text-[11px] text-slate-500 mt-1">
-                We use this address for filing receipts, so use one that will outlive the project.
-              </p>
-            </div>
-
-            {/* 3. PHONE WITH COUNTRY SELECTOR & PASSWORD ROW */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <div className="flex items-center justify-between mb-1">
-                  <label className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">PHONE</label>
-                  <span className="text-[11px] text-slate-400">Required</span>
-                </div>
-                
-                {/* Interactive Country Code Selector + Phone Input */}
-                <div className="flex rounded-xl border border-slate-300 focus-within:border-emerald-600 focus-within:ring-2 focus-within:ring-emerald-500/20 shadow-2xs overflow-hidden bg-white">
-                  <select
-                    value={selectedCountry.code}
-                    onChange={(e) => {
-                      const found = countryList.find(c => c.code === e.target.value) || countryList[0];
-                      setSelectedCountry(found);
-                      setRegData({ ...regData, phone: `${found.dial} ${localPhone}` });
-                    }}
-                    className="bg-slate-50 hover:bg-slate-100 border-r border-slate-200 px-2.5 py-2.5 text-xs text-slate-800 font-bold focus:outline-none cursor-pointer flex-shrink-0"
-                    title="Select Country Dial Code"
+                {/* Switch to Register */}
+                <div className="text-center text-xs text-slate-600 pt-1">
+                  New to Truepriv?{' '}
+                  <button
+                    type="button"
+                    onClick={() => { setMode('register'); setError(null); }}
+                    className="text-emerald-700 font-bold hover:underline"
                   >
-                    {countryList.map((c) => (
-                      <option key={c.code} value={c.code}>
-                        {c.flag} {c.dial}
-                      </option>
+                    Create an Account
+                  </button>
+                </div>
+
+                {/* Quick 1-Click Multi-Tenant Personas */}
+                <div className="pt-3 border-t border-slate-200">
+                  <div className="flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                    <span>1-Click Multi-Tenant Personas</span>
+                    <span className="text-[10px] text-emerald-700 font-bold">Instant Login</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {demoPersonas.map((p, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => handleLogin(p.email)}
+                        className={`text-left p-2.5 rounded-xl border ${p.color} hover:scale-[1.01] transition-transform`}
+                      >
+                        <div className="font-bold text-xs">{p.title}</div>
+                        <div className="text-[11px] text-slate-700 truncate mt-0.5">{p.org}</div>
+                        <div className="text-[10px] text-slate-500 mt-1 truncate">{p.desc}</div>
+                      </button>
                     ))}
-                  </select>
-
-                  <input
-                    type="tel"
-                    required
-                    placeholder={selectedCountry.placeholder}
-                    value={localPhone}
-                    onChange={(e) => {
-                      setLocalPhone(e.target.value);
-                      setRegData({ ...regData, phone: `${selectedCountry.dial} ${e.target.value}` });
-                    }}
-                    className="w-full px-3 py-2.5 text-sm text-slate-900 focus:outline-none bg-transparent"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <div className="flex items-center justify-between mb-1">
-                  <label className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">PASSWORD</label>
-                  <span className="text-[11px] text-slate-400">Required</span>
-                </div>
-                <input
-                  type="password"
-                  required
-                  placeholder="••••••••••••••••"
-                  value={regData.password}
-                  onChange={(e) => setRegData({ ...regData, password: e.target.value })}
-                  className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-emerald-600 shadow-2xs"
-                />
-                <div className="flex items-center gap-1.5 mt-1.5">
-                  <div className="flex items-center gap-1">
-                    <span className="w-4 h-1 rounded-full bg-emerald-600"></span>
-                    <span className="w-4 h-1 rounded-full bg-emerald-600"></span>
-                    <span className="w-4 h-1 rounded-full bg-emerald-600"></span>
                   </div>
-                  <span className="text-[11px] font-semibold text-emerald-700">Strong</span>
                 </div>
               </div>
-            </div>
+            ) : (
+              /* =========================================================================
+                 CREATE ACCOUNT FORM WITH COUNTRY SELECTOR & RADIO CARDS
+                 ========================================================================= */
+              <div className="space-y-4">
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-xs font-mono text-slate-400 font-bold">§24</span>
+                    <h3 className="text-2xl font-serif font-bold text-slate-900 tracking-tight">Create your account</h3>
+                  </div>
+                  <p className="text-xs text-slate-600">
+                    Your answers here decide which product you receive. Everything else can be changed later.
+                  </p>
+                </div>
 
-            {/* 4. WHICH DESCRIBES YOU? RADIO CARDS */}
-            <div className="pt-2">
-              <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2">
-                WHICH DESCRIBES YOU?
-              </label>
-
-              <div className="border border-slate-300 rounded-2xl overflow-hidden divide-y divide-slate-200 bg-white">
-                
-                {/* Option 1: A corporate company */}
-                <div
-                  onClick={() => setRegData({ ...regData, tenant_type: 'corporate' })}
-                  className={`p-3.5 flex items-center justify-between cursor-pointer transition-all ${
-                    regData.tenant_type === 'corporate'
-                      ? 'bg-sky-50/70 border-l-4 border-amber-600'
-                      : 'hover:bg-slate-50'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${
-                      regData.tenant_type === 'corporate'
-                        ? 'border-slate-900 bg-slate-900'
-                        : 'border-slate-400 bg-transparent'
-                    }`}>
-                      {regData.tenant_type === 'corporate' && (
-                        <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
-                      )}
+                <form onSubmit={handleRegister} className="space-y-3.5">
+                  
+                  {/* 1. FULL NAME */}
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <label className="text-[10px] font-bold text-slate-700 uppercase tracking-wider">FULL NAME</label>
+                      <span className="text-[10px] text-slate-400">Required</span>
                     </div>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Bisi Adeyemi"
+                      value={regData.name}
+                      onChange={(e) => setRegData({ ...regData, name: e.target.value })}
+                      className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-emerald-600 shadow-2xs"
+                    />
+                  </div>
+
+                  {/* 2. WORK EMAIL */}
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <label className="text-[10px] font-bold text-slate-700 uppercase tracking-wider">WORK EMAIL</label>
+                      <span className="text-[10px] text-slate-400">Required</span>
+                    </div>
+                    <input
+                      type="email"
+                      required
+                      placeholder="b.adeyemi@alphaltd.ng"
+                      value={regData.email}
+                      onChange={(e) => setRegData({ ...regData, email: e.target.value })}
+                      className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-emerald-600 shadow-2xs"
+                    />
+                  </div>
+
+                  {/* 3. PHONE & PASSWORD ROW */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <div className="text-xs font-bold text-slate-900">A corporate company</div>
-                      <div className="text-[11px] text-slate-600">We handle our own compliance in-house.</div>
-                    </div>
-                  </div>
-                  <span className="text-[10px] font-mono font-bold text-slate-600 tracking-wider">
-                    ENTERPRISE
-                  </span>
-                </div>
+                      <div className="flex items-center justify-between mb-1">
+                        <label className="text-[10px] font-bold text-slate-700 uppercase tracking-wider">PHONE</label>
+                        <span className="text-[10px] text-slate-400">Required</span>
+                      </div>
+                      
+                      {/* Country Code Select + Phone */}
+                      <div className="flex rounded-xl border border-slate-300 focus-within:border-emerald-600 shadow-2xs overflow-hidden bg-white">
+                        <select
+                          value={selectedCountry.code}
+                          onChange={(e) => {
+                            const found = countryList.find(c => c.code === e.target.value) || countryList[0];
+                            setSelectedCountry(found);
+                            setRegData({ ...regData, phone: `${found.dial} ${localPhone}` });
+                          }}
+                          className="bg-slate-50 border-r border-slate-200 px-2 py-2 text-xs text-slate-800 font-bold focus:outline-none cursor-pointer flex-shrink-0"
+                        >
+                          {countryList.map((c) => (
+                            <option key={c.code} value={c.code}>
+                              {c.flag} {c.dial}
+                            </option>
+                          ))}
+                        </select>
 
-                {/* Option 2: An independent outsourced DPO */}
-                <div
-                  onClick={() => setRegData({ ...regData, tenant_type: 'outsourced_dpo' })}
-                  className={`p-3.5 flex items-center justify-between cursor-pointer transition-all ${
-                    regData.tenant_type === 'outsourced_dpo'
-                      ? 'bg-sky-50/70 border-l-4 border-amber-600'
-                      : 'hover:bg-slate-50'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${
-                      regData.tenant_type === 'outsourced_dpo'
-                        ? 'border-slate-900 bg-slate-900'
-                        : 'border-slate-400 bg-transparent'
-                    }`}>
-                      {regData.tenant_type === 'outsourced_dpo' && (
-                        <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
-                      )}
+                        <input
+                          type="tel"
+                          required
+                          placeholder={selectedCountry.placeholder}
+                          value={localPhone}
+                          onChange={(e) => {
+                            setLocalPhone(e.target.value);
+                            setRegData({ ...regData, phone: `${selectedCountry.dial} ${e.target.value}` });
+                          }}
+                          className="w-full px-2.5 py-2 text-xs text-slate-900 focus:outline-none bg-transparent"
+                        />
+                      </div>
                     </div>
+
                     <div>
-                      <div className="text-xs font-bold text-slate-900">An independent outsourced DPO</div>
-                      <div className="text-[11px] text-slate-600">I run compliance for several client businesses.</div>
+                      <div className="flex items-center justify-between mb-1">
+                        <label className="text-[10px] font-bold text-slate-700 uppercase tracking-wider">PASSWORD</label>
+                        <span className="text-[10px] text-slate-400">Required</span>
+                      </div>
+                      <input
+                        type="password"
+                        required
+                        placeholder="••••••••••••"
+                        value={regData.password}
+                        onChange={(e) => setRegData({ ...regData, password: e.target.value })}
+                        className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-emerald-600 shadow-2xs"
+                      />
+                      <div className="flex items-center gap-1.5 mt-1">
+                        <div className="flex items-center gap-0.5">
+                          <span className="w-3 h-0.5 rounded-full bg-emerald-600"></span>
+                          <span className="w-3 h-0.5 rounded-full bg-emerald-600"></span>
+                          <span className="w-3 h-0.5 rounded-full bg-emerald-600"></span>
+                        </div>
+                        <span className="text-[10px] font-semibold text-emerald-700">Strong</span>
+                      </div>
                     </div>
                   </div>
-                  <span className="text-[10px] font-mono font-bold text-slate-600 tracking-wider">
-                    DPO_CONSOLE
-                  </span>
-                </div>
 
-                {/* Option 3: A licensed DPCO firm */}
-                <div
-                  onClick={() => setRegData({ ...regData, tenant_type: 'dpco_firm' })}
-                  className={`p-3.5 flex items-center justify-between cursor-pointer transition-all ${
-                    regData.tenant_type === 'dpco_firm'
-                      ? 'bg-sky-50/70 border-l-4 border-amber-600'
-                      : 'hover:bg-slate-50'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${
-                      regData.tenant_type === 'dpco_firm'
-                        ? 'border-slate-900 bg-slate-900'
-                        : 'border-slate-400 bg-transparent'
-                    }`}>
-                      {regData.tenant_type === 'dpco_firm' && (
-                        <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
-                      )}
+                  {/* 4. WHICH DESCRIBES YOU? RADIO CARDS */}
+                  <div className="pt-1">
+                    <label className="block text-[10px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      WHICH DESCRIBES YOU?
+                    </label>
+
+                    <div className="border border-slate-300 rounded-2xl overflow-hidden divide-y divide-slate-200 bg-white">
+                      {/* Option 1: Corporate */}
+                      <div
+                        onClick={() => setRegData({ ...regData, tenant_type: 'corporate' })}
+                        className={`p-2.5 flex items-center justify-between cursor-pointer transition-all ${
+                          regData.tenant_type === 'corporate'
+                            ? 'bg-sky-50/70 border-l-4 border-amber-600'
+                            : 'hover:bg-slate-50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <div className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
+                            regData.tenant_type === 'corporate' ? 'border-slate-900 bg-slate-900' : 'border-slate-400'
+                          }`}>
+                            {regData.tenant_type === 'corporate' && <div className="w-1 h-1 rounded-full bg-white"></div>}
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900">A corporate company</div>
+                            <div className="text-[10px] text-slate-500">We handle our own compliance in-house.</div>
+                          </div>
+                        </div>
+                        <span className="text-[9px] font-mono font-bold text-slate-600">ENTERPRISE</span>
+                      </div>
+
+                      {/* Option 2: DPO */}
+                      <div
+                        onClick={() => setRegData({ ...regData, tenant_type: 'outsourced_dpo' })}
+                        className={`p-2.5 flex items-center justify-between cursor-pointer transition-all ${
+                          regData.tenant_type === 'outsourced_dpo'
+                            ? 'bg-sky-50/70 border-l-4 border-amber-600'
+                            : 'hover:bg-slate-50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <div className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
+                            regData.tenant_type === 'outsourced_dpo' ? 'border-slate-900 bg-slate-900' : 'border-slate-400'
+                          }`}>
+                            {regData.tenant_type === 'outsourced_dpo' && <div className="w-1 h-1 rounded-full bg-white"></div>}
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900">An independent outsourced DPO</div>
+                            <div className="text-[10px] text-slate-500">I run compliance for several clients.</div>
+                          </div>
+                        </div>
+                        <span className="text-[9px] font-mono font-bold text-slate-600">DPO_CONSOLE</span>
+                      </div>
+
+                      {/* Option 3: DPCO */}
+                      <div
+                        onClick={() => setRegData({ ...regData, tenant_type: 'dpco_firm' })}
+                        className={`p-2.5 flex items-center justify-between cursor-pointer transition-all ${
+                          regData.tenant_type === 'dpco_firm'
+                            ? 'bg-sky-50/70 border-l-4 border-amber-600'
+                            : 'hover:bg-slate-50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <div className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
+                            regData.tenant_type === 'dpco_firm' ? 'border-slate-900 bg-slate-900' : 'border-slate-400'
+                          }`}>
+                            {regData.tenant_type === 'dpco_firm' && <div className="w-1 h-1 rounded-full bg-white"></div>}
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900">A licensed DPCO firm</div>
+                            <div className="text-[10px] text-slate-500">Licensed by NDPC to file audits.</div>
+                          </div>
+                        </div>
+                        <span className="text-[9px] font-mono font-bold text-slate-600">DPCO_MASTER</span>
+                      </div>
                     </div>
-                    <div>
-                      <div className="text-xs font-bold text-slate-900">A licensed DPCO firm</div>
-                      <div className="text-[11px] text-slate-600">We are licensed by the NDPC to file audits.</div>
+
+                    <p className="text-[10px] text-slate-500 mt-1.5 leading-tight">
+                      {getWorkspaceFootnote()}
+                    </p>
+                  </div>
+
+                  {/* Submit Button & Switcher */}
+                  <div className="pt-2 flex items-center gap-4">
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all shadow-md disabled:opacity-50"
+                    >
+                      {loading ? 'Creating account...' : 'Create account'}
+                    </button>
+
+                    <div className="text-xs text-slate-500">
+                      Already registered?{' '}
+                      <button
+                        type="button"
+                        onClick={() => { setMode('login'); setError(null); }}
+                        className="text-emerald-700 font-bold hover:underline"
+                      >
+                        Log in
+                      </button>
                     </div>
                   </div>
-                  <span className="text-[10px] font-mono font-bold text-slate-600 tracking-wider">
-                    DPCO_MASTER
-                  </span>
-                </div>
-
+                </form>
               </div>
-
-              {/* Dynamic Footnote */}
-              <p className="text-[11px] text-slate-500 mt-2 leading-relaxed">
-                {getWorkspaceFootnote()}
-              </p>
-            </div>
-
-            {/* 5. CREATE ACCOUNT BUTTON & LOGIN SWITCHER */}
-            <div className="pt-2 flex items-center gap-4">
-              <button
-                type="submit"
-                disabled={loading}
-                className="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all shadow-md disabled:opacity-50"
-              >
-                {loading ? 'Creating account...' : 'Create account'}
-              </button>
-
-              <div className="text-xs text-slate-500">
-                Already registered?{' '}
-                <button
-                  type="button"
-                  onClick={() => { setMode('login'); setError(null); }}
-                  className="text-emerald-700 font-bold hover:underline"
-                >
-                  Log in
-                </button>
-              </div>
-            </div>
-
-          </form>
-        )}
+            )}
+          </div>
+        </div>
 
       </div>
     </div>
