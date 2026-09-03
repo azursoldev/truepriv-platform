@@ -137,10 +137,21 @@ export default function AuthModal({ onLoginSuccess }) {
       <div className="w-full max-w-5xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-h-[620px]">
         
         {/* =========================================================================
-           LEFT COLUMN: ELEGANT BRANDED VISUAL HERO BANNER (Matches 2nd Screenshot)
+           LEFT COLUMN: PROFESSIONAL DATA PROTECTION IMAGE HERO BANNER
            ========================================================================= */}
-        <div className="lg:col-span-5 bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 text-white p-8 lg:p-10 flex flex-col justify-between relative overflow-hidden">
+        <div className="lg:col-span-5 relative text-white p-8 lg:p-10 flex flex-col justify-between overflow-hidden bg-slate-900">
           
+          {/* High-Resolution Enterprise Cybersecurity / Data Protection Background Image */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 scale-105"
+            style={{
+              backgroundImage: `url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80')`
+            }}
+          />
+
+          {/* Deep Slate / Emerald High-Contrast Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/92 via-slate-900/88 to-emerald-950/92 backdrop-blur-[1px]" />
+
           {/* Topographic Vector Art & Glowing Accents */}
           <div className="absolute inset-0 opacity-15 pointer-events-none">
             <svg className="w-full h-full" viewBox="0 0 400 600" fill="none" xmlns="http://www.w3.org/2000/svg">
