@@ -123,12 +123,12 @@ export default function Header({
                 {tenant.name.substring(0, 2).toUpperCase()}
               </div>
 
-              <div className="hidden lg:flex flex-col justify-center text-left max-w-[130px] xl:max-w-[160px]">
-                <div className="text-xs font-bold text-slate-900 truncate leading-tight">
+              <div className="hidden md:flex flex-col justify-center text-left">
+                <div className="text-xs font-bold text-slate-900 leading-tight whitespace-nowrap">
                   {tenant.name}
                 </div>
-                <div className="flex items-center gap-1 text-[10px] text-slate-500 truncate leading-tight mt-0.5">
-                  <span className="truncate">{tenant.industry || 'Fintech'}</span>
+                <div className="flex items-center gap-1.5 text-[10px] text-slate-500 leading-tight mt-0.5 whitespace-nowrap">
+                  <span>{tenant.industry || 'Fintech & Payment Service Providers'}</span>
                   <span>&bull;</span>
                   {getTenantTypeBadge(tenant.type)}
                 </div>
@@ -164,8 +164,8 @@ export default function Header({
                         }`}
                       >
                         <div>
-                          <div className="text-xs font-semibold text-slate-900 truncate max-w-[180px]">{client.name}</div>
-                          <div className="text-[10px] text-slate-500 flex items-center gap-1.5 mt-0.5">
+                          <div className="text-xs font-semibold text-slate-900 whitespace-nowrap">{client.name}</div>
+                          <div className="text-[10px] text-slate-500 flex items-center gap-1.5 mt-0.5 whitespace-nowrap">
                             <span>{client.industry}</span>
                             <span>&bull;</span>
                             <span className="text-emerald-700 font-mono font-semibold">{client.compliance_score}%</span>
@@ -221,17 +221,17 @@ export default function Header({
         {/* 4. User Profile & Guaranteed-Visible Logout */}
         <div className="flex items-center gap-1.5 pl-1 sm:pl-2 border-l border-slate-200 flex-shrink-0">
           
-          {/* User Badge */}
-          <div className="flex items-center gap-2 px-2 py-1 sm:py-1.5 rounded-xl bg-slate-50 border border-slate-200 whitespace-nowrap flex-shrink-0">
+          {/* User Badge with Full Name & Role */}
+          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-slate-50 border border-slate-200 whitespace-nowrap flex-shrink-0">
             <div className="w-7 h-7 rounded-lg bg-slate-900 flex items-center justify-center font-bold text-xs text-white flex-shrink-0">
               {user?.name ? user.name.substring(0, 2).toUpperCase() : 'TU'}
             </div>
-            <div className="hidden xl:flex flex-col justify-center text-left max-w-[100px]">
-              <div className="text-xs font-bold text-slate-900 truncate leading-tight">
-                {user?.name || 'Tunde Bakare'}
+            <div className="hidden lg:flex flex-col justify-center text-left">
+              <div className="text-xs font-bold text-slate-900 leading-tight whitespace-nowrap">
+                {user?.name || 'System Administrator'}
               </div>
-              <div className="text-[9px] text-slate-500 capitalize font-medium truncate leading-tight mt-0.5">
-                {user?.role?.replace(/_/g, ' ') || 'Admin'}
+              <div className="text-[9px] text-slate-500 capitalize font-semibold leading-tight mt-0.5 whitespace-nowrap">
+                {user?.role?.replace(/_/g, ' ') || 'Super Admin'}
               </div>
             </div>
           </div>
