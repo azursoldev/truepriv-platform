@@ -149,7 +149,7 @@ export default function App() {
         onLogout={handleLogout}
         onOpenPublicPortal={() => setShowPublicPortal(true)}
         onOpenOnboarding={() => setActiveTab('ndpa-wizard')}
-        onOpenChampions={() => setShowChampions(true)}
+        onOpenChampions={() => setActiveTab('champions-desk')}
         onOpenProfile={() => setActiveTab('my-profile')}
         isSidebarCollapsed={sidebarCollapsed}
         onToggleSidebar={() => setSidebarCollapsed(!sidebarCollapsed)}
@@ -246,16 +246,14 @@ export default function App() {
               }}
             />
           )}
+
+          {activeTab === 'champions-desk' && (
+            <ChampionInviteModal
+              onNavigateBack={() => setActiveTab('dashboard')}
+            />
+          )}
         </main>
       </div>
-
-      {/* Department Champion Invites Overlay */}
-      {showChampions && (
-        <ChampionInviteModal
-          isOpen={showChampions}
-          onClose={() => setShowChampions(false)}
-        />
-      )}
 
       {/* Public DSAR Portal Overlay */}
       {showPublicPortal && (
