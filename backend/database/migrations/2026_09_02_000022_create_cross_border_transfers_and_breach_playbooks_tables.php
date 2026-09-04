@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('tenant_id')->constrained('tenants')->cascadeOnDelete();
             $table->foreignUuid('ropa_activity_id')->nullable()->constrained('ropa_activities')->nullOnDelete();
-            $table->string('destination_country_code', 3); // e.g. 'IRL', 'USA', 'GBR'
+            $table->string('destination_country_code', 2); // ISO 3166-1 alpha-2 standard, e.g. 'NG', 'KE', 'BR', 'US', 'GB'
             $table->string('destination_country_name', 100);
             $table->string('recipient_entity_name', 255);
             $table->enum('recipient_entity_type', ['sub_processor', 'joint_controller', 'group_affiliate', 'public_authority'])

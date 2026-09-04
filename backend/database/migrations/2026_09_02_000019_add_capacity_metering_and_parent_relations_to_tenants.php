@@ -21,8 +21,8 @@ return new class extends Migration
             // (ii) SaaS Capacity Metering & Feature Flag JSONB columns
             $table->json('feature_flags')->nullable()->after('compliance_score');
             $table->integer('data_subject_quota')->default(50000)->after('feature_flags');
-            $table->integer('monthly_dsar_limit')->default(50)->after('data_subject_quota');
-            $table->integer('monthly_breach_limit')->default(10)->after('monthly_dsar_limit');
+            $table->integer('monthly_dsar_limit')->default(999999)->after('data_subject_quota'); // Set to ultra-high default (unlimited) per enterprise SaaS monetization model
+            $table->integer('monthly_breach_limit')->default(999999)->after('monthly_dsar_limit'); // Set to ultra-high default (unlimited) per enterprise SaaS monetization model
             $table->json('usage_metrics')->nullable()->after('monthly_breach_limit');
 
             $table->index(['parent_tenant_id', 'tenant_tier'], 'tenants_parent_tier_idx');

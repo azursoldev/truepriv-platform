@@ -51,8 +51,38 @@ class BreachController extends Controller
         ]);
 
         $discoveredAt = \Carbon\Carbon::parse($validated['date_time_discovered']);
-        $deadline72h = $discoveredAt->copy()->addHours(72); // NDPA Section 40 mandatory deadline
+        $riskLevel = $validated['risk_assessment_level'];
 
+        // Dynamic Sectoral Regulatory Deadline Calculation:
+        // Industry-Agnostic Timer Adjustment (NCC Telecom 48h/4h, CBN Banking 24h/48h, NDPA 72h baseline)
+        $tenant = \App\Models\Tenant::find(app('current_tenant_id'));
+        $industry = strtolower($tenant->industry ?? '');
+
+        $regulatoryHours = 72; // Default statutory NDPA 2023 Section 40 baseline
+        $applicableFramework = 'NDPA 2023 Section 40 (72-Hour General Baseline)';
+
+        if (in_array($industry, ['telecom', 'telecoms', 'telecommunications', 'isp', 'internet_service_provider', 'critical_national_infrastructure', 'cni'])) {
+            if (in_array($riskLevel, ['critical_systemic', 'critical'])) {
+                $regulatoryHours = 4; // NCC Major Cyber Incident Initial Alert Window
+                $applicableFramework = 'NCC Framework (4-Hour Major Cyber Incident Emergency Triage)';
+            } else {
+                $regulatoryHours = 48; // NCC Standard Telecommunications Reporting Window
+                $applicableFramework = 'NCC Framework (48-Hour Telecom/ISP Statutory Reporting)';
+            }
+        } elseif (in_array($industry, ['banking', 'fintech', 'financial_services', 'microfinance', 'insurance'])) {
+            if (in_array($riskLevel, ['critical_systemic', 'high_to_rights_freedoms'])) {
+                $regulatoryHours = 24; // CBN Tier-1 Critical Financial Incident Window
+                $applicableFramework = 'CBN / NDPC Tier-1 Financial Directive (24-Hour Emergency Clock)';
+            } else {
+                $regulatoryHours = 48; // CBN Standard Financial Incident Notification
+                $applicableFramework = 'CBN / NDPA Sectoral Clock (48-Hour Financial Window)';
+            }
+        } elseif (in_array($industry, ['healthcare', 'health', 'hospital', 'biometrics'])) {
+            $regulatoryHours = 48; // Health Sector High-Risk Patient Data Window
+            $applicableFramework = 'NDPC Health Data Safeguard Directive (48-Hour Clock)';
+        }
+
+        $regulatoryDeadline = $discoveredAt->copy()->addHours($regulatoryHours);
         $incidentNumber = 'INC-' . date('Y') . '-' . strtoupper(Str::random(5));
 
         $breach = DataBreach::create([
@@ -62,7 +92,7 @@ class BreachController extends Controller
             'nature_of_incident' => $validated['nature_of_incident'],
             'date_time_occurred' => $validated['date_time_occurred'] ?? null,
             'date_time_discovered' => $discoveredAt,
-            'ndpc_notification_deadline' => $deadline72h,
+            'ndpc_notification_deadline' => $regulatoryDeadline,
             'estimated_affected_subjects' => $validated['estimated_affected_subjects'],
             'compromised_data_categories' => $validated['compromised_data_categories'],
             'risk_assessment_level' => $validated['risk_assessment_level'],
@@ -74,9 +104,11 @@ class BreachController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Data breach incident logged. 72-Hour NDPC statutory countdown clock initiated.',
+            'message' => "Data breach incident logged. {$regulatoryHours}-Hour statutory countdown clock initiated under {$applicableFramework}.",
             'data' => $breach,
-            'ndpc_notification_deadline' => $deadline72h->toIso8601String(),
+            'ndpc_notification_deadline' => $regulatoryDeadline->toIso8601String(),
+            'regulatory_hours' => $regulatoryHours,
+            'applicable_framework' => $applicableFramework,
             'hours_remaining' => $breach->hours_remaining,
         ], 201);
     }

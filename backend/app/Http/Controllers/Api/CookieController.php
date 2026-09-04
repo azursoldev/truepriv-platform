@@ -72,6 +72,7 @@ class CookieController extends Controller
 
     /**
      * Public Consent Logging API called by the Vanilla JS Cookie Client.
+     * Buffers incoming consents asynchronously in background Queue pool to handle high-volume client websites.
      */
     public function logConsent(Request $request): JsonResponse
     {
@@ -90,20 +91,24 @@ class CookieController extends Controller
         // Anonymize IP address via SHA-256 for NDPA data privacy
         $ipHash = hash('sha256', $request->ip() . 'salt_ndpa_2026');
 
-        $consent = CookieConsent::create([
+        $consentData = [
             'tenant_id' => $tenant->id,
             'visitor_uuid' => $validated['visitor_uuid'],
             'accepted_categories' => $validated['accepted_categories'],
             'ip_hash' => $ipHash,
             'user_agent' => $validated['user_agent'] ?? $request->header('User-Agent'),
-            'consented_at' => now(),
-        ]);
+            'consented_at' => now()->toIso8601String(),
+        ];
+
+        // Asynchronously buffer cookie proof of consent via Queue Worker
+        \App\Jobs\ProcessCookieConsentLog::dispatch($consentData);
 
         return response()->json([
             'success' => true,
-            'message' => 'Proof of cookie consent recorded.',
-            'consent_id' => $consent->id,
-        ], 201);
+            'status' => 'queued',
+            'message' => 'Proof of cookie consent queued asynchronously for ingestion.',
+            'visitor_uuid' => $validated['visitor_uuid'],
+        ], 202);
     }
 
     /**

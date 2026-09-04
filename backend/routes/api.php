@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\RopaController;
 use App\Http\Controllers\Api\TemplateController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VendorController;
+use App\Http\Controllers\Api\OmnichannelConsentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +37,8 @@ Route::prefix('v1')->group(function () {
     // 2. Public Self-Service Endpoints (DSAR Portal, Cookie SDK & Champion Intake)
     Route::post('/public/dsar/submit', [DsarController::class, 'publicSubmit']);
     Route::post('/cookie-consent/log', [CookieController::class, 'logConsent']);
+    Route::post('/public/consents/ingest', [OmnichannelConsentController::class, 'store']);
+    Route::get('/public/consents/verify/{proofHash}', [OmnichannelConsentController::class, 'verifyProof']);
     Route::get('/public/invitations/{token}', [ChampionInvitationController::class, 'resolvePublicToken']);
     Route::post('/public/invitations/{token}/submit', [ChampionInvitationController::class, 'submitDepartmentData']);
 
@@ -116,6 +119,11 @@ Route::prefix('v1')->group(function () {
             Route::get('/policies', [PolicyController::class, 'index']);
             Route::post('/policies/generate', [PolicyController::class, 'generate']);
             Route::put('/policies/{id}', [PolicyController::class, 'update']);
+
+            // Omnichannel Consent Proof Ledger (USSD, SMS, Web SDK, Mobile)
+            Route::get('/consents', [OmnichannelConsentController::class, 'index']);
+            Route::post('/consents', [OmnichannelConsentController::class, 'store']);
+            Route::put('/consents/{id}/withdraw', [OmnichannelConsentController::class, 'withdraw']);
 
             // User & Role Management / Administration
             Route::get('/users', [UserController::class, 'index']);

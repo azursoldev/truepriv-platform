@@ -15,6 +15,8 @@ class Tenant extends Model
         'name',
         'slug',
         'type',
+        'parent_tenant_id',
+        'tenant_tier',
         'industry',
         'rc_number',
         'ndpc_registration_number',
@@ -25,12 +27,22 @@ class Tenant extends Model
         'state',
         'data_residency',
         'compliance_score',
+        'feature_flags',
+        'data_subject_quota',
+        'monthly_dsar_limit',
+        'monthly_breach_limit',
+        'usage_metrics',
         'settings',
         'is_active',
     ];
 
     protected $casts = [
         'settings' => 'array',
+        'feature_flags' => 'array',
+        'usage_metrics' => 'array',
+        'data_subject_quota' => 'integer',
+        'monthly_dsar_limit' => 'integer',
+        'monthly_breach_limit' => 'integer',
         'compliance_score' => 'float',
         'is_active' => 'boolean',
     ];
@@ -195,13 +207,20 @@ class Tenant extends Model
     }
 
     /**
-     * Get human-readable description of the tenant's data residency infrastructure.
+     * Check if a feature flag is enabled for this tenant.
      */
-    public function getDataResidencyLabel(): string
+    public function hasFeatureFlag(string $flag): bool
     {
-        $residency = $this->data_residency ?? 'local_nigeria';
-        $regionConfig = config("residency.regions.{$residency}");
+        $flags = $this->feature_flags ?? [];
+        return in_array($flag, $flags);
+    }
 
-        return $regionConfig['name'] ?? 'Primary Nigerian Onshore Cloud';
+    /**
+     * Check if tenant has exceeded their allocated data subject quota.
+     */
+    public function isDataSubjectQuotaExceeded(int $currentCount): bool
+    {
+        $quota = $this->data_subject_quota ?? 50000;
+        return $currentCount > $quota;
     }
 }
