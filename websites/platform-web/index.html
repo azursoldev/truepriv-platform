@@ -3,1156 +3,861 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Truepriv Technologies Limited — Enterprise NDPA 2023 Compliance Management SaaS</title>
-  <meta name="description" content="Truepriv Technologies Limited is Nigeria's premier compliance SaaS platform. Automate 80% of NDPA operations: 1-Click RoPA, 5x5 DPIA risk scoring, 72-Hour breach playbooks, and certified DPCO statutory audits.">
-  <link rel="canonical" href="https://truepriv.com/">
-  
-  <!-- Google Fonts -->
+  <title>Truepriv — Make Compliance Work at the Speed and Scale of AI</title>
+  <meta name="description" content="Truepriv is Nigeria's Trust Intelligence Platform. Automate NDPA 2023 compliance: 1-Click RoPA lineage, 5x5 DPIA risk scoring, 72-hour breach command, and certified DPCO statutory CAR audit filings.">
+  <link rel="canonical" href="https://platform-web-six-khaki.vercel.app/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Font Awesome 6 Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
   <style>
     :root {
-      --primary: #059669;
-      --primary-dark: #047857;
-      --primary-light: #ecfdf5;
-      --primary-border: #a7f3d0;
-      --bg: #f8fafc;
-      --bg-surface: #ffffff;
-      --card-bg: #ffffff;
-      --card-border: #e2e8f0;
-      --card-hover-border: #cbd5e1;
-      --text-main: #0f172a;
-      --text-muted: #475569;
-      --text-dim: #94a3b8;
-      --accent-purple: #7c3aed;
-      --accent-blue: #0284c7;
-      --accent-amber: #d97706;
-      --accent-red: #dc2626;
-      --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
-      --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
-      --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg);
-      color: var(--text-main);
-      line-height: 1.6;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Ambient Clean Light Grid */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: 
-        linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
-      background-size: 48px 48px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Header Navigation */
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      padding: 1rem 2.5rem;
-      border-bottom: 1px solid var(--card-border);
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(16px);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .brand-group {
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-      text-decoration: none;
-    }
-
-    .brand-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: #0f172a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #34d399;
-      font-size: 1.15rem;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .brand-text h1 {
-      font-size: 1.15rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .brand-text h1 span.badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      background: var(--primary-light);
-      color: var(--primary);
-      border: 1px solid var(--primary-border);
-      padding: 0.15rem 0.45rem;
-      border-radius: 4px;
-      font-weight: 800;
-    }
-
-    .brand-text p {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.88rem;
-      font-weight: 600;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--text-main);
-    }
-
-    .nav-cta {
-      background: #0f172a;
-      color: #fff !important;
-      font-weight: 700 !important;
-      font-size: 0.85rem !important;
-      padding: 0.65rem 1.25rem;
-      border-radius: 0.75rem;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .nav-cta:hover {
-      background: #1e293b;
-      transform: translateY(-1px);
-    }
-
-    /* Container */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Hero Section */
-    .hero {
-      text-align: center;
-      padding: 5rem 0 3.5rem;
-      max-width: 920px;
-      margin: 0 auto;
-    }
-
-    .hero-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      font-weight: 700;
-      background: #ffffff;
-      color: var(--primary-dark);
-      border: 1px solid var(--primary-border);
-      padding: 0.4rem 1rem;
-      border-radius: 9999px;
-      margin-bottom: 1.75rem;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .pulse-dot {
-      width: 7px;
-      height: 7px;
-      background: var(--primary);
-      border-radius: 50%;
-      animation: pulse 1.8s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
-    }
-
-    .hero-title {
-      font-size: 3.4rem;
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.5rem;
-      color: var(--text-main);
-    }
-
-    .hero-title span {
-      color: var(--primary);
-    }
-
-    .hero-subtitle {
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      line-height: 1.65;
-      max-width: 800px;
-      margin: 0 auto 2.5rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      background: #0f172a;
-      color: #fff;
-      font-weight: 700;
-      font-size: 0.95rem;
-      padding: 0.9rem 2rem;
-      border-radius: 0.85rem;
-      text-decoration: none;
-      box-shadow: var(--shadow-md);
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .btn-primary:hover {
-      background: #1e293b;
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      background: #ffffff;
-      border: 1px solid var(--card-border);
-      color: var(--text-main);
-      font-weight: 700;
-      font-size: 0.95rem;
-      padding: 0.9rem 2rem;
-      border-radius: 0.85rem;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .btn-secondary:hover {
-      background: #f1f5f9;
-      border-color: #cbd5e1;
-    }
-
-    /* Metrics Strip */
-    .metrics-strip {
-      background: #ffffff;
-      border: 1px solid var(--card-border);
-      border-radius: 1.5rem;
-      padding: 2rem 2.5rem;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-      margin: 2rem 0 5rem;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .metric-item {
-      text-align: center;
-      position: relative;
-    }
-
-    .metric-item:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      right: -1rem;
-      top: 15%;
-      height: 70%;
-      width: 1px;
-      background: var(--card-border);
-    }
-
-    .metric-val {
-      font-size: 2.25rem;
-      font-weight: 800;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-
-    .metric-val i {
-      font-size: 1.25rem;
-    }
-
-    .metric-lbl {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      font-weight: 600;
-      margin-top: 0.35rem;
-    }
-
-    /* Section Headers */
-    .section-header {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 3.5rem;
-    }
-
-    .section-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-      background: var(--primary-light);
-      border: 1px solid var(--primary-border);
-      padding: 0.3rem 0.85rem;
-      border-radius: 9999px;
-      display: inline-block;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .section-title {
-      font-size: 2.35rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--text-main);
-      margin-bottom: 0.85rem;
-    }
-
-    .section-desc {
-      font-size: 1rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* Platform Pillars Grid */
-    .pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.75rem;
-      margin-bottom: 6rem;
-    }
-
-    .pillar-card {
-      background: #ffffff;
-      border: 1px solid var(--card-border);
-      border-radius: 1.5rem;
-      padding: 2.25rem;
-      transition: all 0.25s ease;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .pillar-card:hover {
-      border-color: #cbd5e1;
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
-    }
-
-    .pillar-icon-box {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .pillar-icon-emerald { background: var(--primary-light); color: var(--primary); border: 1px solid var(--primary-border); }
-    .pillar-icon-blue { background: #e0f2fe; color: var(--accent-blue); border: 1px solid #bae6fd; }
-    .pillar-icon-amber { background: #fef3c7; color: var(--accent-amber); border: 1px solid #fde68a; }
-    .pillar-icon-purple { background: #f3e8ff; color: var(--accent-purple); border: 1px solid #e9d5ff; }
-
-    .pillar-card h3 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 0.75rem;
-    }
-
-    .pillar-card p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.65;
-    }
-
-    .pillar-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1.5rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid #f1f5f9;
-    }
-
-    .pillar-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      background: #f1f5f9;
-      border: 1px solid #e2e8f0;
-      padding: 0.25rem 0.65rem;
-      border-radius: 6px;
-    }
-
-    /* Pricing Section */
-    .pricing-section {
-      padding: 3rem 0 6rem;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.75rem;
-      align-items: stretch;
-    }
-
-    .pricing-card {
-      background: #ffffff;
-      border: 1px solid var(--card-border);
-      border-radius: 1.5rem;
-      padding: 2.25rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      transition: all 0.25s ease;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .pricing-card:hover {
-      border-color: #cbd5e1;
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
-    }
-
-    .pricing-card.featured {
-      border: 2px solid var(--primary);
-      box-shadow: var(--shadow-xl);
-    }
-
-    .popular-badge {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--primary);
-      color: #fff;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 0.25rem 0.85rem;
-      border-radius: 9999px;
-      letter-spacing: 0.03em;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .plan-header {
-      margin-bottom: 1.5rem;
-    }
-
-    .plan-name {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .plan-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-top: 0.35rem;
-    }
-
-    .plan-price-wrap {
-      margin: 1.5rem 0;
-      display: flex;
-      align-items: baseline;
-      gap: 0.35rem;
-    }
-
-    .plan-price {
-      font-size: 2.35rem;
-      font-weight: 800;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--text-main);
-    }
-
-    .plan-period {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .plan-features {
-      list-style: none;
-      margin: 1.5rem 0 2rem;
-      border-top: 1px solid #f1f5f9;
-      padding-top: 1.5rem;
-    }
-
-    .plan-features li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.65rem;
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      margin-bottom: 0.85rem;
-    }
-
-    .plan-features li i {
-      color: var(--primary);
-      font-size: 0.95rem;
-      margin-top: 0.2rem;
-      flex-shrink: 0;
-    }
-
-    .plan-btn {
-      display: block;
-      width: 100%;
-      text-align: center;
-      padding: 0.85rem 1.5rem;
-      border-radius: 0.75rem;
-      font-size: 0.9rem;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .plan-btn-default {
-      background: #f1f5f9;
-      color: var(--text-main);
-      border: 1px solid var(--card-border);
-    }
-
-    .plan-btn-default:hover {
-      background: #e2e8f0;
-    }
-
-    .plan-btn-featured {
-      background: #0f172a;
-      color: #fff;
-      box-shadow: var(--shadow-md);
-    }
-
-    .plan-btn-featured:hover {
-      background: #1e293b;
-    }
-
-    /* Sovereignty Section */
-    .sovereignty-card {
-      background: #ffffff;
-      border: 1px solid var(--card-border);
-      border-radius: 1.75rem;
-      padding: 3rem 2.5rem;
-      margin-bottom: 6rem;
-      box-shadow: var(--shadow-sm);
-      text-align: center;
-    }
-
-    .sovereignty-card h3 {
-      font-size: 1.75rem;
-      font-weight: 800;
-      color: var(--text-main);
-      margin-bottom: 0.75rem;
-    }
-
-    .sovereignty-card p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      max-width: 750px;
-      margin: 0 auto 2rem;
-    }
-
-    .sovereignty-badges {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.85rem;
-    }
-
-    .sovereignty-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-main);
-      background: #f8fafc;
-      border: 1px solid var(--card-border);
-      padding: 0.5rem 1.15rem;
-      border-radius: 9999px;
-    }
-
-    .sovereignty-badge i {
-      color: var(--primary);
-    }
-
-    /* Footer */
-    .footer {
-      border-top: 1px solid var(--card-border);
-      background: #ffffff;
-      padding: 3.5rem 0 2rem;
-      font-size: 0.88rem;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 2.5rem;
-      margin-bottom: 3rem;
-    }
-
-    .footer-brand p {
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      margin-top: 0.75rem;
-      max-width: 320px;
-    }
-
-    .footer-col h5 {
-      color: var(--text-main);
-      font-size: 0.9rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .footer-col ul {
-      list-style: none;
-    }
-
-    .footer-col li {
-      margin-bottom: 0.6rem;
-    }
-
-    .footer-col a {
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-col a:hover {
-      color: var(--text-main);
-    }
-
-    .footer-bottom {
-      border-top: 1px solid #f1f5f9;
-      padding-top: 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: var(--text-dim);
-      font-size: 0.8rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .pricing-grid {
-        grid-template-columns: 1fr;
-        max-width: 480px;
-        margin: 0 auto;
-      }
-      .pillars-grid {
-        grid-template-columns: 1fr;
-      }
-      .metrics-strip {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-      }
-      .metric-item:nth-child(2)::after {
-        display: none;
-      }
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .header {
-        padding: 1rem 1.25rem;
-      }
-      .nav-links {
-        display: none;
-      }
-      .hero-title {
-        font-size: 2.35rem;
-      }
-      .metrics-strip {
-        grid-template-columns: 1fr;
-      }
-      .metric-item::after {
-        display: none;
-      }
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-      .footer-bottom {
-        flex-direction: column;
-        gap: 0.75rem;
-        text-align: center;
-      }
-    }
+      --black:#0d0d0d;--dark:#111;--mint:#00c882;--mint-dark:#00a86b;--white:#fff;
+      --g50:#fafafa;--g100:#f4f4f4;--g200:#e8e8e8;--g300:#d1d1d1;--g400:#9e9e9e;
+      --g500:#6b6b6b;--g600:#4a4a4a;--g700:#333;
+      --text1:#0d0d0d;--text2:#4a4a4a;--textm:#767676;
+      --font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+      --r4:4px;--r6:6px;--r10:10px;--r16:16px;--r24:24px;--rpill:9999px;
+      --sh-sm:0 1px 3px rgba(0,0,0,.08);--sh:0 4px 12px rgba(0,0,0,.10);
+      --sh-lg:0 12px 40px rgba(0,0,0,.14);--sh-xl:0 24px 64px rgba(0,0,0,.18);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{font-family:var(--font);color:var(--text1);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    .container{max-width:1200px;margin:0 auto;padding:0 2rem}
+
+    /* ANNOUNCEMENT */
+    .ann{background:var(--mint);color:var(--black);padding:.6rem 2rem;text-align:center;font-size:.875rem;font-weight:500;display:flex;align-items:center;justify-content:center;gap:.75rem;position:relative}
+    .ann a{font-weight:700;color:var(--black);border-bottom:1px solid rgba(0,0,0,.3);display:inline-flex;align-items:center;gap:.3rem}
+    .ann a:hover{border-color:var(--black)}
+    .ann-close{position:absolute;right:1.5rem;top:50%;transform:translateY(-50%);opacity:.6;cursor:pointer}
+
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:1000;background:var(--white);border-bottom:1px solid var(--g200);transition:box-shadow .2s}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;gap:2rem}
+    .nav-logo{display:flex;align-items:center;gap:.6rem;font-size:1.25rem;font-weight:900;color:var(--black);letter-spacing:-.03em;flex-shrink:0}
+    .logo-icon{width:32px;height:32px;background:var(--black);border-radius:7px;display:flex;align-items:center;justify-content:center}
+    .nav-links{display:flex;align-items:center;gap:.25rem;list-style:none}
+    .nav-links a{color:var(--g700);font-size:.875rem;font-weight:500;padding:.5rem .85rem;border-radius:var(--r6);display:flex;align-items:center;gap:.3rem;transition:color .15s,background .15s}
+    .nav-links a:hover{color:var(--black);background:var(--g100)}
+    .nav-right{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
+    .btn-login{color:var(--black);font-size:.875rem;font-weight:600;padding:.55rem 1.1rem;border-radius:var(--r6);transition:background .15s}
+    .btn-login:hover{background:var(--g100)}
+    .btn-cta-nav{background:var(--black);color:var(--white);font-size:.875rem;font-weight:700;padding:.6rem 1.35rem;border-radius:var(--r6);display:inline-flex;align-items:center;gap:.4rem;transition:background .15s}
+    .btn-cta-nav:hover{background:#222}
+
+    /* HERO */
+    .hero{background:var(--white);padding:5.5rem 0 4rem;overflow:hidden}
+    .hero-inner{display:grid;grid-template-columns:1.1fr 1fr;gap:4rem;align-items:center}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:1.5rem}
+    .eyebrow-dot{width:7px;height:7px;background:var(--mint);border-radius:50%;flex-shrink:0}
+    .hero-h1{font-size:3.5rem;font-weight:900;line-height:1.05;letter-spacing:-.04em;color:var(--black);margin-bottom:1.5rem}
+    .hero-h1 em{font-style:normal;color:var(--mint)}
+    .hero-desc{font-size:1.05rem;color:var(--text2);line-height:1.65;margin-bottom:2.25rem;max-width:520px}
+    .hero-actions{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+    .btn-mint{background:var(--mint);color:var(--black);font-size:.95rem;font-weight:800;padding:.85rem 2rem;border-radius:var(--r6);display:inline-flex;align-items:center;gap:.5rem;transition:all .2s;box-shadow:0 4px 20px rgba(0,200,130,.25)}
+    .btn-mint:hover{background:var(--mint-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,200,130,.35)}
+    .btn-outline{background:transparent;color:var(--black);font-size:.95rem;font-weight:700;padding:.85rem 2rem;border-radius:var(--r6);border:1.5px solid var(--g300);display:inline-flex;align-items:center;gap:.5rem;transition:all .2s}
+    .btn-outline:hover{border-color:var(--black);background:var(--g50)}
+
+    /* MOCKUP */
+    .mockup-card{background:var(--white);border:1.5px solid var(--g200);border-radius:var(--r16);box-shadow:var(--sh-xl);overflow:hidden}
+    .mockup-bar{background:var(--g100);padding:.75rem 1rem;border-bottom:1px solid var(--g200);display:flex;align-items:center;gap:.4rem}
+    .m-dot{width:10px;height:10px;border-radius:50%}
+    .m-dot.r{background:#ff5f57}.m-dot.y{background:#ffbd2e}.m-dot.g{background:#28c840}
+    .m-url{flex:1;background:var(--white);border:1px solid var(--g300);border-radius:var(--r4);padding:.3rem .75rem;font-size:.72rem;color:var(--g500);margin:0 .5rem}
+    .mockup-body{padding:1.25rem;background:var(--g50)}
+    .m-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem}
+    .m-brand{display:flex;align-items:center;gap:.5rem}
+    .m-brand-icon{width:26px;height:26px;background:var(--black);border-radius:6px;display:flex;align-items:center;justify-content:center}
+    .m-brand-name{font-size:.78rem;font-weight:800;color:var(--black)}
+    .m-live{background:#dcfce7;color:#166534;font-size:.62rem;font-weight:700;padding:.18rem .55rem;border-radius:var(--rpill);border:1px solid #bbf7d0;display:flex;align-items:center;gap:.3rem}
+    .m-live::before{content:'';width:5px;height:5px;background:#22c55e;border-radius:50%}
+    .m-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:1rem}
+    .m-stat{background:var(--white);border:1px solid var(--g200);border-radius:var(--r6);padding:.75rem}
+    .m-stat .lbl{font-size:.58rem;color:var(--g400);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.25rem}
+    .m-stat .val{font-size:1rem;font-weight:800;color:var(--black)}
+    .m-stat .chg{font-size:.58rem;color:#22c55e;font-weight:700;margin-top:.15rem}
+    .m-table{background:var(--white);border:1px solid var(--g200);border-radius:var(--r6);overflow:hidden}
+    .m-thead{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:.5rem .75rem;border-bottom:1px solid var(--g200);background:var(--g50)}
+    .m-th{font-size:.58rem;font-weight:700;color:var(--g400);text-transform:uppercase;letter-spacing:.05em}
+    .m-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:.55rem .75rem;border-bottom:1px solid var(--g100);align-items:center}
+    .m-row:last-child{border-bottom:none}
+    .m-td{font-size:.65rem;color:var(--g700)}
+    .badge{display:inline-block;padding:.1rem .45rem;border-radius:var(--rpill);font-size:.58rem;font-weight:700}
+    .badge-g{background:#dcfce7;color:#166534}
+    .badge-b{background:#dbeafe;color:#1e40af}
+    .badge-a{background:#fef9c3;color:#854d0e}
+
+    /* STATS BAR */
+    .stats-bar{background:var(--white);border-top:1px solid var(--g200);border-bottom:1px solid var(--g200);padding:2rem 0}
+    .stats-inner{display:flex;align-items:center;justify-content:space-between;gap:2rem}
+    .stat-item{text-align:center;flex:1}
+    .stat-num{font-size:2rem;font-weight:900;color:var(--black);letter-spacing:-.04em;line-height:1}
+    .stat-lbl{font-size:.8rem;color:var(--textm);margin-top:.3rem;font-weight:500}
+    .stat-div{width:1px;height:40px;background:var(--g200);flex-shrink:0}
+
+    /* CUSTOMERS - dark */
+    .customers{background:var(--black);padding:4.5rem 0;color:var(--white)}
+    .cust-label{text-align:center;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--g400);margin-bottom:2.5rem}
+    .cust-logos{display:flex;align-items:center;justify-content:center;gap:3.5rem;flex-wrap:wrap}
+    .cust-logo{opacity:.45;transition:opacity .2s;font-size:1rem;font-weight:800;color:var(--white);letter-spacing:-.02em;display:flex;align-items:center;gap:.4rem;cursor:default}
+    .cust-logo:hover{opacity:.8}
+
+    /* TESTIMONIAL */
+    .testimonial{background:var(--black);border-top:1px solid rgba(255,255,255,.07);padding:5.5rem 0;color:var(--white)}
+    .t-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:5rem;align-items:center}
+    .t-img{width:100%;aspect-ratio:4/3;border-radius:var(--r16);background:linear-gradient(135deg,#0a2a1e,#0f1f17);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+    .t-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,200,130,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,200,130,.04) 1px,transparent 1px);background-size:30px 30px}
+    .t-play{width:64px;height:64px;background:var(--mint);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--black);cursor:pointer;transition:transform .2s;z-index:1;position:relative}
+    .t-play:hover{transform:scale(1.08)}
+    .t-badges{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem}
+    .t-badge{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r6);padding:.35rem .8rem;font-size:.78rem;font-weight:700;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:.35rem;cursor:pointer;transition:all .2s}
+    .t-badge.active{border-color:var(--mint);color:var(--white);background:rgba(0,200,130,.08)}
+    .t-quote{font-size:1.5rem;font-weight:700;color:var(--white);line-height:1.45;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .t-author strong{font-size:.875rem;color:var(--white);font-weight:700;display:block}
+    .t-author span{font-size:.8rem;color:var(--g400)}
+    .t-dots{display:flex;gap:.5rem;align-items:center;margin-top:1.25rem}
+    .t-dot-active{width:24px;height:3px;background:var(--mint);border-radius:2px}
+    .t-dot{width:8px;height:8px;background:rgba(255,255,255,.18);border-radius:50%}
+
+    /* ANALYSTS */
+    .analysts{padding:5.5rem 0;background:var(--white);border-bottom:1px solid var(--g200)}
+    .analysts-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem}
+    .analyst-card{border:1.5px solid var(--g200);border-radius:var(--r16);padding:2rem;transition:all .2s;cursor:pointer}
+    .analyst-card:hover{border-color:var(--black);box-shadow:var(--sh-lg)}
+    .a-name{font-size:1.35rem;font-weight:900;color:var(--black);letter-spacing:-.03em;margin-bottom:.5rem}
+    .a-desc{font-size:.85rem;color:var(--text2);line-height:1.55;margin-bottom:1.5rem}
+    .a-link{font-size:.85rem;font-weight:700;color:var(--black);display:flex;align-items:center;gap:.4rem;transition:gap .2s}
+    .analyst-card:hover .a-link{gap:.7rem}
+
+    /* SECTION LABELS */
+    .eyebrow{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--textm);margin-bottom:.75rem}
+    .sec-title{font-size:2.4rem;font-weight:900;color:var(--black);letter-spacing:-.04em;line-height:1.1;margin-bottom:1rem}
+    .sec-desc{font-size:1rem;color:var(--text2);line-height:1.65;max-width:680px}
+
+    /* SOLUTIONS */
+    .solutions{padding:6rem 0;background:var(--g50)}
+    .sol-header{margin-bottom:3.5rem}
+    .sol-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+    .sol-card{background:var(--white);border:1.5px solid var(--g200);border-radius:var(--r16);padding:2.25rem;transition:all .2s;cursor:pointer;position:relative;overflow:hidden}
+    .sol-card:hover{border-color:var(--black);box-shadow:var(--sh-lg);transform:translateY(-2px)}
+    .sol-icon{width:52px;height:52px;margin-bottom:1.5rem}
+    /* Geometric shapes */
+    .shape-tri{width:0;height:0;border-left:26px solid transparent;border-right:26px solid transparent;border-bottom:45px solid #2dd4bf}
+    .shape-circle{width:48px;height:48px;border-radius:50%;background:#3b82f6}
+    .shape-pent{width:48px;height:48px;background:#f59e0b;clip-path:polygon(50% 0%,100% 38%,82% 100%,18% 100%,0% 38%)}
+    .shape-sq{width:40px;height:40px;background:#8b5cf6;transform:rotate(15deg);border-radius:6px}
+    .shape-dia{width:44px;height:44px;background:#10b981;transform:rotate(45deg);border-radius:4px}
+    .shape-hex{width:48px;height:48px;background:#f43f5e;clip-path:polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%)}
+    .sol-card h3{font-size:1.1rem;font-weight:800;color:var(--black);margin-bottom:.6rem;letter-spacing:-.02em;line-height:1.3}
+    .sol-card p{font-size:.85rem;color:var(--text2);line-height:1.6;margin-bottom:1.5rem}
+    .sol-link{font-size:.82rem;font-weight:700;color:var(--black);display:flex;align-items:center;gap:.4rem;transition:gap .2s}
+    .sol-card:hover .sol-link{gap:.7rem}
+    .sol-card.wide{grid-column:span 2;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+    .card-inner-mockup{background:var(--g50);border:1px solid var(--g200);border-radius:var(--r10);padding:1.5rem;display:flex;flex-direction:column;gap:.75rem}
+    .mini-prog-wrap{display:flex;flex-direction:column;gap:.3rem}
+    .mini-top{display:flex;justify-content:space-between;font-size:.7rem}
+    .mini-lbl{color:var(--textm)}
+    .mini-val{color:var(--black);font-weight:700}
+    .mini-bar-bg{background:var(--g200);border-radius:var(--rpill);height:6px;overflow:hidden}
+    .mini-bar{height:100%;border-radius:var(--rpill);background:var(--mint)}
+    .card-check-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem}
+    .card-check-list li{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--text2)}
+    .card-check-list li i{color:var(--mint-dark);font-size:.72rem}
+
+    /* PRICING */
+    .pricing{padding:6rem 0;background:var(--white)}
+    .price-hd{text-align:center;margin-bottom:1.5rem}
+    .price-toggle{display:flex;align-items:center;justify-content:center;gap:.75rem;margin-bottom:3.5rem}
+    .tgl-label{font-size:.875rem;font-weight:600;color:var(--text2)}
+    .tgl-sw{position:relative;width:52px;height:27px;background:var(--black);border-radius:var(--rpill);cursor:pointer;transition:background .25s}
+    .tgl-knob{position:absolute;top:3px;left:3px;width:21px;height:21px;background:var(--white);border-radius:50%;transition:transform .25s;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+    .tgl-sw.on .tgl-knob{transform:translateX(25px)}
+    .tgl-badge{background:var(--mint);color:var(--black);font-size:.72rem;font-weight:800;padding:.2rem .6rem;border-radius:var(--rpill)}
+    .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+    .price-card{border:1.5px solid var(--g200);border-radius:var(--r16);padding:2.5rem 2rem;display:flex;flex-direction:column;position:relative;transition:all .2s}
+    .price-card:hover{box-shadow:var(--sh-lg);border-color:var(--g300)}
+    .price-card.popular{border-color:var(--black);border-width:2px}
+    .pop-tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--black);color:var(--white);font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:.25rem 1rem;border-radius:var(--rpill)}
+    .plan-name{font-size:1rem;font-weight:800;color:var(--black);margin-bottom:.35rem;display:flex;align-items:center;gap:.5rem}
+    .plan-desc{font-size:.8rem;color:var(--textm);margin-bottom:2rem;line-height:1.5}
+    .plan-price{display:flex;align-items:baseline;gap:.3rem;margin-bottom:.5rem}
+    .price-num{font-size:2.5rem;font-weight:900;color:var(--black);letter-spacing:-.04em}
+    .price-per{font-size:.82rem;color:var(--textm);font-weight:500}
+    .plan-feats{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin:1.5rem 0 2rem;border-top:1px solid var(--g200);padding-top:1.5rem;flex:1}
+    .plan-feats li{display:flex;align-items:flex-start;gap:.6rem;font-size:.83rem;color:var(--text2);line-height:1.5}
+    .plan-feats li i{color:var(--mint-dark);font-size:.8rem;margin-top:.2rem;flex-shrink:0}
+    .btn-blk{display:block;text-align:center;padding:.85rem;border-radius:var(--r6);font-size:.875rem;font-weight:700;background:var(--black);color:var(--white);transition:background .15s}
+    .btn-blk:hover{background:#222}
+    .btn-wht{display:block;text-align:center;padding:.85rem;border-radius:var(--r6);font-size:.875rem;font-weight:700;background:transparent;color:var(--black);border:1.5px solid var(--g300);transition:all .15s}
+    .btn-wht:hover{border-color:var(--black);background:var(--g50)}
+
+    /* RESOURCES */
+    .resources{padding:5.5rem 0;background:var(--g50);border-top:1px solid var(--g200)}
+    .res-hd{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2.5rem;gap:2rem}
+    .res-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+    .res-card{border-radius:var(--r16);overflow:hidden;border:1.5px solid var(--g200);background:var(--white);transition:all .2s;cursor:pointer}
+    .res-card:hover{box-shadow:var(--sh-lg);transform:translateY(-2px);border-color:var(--g300)}
+    .res-img{height:130px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:white;position:relative;overflow:hidden}
+    .grad1{background:linear-gradient(135deg,#2dd4bf,#0891b2)}
+    .grad2{background:linear-gradient(135deg,#818cf8,#6366f1)}
+    .grad3{background:linear-gradient(135deg,#f59e0b,#f97316)}
+    .grad4{background:linear-gradient(135deg,#10b981,#06b6d4)}
+    .res-body{padding:1.25rem}
+    .res-type{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--textm);margin-bottom:.5rem}
+    .res-title{font-size:.88rem;font-weight:700;color:var(--black);line-height:1.4;margin-bottom:.5rem}
+    .res-link{font-size:.78rem;font-weight:700;color:var(--black);display:flex;align-items:center;gap:.3rem}
+
+    /* CTA DARK */
+    .cta-dark{background:var(--black);padding:6rem 0;color:var(--white);position:relative;overflow:hidden}
+    .cta-bg{position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(0,200,130,.07) 0%,transparent 50%),radial-gradient(circle at 80% 80%,rgba(0,200,130,.05) 0%,transparent 50%);pointer-events:none}
+    .cta-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+    .cta-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    .cta-h2{font-size:3rem;font-weight:900;color:var(--white);letter-spacing:-.04em;line-height:1.1;margin-bottom:1.25rem}
+    .cta-h2 span{color:var(--mint)}
+    .cta-desc{font-size:1rem;color:rgba(255,255,255,.6);line-height:1.65;margin-bottom:2rem}
+    .cta-acts{display:flex;gap:1rem;flex-wrap:wrap}
+    .btn-mint-lg{background:var(--mint);color:var(--black);font-size:.95rem;font-weight:800;padding:.9rem 2rem;border-radius:var(--r6);display:inline-flex;align-items:center;gap:.5rem;transition:all .2s}
+    .btn-mint-lg:hover{background:var(--mint-dark);transform:translateY(-1px)}
+    .btn-wht-lg{background:transparent;color:var(--white);font-size:.95rem;font-weight:700;padding:.9rem 2rem;border-radius:var(--r6);border:1.5px solid rgba(255,255,255,.3);display:inline-flex;align-items:center;gap:.5rem;transition:all .2s}
+    .btn-wht-lg:hover{border-color:var(--white);background:rgba(255,255,255,.05)}
+    .trust-badges{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2.5rem}
+    .trust-badge{display:flex;align-items:center;gap:.5rem;font-size:.78rem;color:rgba(255,255,255,.45)}
+    .trust-badge i{color:var(--mint)}
+
+    /* CTA FORM */
+    .cta-form{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r24);padding:2.5rem}
+    .form-title{font-size:1.2rem;font-weight:800;color:var(--white);margin-bottom:1.75rem}
+    .f-field{margin-bottom:1rem}
+    .f-field label{display:block;font-size:.78rem;font-weight:700;color:rgba(255,255,255,.7);margin-bottom:.4rem}
+    .f-field input,.f-field select{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:var(--r6);padding:.7rem 1rem;color:var(--white);font-family:var(--font);font-size:.875rem;transition:border-color .2s}
+    .f-field input::placeholder{color:rgba(255,255,255,.3)}
+    .f-field input:focus,.f-field select:focus{outline:none;border-color:var(--mint)}
+    .f-field select option{background:var(--black)}
+    .f-grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .btn-form-sub{width:100%;background:var(--mint);color:var(--black);border:none;border-radius:var(--r6);padding:.9rem;font-size:.95rem;font-weight:800;cursor:pointer;transition:all .2s;margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem;font-family:var(--font)}
+    .btn-form-sub:hover{background:var(--mint-dark);transform:translateY(-1px)}
+
+    /* FOOTER */
+    .footer{background:#0a0a0a;color:rgba(255,255,255,.5);padding:4.5rem 0 2rem;border-top:1px solid rgba(255,255,255,.05)}
+    .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3.5rem;border-bottom:1px solid rgba(255,255,255,.05);margin-bottom:2.5rem}
+    .foot-logo{display:flex;align-items:center;gap:.6rem;margin-bottom:1.25rem}
+    .foot-logo-icon{width:36px;height:36px;background:var(--mint);border-radius:8px;display:flex;align-items:center;justify-content:center}
+    .foot-logo-name{font-size:1.15rem;font-weight:900;color:var(--white);letter-spacing:-.03em}
+    .foot-brand-desc{font-size:.83rem;color:rgba(255,255,255,.4);line-height:1.65;margin-bottom:1.5rem}
+    .foot-social{display:flex;gap:.65rem}
+    .foot-social a{width:33px;height:33px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.82rem;color:rgba(255,255,255,.45);transition:all .2s}
+    .foot-social a:hover{background:rgba(255,255,255,.09);color:var(--white)}
+    .foot-col h5{font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--white);margin-bottom:1.25rem}
+    .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.65rem}
+    .foot-col a{font-size:.83rem;color:rgba(255,255,255,.45);transition:color .15s}
+    .foot-col a:hover{color:var(--white)}
+    .foot-bottom{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:rgba(255,255,255,.25);flex-wrap:wrap;gap:1rem}
+    .foot-legal{display:flex;gap:1.5rem}
+    .foot-legal a{color:rgba(255,255,255,.25);transition:color .15s}
+    .foot-legal a:hover{color:rgba(255,255,255,.55)}
+
+    /* RESPONSIVE */
+    @media(max-width:1024px){
+      .hero-inner{grid-template-columns:1fr;gap:3rem}
+      .hero-h1{font-size:2.75rem}
+      .sol-grid{grid-template-columns:repeat(2,1fr)}
+      .sol-card.wide{grid-column:span 2}
+      .res-grid{grid-template-columns:repeat(2,1fr)}
+      .cta-inner{grid-template-columns:1fr;gap:3rem}
+      .foot-grid{grid-template-columns:repeat(2,1fr)}
+      .price-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+      .m-stats{grid-template-columns:repeat(2,1fr)}
+      .analysts-grid{grid-template-columns:1fr}
+      .t-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:768px){
+      .hero-h1{font-size:2.1rem}
+      .sec-title{font-size:1.85rem}
+      .nav-links{display:none}
+      .container{padding:0 1.25rem}
+      .sol-grid{grid-template-columns:1fr}
+      .sol-card.wide{grid-column:span 1;display:block}
+      .res-grid{grid-template-columns:1fr 1fr}
+      .stats-inner{flex-direction:column;gap:1.25rem}
+      .stat-div{display:none}
+      .foot-grid{grid-template-columns:1fr}
+      .f-grid2{grid-template-columns:1fr}
+      .cta-h2{font-size:2.1rem}
+    }
+    @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
   </style>
 </head>
 <body>
 
-  <!-- Top Navigation Header -->
-  <header class="header">
-    <a href="https://truepriv.com/" class="brand-group">
-      <div class="brand-icon">
-        <i class="fa-solid fa-shield-halved text-emerald-400"></i>
-      </div>
-      <div class="brand-text">
-        <h1>TRUEPRIV <span class="badge">NDPA 2023</span></h1>
-        <p>Truepriv Technologies Limited</p>
-      </div>
-    </a>
+<!-- ANNOUNCEMENT BANNER -->
+<div class="ann" id="annBar">
+  <span>&#127881; Truepriv Recognized as Leader in NDPA 2023 Compliance Automation — Gartner 2026 AI Governance Report</span>
+  <a href="#resources">Read the Report <i class="fa-solid fa-arrow-right" style="font-size:.7rem"></i></a>
+  <span class="ann-close" onclick="document.getElementById('annBar').style.display='none'"><i class="fa-solid fa-xmark"></i></span>
+</div>
 
-    <ul class="nav-links">
-      <li><a href="#features">Platform Pillars</a></li>
-      <li><a href="#automation">Automation</a></li>
-      <li><a href="#pricing">Enterprise Pricing</a></li>
-      <li><a href="#sovereignty">Data Residency</a></li>
-    </ul>
-
-    <a href="https://truepriv-saas.vercel.app" class="nav-cta">
-      <i class="fa-solid fa-arrow-right-to-bracket text-xs"></i>
-      <span>Launch SaaS Portal</span>
-      <span>&rarr;</span>
-    </a>
-  </header>
-
-  <!-- Main Content -->
-  <main>
-    
-    <!-- Hero Section -->
-    <section class="container hero">
-      <div class="hero-pill">
-        <span class="pulse-dot"></span>
-        <span>TRUEPRIV.COM &bull; NIGERIA DATA PROTECTION SAAS &bull; NDPA 2023</span>
-      </div>
-
-      <h1 class="hero-title">
-        Automate <span>80%</span> of Regulatory Compliance Operations
-      </h1>
-
-      <p class="hero-subtitle">
-        Truepriv Technologies Limited provides corporate Data Controllers, Outsourced DPOs, and Licensed DPCOs with high-velocity RoPA automation, 5×5 DPIA risk matrices, 72-Hour breach playbooks, and certified NDPC statutory audit packs.
-      </p>
-
-      <div class="hero-actions">
-        <a href="https://truepriv-saas.vercel.app" class="btn-primary">
-          <i class="fa-solid fa-rocket text-sm"></i>
-          <span>Launch Truepriv Portal &rarr;</span>
-        </a>
-        <a href="#pricing" class="btn-secondary">
-          <i class="fa-solid fa-table-list text-sm mr-1"></i>
-          <span>View Enterprise Pricing</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- Metrics Highlights Strip -->
-    <section class="container">
-      <div class="metrics-strip">
-        <div class="metric-item">
-          <div class="metric-val">
-            <i class="fa-solid fa-bolt text-emerald-600"></i>
-            <span>70–80%</span>
-          </div>
-          <div class="metric-lbl">Routine Compliance Operations Automated</div>
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <div class="logo-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#00c882"><path d="M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3zm-2 16l-4-4 1.41-1.41L10 15.17l6.59-6.59L18 10l-8 8z"/></svg>
         </div>
-
-        <div class="metric-item">
-          <div class="metric-val">
-            <i class="fa-solid fa-clock text-amber-600"></i>
-            <span>72-Hour</span>
-          </div>
-          <div class="metric-lbl">NDPA Sec 40 Breach Notification Clock</div>
-        </div>
-
-        <div class="metric-item">
-          <div class="metric-val">
-            <i class="fa-solid fa-users-viewfinder text-blue-600"></i>
-            <span>30-Day</span>
-          </div>
-          <div class="metric-lbl">Statutory DSAR SLA Tracking Pipeline</div>
-        </div>
-
-        <div class="metric-item">
-          <div class="metric-val">
-            <i class="fa-solid fa-clipboard-check text-purple-600"></i>
-            <span>100%</span>
-          </div>
-          <div class="metric-lbl">NDPC Annual Filing & March 15 Deadline Ready</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Platform Pillars Section -->
-    <section id="features" class="container">
-      <div class="section-header">
-        <div class="section-tag">Enterprise Capabilities</div>
-        <h2 class="section-title">Built for the Nigerian Compliance Ecosystem</h2>
-        <p class="section-desc">Move away from blank manual form fatigue. Our intelligence engine auto-generates your regulatory records so you simply <strong>Review &rarr; Verify &rarr; Correct &rarr; Approve</strong>.</p>
-      </div>
-
-      <div class="pillars-grid">
-        <!-- Pillar 1: RoPA -->
-        <div class="pillar-card">
-          <div>
-            <div class="pillar-icon-box pillar-icon-emerald">
-              <i class="fa-solid fa-file-shield"></i>
-            </div>
-            <h3>1-Click RoPA Generation (NDPA Sec 24)</h3>
-            <p>Pre-populated data processing inventories for Fintech, Healthcare, E-Commerce, Telecoms, and Edutech. Auto-assigns lawful bases, special category flags, and retention rules.</p>
-          </div>
-          <div class="pillar-tags">
-            <span class="pillar-tag"><i class="fa-solid fa-industry text-[10px] mr-1"></i> 5 Industry Presets</span>
-            <span class="pillar-tag"><i class="fa-solid fa-check text-[10px] mr-1"></i> Review &rarr; Verify &rarr; Approve</span>
-            <span class="pillar-tag"><i class="fa-solid fa-scale-balanced text-[10px] mr-1"></i> Lawful Basis Mapping</span>
-          </div>
-        </div>
-
-        <!-- Pillar 2: DPIA -->
-        <div class="pillar-card">
-          <div>
-            <div class="pillar-icon-box pillar-icon-blue">
-              <i class="fa-solid fa-shield-halved"></i>
-            </div>
-            <h3>5x5 DPIA Risk Scoring Matrix (NDPA Sec 28)</h3>
-            <p>Automated screening triggers for high-risk processing (biometrics, AI profiling, minors). Calculates inherent vs. residual risk scores with formal DPO and DPCO digital sign-off seals.</p>
-          </div>
-          <div class="pillar-tags">
-            <span class="pillar-tag"><i class="fa-solid fa-triangle-exclamation text-[10px] mr-1"></i> High-Risk Triggers</span>
-            <span class="pillar-tag"><i class="fa-solid fa-table-cells text-[10px] mr-1"></i> 5x5 Risk Matrix</span>
-            <span class="pillar-tag"><i class="fa-solid fa-signature text-[10px] mr-1"></i> Digital Sign-off</span>
-          </div>
-        </div>
-
-        <!-- Pillar 3: Breach Playbook -->
-        <div class="pillar-card">
-          <div>
-            <div class="pillar-icon-box pillar-icon-amber">
-              <i class="fa-solid fa-triangle-exclamation"></i>
-            </div>
-            <h3>72-Hour Breach Playbook (NDPA Sec 40)</h3>
-            <p>Live countdown clock, severity assessment wizard (1-100), and 1-click generation of the official NDPC Form 1 Notification Pack in standardized JSON/PDF format.</p>
-          </div>
-          <div class="pillar-tags">
-            <span class="pillar-tag"><i class="fa-solid fa-stopwatch text-[10px] mr-1"></i> 72h Regulatory Timer</span>
-            <span class="pillar-tag"><i class="fa-solid fa-file-pdf text-[10px] mr-1"></i> NDPC Form 1 Pack</span>
-            <span class="pillar-tag"><i class="fa-solid fa-bolt text-[10px] mr-1"></i> Phase-1 Remediation Guide</span>
-          </div>
-        </div>
-
-        <!-- Pillar 4: DPCO Audit Desk -->
-        <div class="pillar-card">
-          <div>
-            <div class="pillar-icon-box pillar-icon-purple">
-              <i class="fa-solid fa-building-columns"></i>
-            </div>
-            <h3>Licensed DPCO Statutory Audit Desk</h3>
-            <p>Designed for accredited DPCO firms. Full GAID 5-domain checklist scoring, evidence vault, remediation action tracker, and 1-click certified statutory PDF audit report generator.</p>
-          </div>
-          <div class="pillar-tags">
-            <span class="pillar-tag"><i class="fa-solid fa-clipboard-check text-[10px] mr-1"></i> GAID 5-Domain Audit</span>
-            <span class="pillar-tag"><i class="fa-solid fa-calendar-check text-[10px] mr-1"></i> March 15 Deadline</span>
-            <span class="pillar-tag"><i class="fa-solid fa-stamp text-[10px] mr-1"></i> DPCO Seal Verification</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3-Column Enterprise Pricing Matrix -->
-    <section id="pricing" class="container pricing-section">
-      <div class="section-header">
-        <div class="section-tag">Predictable Tiered Plans</div>
-        <h2 class="section-title">Transparent Pricing for Nigerian Organizations</h2>
-        <p class="section-desc">Tailored capacity tiers for single-entity Corporate Controllers, Outsourced DPO practices, and Licensed DPCO audit firms.</p>
-      </div>
-
-      <div class="pricing-grid">
-        
-        <!-- Tier 1: Corporate Starter -->
-        <div class="pricing-card">
-          <div>
-            <div class="plan-header">
-              <div class="plan-name">
-                <i class="fa-solid fa-building text-slate-700"></i>
-                <span>Corporate Starter</span>
-              </div>
-              <div class="plan-desc">For single-entity Nigerian Data Controllers</div>
-            </div>
-            
-            <div class="plan-price-wrap">
-              <span class="plan-price">₦750,000</span>
-              <span class="plan-period">/ year</span>
-            </div>
-
-            <ul class="plan-features">
-              <li>
-                <i class="fa-solid fa-check"></i>
-                <span><strong>Single Corporate Workspace</strong></span>
-              </li>
-              <li>
-                <i class="fa-solid fa-check"></i>
-                <span>Automated 1-Click RoPA Generation</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-check"></i>
-                <span>30-Day Statutory DSAR Pipeline</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-check"></i>
-                <span>72-Hour Breach Emergency Clock</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-check"></i>
-                <span>Zero-Dependency Cookie Consent SDK</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-check"></i>
-                <span>Up to 50,000 Data Subject Records</span>
-              </li>
-            </ul>
-          </div>
-
-          <a href="https://truepriv-saas.vercel.app" class="plan-btn plan-btn-default">
-            <span>Get Started with Starter &rarr;</span>
-          </a>
-        </div>
-
-        <!-- Tier 2: Outsourced DPO Hub (Featured) -->
-        <div class="pricing-card featured">
-          <div class="popular-badge">
-            <i class="fa-solid fa-star text-amber-300 mr-1"></i> Most Popular
-          </div>
-          <div>
-            <div class="plan-header">
-              <div class="plan-name">
-                <i class="fa-solid fa-user-shield text-emerald-600"></i>
-                <span>Outsourced DPO Hub</span>
-              </div>
-              <div class="plan-desc">For independent DPO consultants & advisory practices</div>
-            </div>
-            
-            <div class="plan-price-wrap">
-              <span class="plan-price">₦2,500,000</span>
-              <span class="plan-period">/ year</span>
-            </div>
-
-            <ul class="plan-features">
-              <li>
-                <i class="fa-solid fa-check"></i>
-                <span><strong>Multi-Tenant Portfolio (15 Client Workspaces)</strong></span>
-              </li>
-              <li>
-                <i class="fa-solid fa-check"></i>
-                <span>5×5 DPIA Risk Scoring Matrix & Seal</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-check"></i>
-                <span>AI Decision Recommendation Logs</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-check"></i>
-                <span>Omnichannel Consent Ledger</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-check"></i>
-                <span>Cross-Border Transfer Tracker (NDPC Sec 41)</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-check"></i>
-                <span>Department Champion Invitations</span>
-              </li>
-            </ul>
-          </div>
-
-          <a href="https://truepriv-saas.vercel.app" class="plan-btn plan-btn-featured">
-            <span>Launch DPO Hub &rarr;</span>
-          </a>
-        </div>
-
-        <!-- Tier 3: Licensed DPCO Suite -->
-        <div class="pricing-card">
-          <div>
-            <div class="plan-header">
-              <div class="plan-name">
-                <i class="fa-solid fa-building-columns text-purple-700"></i>
-                <span>Licensed DPCO Suite</span>
-              </div>
-              <div class="plan-desc">For accredited audit firms with assurance practices</div>
-            </div>
-            
-            <div class="plan-price-wrap">
-              <span class="plan-price">₦4,500,000</span>
-              <span class="plan-period">/ year</span>
-            </div>
-
-            <ul class="plan-features">
-              <li>
-                <i class="fa-solid fa-check"></i>
-                <span><strong>Unlimited Client Audit Engagements</strong></span>
-              </li>
-              <li>
-                <i class="fa-solid fa-check"></i>
-                <span>Full GAID 5-Domain Dynamic Checklist</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-check"></i>
-                <span>Official NDPC PDF Filing Generator</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-check"></i>
-                <span>Digital DPCO Audit Seal Verification</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-check"></i>
-                <span>Dedicated Statutory March 15 Pipeline</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-check"></i>
-                <span>Immutable System Audit Trail Ledger</span>
-              </li>
-            </ul>
-          </div>
-
-          <a href="https://truepriv-saas.vercel.app" class="plan-btn plan-btn-default">
-            <span>Activate DPCO Suite &rarr;</span>
-          </a>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Data Sovereignty & Regulatory Alignment Section -->
-    <section id="sovereignty" class="container">
-      <div class="sovereignty-card">
-        <h3>Data Sovereignty & Regulatory Alignment</h3>
-        <p>Truepriv is architected to satisfy strict Nigerian regulatory requirements under the Nigeria Data Protection Act 2023 and the Nigeria Data Protection Commission (NDPC).</p>
-
-        <div class="sovereignty-badges">
-          <div class="sovereignty-badge">
-            <i class="fa-solid fa-server"></i>
-            <span>Onshore Data Residency (Galaxy Backbone Abuja)</span>
-          </div>
-          <div class="sovereignty-badge">
-            <i class="fa-solid fa-lock"></i>
-            <span>AES-256 & TLS 1.3 Encryption</span>
-          </div>
-          <div class="sovereignty-badge">
-            <i class="fa-solid fa-certificate"></i>
-            <span>NDPC GAID Compliance Verified</span>
-          </div>
-          <div class="sovereignty-badge">
-            <i class="fa-solid fa-scale-balanced"></i>
-            <span>Section 24 DPCO SLA Guard</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="brand-group">
-            <div class="brand-icon">
-              <i class="fa-solid fa-shield-halved text-emerald-400"></i>
-            </div>
-            <div class="brand-text">
-              <h1>TRUEPRIV <span class="badge">NDPA 2023</span></h1>
-            </div>
-          </div>
-          <p>Truepriv Technologies Limited provides automated compliance management solutions for Nigerian corporate enterprises, DPOs, and licensed DPCO audit firms.</p>
-        </div>
-
-        <div class="footer-col">
-          <h5>Platform</h5>
-          <ul>
-            <li><a href="https://truepriv-saas.vercel.app">1-Click RoPA</a></li>
-            <li><a href="https://truepriv-saas.vercel.app">5×5 DPIA Risk Matrix</a></li>
-            <li><a href="https://truepriv-saas.vercel.app">72h Breach Playbook</a></li>
-            <li><a href="https://truepriv-saas.vercel.app">NDPC Audit Desk</a></li>
-            <li><a href="#pricing">Enterprise Pricing</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h5>Regulatory</h5>
-          <ul>
-            <li><a href="https://truepriv-saas.vercel.app">NDPA 2023 Overview</a></li>
-            <li><a href="https://truepriv-saas.vercel.app">NDPC GAID Regulations</a></li>
-            <li><a href="https://truepriv-saas.vercel.app">March 15 Audit Deadline</a></li>
-            <li><a href="https://truepriv-saas.vercel.app">Data Subject Rights</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h5>Company</h5>
-          <ul>
-            <li><a href="https://truepriv.com/">About Truepriv</a></li>
-            <li><a href="mailto:compliance@truepriv.com">Contact Advisory</a></li>
-            <li><a href="https://truepriv.com/privacy">Privacy Policy</a></li>
-            <li><a href="https://truepriv.com/terms">Terms of Service</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div>&copy; 2026 Truepriv Technologies Limited (truepriv.com). All rights reserved.</div>
-        <div>Primary Sovereign Hosting: Galaxy Backbone Regional Datacenter, Abuja, Nigeria.</div>
+        TRUEPRIV
+      </a>
+      <ul class="nav-links">
+        <li><a href="#solutions">Solutions <span style="font-size:.65rem;opacity:.45">&#9660;</span></a></li>
+        <li><a href="#features">Platform <span style="font-size:.65rem;opacity:.45">&#9660;</span></a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#resources">Resources <span style="font-size:.65rem;opacity:.45">&#9660;</span></a></li>
+        <li><a href="https://consultancy-web-virid-seven.vercel.app" target="_blank">Advisory Firm &#8599;</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="https://truepriv-saas.vercel.app" class="btn-login" id="nav-signin">Sign In</a>
+        <a href="#demo" class="btn-cta-nav" id="nav-demo">Get a Demo <i class="fa-solid fa-arrow-right" style="font-size:.7rem"></i></a>
       </div>
     </div>
-  </footer>
+  </div>
+</nav>
 
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow"><span class="eyebrow-dot"></span> TRUEPRIV &bull; Nigeria's Trust Intelligence Platform &bull; NDPA 2023</div>
+        <h1 class="hero-h1">Make Governance Work<br>at the Speed and<br><em>Scale of AI.</em></h1>
+        <p class="hero-desc">Connect your data, privacy, and AI risk teams. Automate NDPA 2023 compliance—from 1-click RoPA lineage and 5×5 DPIA scoring to 72-hour breach command and certified DPCO CAR audit filings.</p>
+        <div class="hero-actions">
+          <a href="https://truepriv-saas.vercel.app" class="btn-mint" id="hero-trial"><i class="fa-solid fa-rocket"></i> Start Free Trial</a>
+          <a href="#demo" class="btn-outline" id="hero-demo"><i class="fa-regular fa-calendar"></i> Request a Demo</a>
+        </div>
+      </div>
+      <div>
+        <div class="mockup-card">
+          <div class="mockup-bar">
+            <span class="m-dot r"></span><span class="m-dot y"></span><span class="m-dot g"></span>
+            <span class="m-url">app.truepriv.com &mdash; Trust Intelligence Console</span>
+          </div>
+          <div class="mockup-body">
+            <div class="m-header">
+              <div class="m-brand">
+                <div class="m-brand-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="#00c882"><path d="M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3zm-2 16l-4-4 1.41-1.41L10 15.17l6.59-6.59L18 10l-8 8z"/></svg></div>
+                <span class="m-brand-name">Trust Intelligence Console</span>
+              </div>
+              <div class="m-live">Continuous Audit</div>
+            </div>
+            <div class="m-stats">
+              <div class="m-stat"><div class="lbl">NDPA Health</div><div class="val">96.8%</div><div class="chg">&#9650; Grade A</div></div>
+              <div class="m-stat"><div class="lbl">RoPA Flows</div><div class="val">142</div><div class="chg">&#9650; 100% lawful</div></div>
+              <div class="m-stat"><div class="lbl">72h Breaches</div><div class="val">0</div><div class="chg" style="color:#22c55e">&#10003; Clear</div></div>
+              <div class="m-stat"><div class="lbl">DSAR SLA</div><div class="val">4.2d</div><div class="chg">&#9650; On-Time</div></div>
+            </div>
+            <div class="m-table">
+              <div class="m-thead">
+                <span class="m-th">Processing Activity</span>
+                <span class="m-th">Lawful Basis</span>
+                <span class="m-th">Retention</span>
+                <span class="m-th">Status</span>
+              </div>
+              <div class="m-row"><span class="m-td">KYC BVN Verification</span><span class="m-td">Legal Obligation</span><span class="m-td">7 Years</span><span class="m-td"><span class="badge badge-g">Verified</span></span></div>
+              <div class="m-row"><span class="m-td">Credit Scoring</span><span class="m-td">Contract</span><span class="m-td">5 Years</span><span class="m-td"><span class="badge badge-g">Verified</span></span></div>
+              <div class="m-row"><span class="m-td">Biometric Access</span><span class="m-td">Explicit Consent</span><span class="m-td">Duration+1y</span><span class="m-td"><span class="badge badge-a">Review</span></span></div>
+              <div class="m-row"><span class="m-td">Cross-Border Transfer</span><span class="m-td">Adequacy</span><span class="m-td">3 Years</span><span class="m-td"><span class="badge badge-b">Pending</span></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat-item"><div class="stat-num">500+</div><div class="stat-lbl">Regulated Organizations</div></div>
+      <div class="stat-div"></div>
+      <div class="stat-item"><div class="stat-num">13</div><div class="stat-lbl">Economic Sectors Covered</div></div>
+      <div class="stat-div"></div>
+      <div class="stat-item"><div class="stat-num">100%</div><div class="stat-lbl">On-Time NDPC Filings</div></div>
+      <div class="stat-div"></div>
+      <div class="stat-item"><div class="stat-num">72h</div><div class="stat-lbl">Breach Response SLA</div></div>
+      <div class="stat-div"></div>
+      <div class="stat-item"><div class="stat-num">March 15</div><div class="stat-lbl">CAR Statutory Deadline</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CUSTOMERS — dark -->
+<section class="customers">
+  <div class="container">
+    <div class="cust-label">Trusted by Thousands of Global Customers</div>
+    <div class="cust-logos">
+      <div class="cust-logo"><i class="fa-solid fa-building-columns"></i> Tier-1 Banks</div>
+      <div class="cust-logo"><i class="fa-solid fa-credit-card"></i> Payment Gateways</div>
+      <div class="cust-logo"><i class="fa-solid fa-hospital"></i> Healthcare Networks</div>
+      <div class="cust-logo"><i class="fa-solid fa-tower-broadcast"></i> Telecom Operators</div>
+      <div class="cust-logo"><i class="fa-solid fa-landmark"></i> Federal MDAs</div>
+      <div class="cust-logo"><i class="fa-solid fa-shield-halved"></i> Fintechs</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial">
+  <div class="container">
+    <div class="t-grid">
+      <div>
+        <div class="t-img">
+          <div class="t-grid-bg"></div>
+          <div class="t-play" id="playBtn"><i class="fa-solid fa-play"></i></div>
+        </div>
+      </div>
+      <div>
+        <div class="t-badges">
+          <div class="t-badge active" data-idx="0"><i class="fa-solid fa-building-columns"></i> Apex Bank</div>
+          <div class="t-badge" data-idx="1"><i class="fa-solid fa-hospital"></i> Meridian Health</div>
+          <div class="t-badge" data-idx="2"><i class="fa-solid fa-tower-broadcast"></i> Nextel Nigeria</div>
+        </div>
+        <blockquote class="t-quote" id="testimonialQuote">"Truepriv transformed our NDPA 2023 compliance posture. What used to take 6 weeks of manual RoPA updates now happens in 1 click. We filed our March 15 CAR Return with zero last-minute fire drills for the first time."</blockquote>
+        <div class="t-author">
+          <strong id="testimonialAuthor">Dr. Emeka Okonkwo, CIPP/E</strong>
+          <span id="testimonialRole">Chief Data Protection Officer, Apex Commercial Bank PLC</span>
+        </div>
+        <div class="t-dots">
+          <div class="t-dot-active"></div>
+          <div class="t-dot"></div>
+          <div class="t-dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANALYSTS -->
+<section class="analysts">
+  <div class="container">
+    <div class="eyebrow">Recognized by Trusted Analysts</div>
+    <div class="sec-title">Industry leaders are watching.</div>
+    <div class="sec-desc">Truepriv is recognized by leading research bodies for excellence in data privacy automation, NDPA regulatory intelligence, and responsible AI governance for Nigerian-regulated organizations.</div>
+    <div class="analysts-grid">
+      <div class="analyst-card">
+        <div class="a-name">NDPC GAID Framework</div>
+        <div class="a-desc">Named in the 2026 Nigeria Data Protection Commission GAID Framework as a certified platform supporting accredited DPCO audit practitioners and Nigeria data controllers filing statutory Compliance Audit Returns.</div>
+        <a href="#" class="a-link">Read the briefing <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="analyst-card">
+        <div class="a-name">Forrester New Wave&#8482;</div>
+        <div class="a-desc">Cited in the <em>Privacy Compliance Automation for Emerging Markets Wave&#8482;</em> with breakout recognition for 72-hour breach command, 1-click RoPA generation, and sovereign data residency architecture.</div>
+        <a href="#" class="a-link">Download the report <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTIONS -->
+<section class="solutions" id="solutions">
+  <div class="container">
+    <div class="sol-header">
+      <div class="eyebrow">Integrated Solutions for All Areas of Governance</div>
+      <div class="sec-title">One Platform. Every<br>Compliance Need.</div>
+    </div>
+    <div class="sol-grid" id="features">
+
+      <!-- Wide Card: Privacy & RoPA -->
+      <div class="sol-card wide">
+        <div>
+          <div class="sol-icon"><div class="shape-tri"></div></div>
+          <h3>Privacy &amp; Data Governance</h3>
+          <p>Automate RoPA lineage, data inventories, consent management, and cross-border transfer registrations under NDPA Section 41.</p>
+          <ul class="card-check-list">
+            <li><i class="fa-solid fa-check"></i> 1-Click RoPA Generation with 5 Sectoral Templates</li>
+            <li><i class="fa-solid fa-check"></i> Omnichannel Consent Ledger &amp; Zero-Cookie SDK</li>
+            <li><i class="fa-solid fa-check"></i> Section 41 Cross-Border Adequacy Registry</li>
+          </ul>
+          <a href="https://truepriv-saas.vercel.app" class="sol-link">Explore Privacy Cloud <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="card-inner-mockup">
+          <div class="mini-prog-wrap">
+            <div class="mini-top"><span class="mini-lbl">Overall Compliance Score</span><span class="mini-val" style="color:#22c55e">96.8%</span></div>
+            <div class="mini-bar-bg"><div class="mini-bar" style="width:97%"></div></div>
+          </div>
+          <div class="mini-prog-wrap">
+            <div class="mini-top"><span class="mini-lbl">Lawful Basis Mapped</span><span class="mini-val">142/142</span></div>
+            <div class="mini-bar-bg"><div class="mini-bar" style="width:100%"></div></div>
+          </div>
+          <div class="mini-prog-wrap">
+            <div class="mini-top"><span class="mini-lbl">Consent Opt-In Rate</span><span class="mini-val">94.2%</span></div>
+            <div class="mini-bar-bg"><div class="mini-bar" style="width:94%"></div></div>
+          </div>
+          <div class="mini-prog-wrap">
+            <div class="mini-top"><span class="mini-lbl">DSAR Fulfillment Rate</span><span class="mini-val">100%</span></div>
+            <div class="mini-bar-bg"><div class="mini-bar" style="width:100%"></div></div>
+          </div>
+          <div style="margin-top:.5rem;padding:.6rem .8rem;background:#dcfce7;border-radius:var(--r6);font-size:.7rem;font-weight:700;color:#166534">
+            &#10003; GAID Grade A &mdash; March 15 CAR Ready
+          </div>
+        </div>
+      </div>
+
+      <!-- CAR & DPCO -->
+      <div class="sol-card">
+        <div class="sol-icon"><div class="shape-circle"></div></div>
+        <h3>Statutory CAR &amp; DPCO Audit Return</h3>
+        <p>Automated GAID 5-domain checklist, official NDPC certified PDF generator, and digital DPCO assurance seal for March 15 annual statutory filing.</p>
+        <a href="https://truepriv-saas.vercel.app" class="sol-link">Explore CAR Cloud <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <!-- GRC & Breach -->
+      <div class="sol-card">
+        <div class="sol-icon"><div class="shape-pent"></div></div>
+        <h3>GRC &amp; 72h Breach Command</h3>
+        <p>Live 72-hour countdown clock, automated NDPC Form 1 notification pack builder, and 30-day DSAR statutory fulfillment pipeline.</p>
+        <a href="https://truepriv-saas.vercel.app" class="sol-link">Explore Breach Cloud <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <!-- AI Governance -->
+      <div class="sol-card">
+        <div class="sol-icon"><div class="shape-sq"></div></div>
+        <h3>Responsible AI Governance</h3>
+        <p>Audit automated decision systems and ML models for algorithmic bias and profiling rights. 5×5 DPIA risk scoring with digital DPO sign-off under NDPA.</p>
+        <a href="https://truepriv-saas.vercel.app" class="sol-link">Explore AI Cloud <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Outsourced DPO -->
+      <div class="sol-card">
+        <div class="sol-icon"><div class="shape-dia"></div></div>
+        <h3>Outsourced DPO Hub</h3>
+        <p>Multi-tenant portfolio for DPO consultants. Manage up to 15 client workspaces with independent compliance scores, RoPA lineage, and breach timelines.</p>
+        <a href="https://truepriv-saas.vercel.app" class="sol-link">Explore DPO Hub <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Sovereign Hosting -->
+      <div class="sol-card">
+        <div class="sol-icon"><div class="shape-hex"></div></div>
+        <h3>Sovereign Data Residency</h3>
+        <p>Onshore hosting on Galaxy Backbone Abuja Tier-4. AES-256 encryption, TLS 1.3 bank-grade transport, and full Section 24 data residency compliance.</p>
+        <a href="https://truepriv-saas.vercel.app" class="sol-link">View Residency Details <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="price-hd">
+      <div class="eyebrow" style="text-align:center">Predictable Enterprise Packaging</div>
+      <div class="sec-title" style="text-align:center;margin-bottom:.75rem">Simple, Transparent Pricing</div>
+      <p style="text-align:center;color:var(--textm);font-size:.95rem">Tailored tiers for Corporate Controllers, Outsourced DPO practices, and Licensed DPCO Audit Firms.</p>
+    </div>
+    <div class="price-toggle">
+      <span class="tgl-label">Monthly</span>
+      <div class="tgl-sw on" id="billingToggle" onclick="toggleBilling(this)" role="button" tabindex="0">
+        <div class="tgl-knob"></div>
+      </div>
+      <span class="tgl-label">Annual</span>
+      <span class="tgl-badge">Save 20%</span>
+    </div>
+    <div class="price-grid">
+      <!-- Starter -->
+      <div class="price-card">
+        <div class="plan-name"><i class="fa-solid fa-building" style="color:var(--g500)"></i> Corporate Starter</div>
+        <div class="plan-desc">Single Nigerian Data Controller</div>
+        <div class="plan-price"><span class="price-num" id="price-starter">&#8358;750K</span><span class="price-per" id="period-starter">/ year</span></div>
+        <ul class="plan-feats">
+          <li><i class="fa-solid fa-check"></i> <span><strong>Single Corporate Workspace</strong></span></li>
+          <li><i class="fa-solid fa-check"></i> 1-Click RoPA Generation</li>
+          <li><i class="fa-solid fa-check"></i> 72-Hour Breach Emergency Clock</li>
+          <li><i class="fa-solid fa-check"></i> 30-Day DSAR Pipeline</li>
+          <li><i class="fa-solid fa-check"></i> Zero-Cookie Consent SDK</li>
+          <li><i class="fa-solid fa-check"></i> Up to 50,000 Data Subject Records</li>
+        </ul>
+        <a href="https://truepriv-saas.vercel.app" class="btn-wht" id="cta-starter">Get Started &#8594;</a>
+      </div>
+      <!-- DPO Hub -->
+      <div class="price-card popular">
+        <div class="pop-tag">&#11088; Most Popular</div>
+        <div class="plan-name"><i class="fa-solid fa-user-shield" style="color:var(--mint-dark)"></i> Outsourced DPO Hub</div>
+        <div class="plan-desc">For DPO consultants &amp; advisory practices</div>
+        <div class="plan-price"><span class="price-num" id="price-dpo">&#8358;2.5M</span><span class="price-per" id="period-dpo">/ year</span></div>
+        <ul class="plan-feats">
+          <li><i class="fa-solid fa-check"></i> <span><strong>Multi-Tenant: 15 Client Workspaces</strong></span></li>
+          <li><i class="fa-solid fa-check"></i> 5&times;5 DPIA Risk Scoring Matrix</li>
+          <li><i class="fa-solid fa-check"></i> AI Decision Recommendation Logs</li>
+          <li><i class="fa-solid fa-check"></i> Omnichannel Consent Ledger</li>
+          <li><i class="fa-solid fa-check"></i> Cross-Border Transfer Tracker (Sec 41)</li>
+          <li><i class="fa-solid fa-check"></i> Department Champion Invitations</li>
+        </ul>
+        <a href="https://truepriv-saas.vercel.app" class="btn-blk" id="cta-dpo">Launch DPO Hub &#8594;</a>
+      </div>
+      <!-- DPCO Suite -->
+      <div class="price-card">
+        <div class="plan-name"><i class="fa-solid fa-building-columns" style="color:#7c3aed"></i> Licensed DPCO Suite</div>
+        <div class="plan-desc">For accredited DPCO audit firms</div>
+        <div class="plan-price"><span class="price-num" id="price-dpco">&#8358;4.5M</span><span class="price-per" id="period-dpco">/ year</span></div>
+        <ul class="plan-feats">
+          <li><i class="fa-solid fa-check"></i> <span><strong>Unlimited Client Audit Engagements</strong></span></li>
+          <li><i class="fa-solid fa-check"></i> Full GAID 5-Domain Dynamic Checklist</li>
+          <li><i class="fa-solid fa-check"></i> Official NDPC PDF Filing Generator</li>
+          <li><i class="fa-solid fa-check"></i> Digital DPCO Audit Seal Verification</li>
+          <li><i class="fa-solid fa-check"></i> Dedicated March 15 Filing Pipeline</li>
+          <li><i class="fa-solid fa-check"></i> Immutable System Audit Trail Ledger</li>
+        </ul>
+        <a href="https://truepriv-saas.vercel.app" class="btn-wht" id="cta-dpco">Activate DPCO Suite &#8594;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section class="resources" id="resources">
+  <div class="container">
+    <div class="res-hd">
+      <div>
+        <div class="eyebrow">Insights &amp; Resources</div>
+        <div class="sec-title" style="margin-bottom:0">Help You Move Faster.</div>
+      </div>
+      <a href="#" style="font-size:.875rem;font-weight:700;color:var(--black);display:flex;align-items:center;gap:.4rem;white-space:nowrap">View All Resources <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="res-grid">
+      <div class="res-card">
+        <div class="res-img grad1"><i class="fa-solid fa-file-contract"></i></div>
+        <div class="res-body">
+          <div class="res-type">Report</div>
+          <div class="res-title">2026 NDPC Compliance Audit Return: GAID Framework &amp; Enforcement Guide</div>
+          <div class="res-link">Read now <i class="fa-solid fa-arrow-right" style="font-size:.65rem"></i></div>
+        </div>
+      </div>
+      <div class="res-card">
+        <div class="res-img grad2"><i class="fa-solid fa-brain"></i></div>
+        <div class="res-body">
+          <div class="res-type">Research</div>
+          <div class="res-title">Responsible AI &amp; Data Privacy: Guarding Against Model Poisoning &amp; Profiling Bias</div>
+          <div class="res-link">Read now <i class="fa-solid fa-arrow-right" style="font-size:.65rem"></i></div>
+        </div>
+      </div>
+      <div class="res-card">
+        <div class="res-img grad3"><i class="fa-solid fa-clock"></i></div>
+        <div class="res-body">
+          <div class="res-type">Guide</div>
+          <div class="res-title">Harmonizing Incident Timelines: CBN 24h, NCC 48h &amp; NDPC 72h Directives</div>
+          <div class="res-link">Read now <i class="fa-solid fa-arrow-right" style="font-size:.65rem"></i></div>
+        </div>
+      </div>
+      <div class="res-card">
+        <div class="res-img grad4"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="res-body">
+          <div class="res-type">Webinar</div>
+          <div class="res-title">Automating DSARs across Legacy Core IT Stacks in Nigerian Banks</div>
+          <div class="res-link">Watch now <i class="fa-solid fa-arrow-right" style="font-size:.65rem"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA DARK + FORM -->
+<section class="cta-dark" id="demo">
+  <div class="cta-bg"></div>
+  <div class="cta-grid-bg"></div>
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-h2">Start your <span>Trust</span><br>Intelligence<br>journey today.</h2>
+        <p class="cta-desc">Schedule an executive walkthrough with our Nigerian compliance engineers. We'll map your NDPA 2023 obligations, build a RoPA migration roadmap, and configure your sovereign cloud instance.</p>
+        <div class="cta-acts">
+          <a href="https://truepriv-saas.vercel.app" class="btn-mint-lg" id="cta-trial"><i class="fa-solid fa-rocket"></i> Start Free Trial</a>
+          <a href="https://consultancy-web-virid-seven.vercel.app" target="_blank" class="btn-wht-lg" id="cta-advisory"><i class="fa-solid fa-building"></i> Amstel Advisory &#8599;</a>
+        </div>
+        <div class="trust-badges">
+          <div class="trust-badge"><i class="fa-solid fa-server"></i> Galaxy Backbone Tier-4 Abuja</div>
+          <div class="trust-badge"><i class="fa-solid fa-lock"></i> AES-256 Encryption</div>
+          <div class="trust-badge"><i class="fa-solid fa-certificate"></i> NDPC GAID Compliant</div>
+          <div class="trust-badge"><i class="fa-solid fa-scale-balanced"></i> Sec 24 DPCO SLA Guard</div>
+        </div>
+      </div>
+      <div class="cta-form">
+        <div class="form-title">Request a Platform Demo</div>
+        <form onsubmit="handleDemoSubmit(event)">
+          <div class="f-grid2">
+            <div class="f-field"><label>First Name *</label><input type="text" placeholder="Dr. Aliyu" required id="f-fname"></div>
+            <div class="f-field"><label>Last Name *</label><input type="text" placeholder="Adeleke" required id="f-lname"></div>
+          </div>
+          <div class="f-field"><label>Work Email *</label><input type="email" placeholder="name@company.com" required id="f-email"></div>
+          <div class="f-field"><label>Organization *</label><input type="text" placeholder="Apex Holdings PLC" required id="f-org"></div>
+          <div class="f-field">
+            <label>Industry Sector *</label>
+            <select required id="f-sector">
+              <option value="">-- Select Industry --</option>
+              <option>Banking &amp; Financial Services</option>
+              <option>Fintech &amp; Payments</option>
+              <option>Healthcare &amp; Telemedicine</option>
+              <option>Telecom &amp; Infrastructure</option>
+              <option>Public Sector &amp; MDAs</option>
+              <option>Retail &amp; E-Commerce</option>
+              <option>Insurance &amp; Pension</option>
+              <option>Education &amp; EdTech</option>
+              <option>Accredited DPCO Audit Firm</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-form-sub" id="form-submit-btn">
+            <i class="fa-solid fa-calendar-check"></i> Schedule Demo Session
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">
+          <div class="foot-logo-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="black"><path d="M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3zm-2 16l-4-4 1.41-1.41L10 15.17l6.59-6.59L18 10l-8 8z"/></svg>
+          </div>
+          <span class="foot-logo-name">TRUEPRIV</span>
+        </div>
+        <p class="foot-brand-desc">Truepriv Technologies Limited is Nigeria's premier Trust Intelligence Platform, powering continuous NDPA 2023 regulatory compliance, GRC posture management, and statutory DPCO audit assurance.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="mailto:enterprise@truepriv.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Platform</h5>
+        <ul>
+          <li><a href="https://truepriv-saas.vercel.app">Privacy &amp; RoPA Lineage</a></li>
+          <li><a href="https://truepriv-saas.vercel.app">5&times;5 DPIA Risk Matrix</a></li>
+          <li><a href="https://truepriv-saas.vercel.app">72h Breach Command</a></li>
+          <li><a href="https://truepriv-saas.vercel.app">DPCO CAR Audit Return</a></li>
+          <li><a href="https://truepriv-saas.vercel.app">AI Governance Cloud</a></li>
+          <li><a href="#pricing">Enterprise Packaging</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Sectors</h5>
+        <ul>
+          <li><a href="https://truepriv-saas.vercel.app">Banking (CBN)</a></li>
+          <li><a href="https://truepriv-saas.vercel.app">Fintech &amp; APIs</a></li>
+          <li><a href="https://truepriv-saas.vercel.app">Healthcare (EHR)</a></li>
+          <li><a href="https://truepriv-saas.vercel.app">Telecom &amp; CDR</a></li>
+          <li><a href="https://truepriv-saas.vercel.app">Public Sector &amp; MDAs</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Regulatory</h5>
+        <ul>
+          <li><a href="https://truepriv-saas.vercel.app">NDPA 2023 Guide</a></li>
+          <li><a href="https://truepriv-saas.vercel.app">NDPC GAID Domains</a></li>
+          <li><a href="https://truepriv-saas.vercel.app">March 15 CAR Protocols</a></li>
+          <li><a href="https://consultancy-web-virid-seven.vercel.app" target="_blank">Amstel Advisory &#8599;</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="https://truepriv-saas.vercel.app">About Truepriv</a></li>
+          <li><a href="mailto:enterprise@truepriv.com">enterprise@truepriv.com</a></li>
+          <li><a href="https://truepriv-saas.vercel.app">Privacy Policy</a></li>
+          <li><a href="https://truepriv-saas.vercel.app">Terms of Service</a></li>
+          <li><a href="https://consultancy-web-virid-seven.vercel.app" target="_blank">Advisory Portal &#8599;</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Truepriv Technologies Limited. All rights reserved. &bull; Sovereign Hosting: Galaxy Backbone Tier-4, Abuja, Nigeria.</span>
+      <div class="foot-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Billing toggle
+  let isAnnual=true;
+  function toggleBilling(el){
+    isAnnual=!isAnnual;
+    el.classList.toggle('on',isAnnual);
+    const d={starter:isAnnual?['&#8358;750K','/ year']:['&#8358;78K','/ month'],dpo:isAnnual?['&#8358;2.5M','/ year']:['&#8358;260K','/ month'],dpco:isAnnual?['&#8358;4.5M','/ year']:['&#8358;470K','/ month']};
+    ['starter','dpo','dpco'].forEach(k=>{
+      document.getElementById('price-'+k).innerHTML=d[k][0];
+      document.getElementById('period-'+k).textContent=d[k][1];
+    });
+  }
+
+  // Demo form
+  function handleDemoSubmit(e){
+    e.preventDefault();
+    const btn=document.getElementById('form-submit-btn');
+    btn.innerHTML='<i class="fa-solid fa-check"></i> Request Received — We\'ll be in touch shortly!';
+    btn.style.background='#166534';
+    btn.style.color='#fff';
+    setTimeout(()=>{
+      btn.innerHTML='<i class="fa-solid fa-calendar-check"></i> Schedule Demo Session';
+      btn.style.background='';btn.style.color='';
+      e.target.reset();
+    },5000);
+  }
+
+  // Play button
+  document.getElementById('playBtn').addEventListener('click',function(){
+    this.innerHTML='<i class="fa-solid fa-pause"></i>';
+    this.style.background='var(--mint-dark)';
+    setTimeout(()=>{this.innerHTML='<i class="fa-solid fa-play"></i>';this.style.background='';},3000);
+  });
+
+  // Testimonial badges
+  const quotes=[
+    {q:'"Truepriv transformed our NDPA 2023 compliance posture. What used to take 6 weeks of manual RoPA updates now happens in 1 click. We filed our March 15 CAR Return with zero last-minute fire drills for the first time."',a:'Dr. Emeka Okonkwo, CIPP/E',r:'Chief Data Protection Officer, Apex Commercial Bank PLC'},
+    {q:'"Our DSAR response time dropped from 18 days to 4.2 days. The 72-hour breach command dashboard gives our clinical team complete confidence during security incidents."',a:'Dr. Adaeze Okafor',r:'Head of Health Informatics &amp; Data Privacy, Meridian Health Group'},
+    {q:'"As a Telecom operator handling 47 million subscriber records, Truepriv\'s NCC CDR compliance module and cross-border transfer tracker are indispensable tools for our DPO team."',a:'Engr. Babatunde Lawal, CISSP',r:'Group CISO &amp; Acting DPO, Nextel Nigeria Limited'}
+  ];
+  document.querySelectorAll('.t-badge').forEach((badge,i)=>{
+    badge.addEventListener('click',function(){
+      document.querySelectorAll('.t-badge').forEach(b=>b.classList.remove('active'));
+      this.classList.add('active');
+      const q=quotes[i];
+      document.getElementById('testimonialQuote').textContent=q.q.replace(/"/g,'');
+      document.getElementById('testimonialAuthor').textContent=q.a;
+      document.getElementById('testimonialRole').innerHTML=q.r;
+    });
+  });
+
+  // Sticky nav shadow
+  window.addEventListener('scroll',function(){
+    document.getElementById('mainNav').style.boxShadow=window.scrollY>10?'0 2px 20px rgba(0,0,0,.08)':'none';
+  });
+
+  // Animate on scroll
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}
+    });
+  },{threshold:0.08});
+  document.querySelectorAll('.sol-card,.price-card,.analyst-card,.res-card,.t-img,.stats-bar,.customers').forEach(el=>{
+    el.style.opacity='0';el.style.transform='translateY(16px)';el.style.transition='opacity 0.45s ease,transform 0.45s ease';
+    io.observe(el);
+  });
+</script>
 </body>
 </html>
