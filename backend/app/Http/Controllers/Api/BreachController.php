@@ -20,9 +20,11 @@ class BreachController extends Controller
             ->get();
 
         $data = $breaches->map(function ($breach) {
+            $hours = $breach->hours_remaining;
             return array_merge($breach->toArray(), [
-                'hours_remaining' => $breach->hours_remaining,
-                'is_urgent' => $breach->hours_remaining <= 24 && !$breach->is_ndpc_notified,
+                'hours_remaining' => $hours,
+                'hours_remaining_72h' => $hours,
+                'is_urgent' => $hours <= 24 && !$breach->is_ndpc_notified,
             ]);
         });
 

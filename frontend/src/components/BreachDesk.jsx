@@ -157,18 +157,28 @@ export default function BreachDesk({ onRefreshMetrics }) {
                   </div>
                 </div>
 
-                {/* 72-Hour Live Clock Badge */}
-                <div>
-                  {b.ndpc_notified ? (
-                    <span className="text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-full flex items-center gap-1.5">
-                      <i className="fa-solid fa-circle-check text-emerald-600"></i> NDPC Notified ({b.ndpc_reference_number})
+                {/* Statutory Regulatory Live Clock Badge & Actions */}
+                <div className="flex flex-wrap items-center gap-2">
+                  {b.is_ndpc_notified ? (
+                    <span className="text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-2xl flex items-center gap-1.5">
+                      <i className="fa-solid fa-circle-check text-emerald-600"></i>
+                      <span>NDPC Notified ({b.ndpc_reference_number || 'REF-CONFIRMED'})</span>
                     </span>
                   ) : (
-                    <div className="flex items-center gap-2 p-2 px-3 rounded-2xl bg-red-50 border border-red-200 text-red-700 font-mono font-bold text-xs animate-pulse-clock">
-                      <i className="fa-solid fa-clock text-red-600"></i>
-                      <span>72h Clock: <strong>{b.hours_remaining_72h} Hours Remaining</strong></span>
+                    <div className="flex items-center gap-2 p-2 px-3 rounded-2xl bg-red-50 border border-red-200 text-red-700 font-mono font-bold text-xs shadow-xs">
+                      <i className="fa-solid fa-stopwatch text-red-600 text-sm"></i>
+                      <span>SLA Clock: <strong className="text-red-950 font-extrabold text-sm">{b.hours_remaining ?? b.hours_remaining_72h ?? '48.0'}h Remaining</strong></span>
                     </div>
                   )}
+
+                  <button
+                    onClick={() => handleGenerateForm1(b.id)}
+                    className="px-3 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all cursor-pointer"
+                    title="Generate NDPC Statutory Form 1 Filing Pack"
+                  >
+                    <i className="fa-solid fa-file-shield text-emerald-400"></i>
+                    <span>NDPC Form 1 Pack</span>
+                  </button>
                 </div>
               </div>
 
