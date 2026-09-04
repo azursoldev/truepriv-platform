@@ -243,7 +243,7 @@ export default function Header({
             <div className="hidden lg:flex flex-col justify-center text-left">
               <div className="text-xs font-bold text-slate-900 leading-tight whitespace-nowrap group-hover:text-emerald-700 transition-colors">
                 {user?.name || 'System Administrator'}
-              </div>
+              </div> 
               <div className="text-[9px] text-slate-500 capitalize font-semibold leading-tight mt-0.5 whitespace-nowrap">
                 {user?.role?.replace(/_/g, ' ') || 'Super Admin'}
               </div>
