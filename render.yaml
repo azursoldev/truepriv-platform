@@ -24,31 +24,6 @@ services:
       - key: APP_KEY
         generateValue: true
       - key: DB_CONNECTION
-        value: pgsql
-      - key: DB_HOST
-        fromDatabase:
-          name: truepriv-postgres
-          property: host
-      - key: DB_PORT
-        fromDatabase:
-          name: truepriv-postgres
-          property: port
+        value: sqlite
       - key: DB_DATABASE
-        fromDatabase:
-          name: truepriv-postgres
-          property: database
-      - key: DB_USERNAME
-        fromDatabase:
-          name: truepriv-postgres
-          property: user
-      - key: DB_PASSWORD
-        fromDatabase:
-          name: truepriv-postgres
-          property: password
-
-databases:
-  - name: truepriv-postgres
-    plan: free
-    region: oregon
-    databaseName: truepriv_db
-    user: truepriv_user
+        value: /var/www/html/database/database.sqlite

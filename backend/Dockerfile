@@ -4,6 +4,7 @@ FROM php:8.2-fpm-alpine
 RUN apk add --no-cache \
     nginx \
     postgresql-dev \
+    sqlite-dev \
     libpng-dev \
     libjpeg-turbo-dev \
     freetype-dev \
@@ -16,7 +17,7 @@ RUN apk add --no-cache \
 
 # Install PHP extensions
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) pdo pdo_pgsql bcmath gd zip opcache
+    && docker-php-ext-install -j$(nproc) pdo pdo_pgsql pdo_sqlite bcmath gd zip opcache
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer

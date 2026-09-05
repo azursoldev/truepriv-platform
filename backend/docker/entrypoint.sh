@@ -9,6 +9,17 @@ if [ -z "$APP_KEY" ]; then
     php artisan key:generate --force
 fi
 
+# Setup SQLite database if no external DB_HOST provided or if DB_CONNECTION is sqlite
+if [ "$DB_CONNECTION" = "sqlite" ] || [ -z "$DB_HOST" ]; then
+    echo "Configuring self-contained SQLite database..."
+    export DB_CONNECTION=sqlite
+    export DB_DATABASE=/var/www/html/database/database.sqlite
+    mkdir -p /var/www/html/database
+    touch /var/www/html/database/database.sqlite
+    chown -R www-data:www-data /var/www/html/database
+    chmod -R 775 /var/www/html/database
+fi
+
 # Run database migrations and seeders safely
 echo "Running database migrations..."
 php artisan migrate --force || true
