@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Consulting & Governance | Amstel Consulting</title>
+  <meta name="description" content="Auditing machine learning models, algorithmic bias assessments, LLM data privacy, and NDPA Section 37 automated decision-making compliance.">
+  <link rel="canonical" href="https://consultancy-web-virid-seven.vercel.app/service-ai.html">
+  <link rel="icon" type="image/jpeg" href="logo.jpg">
+
+  <!-- Google Fonts: Georgia/Times serif, Inter sans-serif, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --pwc-orange: #d85604;
+      --pwc-orange-dark: #b84500;
+      --pwc-peach-light: #fff7f2;
+      --pwc-peach-med: #ffe8dc;
+      --pwc-peach-dark: #ffd3bd;
+      --pwc-charcoal: #2d2d2d;
+      --pwc-black: #000000;
+      --pwc-white: #ffffff;
+      --pwc-gray-bg: #f8f9fa;
+      --pwc-gray-border: #e2e8f0;
+      --pwc-gray-text: #4a5568;
+      --font-serif: 'Georgia', 'Times New Roman', serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--pwc-white);
+      color: var(--pwc-charcoal);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .top-bar {
+      background: var(--pwc-charcoal);
+      color: #cbd5e1;
+      padding: 0.4rem 3.5rem;
+      font-size: 0.78rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1.75rem;
+      border-bottom: 1px solid #3d3d3d;
+    }
+    .top-bar-item { color: #cbd5e1; transition: color 0.2s; display: inline-flex; align-items: center; gap: 0.35rem; }
+    .top-bar-item:hover { color: var(--pwc-orange); }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--pwc-gray-border);
+      padding: 0.75rem 3.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo-img { height: 52px; width: auto; max-width: 140px; object-fit: contain; display: block; }
+    .main-nav { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
+    .main-nav > li { position: relative; }
+    .main-nav a {
+      color: var(--pwc-charcoal);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 0.45rem 0.85rem;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border-radius: 9999px;
+    }
+    .main-nav a:hover, .main-nav > li:hover > a { color: var(--pwc-charcoal); background: #f1f3f5; }
+    .nav-chevron { font-size: 0.65rem; color: #94a3b8; transition: transform 0.2s ease; }
+    .main-nav > li:hover .nav-chevron { transform: rotate(180deg); color: var(--pwc-charcoal); }
+
+    .mega-dropdown-menu {
+      position: absolute;
+      top: 100%; left: 0; width: 780px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.04);
+      padding: 2.25rem 2.5rem;
+      opacity: 0; visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000; pointer-events: none;
+    }
+    .mega-dropdown-menu::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
+    .main-nav > li:hover .mega-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(6px); pointer-events: auto; }
+    .mega-dropdown-grid { display: grid; grid-template-columns: 1.15fr 1.15fr 1fr; gap: 2.5rem; }
+    .mega-col-heading { font-size: 0.82rem; font-weight: 700; color: #64748b; margin-bottom: 1.25rem; letter-spacing: 0.3px; }
+    .mega-subnav-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+    .mega-subnav-list li a {
+      color: #0f172a !important; font-size: 0.93rem !important; font-weight: 600 !important;
+      padding: 0.25rem 0 !important; border-radius: 0 !important; background: transparent !important;
+      display: block !important; transition: all 0.15s ease !important;
+    }
+    .mega-subnav-list li a:hover { color: var(--pwc-orange) !important; transform: translateX(4px); }
+    .mega-view-all-link {
+      display: inline-flex !important; align-items: center !important; gap: 0.45rem !important;
+      margin-top: 1.5rem !important; font-size: 0.85rem !important; font-weight: 700 !important;
+      color: #0f172a !important; padding: 0 !important; border-radius: 0 !important;
+      background: transparent !important; transition: all 0.15s ease !important;
+    }
+    .mega-view-all-link:hover { color: var(--pwc-orange) !important; gap: 0.7rem !important; }
+
+        /* ==========================================================================
+       PwC INDUSTRIES MEGA-DROPDOWN (EXACT PwC NETHERLANDS SCREENSHOT LAYOUT)
+       ========================================================================== */
+    .industries-mega-dropdown {
+      position: absolute;
+      top: 100%;
+      left: -200px;
+      width: 1040px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.16), 0 8px 24px -4px rgba(0, 0, 0, 0.06);
+      padding: 2.25rem 2.5rem 2.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .industries-mega-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: 0;
+      right: 0;
+      height: 16px;
+    }
+
+    .main-nav > li:hover .industries-mega-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(6px);
+      pointer-events: auto;
+    }
+
+    .ind-dropdown-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.75rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .ind-dropdown-title {
+      font-family: var(--font-sans);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+    }
+
+    .ind-dropdown-close {
+      font-size: 1.3rem;
+      color: #94a3b8;
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+
+    .ind-dropdown-close:hover {
+      color: var(--pwc-orange);
+      background: #f8fafc;
+    }
+
+    .ind-mega-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1.35fr;
+      gap: 2.25rem;
+    }
+
+    .ind-links-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .ind-link-item {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      padding: 0.65rem 0.6rem !important;
+      border-radius: 4px !important;
+      color: #1e293b !important;
+      font-size: 0.94rem !important;
+      font-weight: 500 !important;
+      text-decoration: none !important;
+      background: transparent !important;
+      transition: all 0.15s ease !important;
+    }
+
+    .ind-link-item:hover {
+      color: var(--pwc-orange) !important;
+      background: #fff7f2 !important;
+      padding-left: 0.85rem !important;
+    }
+
+    .ind-link-item .ind-chevron {
+      font-size: 0.72rem;
+      color: #94a3b8;
+      transition: transform 0.15s ease, color 0.15s ease;
+    }
+
+    .ind-link-item:hover .ind-chevron {
+      color: var(--pwc-orange);
+      transform: translateX(3px);
+    }
+
+    .ind-view-all {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 0.45rem !important;
+      margin-top: 1.25rem !important;
+      padding: 0.4rem 0.6rem !important;
+      font-size: 0.88rem !important;
+      font-weight: 700 !important;
+      color: var(--pwc-orange) !important;
+      transition: gap 0.2s ease !important;
+    }
+
+    .ind-view-all:hover {
+      gap: 0.75rem !important;
+    }
+
+    /* Featured Column */
+    .ind-featured-col {
+      padding-left: 1.75rem;
+      border-left: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .ind-featured-heading {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 0.25rem;
+      letter-spacing: 0.2px;
+    }
+
+    .ind-featured-card {
+      display: flex !important;
+      align-items: center !important;
+      gap: 1rem !important;
+      text-decoration: none !important;
+      padding: 0.6rem !important;
+      border-radius: 6px !important;
+      transition: all 0.2s ease !important;
+      background: transparent !important;
+    }
+
+    .ind-featured-card:hover {
+      background: #f8fafc !important;
+      transform: translateY(-2px);
+    }
+
+    .ind-featured-thumb-wrap {
+      width: 95px;
+      height: 64px;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .ind-featured-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .thumb-orange-strip {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--pwc-orange);
+    }
+
+    .ind-featured-text {
+      font-family: var(--font-serif);
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.35;
+      transition: color 0.15s ease;
+    }
+
+    .ind-featured-card:hover .ind-featured-text {
+      color: var(--pwc-orange);
+    }
+
+    
+    /* ==========================================================================
+       PwC OUR ORGANISATION MEGA-DROPDOWN (SCREENSHOT 1 EXACT)
+       ========================================================================== */
+    .org-mega-dropdown {
+      position: absolute;
+      top: 100%;
+      left: -420px;
+      width: 1060px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.16), 0 8px 24px -4px rgba(0, 0, 0, 0.06);
+      padding: 2.25rem 2.5rem 2.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .org-mega-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: 0;
+      right: 0;
+      height: 16px;
+    }
+
+    .main-nav > li:hover .org-mega-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(6px);
+      pointer-events: auto;
+    }
+
+    .org-dropdown-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.75rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .org-dropdown-title {
+      font-family: var(--font-sans);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+    }
+
+    .org-dropdown-close {
+      font-size: 1.3rem;
+      color: #94a3b8;
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+
+    .org-dropdown-close:hover {
+      color: var(--pwc-orange);
+      background: #f8fafc;
+    }
+
+    .org-mega-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1.35fr;
+      gap: 2.25rem;
+    }
+
+    .org-links-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .org-link-item {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      padding: 0.6rem 0.5rem !important;
+      border-radius: 4px !important;
+      color: #1e293b !important;
+      font-size: 0.93rem !important;
+      font-weight: 500 !important;
+      text-decoration: none !important;
+      background: transparent !important;
+      transition: all 0.15s ease !important;
+      line-height: 1.35 !important;
+    }
+
+    .org-link-item:hover {
+      color: var(--pwc-orange) !important;
+      background: #fff7f2 !important;
+      padding-left: 0.75rem !important;
+    }
+
+    .org-link-item .org-chevron {
+      font-size: 0.72rem;
+      color: #94a3b8;
+      transition: transform 0.15s ease, color 0.15s ease;
+    }
+
+    .org-link-item:hover .org-chevron {
+      color: var(--pwc-orange);
+      transform: translateX(3px);
+    }
+
+    .org-link-item .org-external-icon {
+      font-size: 0.72rem;
+      color: #94a3b8;
+    }
+
+    /* Featured Column */
+    .org-featured-col {
+      padding-left: 1.75rem;
+      border-left: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+    }
+
+    .org-featured-heading {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 0.15rem;
+      letter-spacing: 0.2px;
+    }
+
+    .org-featured-card {
+      display: flex !important;
+      align-items: center !important;
+      gap: 1rem !important;
+      text-decoration: none !important;
+      padding: 0.5rem !important;
+      border-radius: 6px !important;
+      transition: all 0.2s ease !important;
+      background: transparent !important;
+    }
+
+    .org-featured-card:hover {
+      background: #f8fafc !important;
+      transform: translateY(-2px);
+    }
+
+    .org-featured-thumb-wrap {
+      width: 95px;
+      height: 62px;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .org-featured-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .org-featured-text {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.3;
+      transition: color 0.15s ease;
+    }
+
+    .org-featured-card:hover .org-featured-text {
+      color: var(--pwc-orange);
+    }
+
+    .header-right { display: flex; align-items: center; gap: 1.5rem; }
+    .btn-contact-nav {
+      background: var(--pwc-black); color: var(--pwc-white); padding: 0.65rem 1.4rem;
+      font-size: 0.88rem; font-weight: 700; border-radius: 4px; transition: all 0.2s;
+    }
+    .btn-contact-nav:hover { background: var(--pwc-orange); }
+
+    .pwc-detail-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+    .btn-pwc-orange {
+      background: var(--pwc-orange); color: #ffffff; padding: 0.85rem 1.85rem;
+      font-size: 0.92rem; font-weight: 700; border-radius: 2px;
+      display: inline-flex; align-items: center; gap: 0.5rem; border: none; cursor: pointer; transition: all 0.2s ease;
+    }
+    .btn-pwc-orange:hover { background: var(--pwc-orange-dark); transform: translateX(3px); }
+
+    .btn-pwc-outline {
+      background: transparent; color: var(--pwc-charcoal); border: 2px solid var(--pwc-charcoal);
+      padding: 0.8rem 1.75rem; font-size: 0.92rem; font-weight: 700; border-radius: 2px;
+      display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s;
+    }
+    .btn-pwc-outline:hover { background: var(--pwc-charcoal); color: #ffffff; }
+
+    /* 1. Page Title & Banner */
+    .page-title-section { padding: 3rem 0 1.5rem; }
+    .breadcrumbs-detail { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: #64748b; margin-bottom: 1.25rem; }
+    .breadcrumbs-detail a:hover { color: var(--pwc-orange); }
+    .page-main-headline { font-family: var(--font-serif); font-size: 3.6rem; font-weight: 700; color: var(--pwc-charcoal); line-height: 1.1; letter-spacing: -0.02em; }
+    .hero-banner-wrap { position: relative; width: 100%; height: 380px; margin: 1.5rem 0 4.5rem; border-radius: 4px; overflow: hidden; }
+    .hero-banner-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .pwc-orange-polygon {
+      position: absolute; bottom: 25%; left: 35%; width: 55%; height: 72px; background: var(--pwc-orange);
+      clip-path: polygon(8% 0, 100% 0, 92% 100%, 0% 100%); display: flex; align-items: center;
+      padding-left: 3.5rem; color: #ffffff; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.5px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+
+    /* 2. Overview Split */
+    .split-intro-section { padding-bottom: 5rem; }
+    .split-intro-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 4rem; align-items: center; }
+    .split-intro-left h2 { font-family: var(--font-serif); font-size: 2.25rem; font-weight: 700; color: var(--pwc-charcoal); line-height: 1.25; margin-bottom: 1.25rem; }
+    .split-intro-left p { font-size: 1.05rem; color: var(--pwc-gray-text); line-height: 1.7; margin-bottom: 1.25rem; }
+    .bullet-check-list { list-style: none; margin: 1.5rem 0 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .bullet-check-list li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.98rem; color: #1e293b; font-weight: 600; }
+    .bullet-check-list li i { color: var(--pwc-orange); margin-top: 0.25rem; }
+    .split-intro-right img { width: 100%; height: 380px; object-fit: cover; border-radius: 4px; box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
+
+    /* 3. Tabs */
+    .tabs-section { padding: 4.5rem 0; border-top: 1px solid var(--pwc-gray-border); }
+    .tabs-section-title { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 2rem; }
+    .pwc-nav-tabs { display: flex; gap: 2.5rem; border-bottom: 2px solid #e2e8f0; margin-bottom: 3rem; overflow-x: auto; }
+    .pwc-tab-btn {
+      background: none; border: none; font-family: inherit; font-size: 1.05rem; font-weight: 600;
+      color: #64748b; padding: 0.75rem 0 1rem; cursor: pointer; position: relative; white-space: nowrap; transition: all 0.2s;
+    }
+    .pwc-tab-btn:hover { color: var(--pwc-orange); }
+    .pwc-tab-btn.active { color: var(--pwc-orange); font-weight: 700; }
+    .pwc-tab-btn.active::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 3px; background: var(--pwc-orange); }
+    .pwc-tab-pane { display: none; grid-template-columns: 0.95fr 1.05fr; gap: 4rem; align-items: center; }
+    .pwc-tab-pane.active { display: grid; }
+    .tab-pane-img { width: 100%; height: 360px; object-fit: cover; border-radius: 4px; }
+    .tab-pane-content h3 { font-family: var(--font-serif); font-size: 1.85rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 1rem; line-height: 1.3; }
+    .tab-pane-content p { font-size: 1rem; color: var(--pwc-gray-text); line-height: 1.7; margin-bottom: 1.5rem; }
+
+    /* 4. FAQ */
+    .faq-section { padding: 5rem 0; border-top: 1px solid var(--pwc-gray-border); }
+    .faq-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4.5rem; align-items: start; }
+    .faq-grid h2 { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 2rem; }
+    .accordion-list { display: flex; flex-direction: column; border-top: 1px solid #e2e8f0; }
+    .accordion-item { border-bottom: 1px solid #e2e8f0; }
+    .accordion-header {
+      width: 100%; background: none; border: none; padding: 1.25rem 0; text-align: left;
+      font-size: 1.05rem; font-weight: 700; color: var(--pwc-charcoal); cursor: pointer; display: flex;
+      justify-content: space-between; align-items: center; gap: 1rem; font-family: inherit; transition: color 0.2s;
+    }
+    .accordion-header:hover { color: var(--pwc-orange); }
+    .accordion-icon { font-size: 1.1rem; color: var(--pwc-orange); transition: transform 0.25s ease; }
+    .accordion-item.open .accordion-icon { transform: rotate(45deg); }
+    .accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0, 1, 0, 1); color: var(--pwc-gray-text); font-size: 0.95rem; line-height: 1.7; }
+    .accordion-item.open .accordion-body { max-height: 400px; padding-bottom: 1.25rem; }
+    .faq-tall-img { width: 100%; height: 520px; object-fit: cover; border-radius: 4px; box-shadow: 0 10px 24px rgba(0,0,0,0.06); }
+
+    /* 5. Focus Split */
+    .focus-split-section { padding: 5rem 0; border-top: 1px solid var(--pwc-gray-border); }
+    .focus-split-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 4rem; align-items: center; }
+    .focus-split-grid img { width: 100%; height: 380px; object-fit: cover; border-radius: 4px; }
+    .focus-split-grid h3 { font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 1rem; line-height: 1.3; }
+    .focus-split-grid p { font-size: 1.02rem; color: var(--pwc-gray-text); line-height: 1.7; margin-bottom: 1.25rem; }
+
+    /* 6. Twin Cards */
+    .twin-cards-section { padding: 2rem 0 5rem; }
+    .twin-cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .twin-peach-card { background: var(--pwc-peach-light); border-top: 4px solid var(--pwc-orange); padding: 3rem 2.5rem; border-radius: 2px; display: flex; flex-direction: column; justify-content: space-between; }
+    .twin-peach-card h3 { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 1rem; line-height: 1.3; }
+    .twin-peach-card p { font-size: 0.95rem; color: var(--pwc-gray-text); line-height: 1.65; margin-bottom: 2rem; }
+
+    /* 7. Process */
+    .process-section { padding: 5rem 0; border-top: 1px solid var(--pwc-gray-border); }
+    .process-section h2 { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 3rem; }
+    .process-steps-nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 3.5rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 1.5rem; }
+    .step-nav-item { text-align: center; cursor: pointer; position: relative; }
+    .step-icon-wrap {
+      width: 64px; height: 64px; margin: 0 auto 0.75rem; border: 2px solid var(--pwc-orange);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--pwc-orange);
+      font-size: 1.35rem; background: #ffffff; transition: all 0.2s;
+    }
+    .step-nav-item:hover .step-icon-wrap, .step-nav-item.active .step-icon-wrap { background: var(--pwc-orange); color: #ffffff; }
+    .step-nav-title { font-size: 0.88rem; font-weight: 700; color: var(--pwc-charcoal); }
+    .process-feature-split { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 4rem; align-items: center; background: #f8fafc; padding: 2.5rem; border-radius: 4px; border: 1px solid #e2e8f0; }
+    .process-feature-split img { width: 100%; height: 320px; object-fit: cover; border-radius: 4px; }
+    .process-feature-split h3 { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 1rem; }
+    .process-feature-split p { font-size: 0.98rem; color: var(--pwc-gray-text); line-height: 1.7; margin-bottom: 1.5rem; }
+
+    /* 8. Pillars */
+    .pillars-section { padding: 5.5rem 0; border-top: 1px solid var(--pwc-gray-border); }
+    .pillars-section h2 { font-family: var(--font-serif); font-size: 2.3rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 1rem; max-width: 800px; }
+    .pillars-section p.sub-lead { font-size: 1.05rem; color: var(--pwc-gray-text); margin-bottom: 4rem; max-width: 760px; }
+    .staggered-columns-wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; align-items: end; }
+    .stagger-col { padding: 2.5rem 2rem; border-radius: 4px 4px 0 0; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s; }
+    .stagger-col:hover { transform: translateY(-6px); }
+    .stagger-1 { height: 420px; background: var(--pwc-peach-light); border-top: 4px solid #f97316; }
+    .stagger-2 { height: 480px; background: var(--pwc-peach-med); border-top: 4px solid var(--pwc-orange); }
+    .stagger-3 { height: 540px; background: var(--pwc-orange); color: #ffffff; border-top: 4px solid var(--pwc-black); }
+    .stagger-badge { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 800; margin-bottom: 1rem; display: inline-block; letter-spacing: 1px; }
+    .stagger-1 .stagger-badge, .stagger-2 .stagger-badge { color: var(--pwc-orange); }
+    .stagger-3 .stagger-badge { color: #ffe4d6; }
+    .stagger-col h3 { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.25; }
+    .stagger-3 h3 { color: #ffffff; }
+    .stagger-col p { font-size: 0.92rem; line-height: 1.65; margin-bottom: 1.5rem; }
+    .stagger-1 p, .stagger-2 p { color: #475569; }
+    .stagger-3 p { color: #ffede3; }
+    .stagger-points { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; font-size: 0.86rem; font-weight: 600; margin-top: auto; }
+    .stagger-points li { display: flex; align-items: center; gap: 0.5rem; }
+    .stagger-1 .stagger-points i, .stagger-2 .stagger-points i { color: var(--pwc-orange); }
+    .stagger-3 .stagger-points i { color: #ffffff; }
+
+    /* 9. Hex */
+    .hex-section { padding: 5rem 0; background: #fbfcfd; border-top: 1px solid var(--pwc-gray-border); }
+    .hex-section h2 { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; text-align: center; color: var(--pwc-charcoal); margin-bottom: 3.5rem; }
+    .hex-cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+    .hex-card { background: #ffffff; border: 1px solid var(--pwc-gray-border); border-radius: 4px; padding: 2.5rem 2rem; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-between; transition: all 0.2s; }
+    .hex-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.06); border-color: #cbd5e1; }
+    .pwc-hex-icon {
+      width: 80px; height: 80px; background: var(--pwc-peach-light); border: 3px solid var(--pwc-orange);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 25%);
+      display: flex; align-items: center; justify-content: center; color: var(--pwc-orange); font-size: 1.8rem; margin-bottom: 1.75rem;
+    }
+    .hex-card h3 { font-family: var(--font-serif); font-size: 1.35rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 0.75rem; }
+    .hex-card p { font-size: 0.92rem; color: var(--pwc-gray-text); line-height: 1.6; margin-bottom: 1.75rem; }
+
+    /* 10. Callout */
+    .callout-bar-section { background: var(--pwc-peach-light); border-top: 1px solid var(--pwc-peach-med); border-bottom: 1px solid var(--pwc-peach-med); padding: 3rem 0; text-align: center; }
+    .callout-bar-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+    .callout-bar-inner h3 { font-family: var(--font-serif); font-size: 1.65rem; font-weight: 700; color: var(--pwc-charcoal); text-align: left; }
+
+    /* 11. Case Study */
+    .case-study-section { padding: 5rem 0; border-top: 1px solid var(--pwc-gray-border); }
+    .case-study-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4.5rem; align-items: center; }
+    .case-study-left h2 { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 1rem; line-height: 1.25; }
+    .case-study-left p { font-size: 1.02rem; color: var(--pwc-gray-text); line-height: 1.7; margin-bottom: 1.5rem; }
+    .case-study-right img { width: 100%; height: 380px; object-fit: cover; border-radius: 4px; box-shadow: 0 10px 24px rgba(0,0,0,0.06); }
+
+    /* 12. Accreditation */
+    .accreditation-section { padding: 3.5rem 0; background: #ffffff; border-top: 1px solid var(--pwc-gray-border); }
+    .accreditation-wrap { display: flex; align-items: center; gap: 3rem; padding: 2rem 2.5rem; border: 1px solid #e2e8f0; border-radius: 4px; background: #f8fafc; }
+    .accreditation-seal {
+      width: 110px; height: 110px; border: 3px solid #0284c7; border-radius: 50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: #0284c7; font-family: var(--font-mono); font-weight: 800; text-align: center; flex-shrink: 0; line-height: 1.1; padding: 0.5rem;
+    }
+    .accreditation-seal span.small { font-size: 0.65rem; }
+    .accreditation-seal span.big { font-size: 1.1rem; color: #0369a1; }
+    .accreditation-text p { font-size: 0.95rem; color: #334155; line-height: 1.65; }
+
+    /* 13. Insights */
+    .related-insights-section { padding: 5rem 0; border-top: 1px solid var(--pwc-gray-border); }
+    .related-insights-section h2 { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 2.5rem; }
+    .insights-4col-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .insight-mini-card { border: 1px solid var(--pwc-gray-border); border-radius: 2px; overflow: hidden; display: flex; flex-direction: column; background: #ffffff; transition: transform 0.2s; }
+    .insight-mini-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.06); }
+    .insight-mini-card img { width: 100%; height: 160px; object-fit: cover; }
+    .insight-mini-body { padding: 1.25rem 1rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
+    .insight-mini-tag { font-family: var(--font-mono); font-size: 0.7rem; color: var(--pwc-orange); font-weight: 700; margin-bottom: 0.4rem; display: block; }
+    .insight-mini-body h4 { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 700; color: var(--pwc-charcoal); line-height: 1.35; margin-bottom: 1rem; }
+    .insight-mini-link { font-size: 0.8rem; font-weight: 700; color: var(--pwc-orange); display: inline-flex; align-items: center; gap: 0.35rem; margin-top: auto; }
+
+    /* 14. Contacts */
+    .key-contacts-section { padding: 5rem 0; border-top: 1px solid var(--pwc-gray-border); }
+    .key-contacts-section h2 { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 2.5rem; }
+    .contacts-2col-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .expert-card { display: flex; gap: 1.75rem; padding: 2rem; border: 1px solid var(--pwc-gray-border); border-radius: 4px; background: #fdfdfd; align-items: center; }
+    .expert-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--pwc-charcoal); color: var(--pwc-orange); font-family: var(--font-serif); font-size: 1.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 2px solid var(--pwc-orange); flex-shrink: 0; }
+    .expert-info h3 { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; color: var(--pwc-charcoal); }
+    .expert-role { font-size: 0.84rem; font-weight: 700; color: var(--pwc-orange); margin: 0.2rem 0 0.6rem; }
+    .expert-link { font-size: 0.85rem; font-weight: 700; color: var(--pwc-charcoal); display: inline-flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+    .expert-link:hover { color: var(--pwc-orange); }
+
+    /* 15. Closing Banner */
+    .closing-hero-wrap { position: relative; background: #0f172a; padding: 6rem 0; overflow: hidden; }
+    .closing-hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.25; }
+    .closing-hero-content { position: relative; z-index: 2; max-width: 800px; }
+    .closing-kicker { font-size: 0.85rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; display: block; }
+    .closing-title { font-family: var(--font-serif); font-size: 3.2rem; font-weight: 700; color: #ffffff; line-height: 1.15; margin-bottom: 2rem; }
+    .closing-title span.orange { color: var(--pwc-orange); }
+
+    /* 16. Footer */
+    .pwc-footer { background: var(--pwc-charcoal); color: #ffffff; padding: 4.5rem 0 2.5rem; border-top: 1px solid #3d3d3d; font-size: 0.88rem; }
+    .footer-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; margin-bottom: 3.5rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    .footer-col h5 { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem; color: #ffffff; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-col a { color: #94a3b8; transition: color 0.2s; font-size: 0.85rem; }
+    .footer-col a:hover { color: var(--pwc-orange); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; color: #64748b; font-size: 0.8rem; flex-wrap: wrap; gap: 1.5rem; }
+
+    @media (max-width: 1024px) {
+      .header { padding: 0.75rem 1.5rem; }
+      .industries-mega-dropdown { width: 92vw; left: -10vw; padding: 1.5rem; }
+      .ind-mega-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .ind-featured-col { border-left: none; padding-left: 0; border-top: 1px solid #e2e8f0; padding-top: 1.25rem; grid-column: span 2; }
+      .org-mega-dropdown { width: 92vw; left: -30vw; padding: 1.5rem; }
+      .org-mega-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .org-featured-col { border-left: none; padding-left: 0; border-top: 1px solid #e2e8f0; padding-top: 1.25rem; grid-column: span 2; }
+
+      .split-intro-grid, .pwc-tab-pane, .faq-grid, .focus-split-grid, .process-feature-split, .case-study-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .staggered-columns-wrap { grid-template-columns: 1fr; }
+      .stagger-col { height: auto !important; }
+      .hex-cards-grid { grid-template-columns: 1fr; }
+      .twin-cards-grid { grid-template-columns: 1fr; }
+      .insights-4col-grid { grid-template-columns: 1fr 1fr; }
+      .contacts-2col-grid { grid-template-columns: 1fr; }
+      .footer-cols { grid-template-columns: 1fr 1fr; }
+      .page-main-headline { font-family: var(--font-serif); font-size: 2.8rem; }
+    }
+    @media (max-width: 640px) {
+      .main-nav { display: none; }
+      .insights-4col-grid { grid-template-columns: 1fr; }
+      .footer-cols { grid-template-columns: 1fr; }
+      .process-steps-nav { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <a href="contact.html" class="top-bar-item"><i class="fa-solid fa-location-dot"></i> Nigeria (Abuja & Lagos)</a>
+    <a href="https://truepriv-saas.vercel.app" target="_blank" class="top-bar-item"><i class="fa-solid fa-lock"></i> Client SaaS Portal</a>
+    <span class="top-bar-item"><i class="fa-solid fa-globe"></i> EN</span>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="index.html" class="brand-logo-link">
+      <img src="logo.jpg" alt="Amstel Consulting" class="brand-logo-img">
+    </a>
+
+    <ul class="main-nav">
+      <!-- Services Mega Dropdown -->
+      <li class="nav-item-dropdown">
+        <a href="index.html#services" class="nav-dropdown-trigger" style="background: #f1f3f5;">
+          <span>Services</span>
+          <i class="fa-solid fa-chevron-down nav-chevron"></i>
+        </a>
+        
+        <div class="mega-dropdown-menu">
+          <div class="mega-dropdown-grid">
+            <div>
+              <h5 class="mega-col-heading">By Solution</h5>
+              <ul class="mega-subnav-list">
+                <li><a href="service-car.html">Compliance Audit Return (CAR)</a></li>
+                <li><a href="service-audit.html">Data Protection Audit</a></li>
+                <li><a href="service-training.html">Data Protection Training</a></li>
+                <li><a href="service-policies.html">Privacy Policies & Notices</a></li>
+                <li><a href="service-ropa.html">ROPA Data Lineage</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5 class="mega-col-heading">By Practice</h5>
+              <ul class="mega-subnav-list">
+                <li><a href="service-dpia.html">DPIA & LIA Assessments</a></li>
+                <li><a href="service-dpo.html">Outsourced DPO (DPOaaS)</a></li>
+                <li><a href="service-cyber.html">Cybersecurity & Pen-Testing</a></li>
+                <li><a href="service-ai.html">AI Consulting & Governance</a></li>
+                <li><a href="service-gov.html">Corporate Governance & ESG</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5 class="mega-col-heading">By Regulation</h5>
+              <ul class="mega-subnav-list">
+                <li><a href="service-car.html">NDPA 2023 Statutory Compliance</a></li>
+                <li><a href="service-audit.html">NDPC GAID 5-Domain Framework</a></li>
+                <li><a href="service-ropa.html">Section 41 Cross-Border Transfers</a></li>
+                <li><a href="service-cyber.html">CBN & Sectoral Directives</a></li>
+              </ul>
+              <a href="index.html#services" class="mega-view-all-link">
+                <span>View All 10 Practice Services</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+            <!-- Industries Mega-Dropdown (Exact PwC Reference Layout) -->
+      <li class="nav-item-dropdown">
+        <a href="industries.html" class="nav-dropdown-trigger">
+          <span>Industries</span>
+          <i class="fa-solid fa-chevron-down nav-chevron"></i>
+        </a>
+        
+        <div class="industries-mega-dropdown">
+          <div class="ind-dropdown-topbar">
+            <h4 class="ind-dropdown-title">Industries</h4>
+            <button type="button" class="ind-dropdown-close" onclick="this.closest('.industries-mega-dropdown').style.display='none'; setTimeout(() => this.closest('.industries-mega-dropdown').style.display='', 300);" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+
+          <div class="ind-mega-grid">
+            <!-- Column 1 -->
+            <div class="ind-links-col">
+              <a href="industry-banking.html" class="ind-link-item">
+                <span>Banking</span>
+                <i class="fa-solid fa-chevron-right ind-chevron"></i>
+              </a>
+              <a href="industry-fintech.html" class="ind-link-item">
+                <span>Fintech</span>
+                <i class="fa-solid fa-chevron-right ind-chevron"></i>
+              </a>
+              <a href="industry-health.html" class="ind-link-item">
+                <span>Healthcare & Life Sciences</span>
+                <i class="fa-solid fa-chevron-right ind-chevron"></i>
+              </a>
+              <a href="industry-education.html" class="ind-link-item">
+                <span>Education</span>
+                <i class="fa-solid fa-chevron-right ind-chevron"></i>
+              </a>
+              <a href="industry-retail.html" class="ind-link-item">
+                <span>Retail & Consumer</span>
+                <i class="fa-solid fa-chevron-right ind-chevron"></i>
+              </a>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="ind-links-col">
+              <a href="industry-insurance.html" class="ind-link-item">
+                <span>Insurance</span>
+                <i class="fa-solid fa-chevron-right ind-chevron"></i>
+              </a>
+              <a href="industry-pension.html" class="ind-link-item">
+                <span>Pension Sector</span>
+                <i class="fa-solid fa-chevron-right ind-chevron"></i>
+              </a>
+              <a href="industry-transport.html" class="ind-link-item">
+                <span>Transport & Logistics</span>
+                <i class="fa-solid fa-chevron-right ind-chevron"></i>
+              </a>
+              <a href="industry-public-sector.html" class="ind-link-item">
+                <span>Public Sector & MDAs</span>
+                <i class="fa-solid fa-chevron-right ind-chevron"></i>
+              </a>
+              <a href="industry-real-estate.html" class="ind-link-item">
+                <span>Real Estate</span>
+                <i class="fa-solid fa-chevron-right ind-chevron"></i>
+              </a>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="ind-links-col">
+              <a href="industry-energy.html" class="ind-link-item">
+                <span>Energy, Oil & Power</span>
+                <i class="fa-solid fa-chevron-right ind-chevron"></i>
+              </a>
+              <a href="industry-telecom.html" class="ind-link-item">
+                <span>Telecommunications</span>
+                <i class="fa-solid fa-chevron-right ind-chevron"></i>
+              </a>
+              <a href="industry-engineering.html" class="ind-link-item">
+                <span>Engineering & Construction</span>
+                <i class="fa-solid fa-chevron-right ind-chevron"></i>
+              </a>
+              <a href="industries.html" class="ind-view-all">
+                <span>View all 13 industries</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <!-- Column 4: Featured (PwC Screenshot Exact) -->
+            <div class="ind-featured-col">
+              <h5 class="ind-featured-heading">Featured</h5>
+              
+              <a href="topics.html#cross-border" class="ind-featured-card">
+                <div class="ind-featured-thumb-wrap">
+                  <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=400&q=80" alt="M&A Outlook">
+                  <div class="thumb-orange-strip"></div>
+                </div>
+                <div class="ind-featured-text">M&A & Fintech Outlook 2026</div>
+              </a>
+
+              <a href="topics.html#car-deadline" class="ind-featured-card">
+                <div class="ind-featured-thumb-wrap">
+                  <img src="https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=400&q=80" alt="Retail Monitor">
+                  <div class="thumb-orange-strip"></div>
+                </div>
+                <div class="ind-featured-text">Retail & Consumer Monitor 2026</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li><a href="topics.html">Topics</a></li>
+                  <!-- Our organisation Mega-Dropdown -->
+      <li class="nav-item-dropdown">
+        <a href="organisation.html" class="nav-dropdown-trigger">
+          <span>Our organisation</span>
+          <i class="fa-solid fa-chevron-down nav-chevron"></i>
+        </a>
+        
+        <div class="org-mega-dropdown">
+          <div class="org-dropdown-topbar">
+            <h4 class="org-dropdown-title">Our organisation</h4>
+            <button type="button" class="org-dropdown-close" onclick="this.closest('.org-mega-dropdown').style.display='none'; setTimeout(() => this.closest('.org-mega-dropdown').style.display='', 300);" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+
+          <div class="org-mega-grid">
+            <!-- Column 1: Our Organisation & Reports -->
+            <div class="org-links-col">
+              <a href="organisation.html" class="org-link-item" style="font-weight: 700; color: var(--pwc-orange) !important;">
+                <span>Our Organisation</span>
+                <i class="fa-solid fa-chevron-right org-chevron"></i>
+              </a>
+              <a href="organisation.html#reports" class="org-link-item">
+                <span>Annual report and Transparency report</span>
+              </a>
+              <a href="organisation.html#overview" class="org-link-item">
+                <span>Overview & Practice Mandate</span>
+              </a>
+              <a href="contact.html" class="org-link-item">
+                <span>Contact & Practice Offices</span>
+                <i class="fa-solid fa-chevron-right org-chevron"></i>
+              </a>
+            </div>
+
+            <!-- Column 2: Leadership & Talent -->
+            <div class="org-links-col">
+              <a href="organisation.html#board" class="org-link-item" style="font-weight: 700;">
+                <span>Advisory Board</span>
+                <i class="fa-solid fa-chevron-right org-chevron"></i>
+              </a>
+              <a href="organisation.html#consultants" class="org-link-item" style="font-weight: 700;">
+                <span>Consultants</span>
+                <i class="fa-solid fa-chevron-right org-chevron"></i>
+              </a>
+              <a href="organisation.html#consultants" class="org-link-item">
+                <span>Practice Leaders & Specialists</span>
+              </a>
+              <a href="contact.html?type=careers" class="org-link-item">
+                <span>Careers at Amstel Consulting</span>
+              </a>
+            </div>
+
+            <!-- Column 3: Principles & Governance -->
+            <div class="org-links-col">
+              <a href="organisation.html#values" class="org-link-item" style="font-weight: 700;">
+                <span>Purpose & Values</span>
+                <i class="fa-solid fa-chevron-right org-chevron"></i>
+              </a>
+              <a href="organisation.html#governance" class="org-link-item" style="font-weight: 700;">
+                <span>Governance</span>
+                <i class="fa-solid fa-chevron-right org-chevron"></i>
+              </a>
+              <a href="organisation.html#governance" class="org-link-item">
+                <span>Dual-Sign-Off Audit Protocols</span>
+              </a>
+              <a href="organisation.html#governance" class="org-link-item">
+                <span>Licensed DPCO Credentials</span>
+              </a>
+            </div>
+
+            <!-- Column 4: Featured (Screenshot 1 Exact) -->
+            <div class="org-featured-col">
+              <h5 class="org-featured-heading">Featured</h5>
+              
+              <a href="organisation.html#overview" class="org-featured-card">
+                <div class="org-featured-thumb-wrap">
+                  <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=400&q=80" alt="Make it happen">
+                  <div class="thumb-orange-strip"></div>
+                </div>
+                <div class="org-featured-text">Make it happen with Amstel Consulting</div>
+              </a>
+
+              <a href="organisation.html#reports" class="org-featured-card">
+                <div class="org-featured-thumb-wrap">
+                  <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=400&q=80" alt="Annual report">
+                  <div class="thumb-orange-strip"></div>
+                </div>
+                <div class="org-featured-text">Annual report 2024/2025</div>
+              </a>
+
+              <a href="organisation.html#values" class="org-featured-card">
+                <div class="org-featured-thumb-wrap">
+                  <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=400&q=80" alt="Net Zero">
+                  <div class="thumb-orange-strip"></div>
+                </div>
+                <div class="org-featured-text">Committing to Net Zero by 2030</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <div class="header-right">
+      <a href="contact.html" class="btn-contact-nav">Request proposal</a>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="pwc-detail-container">
+
+    <!-- 1. TOP TITLE & PwC HERO BANNER -->
+    <section class="page-title-section">
+      <div class="breadcrumbs-detail">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <a href="index.html#services">Services</a>
+        <span>/</span>
+        <span>AI Consulting & Governance</span>
+      </div>
+
+      <h1 class="page-main-headline">AI Consulting & Governance</h1>
+
+      <div class="hero-banner-wrap">
+        <img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1600&q=80" alt="Artificial Intelligence Governance" class="hero-banner-img">
+        <div class="pwc-orange-polygon">
+          <span>Responsible, Explainable & Auditable Artificial Intelligence</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. EXECUTIVE OVERVIEW SPLIT BLOCK -->
+    <section class="split-intro-section">
+      <div class="split-intro-grid">
+        <div class="split-intro-left">
+          <h2>Deploy transformative machine learning while neutralizing algorithmic regulatory liability</h2>
+          <p>
+            As Nigerian enterprises deploy predictive analytics, large language models (LLMs), and automated underwriting engines, artificial intelligence brings unprecedented legal accountability. Under Section 37 of the Nigeria Data Protection Act (NDPA) 2023, data subjects possess the fundamental right not to be subjected to decisions based solely on automated processing that produce significant legal effects.
+          </p>
+          <p>
+            Amstel Consulting bridges state-of-the-art machine learning engineering with licensed DPCO legal oversight. We audit inference pipelines, eliminate algorithmic bias, design human-in-the-loop fallback architectures, and establish board-level AI governance frameworks aligned with ISO 42001.
+          </p>
+          <ul class="bullet-check-list">
+            <li><i class="fa-solid fa-circle-check"></i> Algorithmic bias, explainability (XAI), and fairness audits</li>
+            <li><i class="fa-solid fa-circle-check"></i> Statutory Section 37 automated profiling defensibility reviews</li>
+            <li><i class="fa-solid fa-circle-check"></i> Generative AI training data privacy and prompt telemetry governance</li>
+          </ul>
+          <a href="contact.html?service=ai" class="btn-pwc-orange">
+            <span>Commission an AI Governance Audit</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+        <div class="split-intro-right">
+          <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=80" alt="AI engineering collaboration">
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TABBED DEEP-DIVE SECTION -->
+    <section class="tabs-section">
+      <h2 class="tabs-section-title">The 4 Diagnostic Pillars of Responsible Enterprise AI</h2>
+      
+      <div class="pwc-nav-tabs">
+        <button class="pwc-tab-btn active" onclick="switchTab(event, 'tab-section37')">1. Section 37 Profiling</button>
+        <button class="pwc-tab-btn" onclick="switchTab(event, 'tab-bias')">2. Bias & Fairness</button>
+        <button class="pwc-tab-btn" onclick="switchTab(event, 'tab-llm')">3. LLM Data Privacy</button>
+        <button class="pwc-tab-btn" onclick="switchTab(event, 'tab-iso')">4. ISO 42001 Charters</button>
+      </div>
+
+      <div id="tab-section37" class="pwc-tab-pane active">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80" alt="Automated Decisioning Compliance" class="tab-pane-img">
+        <div class="tab-pane-content">
+          <h3>Automated Decisioning (NDPA Section 37)</h3>
+          <p>We audit automated loan underwriting, candidate screening, and customer risk scoring algorithms, establishing certified human-in-the-loop contestation mechanisms and clear explanatory disclosures for affected individuals.</p>
+          <a href="service-dpia.html" class="btn-pwc-orange">
+            <span>Explore High-Risk DPIA</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div id="tab-bias" class="pwc-tab-pane">
+        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1000&q=80" alt="Algorithmic Bias Testing" class="tab-pane-img">
+        <div class="tab-pane-content">
+          <h3>Algorithmic Fairness & Demographic Parity</h3>
+          <p>Testing predictive training datasets and weights for disparate impact, gender/regional bias, and unrepresentative proxy variables across Nigerian demographic groups to prevent systemic discrimination claims.</p>
+          <a href="contact.html?service=ai" class="btn-pwc-orange">
+            <span>Audit Model Fairness</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div id="tab-llm" class="pwc-tab-pane">
+        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80" alt="LLM Privacy and Retrieval Augmented Generation" class="tab-pane-img">
+        <div class="tab-pane-content">
+          <h3>LLM Privacy, Fine-Tuning & Prompt Telemetry</h3>
+          <p>Scrubbing proprietary and customer PII (BVN, NIN, financial transactions) before training or prompting public LLMs, paired with vector database access controls and prompt injection defenses.</p>
+          <a href="service-cyber.html" class="btn-pwc-orange">
+            <span>Explore Cyber Controls</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div id="tab-iso" class="pwc-tab-pane">
+        <img src="https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=1000&q=80" alt="ISO 42001 Governance Charters" class="tab-pane-img">
+        <div class="tab-pane-content">
+          <h3>ISO 42001 & Enterprise AI Charters</h3>
+          <p>Designing institutional AI governance policies, internal model cards, ethical risk committee charters, and algorithmic impact registers that elevate enterprise valuation during international capital raises.</p>
+          <a href="service-gov.html" class="btn-pwc-orange">
+            <span>Corporate Governance</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. INTERACTIVE FAQ ACCORDION + TALL DISPLAY PHOTO -->
+    <section class="faq-section">
+      <div class="faq-grid">
+        <div>
+          <h2>Frequently Asked Questions</h2>
+          <div class="accordion-list">
+            
+            <div class="accordion-item open">
+              <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>What are the statutory requirements under NDPA Section 37?</span>
+                <i class="fa-solid fa-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Section 37 guarantees that individuals have the right not to be subject to a decision based solely on automated processing (including profiling) which produces legal or similarly significant effects. The controller must provide meaningful information about the logic involved and ensure the individual can obtain human intervention, express their view, and contest the decision.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>Can we train generative AI models using customer transaction data?</span>
+                <i class="fa-solid fa-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Not without explicit, informed statutory consent or a verifiable legitimate interest assessment paired with irreversible anonymization. Feeding raw customer PII into public or third-party AI models violates NDPA minimization and purpose limitation principles.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>How do you audit black-box machine learning algorithms?</span>
+                <i class="fa-solid fa-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                We employ explainable AI (XAI) frameworks including SHAP (SHapley Additive exPlanations) and LIME to interpret feature importance, quantify input bias, and produce auditable decision attribution trees that satisfy regulators and board risk committees.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>Does the NDPC inspect AI algorithms during the annual CAR?</span>
+                <i class="fa-solid fa-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Yes. Under the NDPC GAID framework, organizations utilizing automated customer decisioning, credit scoring, or biometric verification must disclose algorithmic impact assessments and human oversight controls within their statutory CAR filing.
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div>
+          <img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1000&q=80" alt="Neural network analytics" class="faq-tall-img">
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. FOCUS SPLIT BLOCK -->
+    <section class="focus-split-section">
+      <div class="focus-split-grid">
+        <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1000&q=80" alt="Data scientists evaluating model accuracy">
+        <div>
+          <h3>Unlock Competitive Advantage While Governing Enterprise AI Risk</h3>
+          <p>
+            The organizations that dominate the next decade will not simply deploy AI the fastest; they will deploy AI that customers, enterprise partners, and regulators trust implicitly.
+          </p>
+          <p>
+            Amstel Consulting transforms ethical AI principles into actionable software engineering parameters, protecting your brand from algorithmic discrimination controversies and regulatory enforcement fines.
+          </p>
+          <a href="contact.html?service=ai" class="btn-pwc-outline">
+            <span>Schedule AI Strategy Session &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. TWIN HIGHLIGHT BOXES -->
+    <section class="twin-cards-section">
+      <div class="twin-cards-grid">
+        <div class="twin-peach-card">
+          <div>
+            <h3>Algorithmic Diagnostic Audit</h3>
+            <p>Commission a rapid 10-day diagnostic of your machine learning scoring engines, data pipelines, and explainability mechanisms.</p>
+          </div>
+          <a href="contact.html?service=ai" class="btn-pwc-orange" style="align-self: flex-start;">
+            <span>Commission AI Audit</span>
+          </a>
+        </div>
+
+        <div class="twin-peach-card">
+          <div>
+            <h3>Generative AI Enterprise Safeguards Pack</h3>
+            <p>Implement employee prompt charters, commercial API filtering rules, and vendor model covenants to protect intellectual property.</p>
+          </div>
+          <a href="contact.html?service=ai" class="btn-pwc-orange" style="align-self: flex-start;">
+            <span>Download AI Framework</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. PROCESS STEPS -->
+    <section class="process-section">
+      <h2>Our 4-Phase AI Governance & Audit Lifecycle</h2>
+      
+      <div class="process-steps-nav">
+        <div class="step-nav-item active">
+          <div class="step-icon-wrap"><i class="fa-solid fa-layer-group"></i></div>
+          <div class="step-nav-title">Phase 01: Inventory</div>
+        </div>
+        <div class="step-nav-item">
+          <div class="step-icon-wrap"><i class="fa-solid fa-scale-balanced"></i></div>
+          <div class="step-nav-title">Phase 02: Bias Audit</div>
+        </div>
+        <div class="step-nav-item">
+          <div class="step-icon-wrap"><i class="fa-solid fa-eye"></i></div>
+          <div class="step-nav-title">Phase 03: Explainability</div>
+        </div>
+        <div class="step-nav-item">
+          <div class="step-icon-wrap"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="step-nav-title">Phase 04: Continuous Drift</div>
+        </div>
+      </div>
+
+      <div class="process-feature-split">
+        <img src="https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?auto=format&fit=crop&w=1000&q=80" alt="Executive AI debrief session">
+        <div>
+          <h3>Turnkey Governance for Machine Learning Engineers & Legal</h3>
+          <p>
+            We translate abstract ethical mandates into concrete Python/PyTorch model cards, SHAP explainability plots, and unambiguous API contracts that your data science team can immediately implement.
+          </p>
+          <a href="contact.html?service=ai" class="btn-pwc-outline">
+            <span>Speak with AI Governance Lead &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. STAGGERED 3-LEVEL MATURITY PILLARS -->
+    <section class="pillars-section">
+      <h2>Where does your organization's AI governance stand?</h2>
+      <p class="sub-lead">Benchmark your artificial intelligence deployments against national regulatory standards.</p>
+
+      <div class="staggered-columns-wrap">
+        
+        <div class="stagger-col stagger-1">
+          <div>
+            <span class="stagger-badge">STAGE 01 &bull; FOUNDATION</span>
+            <h3>Unmonitored Shadow AI</h3>
+            <p>Employees utilizing consumer LLMs with sensitive corporate data. Scoring models deployed without documented bias testing or Section 37 contestation workflows.</p>
+          </div>
+          <ul class="stagger-points">
+            <li><i class="fa-solid fa-check"></i> Zero algorithmic explainability</li>
+            <li><i class="fa-solid fa-check"></i> Data leakage into public LLMs</li>
+            <li><i class="fa-solid fa-check"></i> Severe Section 37 regulatory exposure</li>
+          </ul>
+        </div>
+
+        <div class="stagger-col stagger-2">
+          <div>
+            <span class="stagger-badge">STAGE 02 &bull; SCALED</span>
+            <h3>Audited Algorithmic Trust</h3>
+            <p>Formal AI governance charters, verified human-in-the-loop decision mechanisms, demographic bias audits, and DPCO certified Section 37 compliance dossiers.</p>
+          </div>
+          <ul class="stagger-points">
+            <li><i class="fa-solid fa-check"></i> Full Section 37 statutory compliance</li>
+            <li><i class="fa-solid fa-check"></i> Documented model cards</li>
+            <li><i class="fa-solid fa-check"></i> Anonymized LLM fine-tuning</li>
+            <li><i class="fa-solid fa-check"></i> Certified DPCO sign-off</li>
+          </ul>
+        </div>
+
+        <div class="stagger-col stagger-3">
+          <div>
+            <span class="stagger-badge">STAGE 03 &bull; INDUSTRY LEADER</span>
+            <h3>ISO 42001 Certified AI</h3>
+            <p>Continuous model drift monitoring, automated differential privacy pipelines, executive AI ethics committee, and investor-grade digital trust credentials.</p>
+          </div>
+          <ul class="stagger-points">
+            <li><i class="fa-solid fa-check"></i> Automated real-time drift detection</li>
+            <li><i class="fa-solid fa-check"></i> Board-level AI ethics oversight</li>
+            <li><i class="fa-solid fa-check"></i> Zero-penalty regulatory record</li>
+            <li><i class="fa-solid fa-check"></i> Global institutional partner trust</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 9. 3 VALUE PILLAR CARDS WITH HEXAGONS -->
+    <section class="hex-section">
+      <h2>Why enterprises trust our AI governance practice</h2>
+      <div class="hex-cards-grid">
+        
+        <div class="hex-card">
+          <div class="pwc-hex-icon"><i class="fa-solid fa-microchip"></i></div>
+          <h3>Section 37 Statutory Shield</h3>
+          <p>Protect your commercial lending, recruitment, or underwriting models against statutory litigation and civil claims.</p>
+          <a href="service-car.html" class="btn-pwc-orange" style="width: 100%; justify-content: center;">
+            <span>CAR Alignment</span>
+          </a>
+        </div>
+
+        <div class="hex-card">
+          <div class="pwc-hex-icon"><i class="fa-solid fa-code-compare"></i></div>
+          <h3>Model Explainability (XAI)</h3>
+          <p>Transform inscrutable neural networks into transparent attribution charts that reassure regulators and customers.</p>
+          <a href="topics.html#ai-governance" class="btn-pwc-orange" style="width: 100%; justify-content: center;">
+            <span>AI Briefing</span>
+          </a>
+        </div>
+
+        <div class="hex-card">
+          <div class="pwc-hex-icon"><i class="fa-solid fa-passport"></i></div>
+          <h3>Licensed DPCO Credibility</h3>
+          <p>AI audits stamped by licensed DPCO partners carry unassailable authority with the NDPC and federal agencies.</p>
+          <a href="organisation.html#governance" class="btn-pwc-orange" style="width: 100%; justify-content: center;">
+            <span>Our Credentials</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 10. CALLOUT BAR -->
+    <section class="callout-bar-section">
+      <div class="callout-bar-inner">
+        <h3>Are your artificial intelligence and machine learning models legally defensible?</h3>
+        <a href="contact.html?service=ai" class="btn-pwc-orange">
+          <span>Commission AI Governance Review &rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 11. CASE STUDY -->
+    <section class="case-study-section">
+      <div class="case-study-grid">
+        <div class="case-study-left">
+          <h2>Case Study: National Commercial Bank Generative AI Customer Assistant</h2>
+          <p>
+            A premier Nigerian commercial bank introduced a Retrieval-Augmented Generation (RAG) customer service bot to automate 4.2 million customer account inquiries monthly.
+          </p>
+          <p>
+            Amstel Consulting conducted an exhaustive data pipeline audit, implemented real-time regex redaction for BVN, card PAN, and account numbers, engineered human agent escalation triggers under NDPA Section 37, and drafted customer-facing automated interaction disclosures, winning NDPC innovation commendation.
+          </p>
+          <a href="contact.html" class="btn-pwc-orange">
+            <span>Read AI Case Study</span>
+          </a>
+        </div>
+        <div class="case-study-right">
+          <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1000&q=80" alt="Bank artificial intelligence review">
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. ACCREDITATION -->
+    <section class="accreditation-section">
+      <div class="accreditation-wrap">
+        <div class="accreditation-seal">
+          <span class="small">LICENSED</span>
+          <span class="big">DPCO</span>
+          <span class="small">NDPC / 2026</span>
+        </div>
+        <div class="accreditation-text">
+          <p>
+            <strong>Accredited AI Governance Authority:</strong> Amstel Consulting Nigeria is fully certified and licensed by the Nigeria Data Protection Commission (NDPC). All algorithmic assessments, automated profiling reviews, and AI governance charters meet statutory standards under the NDPA 2023.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. RELATED INSIGHTS -->
+    <section class="related-insights-section">
+      <h2>Related insights and publications</h2>
+      <div class="insights-4col-grid">
+        
+        <div class="insight-mini-card">
+          <img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=600&q=80" alt="AI Governance Brief">
+          <div class="insight-mini-body">
+            <div>
+              <span class="insight-mini-tag">AI GOVERNANCE</span>
+              <h4>Navigating NDPA Section 37 Profiling</h4>
+            </div>
+            <a href="topics.html#ai-governance" class="insight-mini-link">Read analysis &rarr;</a>
+          </div>
+        </div>
+
+        <div class="insight-mini-card">
+          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" alt="Model Lineage">
+          <div class="insight-mini-body">
+            <div>
+              <span class="insight-mini-tag">DATA LINEAGE</span>
+              <h4>Tracking Training Data Ingestion</h4>
+            </div>
+            <a href="service-ropa.html" class="insight-mini-link">Read analysis &rarr;</a>
+          </div>
+        </div>
+
+        <div class="insight-mini-card">
+          <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" alt="AI Security">
+          <div class="insight-mini-body">
+            <div>
+              <span class="insight-mini-tag">SECURITY ASSURANCE</span>
+              <h4>Adversarial Attacks on LLM Endpoints</h4>
+            </div>
+            <a href="service-cyber.html" class="insight-mini-link">Read analysis &rarr;</a>
+          </div>
+        </div>
+
+        <div class="insight-mini-card">
+          <img src="https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=600&q=80" alt="DPIA Assessment">
+          <div class="insight-mini-body">
+            <div>
+              <span class="insight-mini-tag">STATUTORY MANDATE</span>
+              <h4>When Machine Learning Triggers a DPIA</h4>
+            </div>
+            <a href="service-dpia.html" class="insight-mini-link">Read analysis &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 14. KEY CONTACTS -->
+    <section class="key-contacts-section">
+      <h2>Key practice contacts</h2>
+      <div class="contacts-2col-grid">
+        
+        <div class="expert-card">
+          <div class="expert-avatar">BS</div>
+          <div class="expert-info">
+            <h3>Engr. Babatunde Sanusi</h3>
+            <div class="expert-role">Partner &bull; Enterprise Tech & AI Architecture</div>
+            <a href="contact.html?service=ai" class="expert-link">
+              <span>Contact partner</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="expert-card">
+          <div class="expert-avatar">CE</div>
+          <div class="expert-info">
+            <h3>Barr. Chimaobi Eze</h3>
+            <div class="expert-role">Senior Partner &bull; Licensed DPCO Director & Counsel</div>
+            <a href="contact.html?service=ai" class="expert-link">
+              <span>Contact partner</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 15. CLOSING BANNER -->
+  <section class="closing-hero-wrap">
+    <img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1600&q=80" alt="AI transformation" class="closing-hero-bg">
+    <div class="pwc-detail-container">
+      <div class="closing-hero-content">
+        <span class="closing-kicker">We govern and de-risk artificial intelligence</span>
+        <h2 class="closing-title">so you can <span class="orange">innovate, automate, and lead your industry with absolute trust.</span></h2>
+        <a href="contact.html" class="btn-pwc-orange">
+          <span>Commission an AI Governance Audit</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16. FOOTER -->
+  <footer class="pwc-footer">
+    <div class="pwc-detail-container">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="service-car.html">Compliance Audit Return (CAR)</a></li>
+            <li><a href="service-audit.html">Data Protection Audit</a></li>
+            <li><a href="service-training.html">Data Protection Training</a></li>
+            <li><a href="service-policies.html">Privacy Policies & Notices</a></li>
+            <li><a href="service-ropa.html">ROPA Data Lineage</a></li>
+            <li><a href="service-dpia.html">DPIA & LIA Assessments</a></li>
+            <li><a href="service-dpo.html">Outsourced DPO (DPOaaS)</a></li>
+            <li><a href="service-cyber.html">Cybersecurity & Pen-Testing</a></li>
+            <li><a href="service-ai.html">AI Consulting & Governance</a></li>
+            <li><a href="service-gov.html">Corporate Governance & ESG</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Industries</h5>
+          <ul>
+            <li><a href="industry-banking.html">Banking & Capital Markets</a></li>
+            <li><a href="industry-fintech.html">Fintech & Payments</a></li>
+            <li><a href="industry-health.html">Healthcare & Life Sciences</a></li>
+            <li><a href="industry-telecom.html">Telecommunications</a></li>
+            <li><a href="industry-energy.html">Energy, Oil & Power</a></li>
+            <li><a href="industries.html">View All 13 Sectors</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Topics & Insights</h5>
+          <ul>
+            <li><a href="topics.html#car-deadline">Annual March 15 Filing</a></li>
+            <li><a href="topics.html#cross-border">Cross-Border Data Transfers</a></li>
+            <li><a href="topics.html#ai-governance">Algorithmic Governance</a></li>
+            <li><a href="topics.html#breach">72-Hour Breach Protocols</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Amstel Consulting</h5>
+          <ul>
+            <li><a href="organisation.html#board">Advisory Board</a></li>
+            <li><a href="organisation.html#consultants">Senior Consultants</a></li>
+            <li><a href="organisation.html#values">Purpose & Values</a></li>
+            <li><a href="organisation.html#governance">Licensing & Accreditations</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Amstel Consulting Nigeria. Licensed Data Protection Compliance Organisation (DPCO). All rights reserved.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="service-policies.html">Privacy Statement</a>
+          <a href="contact.html">Legal Disclaimers</a>
+          <a href="contact.html">Regulatory Filings</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function switchTab(e, tabId) {
+      document.querySelectorAll('.pwc-tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.pwc-tab-pane').forEach(pane => pane.classList.remove('active'));
+      e.currentTarget.classList.add('active');
+      const targetPane = document.getElementById(tabId);
+      if (targetPane) targetPane.classList.add('active');
+    }
+
+    function toggleAccordion(btn) {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('open'));
+      if (!isOpen) {
+        item.classList.add('open');
+      }
+    }
+  </script>
+
+</body>
+</html>
