@@ -10,6 +10,7 @@ export default function Header({
   onOpenOnboarding, 
   onOpenChampions,
   onOpenProfile,
+  onOpenAiCopilot,
   isSidebarCollapsed,
   onToggleSidebar
 }) {
@@ -58,95 +59,70 @@ export default function Header({
   };
 
   return (
-    <header className="h-16 border-b border-slate-200 bg-white px-3 sm:px-5 flex items-center justify-between sticky top-0 z-40 shadow-xs">
+    <header className="bg-white border-b border-slate-200 px-3 sm:px-6 py-2.5 flex items-center justify-between sticky top-0 z-30 shadow-2xs">
       
-      {/* 1. Left Brand & Company Identity */}
-      <div className="flex items-center gap-2.5 flex-shrink-0">
-        {/* Sidebar Toggle Button */}
+      {/* 1. Left: Brand & Sidebar Toggle */}
+      <div className="flex items-center gap-2 sm:gap-3">
         <button
           onClick={onToggleSidebar}
-          title={isSidebarCollapsed ? "Open Sidebar Menu" : "Close Sidebar Menu"}
-          className="w-8 h-8 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-slate-300 text-slate-600 hover:text-slate-900 transition-all flex items-center justify-center flex-shrink-0 shadow-2xs"
+          className="p-1.5 text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors"
+          title={isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
-          <i className={`fa-solid ${isSidebarCollapsed ? 'fa-bars' : 'fa-bars-staggered'} text-xs text-slate-700`}></i>
+          <i className="fa-solid fa-bars text-sm"></i>
         </button>
 
-        <div className="relative flex-shrink-0">
-          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-900 flex items-center justify-center text-white shadow-xs">
-            <i className="fa-solid fa-shield-halved text-emerald-400 text-base"></i>
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-700 flex items-center justify-center text-white font-bold text-sm shadow-2xs">
+            <i className="fa-solid fa-shield-halved"></i>
           </div>
-          <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-emerald-500 border-2 border-white rounded-full"></span>
-        </div>
-
-        <div className="flex flex-col justify-center">
-          <div className="flex items-center gap-1.5">
-            <span className="font-extrabold text-sm sm:text-base text-slate-900 tracking-tight font-sans whitespace-nowrap">TRUEPRIV</span>
-            <span className="text-[8px] sm:text-[9px] font-extrabold tracking-wider uppercase bg-emerald-50 text-emerald-800 border border-emerald-200 px-1.5 py-0.2 rounded font-mono whitespace-nowrap">
-              NDPA 2023
-            </span>
+          <div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm font-black tracking-tight text-slate-900">TRUEPRIV</span>
+              <span className="text-[9px] font-bold bg-emerald-100 text-emerald-800 px-1.5 py-0.2 rounded font-mono">
+                NDPA 2023
+              </span>
+            </div>
+            <div className="text-[10px] text-slate-400 font-mono leading-none">
+              Truepriv Technologies &bull; truepriv.com
+            </div>
           </div>
-          <p className="hidden md:block text-[10px] text-slate-500 font-medium tracking-tight whitespace-nowrap">
-            Truepriv Technologies &bull; <span className="text-slate-600 font-mono">truepriv.com</span>
-          </p>
         </div>
       </div>
 
-      {/* 2. Right Context & Navigation Group */}
-      <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0" ref={dropdownRef}>
-        
-        {/* Data Residency Indicator Pill (Shown on large screens) */}
+      {/* 2. Middle: Active Workspace Selector */}
+      <div className="flex items-center gap-2 sm:gap-3">
         {tenant && (
-          <div 
-            title="Section 20 Data Localization: Galaxy Backbone Tier-III Sovereign Hosting"
-            className="hidden 2xl:flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs whitespace-nowrap flex-shrink-0"
-          >
-            <span className="relative flex h-2 w-2 flex-shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
-            <span className="text-slate-500 text-[10px] font-medium">Residency:</span>
-            <span className="text-slate-800 text-[10px] font-bold inline-flex items-center gap-1">
-              <i className={`fa-solid ${tenant.data_residency === 'global_aws' ? 'fa-cloud text-sky-600' : 'fa-server text-emerald-600'} text-[9px]`}></i>
-              <span>{tenant.data_residency === 'global_aws' ? 'AWS Global' : 'Galaxy Sovereign'}</span>
-            </span>
-          </div>
-        )}
-
-        {/* Active Workspace / Client Selector Dropdown */}
-        {tenant && (
-          <div className="relative flex-shrink-0">
-            <button 
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              className={`flex items-center gap-2 bg-slate-50 hover:bg-slate-100 border ${
-                dropdownOpen ? 'border-emerald-500 ring-2 ring-emerald-500/20 bg-white' : 'border-slate-200'
-              } px-2.5 py-1.5 rounded-xl text-left transition-all group`}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => accessibleClients.length > 1 && setDropdownOpen(!dropdownOpen)}
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border transition-all text-left ${
+                accessibleClients.length > 1
+                  ? 'bg-slate-50 hover:bg-slate-100 border-slate-300 cursor-pointer shadow-2xs'
+                  : 'bg-slate-50/50 border-slate-200 cursor-default'
+              }`}
             >
-              <div className="w-7 h-7 rounded-lg bg-slate-900 flex items-center justify-center text-emerald-400 font-bold text-xs shadow-xs flex-shrink-0">
-                {tenant.name.substring(0, 2).toUpperCase()}
+              <div className="w-6 h-6 rounded-lg bg-slate-900 text-white text-[10px] font-bold flex items-center justify-center font-mono">
+                {tenant.name?.substring(0, 2).toUpperCase() || 'TP'}
               </div>
-
-              <div className="hidden md:flex flex-col justify-center text-left">
-                <div className="text-xs font-bold text-slate-900 leading-tight whitespace-nowrap">
-                  {tenant.name}
+              <div className="hidden md:block">
+                <div className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                  <span className="truncate max-w-[160px]">{tenant.name}</span>
+                  {accessibleClients.length > 1 && (
+                    <i className="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+                  )}
                 </div>
-                <div className="flex items-center gap-1.5 text-[10px] text-slate-500 leading-tight mt-0.5 whitespace-nowrap">
-                  <span>{tenant.industry || 'Fintech & Payment Service Providers'}</span>
+                <div className="text-[10px] text-slate-500 flex items-center gap-1 mt-0.2">
+                  <span>{tenant.industry || 'Compliance Workspace'}</span>
                   <span>&bull;</span>
                   {getTenantTypeBadge(tenant.type)}
                 </div>
               </div>
-
-              {accessibleClients && accessibleClients.length > 0 && (
-                <i className={`fa-solid fa-chevron-down text-[9px] text-slate-400 group-hover:text-slate-700 transition-transform duration-200 ${
-                  dropdownOpen ? 'rotate-180' : ''
-                }`}></i>
-              )}
             </button>
 
-            {/* Client Workspaces Dropdown */}
-            {dropdownOpen && accessibleClients && accessibleClients.length > 0 && (
-              <div className="absolute right-0 mt-2 w-72 bg-white border border-slate-200 rounded-2xl shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2">
-                <div className="px-3 py-1.5 border-b border-slate-100 flex items-center justify-between text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+            {/* Dropdown Menu */}
+            {dropdownOpen && accessibleClients.length > 1 && (
+              <div className="absolute top-full left-0 mt-2 w-72 bg-white border border-slate-200 rounded-2xl shadow-xl z-50 overflow-hidden animate-in fade-in duration-100">
+                <div className="p-2.5 bg-slate-50 border-b border-slate-100 text-[11px] font-bold text-slate-700 flex items-center justify-between">
                   <span>Switch Client Workspace</span>
                   <span className="text-emerald-600 font-mono">{accessibleClients.length} Clients</span>
                 </div>
@@ -189,6 +165,18 @@ export default function Header({
 
         {/* 3. Action Buttons Segmented Toolbar */}
         <div className="flex items-center bg-slate-100/90 border border-slate-200 p-0.5 rounded-xl shadow-2xs gap-0.5 flex-shrink-0">
+          
+          {/* TruePriv AI Agent (Marquee Trigger) */}
+          <button
+            onClick={onOpenAiCopilot}
+            title="Open TruePriv Autonomous Privacy AI Agent"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-extrabold text-sky-900 hover:text-sky-950 bg-sky-50 hover:bg-white border border-sky-200/80 rounded-lg transition-all shadow-2xs whitespace-nowrap"
+          >
+            <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
+            <i className="fa-solid fa-brain text-sky-600 text-xs"></i>
+            <span>TruePriv AI Agent</span>
+          </button>
+
           {/* NDPA Wizard */}
           <button
             onClick={onOpenOnboarding}
@@ -213,9 +201,9 @@ export default function Header({
           <button
             onClick={onOpenPublicPortal}
             title="Open Hosted DSAR Self-Service Portal"
-            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-bold text-sky-900 hover:text-sky-950 hover:bg-white rounded-lg transition-all shadow-2xs whitespace-nowrap"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 hover:bg-white rounded-lg transition-all shadow-2xs whitespace-nowrap"
           >
-            <i className="fa-solid fa-globe text-sky-600 text-xs"></i>
+            <i className="fa-solid fa-globe text-slate-500 text-xs"></i>
             <span className="hidden sm:inline">Public DSAR</span>
           </button>
         </div>

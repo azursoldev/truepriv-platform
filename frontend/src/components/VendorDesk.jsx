@@ -4,12 +4,16 @@ import { api } from '../lib/api';
 export default function VendorDesk({ onRefreshMetrics }) {
   const [vendors, setVendors] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [discovering, setDiscovering] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [notification, setNotification] = useState(null);
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState('all');
 
   const [formData, setFormData] = useState({
     vendor_name: '',
     service_category: 'Cloud Hosting',
+    cookie_category: 'strictly_necessary',
+    cookies_detected: '_ga, _gid',
     contact_person: '',
     contact_email: '',
     data_types_processed: 'Customer BVN, KYC Selfies, Transaction Logs',
@@ -20,10 +24,11 @@ export default function VendorDesk({ onRefreshMetrics }) {
     is_cross_border: true,
   });
 
-  const loadData = async () => {
+  const loadData = async (catFilter = selectedCategoryFilter) => {
     setLoading(true);
     try {
-      const res = await api.getVendors();
+      const queryParam = catFilter && catFilter !== 'all' ? `?cookie_category=${catFilter}` : '';
+      const res = await api.getVendors(queryParam);
       if (res.success) {
         setVendors(res.data);
       }
@@ -35,8 +40,27 @@ export default function VendorDesk({ onRefreshMetrics }) {
   };
 
   useEffect(() => {
-    loadData();
-  }, []);
+    loadData(selectedCategoryFilter);
+  }, [selectedCategoryFilter]);
+
+  const handleDiscoverCookies = async () => {
+    setDiscovering(true);
+    try {
+      const res = await api.discoverVendorCookies();
+      if (res.success) {
+        setNotification({ 
+          type: 'success', 
+          message: `TruePriv Discovery Complete: Automatically mapped tracking cookies for ${res.updated_count} vendors.` 
+        });
+        setVendors(res.vendors);
+        if (onRefreshMetrics) onRefreshMetrics();
+      }
+    } catch (err) {
+      setNotification({ type: 'error', message: err.message || 'Error running discovery' });
+    } finally {
+      setDiscovering(false);
+    }
+  };
 
   const handleCreate = async (e) => {
     e.preventDefault();
@@ -44,11 +68,12 @@ export default function VendorDesk({ onRefreshMetrics }) {
       const payload = {
         ...formData,
         data_types_processed: formData.data_types_processed.split(',').map(s => s.trim()),
+        cookies_detected: formData.cookies_detected ? formData.cookies_detected.split(',').map(s => s.trim()) : [],
       };
 
       const res = await api.createVendor(payload);
       if (res.success) {
-        setNotification({ type: 'success', message: 'Vendor processor registered.' });
+        setNotification({ type: 'success', message: 'Third-party processor registered with cookie linkage.' });
         setShowCreateModal(false);
         loadData();
         if (onRefreshMetrics) onRefreshMetrics();
@@ -72,6 +97,19 @@ export default function VendorDesk({ onRefreshMetrics }) {
     }
   };
 
+  const getCookieCategoryBadge = (cat) => {
+    switch (cat) {
+      case 'analytics':
+        return <span className="text-[10px] bg-indigo-50 text-indigo-800 border border-indigo-200 px-2 py-0.5 rounded font-bold">Analytics Tracker</span>;
+      case 'marketing':
+        return <span className="text-[10px] bg-purple-50 text-purple-800 border border-purple-200 px-2 py-0.5 rounded font-bold">Marketing Pixel</span>;
+      case 'functional':
+        return <span className="text-[10px] bg-sky-50 text-sky-800 border border-sky-200 px-2 py-0.5 rounded font-bold">Functional Tool</span>;
+      default:
+        return <span className="text-[10px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded font-bold">Strictly Necessary</span>;
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Toast Notification */}
@@ -88,34 +126,86 @@ export default function VendorDesk({ onRefreshMetrics }) {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Third-Party Data Processors & TPRM Risk</h2>
+            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Third-Party Data Processors & Cookie Tracker Discovery</h2>
             <span className="text-[11px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded font-mono font-bold">
-              NDPA SEC 29
+              NDPA SEC 29 & 42
+            </span>
+            <span className="text-[11px] bg-sky-50 text-sky-800 border border-sky-200 px-2 py-0.5 rounded font-mono font-bold">
+              TRUEPRIV DISCOVERY
             </span>
           </div>
           <p className="text-xs text-slate-600 mt-0.5">
-            Maintain inventory of external vendors, signed DPAs, cross-border safeguards, and security ratings.
+            Maintain inventory of external vendors, automatically discover and map website cookies to third-party processors, and verify signed DPAs.
           </p>
         </div>
 
+        <div className="flex items-center gap-2">
+          {/* TruePriv Auto-Discovery Button */}
+          <button
+            onClick={handleDiscoverCookies}
+            disabled={discovering}
+            className="px-3.5 py-2 bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-700 hover:to-indigo-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer disabled:opacity-50"
+          >
+            <i className={`fa-solid fa-radar ${discovering ? 'animate-spin' : ''}`}></i>
+            <span>{discovering ? 'Discovering Trackers...' : '⚡ TruePriv Auto-Discover Cookies'}</span>
+          </button>
+
+          <button
+            onClick={() => setShowCreateModal(true)}
+            className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs"
+          >
+            <i className="fa-solid fa-plus text-xs"></i>
+            <span>Add Processor</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Filter Tabs by Cookie Category */}
+      <div className="flex items-center gap-2 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 overflow-x-auto">
         <button
-          onClick={() => setShowCreateModal(true)}
-          className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs"
+          onClick={() => setSelectedCategoryFilter('all')}
+          className={`px-3 py-1.5 rounded-lg transition-all ${selectedCategoryFilter === 'all' ? 'bg-white text-slate-900 shadow-xs' : 'hover:text-slate-900'}`}
         >
-          <i className="fa-solid fa-plus text-xs"></i>
-          <span>Add Processor</span>
+          All Processors ({vendors.length})
+        </button>
+        <button
+          onClick={() => setSelectedCategoryFilter('strictly_necessary')}
+          className={`px-3 py-1.5 rounded-lg transition-all ${selectedCategoryFilter === 'strictly_necessary' ? 'bg-white text-emerald-800 shadow-xs' : 'hover:text-slate-900'}`}
+        >
+          Strictly Necessary
+        </button>
+        <button
+          onClick={() => setSelectedCategoryFilter('analytics')}
+          className={`px-3 py-1.5 rounded-lg transition-all ${selectedCategoryFilter === 'analytics' ? 'bg-white text-indigo-800 shadow-xs' : 'hover:text-slate-900'}`}
+        >
+          Analytics & Performance
+        </button>
+        <button
+          onClick={() => setSelectedCategoryFilter('marketing')}
+          className={`px-3 py-1.5 rounded-lg transition-all ${selectedCategoryFilter === 'marketing' ? 'bg-white text-purple-800 shadow-xs' : 'hover:text-slate-900'}`}
+        >
+          Marketing & Advertising
+        </button>
+        <button
+          onClick={() => setSelectedCategoryFilter('functional')}
+          className={`px-3 py-1.5 rounded-lg transition-all ${selectedCategoryFilter === 'functional' ? 'bg-white text-sky-800 shadow-xs' : 'hover:text-slate-900'}`}
+        >
+          Functional & Tools
         </button>
       </div>
 
       {/* Vendor Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {loading ? (
-          <div className="col-span-3 py-12 text-center text-slate-500 text-xs font-medium">Loading processors...</div>
+          <div className="col-span-3 py-12 text-center text-slate-500 text-xs font-medium">
+            <i className="fa-solid fa-spinner animate-spin text-sky-600 text-lg mb-2"></i>
+            <div>Loading processors...</div>
+          </div>
         ) : vendors.length === 0 ? (
           <div className="col-span-3 bg-white border border-slate-200 rounded-3xl p-12 text-center shadow-xs">
             <i className="fa-solid fa-handshake-simple text-slate-300 text-3xl mb-2"></i>
-            <h4 className="text-sm font-bold text-slate-800">No third-party processors recorded</h4>
-            <p className="text-xs text-slate-500 mt-1">Record cloud providers, SMS gateways, and SaaS vendors processing personal data.</p>
+            <h4 className="text-sm font-bold text-slate-800">No processors matching category filter</h4>
+            <p className="text-xs text-slate-500 mt-1">Run TruePriv Auto-Discovery or register new processors.</p>
           </div>
         ) : (
           vendors.map((v) => (
@@ -130,27 +220,53 @@ export default function VendorDesk({ onRefreshMetrics }) {
                     <h3 className="text-base font-bold text-slate-900 mt-0.5">{v.vendor_name}</h3>
                   </div>
                   <span className={`text-[11px] font-mono uppercase px-2 py-0.5 rounded-full font-bold ${
-                    v.risk_rating === 'high' ? 'bg-red-50 text-red-700 border border-red-200' : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                    v.risk_rating === 'high' || v.risk_rating === 'critical' ? 'bg-red-50 text-red-700 border border-red-200' : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
                   }`}>
                     {v.risk_rating} Risk
                   </span>
                 </div>
 
-                <div className="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs space-y-1">
-                  <div className="text-slate-600"><strong>Data Handled:</strong> {v.data_types_processed?.join(', ')}</div>
-                  <div className="text-slate-600 flex items-center gap-1 mt-1">
+                {/* Cookie Category & Disclosed Trackers */}
+                <div className="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-500 font-bold text-[10px] uppercase">Consent Category:</span>
+                    {getCookieCategoryBadge(v.cookie_category)}
+                  </div>
+                  
+                  {v.cookies_detected && v.cookies_detected.length > 0 && (
+                    <div className="pt-1 flex items-center gap-1 flex-wrap">
+                      <span className="text-[10px] text-slate-500 font-bold">Trackers:</span>
+                      {v.cookies_detected.map((ck, i) => (
+                        <span key={i} className="text-[9px] font-mono bg-white border border-slate-200 px-1.5 py-0.5 rounded text-slate-700">
+                          {ck}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className="text-slate-600 text-[11px] pt-1">
+                    <strong>Data Handled:</strong> {Array.isArray(v.data_types_processed) ? v.data_types_processed.join(', ') : v.data_types_processed}
+                  </div>
+                  
+                  <div className="text-slate-600 flex items-center gap-1 text-[11px]">
                     <i className="fa-solid fa-globe text-slate-400"></i>
                     <span>Hosting Location: <strong className="text-slate-900">{v.hosting_country || 'Nigeria'}</strong></span>
                   </div>
                 </div>
 
                 {/* DPA Status */}
-                <div className="p-2.5 rounded-xl border flex items-center justify-between text-xs font-semibold bg-emerald-50 text-emerald-900 border-emerald-200">
+                <div className={`p-2.5 rounded-xl border flex items-center justify-between text-xs font-semibold ${
+                  v.dpa_signed 
+                    ? 'bg-emerald-50 text-emerald-900 border-emerald-200'
+                    : 'bg-amber-50 text-amber-900 border-amber-200'
+                }`}>
                   <span className="flex items-center gap-1.5">
                     <i className="fa-solid fa-file-contract text-emerald-600"></i>
                     <span>Executed DPA on File</span>
                   </span>
-                  <span className="text-[10px] font-mono font-bold">✓ Signed</span>
+                  <span className="text-[10px] font-mono font-bold">
+                    {v.dpa_signed ? '✓ Signed' : '⚠️ Pending DPA'}
+                  </span>
                 </div>
               </div>
 
@@ -158,7 +274,7 @@ export default function VendorDesk({ onRefreshMetrics }) {
                 <span className="truncate">{v.contact_email || 'vendor@support.com'}</span>
                 <button
                   onClick={() => handleDelete(v.id)}
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
                 >
                   <i className="fa-solid fa-trash-can text-xs"></i>
                 </button>
@@ -185,7 +301,7 @@ export default function VendorDesk({ onRefreshMetrics }) {
                 <input
                   type="text"
                   required
-                  placeholder="e.g. AWS Cloud EMEA or Twilio SMS"
+                  placeholder="e.g. Google Analytics or Paystack Payments"
                   value={formData.vendor_name}
                   onChange={(e) => setFormData({ ...formData, vendor_name: e.target.value })}
                   className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
@@ -203,6 +319,34 @@ export default function VendorDesk({ onRefreshMetrics }) {
                   />
                 </div>
                 <div>
+                  <label className="block text-slate-700 font-bold mb-1">Cookie & Consent Category:</label>
+                  <select
+                    value={formData.cookie_category}
+                    onChange={(e) => setFormData({ ...formData, cookie_category: e.target.value })}
+                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 font-semibold"
+                  >
+                    <option value="strictly_necessary">Strictly Necessary</option>
+                    <option value="analytics">Analytics & Performance</option>
+                    <option value="marketing">Marketing & Advertising</option>
+                    <option value="functional">Functional & Tools</option>
+                    <option value="none">None / Internal Server</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-slate-700 font-bold mb-1">Detected Cookies (comma separated):</label>
+                <input
+                  type="text"
+                  placeholder="_ga, _gid, _fbp, pstk_id"
+                  value={formData.cookies_detected}
+                  onChange={(e) => setFormData({ ...formData, cookies_detected: e.target.value })}
+                  className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 font-mono text-[11px]"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-2">
+                <div>
                   <label className="block text-slate-700 font-bold mb-1">Hosting Country:</label>
                   <input
                     type="text"
@@ -210,6 +354,19 @@ export default function VendorDesk({ onRefreshMetrics }) {
                     onChange={(e) => setFormData({ ...formData, hosting_country: e.target.value })}
                     className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900"
                   />
+                </div>
+                <div>
+                  <label className="block text-slate-700 font-bold mb-1">Risk Rating:</label>
+                  <select
+                    value={formData.risk_rating}
+                    onChange={(e) => setFormData({ ...formData, risk_rating: e.target.value })}
+                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900"
+                  >
+                    <option value="low">Low Risk</option>
+                    <option value="medium">Medium Risk</option>
+                    <option value="high">High Risk</option>
+                    <option value="critical">Critical Risk</option>
+                  </select>
                 </div>
               </div>
 
@@ -223,7 +380,7 @@ export default function VendorDesk({ onRefreshMetrics }) {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold shadow-xs"
+                  className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer"
                 >
                   Register Processor
                 </button>

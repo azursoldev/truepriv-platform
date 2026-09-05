@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\TemplateController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VendorController;
 use App\Http\Controllers\Api\OmnichannelConsentController;
+use App\Http\Controllers\Api\AiPrivacyCopilotController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -107,8 +108,14 @@ Route::prefix('v1')->group(function () {
             // Vendor & Third-Party Processors (TPRM)
             Route::get('/vendors', [VendorController::class, 'index']);
             Route::post('/vendors', [VendorController::class, 'store']);
+            Route::post('/vendors/discover-cookies', [VendorController::class, 'autoDiscoverCookies']);
             Route::put('/vendors/{id}', [VendorController::class, 'update']);
             Route::delete('/vendors/{id}', [VendorController::class, 'destroy']);
+
+            // TruePriv Agent Network: AI-Powered Privacy Operations
+            Route::post('/ai-copilot/scan', [AiPrivacyCopilotController::class, 'scanCompliance']);
+            Route::post('/ai-copilot/ask', [AiPrivacyCopilotController::class, 'askCopilot']);
+            Route::get('/ai-copilot/ledger', [AiPrivacyCopilotController::class, 'getDecisionLedger']);
 
             // Cookie Banner Configurator & Proof Logs
             Route::get('/cookies/config', [CookieController::class, 'getBannerConfig']);

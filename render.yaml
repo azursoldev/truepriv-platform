@@ -11,6 +11,16 @@ services:
         value: production
       - key: APP_DEBUG
         value: false
+      - key: APP_NAME
+        value: "TruePriv Platform"
+      - key: SESSION_DRIVER
+        value: file
+      - key: CACHE_STORE
+        value: file
+      - key: SANCTUM_STATEFUL_DOMAINS
+        value: "truepriv-saas.vercel.app,localhost:3000"
+      - key: DUAL_RESIDENCY_ENABLED
+        value: "false"
       - key: APP_KEY
         generateValue: true
       - key: DB_CONNECTION

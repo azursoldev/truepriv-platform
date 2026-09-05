@@ -17,6 +17,7 @@
   var THEME_COLOR = SCRIPT_TAG ? (SCRIPT_TAG.getAttribute('data-primary-color') || '#059669') : '#059669';
   var PRIVACY_URL = SCRIPT_TAG ? (SCRIPT_TAG.getAttribute('data-privacy-url') || '#privacy-policy') : '#privacy-policy';
   var COMPANY_NAME = SCRIPT_TAG ? (SCRIPT_TAG.getAttribute('data-company-name') || 'This Website') : 'This Website';
+  var POSITION = SCRIPT_TAG ? (SCRIPT_TAG.getAttribute('data-position') || 'bottom_bar') : 'bottom_bar';
 
   var CONSENT_CATEGORIES = {
     necessary: { label: 'Strictly Necessary', desc: 'Essential for core website operation and security. Cannot be disabled.', required: true, default: true },
@@ -59,9 +60,14 @@
       console.warn('[DPConsent] LocalStorage unavailable');
     }
 
+    // Dispatch event to page scripts
     var event = new CustomEvent('dpConsentUpdated', { detail: consentData });
     window.dispatchEvent(event);
 
+    // Automatically unblock gated scripts matching consented categories
+    unblockScripts(categories);
+
+    // Asynchronously log consent to backend API for NDPA audit trail
     if (TENANT_ID && API_BASE) {
       try {
         fetch(API_BASE + '/cookie-consent/log', {
@@ -80,6 +86,35 @@
 
     removeBanner();
     removePreferencesModal();
+  }
+
+  function unblockScripts(categories) {
+    if (!categories) return;
+    try {
+      var scripts = document.querySelectorAll('script[type="text/plain"][data-dp-category]');
+      for (var i = 0; i < scripts.length; i++) {
+        var s = scripts[i];
+        var cat = s.getAttribute('data-dp-category');
+        if (categories[cat]) {
+          var newScript = document.createElement('script');
+          for (var j = 0; j < s.attributes.length; j++) {
+            var attr = s.attributes[j];
+            if (attr.name !== 'type') {
+              newScript.setAttribute(attr.name, attr.value);
+            }
+          }
+          newScript.type = 'text/javascript';
+          if (s.src) {
+            newScript.src = s.src;
+          } else {
+            newScript.textContent = s.textContent;
+          }
+          s.parentNode.replaceChild(newScript, s);
+        }
+      }
+    } catch (e) {
+      console.warn('[DPConsent] Script unblocking error:', e);
+    }
   }
 
   function removeBanner() {
@@ -106,19 +141,50 @@
       }
       .dp-banner-container {
         position: fixed;
-        bottom: 24px;
-        left: 24px;
-        right: 24px;
-        max-width: 820px;
-        margin: 0 auto;
         background: #ffffff;
-        border-radius: 16px;
         box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.06);
         padding: 24px;
         display: flex;
         flex-direction: column;
         gap: 16px;
         animation: dpSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 9999999;
+      }
+      .dp-pos-bottom_bar {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        max-width: 100%;
+        border-radius: 0;
+        border-top: 1px solid #e2e8f0;
+      }
+      .dp-pos-floating_bottom_left {
+        bottom: 24px;
+        left: 24px;
+        right: auto;
+        max-width: 480px;
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+      }
+      .dp-pos-floating_bottom_right {
+        bottom: 24px;
+        right: 24px;
+        left: auto;
+        max-width: 480px;
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+      }
+      .dp-pos-center_modal {
+        top: 50%;
+        left: 50%;
+        bottom: auto;
+        right: auto;
+        transform: translate(-50%, -50%);
+        max-width: 540px;
+        width: 90%;
+        border-radius: 20px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
       }
       @media (min-width: 640px) {
         .dp-banner-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
@@ -189,6 +255,7 @@
       .dp-btn-text:hover {
         color: #0f172a;
       }
+      /* Preferences Modal */
       .dp-modal-backdrop {
         position: fixed;
         inset: 0;
@@ -260,11 +327,24 @@
         transition: .2s;
         border-radius: 50%;
       }
-      input:checked + .dp-slider { background-color: ${THEME_COLOR}; }
-      input:checked + .dp-slider:before { transform: translateX(20px); }
-      input:disabled + .dp-slider { opacity: 0.6; cursor: not-allowed; }
-      @keyframes dpSlideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-      @keyframes dpFadeIn { from { opacity: 0; } to { opacity: 1; } }
+      input:checked + .dp-slider {
+        background-color: ${THEME_COLOR};
+      }
+      input:checked + .dp-slider:before {
+        transform: translateX(20px);
+      }
+      input:disabled + .dp-slider {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      @keyframes dpSlideUp {
+        from { transform: translateY(40px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+      @keyframes dpFadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
     `;
     var styleEl = document.createElement('style');
     styleEl.id = 'dp-consent-styles';
@@ -345,14 +425,15 @@
   }
 
   function showBanner() {
-    if (getStoredConsent()) return;
+    if (getStoredConsent()) return; // Already answered
     injectStyles();
     removeBanner();
 
     var bannerRoot = document.createElement('div');
     bannerRoot.id = 'dp-consent-banner-root';
+    var posClass = 'dp-pos-' + (POSITION || 'bottom_bar');
     bannerRoot.innerHTML = `
-      <div class="dp-banner-container">
+      <div class="dp-banner-container ${posClass}">
         <div class="dp-banner-header">
           <div>
             <div class="dp-banner-title">
@@ -387,10 +468,16 @@
     };
   }
 
+  // Public SDK methods exposed on window
   window.DPConsent = {
     showBanner: showBanner,
     openPreferences: showPreferencesModal,
     getConsent: getStoredConsent,
+    unblockScripts: unblockScripts,
+    resetConsent: function () {
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      showBanner();
+    },
     hasConsented: function (category) {
       var consent = getStoredConsent();
       if (!consent || !consent.categories) return false;
@@ -398,6 +485,13 @@
     }
   };
 
+  // Check stored consent to immediately unblock consented scripts on page load
+  var currentStoredConsent = getStoredConsent();
+  if (currentStoredConsent && currentStoredConsent.categories) {
+    unblockScripts(currentStoredConsent.categories);
+  }
+
+  // Auto-run on DOM ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', showBanner);
   } else {

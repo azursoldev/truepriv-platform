@@ -17,6 +17,7 @@ import AuthModal from './components/AuthModal';
 import OnboardingWizard from './components/OnboardingWizard';
 import ChampionInviteModal from './components/ChampionInviteModal';
 import MyProfileDetailDesk from './components/MyProfileDetailDesk';
+import TruePrivAiCopilotDrawer from './components/TruePrivAiCopilotDrawer';
 import { api, getAuthToken, removeAuthToken, setActiveTenantId } from './lib/api';
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
   const [showPublicPortal, setShowPublicPortal] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showChampions, setShowChampions] = useState(false);
+  const [showAiCopilot, setShowAiCopilot] = useState(false);
 
   const initApp = async () => {
     setLoading(true);
@@ -151,6 +153,7 @@ export default function App() {
         onOpenOnboarding={() => setActiveTab('ndpa-wizard')}
         onOpenChampions={() => setActiveTab('champions-desk')}
         onOpenProfile={() => setActiveTab('my-profile')}
+        onOpenAiCopilot={() => setShowAiCopilot(true)}
         isSidebarCollapsed={sidebarCollapsed}
         onToggleSidebar={() => setSidebarCollapsed(!sidebarCollapsed)}
       />
@@ -261,6 +264,23 @@ export default function App() {
           )}
         </main>
       </div>
+
+      {/* Floating TruePriv AI Agent Trigger */}
+      <button
+        onClick={() => setShowAiCopilot(true)}
+        title="Open TruePriv Autonomous Privacy AI Agent"
+        className="fixed bottom-6 right-6 z-40 bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-500 hover:to-indigo-500 text-white p-3.5 px-4 rounded-full shadow-2xl flex items-center gap-2.5 font-bold text-xs border border-sky-400/40 transition-all hover:scale-105 group cursor-pointer"
+      >
+        <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+        <i className="fa-solid fa-brain text-sm"></i>
+        <span>TruePriv AI Agent</span>
+      </button>
+
+      {/* TruePriv AI Copilot Drawer */}
+      <TruePrivAiCopilotDrawer
+        isOpen={showAiCopilot}
+        onClose={() => setShowAiCopilot(false)}
+      />
     </div>
   );
 }

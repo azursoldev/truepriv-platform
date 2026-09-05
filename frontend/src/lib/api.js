@@ -106,10 +106,17 @@ export const api = {
   createVendor: (data) => request('/vendors', { method: 'POST', body: JSON.stringify(data) }),
   updateVendor: (id, data) => request(`/vendors/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
   deleteVendor: (id) => request(`/vendors/${id}`, { method: 'DELETE' }),
+  discoverVendorCookies: () => request('/vendors/discover-cookies', { method: 'POST' }),
+
+  // TruePriv Agent Network: AI-Powered Privacy Operations
+  scanAiCompliance: () => request('/ai-copilot/scan', { method: 'POST' }),
+  askAiCopilot: (prompt, context = '') => request('/ai-copilot/ask', { method: 'POST', body: JSON.stringify({ prompt, context }) }),
+  getAiLedger: () => request('/ai-copilot/ledger'),
 
   // Cookie SDK
   getCookieConfig: () => request('/cookies/config'),
   updateCookieConfig: (data) => request('/cookies/config', { method: 'PUT', body: JSON.stringify(data) }),
+  saveCookieConfig: (data) => request('/cookies/config', { method: 'PUT', body: JSON.stringify(data) }),
   getCookieAnalytics: () => request('/cookies/analytics'),
 
   // Policies

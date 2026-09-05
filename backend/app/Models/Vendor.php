@@ -15,6 +15,8 @@ class Vendor extends Model
         'tenant_id',
         'vendor_name',
         'service_category',
+        'cookie_category',
+        'cookies_detected',
         'contact_person',
         'contact_email',
         'contact_phone',
@@ -31,6 +33,7 @@ class Vendor extends Model
 
     protected $casts = [
         'data_types_processed' => 'array',
+        'cookies_detected' => 'array',
         'dpa_signed' => 'boolean',
         'dpa_signed_date' => 'date',
         'is_cross_border' => 'boolean',

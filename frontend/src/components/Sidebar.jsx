@@ -26,6 +26,8 @@ export default function Sidebar({
       { id: 'ropa', label: 'Industry RoPA Presets', icon: 'fa-solid fa-file-shield' },
       { id: 'audits', label: 'Statutory Filing Registry', icon: 'fa-solid fa-clipboard-check' },
       { id: 'breaches', label: 'National Breach Registry', icon: 'fa-solid fa-triangle-exclamation' },
+      { id: 'vendors', label: 'Vendor & TPRM Risk', icon: 'fa-solid fa-handshake-simple' },
+      { id: 'cookies', label: 'Cookie Consent SDK', icon: 'fa-solid fa-cookie-bite' },
     ];
   } else if (isDpo) {
     sectionTitle = 'DPO Advisory Console';
@@ -36,6 +38,8 @@ export default function Sidebar({
       { id: 'dpia', label: 'DPIA Sign-Off Desk', icon: 'fa-solid fa-shield-halved', count: metrics?.dpia?.total },
       { id: 'dsar', label: 'Client DSAR SLA Watch', icon: 'fa-solid fa-users-viewfinder', count: metrics?.dsar?.open_requests },
       { id: 'breaches', label: 'Client 72h Breach Watch', icon: 'fa-solid fa-triangle-exclamation', count: metrics?.breaches?.active_incidents },
+      { id: 'vendors', label: 'Vendor & TPRM Risk', icon: 'fa-solid fa-handshake-simple', count: metrics?.vendors?.total_processors },
+      { id: 'cookies', label: 'Cookie Consent SDK', icon: 'fa-solid fa-cookie-bite' },
       { id: 'policies', label: 'Statutory Policy Desk', icon: 'fa-solid fa-file-contract' },
     ];
   } else if (isDpco) {
@@ -46,6 +50,8 @@ export default function Sidebar({
       { id: 'audits', label: 'GAID 5-Domain Checklist', icon: 'fa-solid fa-clipboard-check', badge: metrics?.compliance_gauge?.score ? `${metrics.compliance_gauge.score}%` : null },
       { id: 'dpia', label: 'Risk Evaluation Ledger', icon: 'fa-solid fa-shield-halved' },
       { id: 'ropa', label: 'Client Verified RoPA', icon: 'fa-solid fa-file-shield' },
+      { id: 'vendors', label: 'Vendor & TPRM Risk', icon: 'fa-solid fa-handshake-simple', count: metrics?.vendors?.total_processors },
+      { id: 'cookies', label: 'Cookie Consent SDK', icon: 'fa-solid fa-cookie-bite' },
       { id: 'policies', label: 'Governance Policies', icon: 'fa-solid fa-file-contract' },
     ];
   } else {

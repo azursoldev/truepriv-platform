@@ -24,6 +24,10 @@ class VendorController extends Controller
             $query->where('risk_rating', $request->risk_rating);
         }
 
+        if ($request->has('cookie_category') && $request->cookie_category) {
+            $query->where('cookie_category', $request->cookie_category);
+        }
+
         $vendors = $query->orderBy('created_at', 'desc')->get();
 
         return response()->json([
@@ -62,6 +66,8 @@ class VendorController extends Controller
         $validated = $request->validate([
             'vendor_name' => 'required|string|max:255',
             'service_category' => 'required|string|max:255',
+            'cookie_category' => 'nullable|string|in:strictly_necessary,functional,analytics,marketing,none',
+            'cookies_detected' => 'nullable|array',
             'contact_person' => 'nullable|string|max:255',
             'contact_email' => 'nullable|email|max:255',
             'contact_phone' => 'nullable|string',
@@ -93,6 +99,8 @@ class VendorController extends Controller
         $validated = $request->validate([
             'vendor_name' => 'sometimes|string|max:255',
             'service_category' => 'sometimes|string|max:255',
+            'cookie_category' => 'nullable|string|in:strictly_necessary,functional,analytics,marketing,none',
+            'cookies_detected' => 'nullable|array',
             'contact_person' => 'nullable|string|max:255',
             'contact_email' => 'nullable|email|max:255',
             'contact_phone' => 'nullable|string',
@@ -109,8 +117,63 @@ class VendorController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Third-party processor details updated.',
+            'message' => 'Third-party processor updated successfully.',
             'data' => $vendor,
+        ]);
+    }
+
+    /**
+     * Auto-detect and map cookies to vendors (TruePriv Data Discovery).
+     */
+    public function autoDiscoverCookies(): JsonResponse
+    {
+        $discoveryMap = [
+            'google' => ['category' => 'analytics', 'cookies' => ['_ga', '_gid', '_gat_UA']],
+            'analytics' => ['category' => 'analytics', 'cookies' => ['_ga', '_gid']],
+            'meta' => ['category' => 'marketing', 'cookies' => ['_fbp', '_fbc', 'fr']],
+            'facebook' => ['category' => 'marketing', 'cookies' => ['_fbp', '_fbc', 'fr']],
+            'linkedin' => ['category' => 'marketing', 'cookies' => ['bcookie', 'li_sugr', 'UserMatchHistory']],
+            'paystack' => ['category' => 'strictly_necessary', 'cookies' => ['pstk_session', '__cf_bm']],
+            'flutterwave' => ['category' => 'strictly_necessary', 'cookies' => ['flw_session', 'device_id']],
+            'intercom' => ['category' => 'functional', 'cookies' => ['intercom-id', 'intercom-session']],
+            'zendesk' => ['category' => 'functional', 'cookies' => ['__zlcmid', '_zendesk_session']],
+            'aws' => ['category' => 'strictly_necessary', 'cookies' => ['AWSALB', 'AWSALBCORS']],
+            'amazon' => ['category' => 'strictly_necessary', 'cookies' => ['AWSALB', 'AWSALBCORS']],
+            'microsoft' => ['category' => 'strictly_necessary', 'cookies' => ['MSISAuth', 'buid']],
+            'azure' => ['category' => 'strictly_necessary', 'cookies' => ['AppServiceSession', 'ARRAffinity']],
+        ];
+
+        $vendors = Vendor::all();
+        $updatedCount = 0;
+
+        foreach ($vendors as $vendor) {
+            $lowerName = strtolower($vendor->vendor_name . ' ' . $vendor->service_category);
+            $matched = false;
+            foreach ($discoveryMap as $keyword => $info) {
+                if (str_contains($lowerName, $keyword)) {
+                    $vendor->update([
+                        'cookie_category' => $info['category'],
+                        'cookies_detected' => $info['cookies'],
+                    ]);
+                    $updatedCount++;
+                    $matched = true;
+                    break;
+                }
+            }
+            if (!$matched && empty($vendor->cookie_category)) {
+                $vendor->update([
+                    'cookie_category' => 'strictly_necessary',
+                    'cookies_detected' => ['session_id', 'csrf_token'],
+                ]);
+                $updatedCount++;
+            }
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => "TruePriv discovery completed. Mapped {$updatedCount} vendor cookie profiles.",
+            'updated_count' => $updatedCount,
+            'vendors' => Vendor::orderBy('created_at', 'desc')->get(),
         ]);
     }
 
