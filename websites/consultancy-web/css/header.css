@@ -1,0 +1,837 @@
+/* ==========================================================================
+   AMSTEL CONSULTING — STANDARDIZED HEADER & NAVIGATION SYSTEM
+   Single Source of Truth for Header, Brand Logo, Mega Menus & Mobile Drawer
+   ========================================================================== */
+
+:root {
+  --pwc-orange: #eb5f07;
+  --pwc-orange-dark: #c94f05;
+  --pwc-orange-light: #fff5ee;
+  --pwc-black: #000000;
+  --pwc-charcoal: #2d2d2d;
+  --pwc-dark-slate: #1d1d1d;
+  --pwc-gray-light: #f6f6f6;
+  --pwc-gray-border: #e3e3e3;
+  --pwc-gray-text: #53565a;
+  --pwc-white: #ffffff;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* 1. PERSISTENT TOP ANNOUNCEMENT BAR */
+.top-announcement-bar {
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 0.55rem 1.5rem;
+  font-size: 0.84rem;
+  border-bottom: 2px solid var(--pwc-orange);
+  position: relative;
+  z-index: 1050;
+}
+
+.announcement-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.announcement-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #f1f5f9;
+  font-size: 0.85rem;
+}
+
+.announcement-text strong {
+  color: #ffffff;
+}
+
+.announcement-icon {
+  color: #f59e0b;
+  font-size: 0.95rem;
+}
+
+.announcement-action-btn {
+  background: var(--pwc-orange);
+  color: #ffffff !important;
+  padding: 0.28rem 0.95rem;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.announcement-action-btn:hover {
+  background: #b23e00;
+  transform: translateY(-1px);
+}
+
+/* 2. TOP UTILITY BAR */
+.top-bar {
+  background: var(--pwc-white);
+  border-bottom: 1px solid var(--pwc-gray-border);
+  padding: 0.35rem 3.5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2rem;
+  font-size: 0.78rem;
+  color: var(--pwc-gray-text);
+}
+
+.top-bar-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  color: var(--pwc-gray-text);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.top-bar-item:hover {
+  color: var(--pwc-orange);
+}
+
+/* 3. MAIN NAVIGATION HEADER CONTAINER */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--pwc-gray-border);
+  padding: 0.75rem 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* 4. UNIFIED BRAND LOGO SYSTEM (Header, Mobile Drawer & Footer) */
+.brand-logo-link,
+.footer-logo-wrap {
+  display: inline-flex;
+  align-items: flex-end;
+  text-decoration: none;
+  gap: 0.15rem;
+}
+
+.brand-logo-img {
+  height: 48px;
+  width: auto;
+  max-width: 60px;
+  object-fit: contain;
+  display: block;
+}
+
+.brand-logo-text {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  position: relative;
+  top: -5px;
+  left: -8px;
+  padding-bottom: 2px;
+}
+
+.brand-mstel {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #1a2a47;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-family: var(--font-sans);
+}
+
+.brand-consulting {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--pwc-orange, #eb5f07);
+  letter-spacing: -0.01em;
+  line-height: 1;
+  font-family: var(--font-sans);
+}
+
+/* Footer Logo Variant (Clean proportional sizing) */
+.footer-logo-wrap .brand-logo-img {
+  height: 38px;
+}
+
+.footer-logo-wrap .brand-mstel {
+  font-size: 1.25rem;
+  color: #1a2a47;
+}
+
+.footer-logo-wrap .brand-consulting {
+  font-size: 1rem;
+  color: var(--pwc-orange, #eb5f07);
+}
+
+/* 5. MAIN NAVIGATION LINKS & HOVER STATES */
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.main-nav>li {
+  position: relative;
+}
+
+.main-nav a {
+  color: var(--pwc-charcoal);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 0.45rem 0.85rem;
+  position: relative;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 9999px;
+}
+
+.main-nav a:hover,
+.main-nav>li:hover>a {
+  color: var(--pwc-charcoal);
+  background: #f1f3f5;
+}
+
+.nav-chevron {
+  font-size: 0.65rem;
+  color: #94a3b8;
+  transition: transform 0.2s ease;
+}
+
+.main-nav>li:hover .nav-chevron {
+  transform: rotate(180deg);
+  color: var(--pwc-charcoal);
+}
+
+/* 6. MEGA DROPDOWN (Services) */
+.mega-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 780px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.04);
+  padding: 2.25rem 2.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.mega-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -16px;
+  left: 0;
+  right: 0;
+  height: 16px;
+}
+
+.main-nav>li:hover .mega-dropdown-menu,
+.nav-item-dropdown:hover .mega-dropdown-menu {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(6px) !important;
+  pointer-events: auto !important;
+}
+
+.mega-dropdown-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1.15fr 1fr;
+  gap: 2.5rem;
+}
+
+.mega-col-heading {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #64748b;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.3px;
+  text-transform: none;
+}
+
+.mega-subnav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mega-subnav-list li a {
+  color: #0f172a !important;
+  font-size: 0.93rem !important;
+  font-weight: 600 !important;
+  padding: 0.25rem 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  display: block !important;
+  transition: all 0.15s ease !important;
+}
+
+.mega-subnav-list li a:hover {
+  color: var(--pwc-orange) !important;
+  transform: translateX(4px) !important;
+  background: transparent !important;
+}
+
+.mega-view-all-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.45rem !important;
+  margin-top: 1.5rem !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  transition: all 0.15s ease !important;
+}
+
+.mega-view-all-link:hover {
+  color: var(--pwc-orange) !important;
+  background: transparent !important;
+}
+
+/* 7. SIMPLE DROPDOWN MENU (Blog & Our Organisation) */
+.simple-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 320px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.12), 0 5px 15px rgba(0, 0, 0, 0.05);
+  padding: 1rem 0.75rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.simple-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -16px;
+  left: 0;
+  right: 0;
+  height: 16px;
+}
+
+.main-nav>li:hover .simple-dropdown-menu,
+.nav-item-dropdown:hover .simple-dropdown-menu {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(4px) !important;
+  pointer-events: auto !important;
+}
+
+.simple-dropdown-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+.simple-dropdown-list li a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  padding: 0.65rem 0.85rem !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  color: #1e293b !important;
+  border-radius: 6px !important;
+  background: transparent !important;
+  transition: all 0.15s ease !important;
+}
+
+.simple-dropdown-list li a:hover {
+  background: #fff5ee !important;
+  color: var(--pwc-orange, #eb5f07) !important;
+  padding-left: 0.95rem !important;
+}
+
+.simple-dropdown-list li a i {
+  color: var(--pwc-orange, #eb5f07) !important;
+  font-size: 0.85rem !important;
+  width: 16px !important;
+  text-align: center !important;
+}
+
+/* 8. HEADER RIGHT SECTION (Search, CTA Button, Hamburger) */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header-search-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.header-search-trigger {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  border-radius: 20px;
+  padding: 0.4rem 0.9rem;
+  color: #475569;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.2s;
+}
+
+.header-search-trigger:hover {
+  border-color: var(--pwc-orange);
+  color: var(--pwc-orange);
+  background: #fffaf5;
+}
+
+.btn-contact-nav,
+.btn-header-cta {
+  background: var(--pwc-orange);
+  border: 1px solid var(--pwc-orange);
+  color: var(--pwc-white) !important;
+  text-decoration: none;
+  font-size: 0.86rem;
+  font-weight: 700;
+  padding: 0.6rem 1.4rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-contact-nav:hover,
+.btn-header-cta:hover {
+  background: var(--pwc-orange-dark);
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.55rem 0.8rem;
+  color: var(--pwc-charcoal);
+  font-size: 1.15rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+  font-weight: 700;
+}
+
+.mobile-menu-btn:hover {
+  background: #f8fafc;
+  color: var(--pwc-orange);
+  border-color: var(--pwc-orange);
+}
+
+/* 9. MOBILE SLIDEOUT DRAWER */
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.mobile-nav-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-nav-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 88vw;
+  max-width: 380px;
+  background: #ffffff;
+  z-index: 2010;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-nav-overlay.open .mobile-nav-drawer {
+  transform: translateX(0);
+}
+
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.mobile-drawer-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #64748b;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+}
+
+.mobile-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mobile-nav-group-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #94a3b8;
+  margin-bottom: 0.5rem;
+}
+
+.mobile-nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.mobile-nav-links li a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #1e293b;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+}
+
+.mobile-nav-links li a:hover {
+  background: #fff5ee;
+  color: var(--pwc-orange);
+}
+
+.mobile-drawer-footer {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid #e2e8f0;
+  background: #fafafa;
+}
+
+.btn-mobile-car {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  background: var(--pwc-orange);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.85rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.btn-mobile-car:hover {
+  background: #c94f05;
+}
+
+/* 10. SITE-WIDE SEARCH MODAL */
+.search-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 3000;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10vh;
+}
+
+.search-modal-overlay.open {
+  display: flex;
+}
+
+.search-modal-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 640px;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  animation: modalFadeDown 0.2s ease-out;
+}
+
+@keyframes modalFadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-input-wrap {
+  display: flex;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  gap: 1rem;
+}
+
+.search-input-wrap i {
+  color: var(--pwc-orange);
+  font-size: 1.2rem;
+}
+
+.search-input-wrap input {
+  border: none;
+  outline: none;
+  font-size: 1.15rem;
+  width: 100%;
+  font-family: var(--font-sans);
+  color: #0f172a;
+}
+
+.search-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #94a3b8;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.search-results-list {
+  padding: 1.5rem;
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+.search-quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  align-items: center;
+}
+
+.search-quick-links span {
+  font-size: 0.82rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.search-quick-links a {
+  background: #f1f5f9;
+  color: #334155;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.search-quick-links a:hover {
+  background: var(--pwc-orange);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   RESPONSIVE MEDIA QUERIES (Header & Mobile Drawer)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .top-bar {
+    padding: 0.35rem 1.25rem !important;
+  }
+
+  .header {
+    padding: 0.65rem 1.25rem !important;
+  }
+
+  .header .main-nav {
+    display: none !important;
+  }
+
+  .header-right {
+    gap: 0.65rem !important;
+  }
+
+  .header-search-trigger {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    justify-content: center !important;
+  }
+
+  .header-search-trigger span {
+    display: none !important;
+  }
+
+  .mobile-menu-btn {
+    display: inline-flex !important;
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    padding: 0 !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  .btn-header-cta,
+  .btn-contact-nav {
+    padding: 0.45rem 0.85rem !important;
+    font-size: 0.78rem !important;
+    white-space: nowrap !important;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .btn-header-cta,
+  .btn-contact-nav {
+    display: none !important;
+  }
+
+  .header {
+    padding: 0.55rem 0.95rem !important;
+  }
+
+  .brand-logo-img {
+    height: 38px !important;
+    max-width: 48px !important;
+  }
+
+  .brand-mstel {
+    font-size: 1.22rem !important;
+  }
+
+  .brand-consulting {
+    font-size: 0.94rem !important;
+  }
+
+  .top-announcement-bar {
+    padding: 0.45rem 0.95rem !important;
+  }
+
+  .announcement-inner {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.45rem !important;
+  }
+
+  .announcement-text {
+    font-size: 0.78rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .announcement-action-btn {
+    padding: 0.22rem 0.7rem !important;
+    font-size: 0.72rem !important;
+  }
+
+  .top-bar {
+    padding: 0.25rem 0.95rem !important;
+    gap: 1.25rem !important;
+    font-size: 0.72rem !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .header {
+    padding: 0.45rem 0.75rem !important;
+  }
+
+  .brand-logo-img {
+    height: 30px !important;
+    max-width: 38px !important;
+  }
+
+  .brand-mstel {
+    font-size: 1.05rem !important;
+  }
+
+  .brand-consulting {
+    font-size: 0.82rem !important;
+  }
+
+  .header-search-trigger {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+  }
+
+  .mobile-menu-btn {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    font-size: 1.05rem !important;
+  }
+
+  .header-right {
+    gap: 0.4rem !important;
+  }
+}
