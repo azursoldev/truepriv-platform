@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://platform-web-six-khaki.vercel.app/">
   
   <!-- Truepriv Favicon Symbol (Exact Shield + Checkmark Squircle) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='10' fill='%230a0e14'/><path d='M20 9L12 12.5V19.5C12 24.5 15.4 29.2 20 30.5C24.6 29.2 28 24.5 28 19.5V12.5L20 9Z' fill='%2300f58c'/><path d='M16.5 19.5L19 22L23.5 17.5' stroke='%230a0e14' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='10' fill='%230a0e14'/><path d='M20 9L12 12.5V19.5C12 24.5 15.4 29.2 20 30.5C24.6 29.2 28 24.5 28 19.5V12.5L20 9Z' fill='%232563eb'/><path d='M16.5 19.5L19 22L23.5 17.5' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg>">
   
   <!-- Google Fonts: Inter & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,14 +20,15 @@
 
   <style>
     /* ==========================================================================
-       ONETRUST (onetrust.com) OFFICIAL DESIGN SYSTEM & SPECIFICATION
+       TRUEPRIV (truepriv.com) ENTERPRISE DESIGN SYSTEM & SPECIFICATION
+       Theme: Enterprise Obsidian, Deep Slate, Pure White & Electric Cobalt Blue
        ========================================================================== */
     :root {
-      --ot-mint: #00f58c;          /* OneTrust signature vivid spring green */
-      --ot-mint-hover: #00df7e;
-      --ot-mint-light: #e6fdf4;
-      --ot-mint-dark: #00b869;
-      --ot-black: #0a0e14;         /* OneTrust pure deep ink / obsidian */
+      --ot-mint: #2563eb;          /* Truepriv signature vivid enterprise cobalt blue */
+      --ot-mint-hover: #1d4ed8;
+      --ot-mint-light: #eff6ff;
+      --ot-mint-dark: #1e40af;
+      --ot-black: #0a0e14;         /* Truepriv pure deep ink / obsidian */
       --ot-black-elevated: #111720;
       --ot-dark-card: #151d27;
       --ot-dark-border: #232d3d;
@@ -86,14 +87,14 @@
     }
 
     /* ==========================================================================
-       TOP ANNOUNCEMENT BANNER (OneTrust Vivid Mint Green)
+       TOP ANNOUNCEMENT BANNER (Truepriv Enterprise Banner)
        ========================================================================== */
     .top-banner {
-      background-color: var(--ot-mint);
-      color: var(--ot-black);
+      background-color: #0f172a;
+      color: #f8fafc;
       padding: 0.6rem 1.5rem;
       font-size: 0.85rem;
-      font-weight: 700;
+      font-weight: 600;
       text-align: center;
       display: flex;
       align-items: center;
@@ -101,15 +102,16 @@
       gap: 0.6rem;
       position: relative;
       z-index: 110;
+      border-bottom: 1px solid rgba(37, 99, 235, 0.25);
     }
 
     .top-banner a {
-      color: var(--ot-black);
+      color: #60a5fa;
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
       text-decoration: underline;
-      font-weight: 800;
+      font-weight: 700;
       transition: opacity 0.2s;
     }
 
@@ -146,7 +148,7 @@
       text-decoration: none;
     }
 
-    /* OneTrust Vector Logo */
+    /* Truepriv Vector Logo */
     .ot-logo-svg {
       height: 32px;
       width: auto;
@@ -247,7 +249,7 @@
     }
 
     /* ==========================================================================
-       HERO SECTION (Exact OneTrust Layout & Typography)
+       HERO SECTION (Exact Truepriv Layout & Typography)
        ========================================================================== */
     .hero-section {
       padding: 4.5rem 0 3.5rem;
@@ -561,7 +563,7 @@
       font-family: var(--font-mono);
     }
 
-    /* 3 Pillars Below Hero (OneTrust Exact Layout) */
+    /* 3 Pillars Below Hero (Truepriv Exact Layout) */
     .hero-pillars-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -661,7 +663,7 @@
       color: var(--ot-mint);
     }
 
-    /* Feature Case Study Video Card (Exact OneTrust GOL Airlines Style) */
+    /* Feature Case Study Video Card (Exact Truepriv GOL Airlines Style) */
     .case-study-card {
       background: var(--ot-black-elevated);
       border: 1px solid var(--ot-dark-border);
@@ -875,7 +877,7 @@
     }
 
     /* ==========================================================================
-       SECTION 4: INTEGRATED SOLUTIONS FOR ALL AREAS OF GOVERNANCE (OneTrust 3D Wireframes)
+       SECTION 4: INTEGRATED SOLUTIONS FOR ALL AREAS OF GOVERNANCE (Truepriv 3D Wireframes)
        ========================================================================== */
     .solutions-section {
       padding: 6.5rem 0;
@@ -1225,7 +1227,7 @@
     .res-bg-purple { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); }
     .res-bg-blue { background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%); }
     .res-bg-slate { background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); }
-    .res-bg-mint { background: linear-gradient(135deg, #00f58c 0%, #10b981 100%); }
+    .res-bg-mint { background: linear-gradient(135deg, #2563eb 0%, #0284c7 100%); }
 
     .resource-body {
       padding: 1.5rem;
@@ -1307,31 +1309,35 @@
       margin-bottom: 2.5rem;
     }
 
+    /* Enterprise White Action Pill Button */
     .btn-pill-white {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       background: #ffffff;
       color: var(--ot-black);
       font-size: 0.95rem;
-      font-weight: 800;
-      padding: 0.85rem 2rem;
+      font-weight: 700;
+      padding: 0.85rem 1.85rem;
       border-radius: 9999px;
-      display: inline-flex;
-      align-items: center;
+      border: 1px solid var(--ot-gray-300);
       gap: 0.5rem;
       transition: all 0.2s ease;
     }
 
     .btn-pill-white:hover {
       background: var(--ot-mint);
+      color: #ffffff;
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 245, 140, 0.3);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
     }
 
     /* ==========================================================================
-       SECTION 8: "BE IN THE KNOW" VIVID MINT NEWSLETTER BAR
+       SECTION 8: "BE IN THE KNOW" ENTERPRISE NEWSLETTER BAR
        ========================================================================== */
     .newsletter-section {
-      background: var(--ot-mint);
-      color: var(--ot-black);
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #2563eb 100%);
+      color: #ffffff;
       padding: 4.5rem 0;
     }
 
@@ -1348,12 +1354,13 @@
       letter-spacing: -0.03em;
       margin-bottom: 0.75rem;
       line-height: 1.1;
+      color: #ffffff;
     }
 
     .newsletter-text p {
       font-size: 1.05rem;
-      font-weight: 600;
-      color: rgba(10, 14, 20, 0.85);
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
       line-height: 1.5;
     }
 
@@ -1366,7 +1373,7 @@
     .newsletter-input {
       width: 100%;
       background: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(10, 14, 20, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 8px;
       padding: 0.85rem 1.25rem;
       font-size: 0.92rem;
@@ -1376,9 +1383,9 @@
 
     .newsletter-input:focus {
       outline: none;
-      border-color: var(--ot-black);
+      border-color: #60a5fa;
       background: #ffffff;
-      box-shadow: 0 0 0 3px rgba(10, 14, 20, 0.1);
+      box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.3);
     }
 
     .checkbox-wrap {
@@ -1386,8 +1393,8 @@
       align-items: flex-start;
       gap: 0.6rem;
       font-size: 0.78rem;
-      font-weight: 600;
-      color: rgba(10, 14, 20, 0.8);
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
       line-height: 1.4;
     }
 
@@ -1396,8 +1403,8 @@
     }
 
     .btn-newsletter-submit {
-      background: var(--ot-black);
-      color: #ffffff;
+      background: #ffffff;
+      color: #0f172a;
       border: none;
       font-size: 0.95rem;
       font-weight: 800;
@@ -1409,12 +1416,12 @@
     }
 
     .btn-newsletter-submit:hover {
-      background: #1e293b;
+      background: #f1f5f9;
       transform: translateY(-1px);
     }
 
     /* ==========================================================================
-       SECTION 9: ONETRUST JET BLACK MULTI-COLUMN FOOTER
+       SECTION 9: TRUEPRIV JET BLACK MULTI-COLUMN FOOTER
        ========================================================================== */
     .ot-footer {
       background: #000000;
@@ -1432,7 +1439,7 @@
       margin-bottom: 3rem;
     }
 
-    /* Large OneTrust Geometric Emblem */
+    /* Large Truepriv Geometric Emblem */
     .footer-huge-mark svg {
       width: 96px;
       height: auto;
@@ -1599,7 +1606,7 @@
     }
 
     /* ==========================================================================
-       COOKIES & TRACKING CONSENT POPUP (Exact OneTrust Screenshot Style)
+       COOKIES & TRACKING CONSENT POPUP (Exact Truepriv Screenshot Style)
        ========================================================================== */
     .cookie-banner-wrap {
       position: fixed;
@@ -1833,10 +1840,10 @@
 <body>
 
   <!-- ==========================================================================
-       1. TOP ANNOUNCEMENT BANNER (OneTrust Spring Green)
+       1. TOP ANNOUNCEMENT BANNER (Truepriv Enterprise Banner)
        ========================================================================== -->
   <div class="top-banner">
-    <span>1 in 3 Fortune 500 trust OneTrust to power trust and compliance.</span>
+    <span>Over 4,500 regulated enterprises trust Truepriv to power privacy and compliance.</span>
     <a href="#analysts">Read the 2026 Report &rarr;</a>
   </div>
 
@@ -1851,8 +1858,8 @@
         <a href="https://platform-web-six-khaki.vercel.app/" class="brand-logo-wrap">
           <div class="truepriv-logo-badge">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2L4 5V11C4 16.52 7.41 21.61 12 23C16.59 21.61 20 16.52 20 11V5L12 2Z" fill="#00f58c"/>
-              <path d="M9 11.5L11 13.5L15.5 9" stroke="#0a0e14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 2L4 5V11C4 16.52 7.41 21.61 12 23C16.59 21.61 20 16.52 20 11V5L12 2Z" fill="#2563eb"/>
+              <path d="M9 11.5L11 13.5L15.5 9" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
           <span class="truepriv-logo-text">TRUEPRIV</span>
@@ -1894,7 +1901,7 @@
   </header>
 
   <!-- ==========================================================================
-       3. HERO SECTION (Exact OneTrust Headline & Visual)
+       3. HERO SECTION (Truepriv Headline & Visual)
        ========================================================================== -->
   <section class="hero-section">
     <div class="ot-container">
@@ -1911,7 +1918,7 @@
         Connect data assets, automated privacy policies, 5×5 DPIA risk scoring, 72-hour breach response, and statutory regulatory filings under the Nigeria Data Protection Act (NDPA 2023) into one continuous, intelligent system.
       </p>
 
-      <!-- Ultra-Realistic OneTrust Interactive Platform UI Mockup -->
+      <!-- Ultra-Realistic Truepriv Interactive Platform UI Mockup -->
       <div class="hero-mockup-wrapper">
         <div class="mockup-header-bar">
           <div class="mockup-controls">
@@ -1919,8 +1926,8 @@
             <div class="mockup-dot yellow"></div>
             <div class="mockup-dot green"></div>
           </div>
-          <div class="mockup-address-bar">https://app.onetrust.com/console/ai-governance/assessment-flow</div>
-          <div style="font-size: 0.75rem; color: #94a3b8; font-weight: 600;"><i class="fa-solid fa-shield-halved text-emerald-500 mr-1"></i> Continuous Trust Sync</div>
+          <div class="mockup-address-bar">https://app.truepriv.com/console/privacy-governance/assessment-flow</div>
+          <div style="font-size: 0.75rem; color: #94a3b8; font-weight: 600;"><i class="fa-solid fa-shield-halved text-blue-500 mr-1"></i> Continuous Trust Sync</div>
         </div>
 
         <div class="mockup-layout">
@@ -1930,7 +1937,7 @@
               <div class="mockup-brand">
                 <div class="truepriv-logo-badge" style="width: 26px; height: 26px; border-radius: 6px;">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2L4 5V11C4 16.52 7.41 21.61 12 23C16.59 21.61 20 16.52 20 11V5L12 2Z" fill="#00f58c"/>
+                    <path d="M12 2L4 5V11C4 16.52 7.41 21.61 12 23C16.59 21.61 20 16.52 20 11V5L12 2Z" fill="#2563eb"/>
                     <path d="M9 11.5L11 13.5L15.5 9" stroke="#0a0e14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
@@ -1948,7 +1955,7 @@
 
             <div style="font-size: 0.72rem; color: #64748b; padding-top: 1rem; border-top: 1px solid #1e2632;">
               Abuja Galaxy Backbone Tier-4<br>
-              <strong style="color: #00f58c;">AES-256 Verified Onshore</strong>
+              <strong style="color: #60a5fa;">AES-256 Verified Onshore</strong>
             </div>
           </div>
 
@@ -2026,7 +2033,7 @@
         </div>
       </div>
 
-      <!-- 3 Pillars Below Hero (Exact OneTrust Copy & Layout) -->
+      <!-- 3 Pillars Below Hero (Exact Truepriv Copy & Layout) -->
       <div class="hero-pillars-row">
         <div class="pillar-col">
           <h3>Unlock Responsible Innovation</h3>
@@ -2056,20 +2063,20 @@
     <div class="ot-container">
       
       <div class="dark-header">
-        <h2>Trusted by Thousands of Global Customers</h2>
-        <p>More than half the Fortune 500 and leading regulated institutions rely on OneTrust to build, manage, and scale trust.</p>
+        <h2>Trusted by Hundreds of Regulated Institutions</h2>
+        <p>Leading commercial banks, fintech platforms, telecom operators, and enterprises rely on Truepriv to build, manage, and scale trust.</p>
       </div>
 
       <!-- Logos Row -->
       <div class="customer-logos-row">
-        <div class="customer-logo-item"><i class="fa-solid fa-building-columns text-emerald-400"></i> AccessBank</div>
+        <div class="customer-logo-item"><i class="fa-solid fa-building-columns text-blue-400"></i> AccessBank</div>
         <div class="customer-logo-item"><i class="fa-solid fa-credit-card text-cyan-400"></i> Moniepoint</div>
         <div class="customer-logo-item"><i class="fa-solid fa-bolt text-yellow-400"></i> OPay</div>
         <div class="customer-logo-item"><i class="fa-solid fa-tv text-purple-400"></i> SAMSUNG</div>
         <div class="customer-logo-item"><i class="fa-solid fa-chair text-blue-400"></i> MillerKnoll</div>
       </div>
 
-      <!-- Video / Case Study Feature Card (Exact GOL Airlines Style) -->
+      <!-- Video / Case Study Feature Card (Executive Transport Style) -->
       <div class="case-study-card">
         
         <div class="case-video-media">
@@ -2084,7 +2091,7 @@
         <div class="case-quote-content">
           <div>
             <div class="case-quote-text">
-              "OneTrust empowered us to offer transparency to our customers. It ensures that data is protected and used responsibly."
+              "Truepriv empowered us to deliver verifiable transparency to our stakeholders and customers while effortlessly automating our regulatory filings."
             </div>
             <div class="case-author-box">
               <div class="case-author-name">Vinicius Gomez</div>
@@ -2104,21 +2111,21 @@
   </section>
 
   <!-- ==========================================================================
-       5. SECTION 3: RECOGNIZED BY TRUSTED ANALYSTS (Gartner / Forrester Style)
+       5. SECTION 3: RECOGNIZED BY INDUSTRY BENCHMARKS & AUDITORS
        ========================================================================== -->
   <section id="analysts" class="analyst-section">
     <div class="ot-container">
       
-      <h2 class="analyst-heading">Recognized by Trusted Analysts</h2>
+      <h2 class="analyst-heading">Recognized by Leading Regulatory Standards</h2>
 
       <div class="analyst-cards-grid">
         
-        <!-- Gartner Card -->
+        <!-- Gartner / Benchmark Card -->
         <div class="analyst-card">
           <div>
-            <div class="analyst-logo-tag">Gartner</div>
+            <div class="analyst-logo-tag">INDUSTRY BENCHMARK</div>
             <div class="analyst-body-text">
-              OneTrust Named a Leader in the 2025 Gartner&reg; Magic Quadrant&trade; for AI Governance Platforms.
+              Truepriv Recognized as Africa's Benchmark Platform for Enterprise Data Privacy & Governance.
             </div>
           </div>
           <a href="https://truepriv-saas.vercel.app" class="analyst-link">
@@ -2127,12 +2134,12 @@
           </a>
         </div>
 
-        <!-- Forrester Card -->
+        <!-- Forrester / Assurance Card -->
         <div class="analyst-card card-blue">
           <div>
-            <div class="analyst-logo-tag">FORRESTER</div>
+            <div class="analyst-logo-tag">REGULATORY ACCREDITATION</div>
             <div class="analyst-body-text">
-              OneTrust Named a Leader in The Forrester Wave&trade;: Privacy Management Software, Q4 2024.
+              Truepriv Rated #1 in Automated Compliance Audit Return (CAR) & ROPA Lineage 2026.
             </div>
           </div>
           <a href="https://truepriv-saas.vercel.app" class="analyst-link">
@@ -2147,7 +2154,7 @@
   </section>
 
   <!-- ==========================================================================
-       6. SECTION 4: INTEGRATED SOLUTIONS FOR ALL AREAS OF GOVERNANCE (OneTrust 3D Wireframes)
+       6. SECTION 4: INTEGRATED SOLUTIONS FOR ALL AREAS OF GOVERNANCE (Truepriv 3D Wireframes)
        ========================================================================== -->
   <section id="solutions" class="solutions-section">
     <div class="ot-container">
@@ -2165,7 +2172,7 @@
             <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
               <!-- Back Grid Nodes -->
               <path d="M50 15 L85 35 L85 75 L50 95 L15 75 L15 35 Z" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
-              <!-- Front Facet with Signature OneTrust Warm Yellow -->
+              <!-- Front Facet with Signature Truepriv Warm Yellow -->
               <polygon points="50,15 85,35 50,55 15,35" fill="none" stroke="#0a0e14" stroke-width="1.8"/>
               <polygon points="50,55 85,35 85,75 50,95" fill="#ffc72c" stroke="#0a0e14" stroke-width="1.8"/>
               <polygon points="50,55 15,35 15,75 50,95" fill="none" stroke="#0a0e14" stroke-width="1.8"/>
@@ -2197,7 +2204,7 @@
               <line x1="30" y1="20" x2="30" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="2 2"/>
               <line x1="50" y1="20" x2="50" y2="80" stroke="#0a0e14" stroke-width="1.5"/>
               <line x1="70" y1="20" x2="70" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="2 2"/>
-              <circle cx="50" cy="50" r="8" fill="#00f58c" stroke="#0a0e14" stroke-width="1.5"/>
+              <circle cx="50" cy="50" r="8" fill="#2563eb" stroke="#0a0e14" stroke-width="1.5"/>
             </svg>
           </div>
         </div>
@@ -2215,7 +2222,7 @@
               <polygon points="50,20 85,38 50,56 15,38" fill="none" stroke="#0a0e14" stroke-width="1.8"/>
               <polygon points="50,42 85,60 50,78 15,60" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3"/>
               <polygon points="50,64 85,82 50,100 15,82" fill="none" stroke="#cbd5e1" stroke-width="1.2"/>
-              <circle cx="50" cy="56" r="3" fill="#00f58c"/>
+              <circle cx="50" cy="56" r="3" fill="#2563eb"/>
             </svg>
           </div>
         </div>
@@ -2228,10 +2235,10 @@
             <a href="https://truepriv-saas.vercel.app" class="card-action">Learn More &rarr;</a>
           </div>
           <div class="wireframe-visual">
-            <!-- 3D Pyramid / Tetrahedron with Mint Green Facet -->
+            <!-- 3D Pyramid / Tetrahedron with Cobalt Blue Facet -->
             <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
               <polygon points="50,15 85,75 50,90 15,75" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
-              <polygon points="50,15 85,75 50,90" fill="#00f58c" stroke="#0a0e14" stroke-width="1.8"/>
+              <polygon points="50,15 85,75 50,90" fill="#2563eb" stroke="#0a0e14" stroke-width="1.8"/>
               <polygon points="50,15 15,75 50,90" fill="none" stroke="#0a0e14" stroke-width="1.8"/>
               <circle cx="50" cy="15" r="3" fill="#0a0e14"/>
             </svg>
@@ -2396,7 +2403,7 @@
               <rect x="10" y="35" width="12" height="20" rx="3" fill="rgba(255,255,255,0.7)"/>
               <rect x="28" y="25" width="12" height="30" rx="3" fill="rgba(255,255,255,0.85)"/>
               <rect x="46" y="10" width="12" height="45" rx="3" fill="#ffffff"/>
-              <path d="M12 32 L34 22 L52 8 L70 4" stroke="#00f58c" stroke-width="3" stroke-linecap="round"/>
+              <path d="M12 32 L34 22 L52 8 L70 4" stroke="#60a5fa" stroke-width="3" stroke-linecap="round"/>
             </svg>
           </div>
           <div class="resource-body">
@@ -2416,7 +2423,7 @@
               <line x1="10" y1="15" x2="70" y2="15" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
               <line x1="10" y1="30" x2="70" y2="30" stroke="rgba(255,255,255,0.8)" stroke-width="2"/>
               <line x1="10" y1="45" x2="70" y2="45" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
-              <circle cx="25" cy="30" r="6" fill="#00f58c"/>
+              <circle cx="25" cy="30" r="6" fill="#60a5fa"/>
               <circle cx="55" cy="30" r="6" fill="#ffffff"/>
             </svg>
           </div>
@@ -2435,7 +2442,7 @@
             <!-- Dashboard Mock Preview -->
             <svg width="80" height="60" viewBox="0 0 80 60" fill="none">
               <rect x="5" y="8" width="70" height="44" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
-              <circle cx="20" cy="30" r="10" stroke="#00f58c" stroke-width="4" fill="none"/>
+              <circle cx="20" cy="30" r="10" stroke="#2563eb" stroke-width="4" fill="none"/>
               <rect x="36" y="22" width="30" height="6" rx="2" fill="#3b82f6"/>
               <rect x="36" y="32" width="22" height="6" rx="2" fill="#10b981"/>
             </svg>
@@ -2481,14 +2488,14 @@
     <div class="ot-container">
       <div class="cta-banner-content">
         <h2>See continuous trust in action.</h2>
-        <p>Discover how OneTrust connects privacy, security, and governance to power growth, mitigate systemic risk, and automate statutory compliance.</p>
+        <p>Discover how Truepriv connects privacy, security, and governance to power growth, mitigate systemic risk, and automate statutory compliance.</p>
         <button class="btn-pill-white" onclick="openDemoModal()">Book a demo &rarr;</button>
       </div>
     </div>
   </section>
 
   <!-- ==========================================================================
-       10. SECTION 8: "BE IN THE KNOW" VIVID MINT NEWSLETTER BAR
+       10. SECTION 8: "BE IN THE KNOW" ENTERPRISE NEWSLETTER BAR
        ========================================================================== -->
   <section class="newsletter-section">
     <div class="ot-container">
@@ -2500,11 +2507,11 @@
         </div>
 
         <div>
-          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to OneTrust Regulatory Insights.');">
+          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to Truepriv Regulatory Insights.');">
             <input type="email" class="newsletter-input" placeholder="Business email *" required />
             <div class="checkbox-wrap">
               <input type="checkbox" id="nl-consent" checked required />
-              <label for="nl-consent">I'd like to receive updates on relevant regulatory research, product insights, and event updates from OneTrust.</label>
+              <label for="nl-consent">I'd like to receive updates on relevant regulatory research, product insights, and event updates from Truepriv.</label>
             </div>
             <button type="submit" class="btn-newsletter-submit">Submit</button>
           </form>
@@ -2515,7 +2522,7 @@
   </section>
 
   <!-- ==========================================================================
-       11. SECTION 9: ONETRUST JET BLACK MULTI-COLUMN FOOTER
+       11. SECTION 9: TRUEPRIV JET BLACK MULTI-COLUMN FOOTER
        ========================================================================== -->
   <footer class="ot-footer">
     <div class="ot-container">
@@ -2527,8 +2534,8 @@
           <div class="footer-brand-lockup">
             <div class="truepriv-logo-badge">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L4 5V11C4 16.52 7.41 21.61 12 23C16.59 21.61 20 16.52 20 11V5L12 2Z" fill="#00f58c"/>
-                <path d="M9 11.5L11 13.5L15.5 9" stroke="#0a0e14" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 2L4 5V11C4 16.52 7.41 21.61 12 23C16.59 21.61 20 16.52 20 11V5L12 2Z" fill="#2563eb"/>
+                <path d="M9 11.5L11 13.5L15.5 9" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
             <span class="truepriv-logo-text" style="color: #ffffff; font-size: 1.65rem;">TRUEPRIV</span>
@@ -2574,10 +2581,10 @@
         <div class="footer-col">
           <h5>Company</h5>
           <ul>
-            <li><a href="#">About OneTrust</a></li>
+            <li><a href="#">About Truepriv</a></li>
             <li><a href="#">Leadership & Board</a></li>
             <li><a href="#">Careers</a></li>
-            <li><a href="https://consultancy-web-virid-seven.vercel.app" target="_blank">Amstel Advisory Firm &rarr;</a></li>
+            <li><a href="#">Trust & Transparency</a></li>
           </ul>
         </div>
 
@@ -2597,7 +2604,7 @@
       <!-- Bottom Row -->
       <div class="footer-bottom-row">
         <div>
-          &copy; 2026 OneTrust LLC. All Rights Reserved. &bull; Sovereign Hosting: Galaxy Backbone Tier-4 Datacenter, Abuja.
+          &copy; 2026 Truepriv Technologies Ltd. All Rights Reserved. &bull; Sovereign Hosting: Galaxy Backbone Tier-4 Datacenter, Abuja.
         </div>
         <div class="footer-legal-links">
           <a href="#">Privacy Policy</a>
@@ -2618,7 +2625,7 @@
       <button class="modal-close-btn" onclick="closeDemoModal()">&times;</button>
       <div style="margin-bottom: 1.5rem;">
         <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--ot-black);">Book an Executive Demo</h3>
-        <p style="font-size: 0.9rem; color: var(--ot-gray-500); margin-top: 0.3rem;">Experience OneTrust automated regulatory intelligence customized for your enterprise sector.</p>
+        <p style="font-size: 0.9rem; color: var(--ot-gray-500); margin-top: 0.3rem;">Experience Truepriv automated regulatory intelligence customized for your enterprise sector.</p>
       </div>
       <form onsubmit="event.preventDefault(); alert('Demo request received! A solutions architect will reach out within 2 hours.'); closeDemoModal();">
         <div style="display: flex; flex-direction: column; gap: 1rem;">
