@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 76" width="380" height="76">
+  <defs>
+    <linearGradient id="ndpcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#006633" />
+      <stop offset="100%" stop-color="#004d26" />
+    </linearGradient>
+    <filter id="badgeShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- Container Box with Generous Horizontal Breathing Space -->
+  <rect x="2" y="2" width="376" height="72" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#badgeShadow)" />
+
+  <!-- Nigeria Official DPCO Seal / Shield Circle -->
+  <g transform="translate(14, 14)">
+    <!-- Seal Base Circle -->
+    <circle cx="24" cy="24" r="23" fill="url(#ndpcGrad)" />
+    <!-- White Inner Ring -->
+    <circle cx="24" cy="24" r="20" fill="none" stroke="#ffffff" stroke-width="1.2" opacity="0.95" />
+    <!-- Outer Shield Silhouette -->
+    <path d="M24 10 L33 14.5 L33 25 C33 31.5 24 37 24 37 C24 37 15 31.5 15 25 L15 14.5 Z" fill="#ffffff" opacity="0.95" />
+    <!-- Inner Lock & Seal Motif -->
+    <path d="M24 14.5 L28 16.5 L28 23 C28 27.5 24 30.5 24 30.5 C24 30.5 20 27.5 20 23 L20 16.5 Z" fill="#006633" />
+    <circle cx="24" cy="21" r="2.2" fill="#ffffff" />
+    <path d="M23 23 H25 V26.5 H23 Z" fill="#ffffff" />
+  </g>
+
+  <!-- Official Authority Typography -->
+  <text x="74" y="24" font-family="'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8.5" font-weight="700" fill="#006633" letter-spacing="0.08em">OFFICIAL AUTHORITY CREDENTIAL</text>
+  <text x="74" y="42" font-family="'Newsreader', 'Georgia', 'Times New Roman', serif" font-size="13" font-weight="700" fill="#1e293b" letter-spacing="-0.01em">National Data Protection Commission</text>
+  <text x="74" y="58" font-family="'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="600" fill="#eb5f07" letter-spacing="0.01em">Licensed DPCO Assurance Partner &#8226; 2026</text>
+</svg>

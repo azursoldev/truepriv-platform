@@ -1109,9 +1109,558 @@
       .pwc-footer-columns { grid-template-columns: 1fr !important; gap: 2rem !important; }
     }
 
+
+    /* Top Announcement Alert Bar */
+    .top-announcement-bar {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 0.55rem 1.5rem;
+      font-size: 0.84rem;
+      border-bottom: 2px solid var(--pwc-orange);
+      position: relative;
+      z-index: 1050;
+    }
+    .announcement-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .announcement-text {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #f1f5f9;
+      font-size: 0.85rem;
+    }
+    .announcement-text strong {
+      color: #ffffff;
+    }
+    .announcement-icon {
+      color: #f59e0b;
+      font-size: 0.95rem;
+    }
+    .announcement-action-btn {
+      background: var(--pwc-orange);
+      color: #ffffff !important;
+      padding: 0.28rem 0.95rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.78rem;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .announcement-action-btn:hover {
+      background: #b23e00;
+      transform: translateY(-1px);
+    }
+
+    /* Header Search Button */
+    .header-search-wrap {
+      display: flex;
+      align-items: center;
+    }
+    .header-search-trigger {
+      background: transparent;
+      border: 1px solid #cbd5e1;
+      border-radius: 20px;
+      padding: 0.4rem 0.9rem;
+      color: #475569;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.2s;
+    }
+    .header-search-trigger:hover {
+      border-color: var(--pwc-orange);
+      color: var(--pwc-orange);
+      background: #fffaf5;
+    }
+
+    /* Search Modal Overlay */
+    .search-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 2000;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 10vh;
+    }
+    .search-modal-overlay.open {
+      display: flex;
+    }
+    .search-modal-card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 640px;
+      border-radius: 8px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      animation: modalFadeDown 0.2s ease-out;
+    }
+    @keyframes modalFadeDown {
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .search-input-wrap {
+      display: flex;
+      align-items: center;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid #e2e8f0;
+      gap: 1rem;
+    }
+    .search-input-wrap i {
+      color: var(--pwc-orange);
+      font-size: 1.2rem;
+    }
+    .search-input-wrap input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 1.1rem;
+      font-family: var(--font-sans);
+      color: #0f172a;
+    }
+    .search-close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #94a3b8;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .search-results-list {
+      padding: 1.5rem;
+      max-height: 380px;
+      overflow-y: auto;
+    }
+    .search-quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .search-quick-links span {
+      font-size: 0.82rem;
+      color: #64748b;
+      margin-right: 0.5rem;
+    }
+    .search-quick-links a {
+      background: #f1f5f9;
+      color: #334155;
+      padding: 0.35rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .search-quick-links a:hover {
+      background: var(--pwc-orange);
+      color: #ffffff;
+    }
+
+    /* Sticky Footer Consultant Button */
+    .sticky-talk-consultant {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 999;
+    }
+    .sticky-talk-btn {
+      background: #0f172a;
+      color: #ffffff !important;
+      border: 2px solid var(--pwc-orange);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      border-radius: 50px;
+      padding: 0.75rem 1.4rem;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      transition: all 0.25s ease;
+    }
+    .sticky-talk-btn:hover {
+      background: var(--pwc-orange);
+      border-color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(208, 74, 2, 0.35);
+    }
+    @media (max-width: 768px) {
+      .sticky-talk-consultant {
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+      }
+      .sticky-talk-btn {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        padding: 0.85rem 1rem;
+        font-size: 0.82rem;
+      }
+    }
+
+
+
+    /* PwC / ONE-TRUST DROPDOWN MENU STYLES (FIXED & STANDARDIZED) */
+    .nav-item-dropdown {
+      position: relative !important;
+    }
+
+    .mega-dropdown-menu {
+      position: absolute !important;
+      top: 100% !important;
+      left: 0 !important;
+      width: 840px !important;
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 12px !important;
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.15), 0 8px 16px -4px rgba(0, 0, 0, 0.06) !important;
+      padding: 2.25rem 2.5rem !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      transform: translateY(10px) !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      z-index: 1000 !important;
+      pointer-events: none !important;
+    }
+
+    .mega-dropdown-menu::before {
+      content: '' !important;
+      position: absolute !important;
+      top: -16px !important;
+      left: 0 !important;
+      right: 0 !important;
+      height: 16px !important;
+    }
+
+    .main-nav > li:hover .mega-dropdown-menu,
+    .nav-item-dropdown:hover .mega-dropdown-menu {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: translateY(6px) !important;
+      pointer-events: auto !important;
+    }
+
+    .mega-dropdown-grid {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr 1fr !important;
+      gap: 2.25rem !important;
+    }
+
+    .mega-col-heading {
+      font-size: 0.82rem !important;
+      font-weight: 700 !important;
+      color: #64748b !important;
+      margin-bottom: 1.25rem !important;
+      letter-spacing: 0.3px !important;
+      text-transform: none !important;
+    }
+
+    .mega-subnav-list {
+      list-style: none !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0.75rem !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .mega-subnav-list li a {
+      color: #0f172a !important;
+      font-size: 0.93rem !important;
+      font-weight: 600 !important;
+      padding: 0.25rem 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      display: block !important;
+      transition: all 0.15s ease !important;
+      line-height: 1.35 !important;
+    }
+
+    .mega-subnav-list li a:hover {
+      color: var(--pwc-orange, #d04a02) !important;
+      transform: translateX(4px) !important;
+    }
+
+    .simple-dropdown-menu {
+      position: absolute !important;
+      top: 100% !important;
+      left: 0 !important;
+      width: 320px !important;
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 12px !important;
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.15), 0 8px 16px -4px rgba(0, 0, 0, 0.06) !important;
+      padding: 1rem !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      transform: translateY(10px) !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      z-index: 1000 !important;
+      pointer-events: none !important;
+    }
+
+    .simple-dropdown-menu::before {
+      content: '' !important;
+      position: absolute !important;
+      top: -16px !important;
+      left: 0 !important;
+      right: 0 !important;
+      height: 16px !important;
+    }
+
+    .main-nav > li:hover .simple-dropdown-menu,
+    .nav-item-dropdown:hover .simple-dropdown-menu {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: translateY(6px) !important;
+      pointer-events: auto !important;
+    }
+
+    .simple-dropdown-list {
+      list-style: none !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0.35rem !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .simple-dropdown-list li a {
+      display: flex !important;
+      align-items: center !important;
+      gap: 0.75rem !important;
+      padding: 0.6rem 0.75rem !important;
+      font-size: 0.9rem !important;
+      font-weight: 600 !important;
+      color: #1e293b !important;
+      border-radius: 6px !important;
+      background: transparent !important;
+      transition: all 0.15s ease !important;
+    }
+
+    .simple-dropdown-list li a:hover {
+      background: #fff5ee !important;
+      color: var(--pwc-orange, #d04a02) !important;
+      padding-left: 0.95rem !important;
+    }
+
+    .simple-dropdown-list li a i {
+      color: var(--pwc-orange, #d04a02) !important;
+      font-size: 0.85rem !important;
+      width: 16px !important;
+      text-align: center !important;
+    }
+
+
+    /* ==========================================================================
+       MOBILE RESPONSIVE HEADER & NAVIGATION (Pixel-Perfect on All Mobile Devices)
+       Desktop (> 1024px) remains 100% untouched
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .top-bar {
+        padding: 0.35rem 1.25rem !important;
+      }
+      .header {
+        padding: 0.65rem 1.25rem !important;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 1000 !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+      }
+      .header .main-nav {
+        display: none !important;
+      }
+      .header-right {
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.65rem !important;
+        flex-shrink: 0 !important;
+      }
+      .header-search-wrap {
+        display: flex !important;
+        align-items: center !important;
+      }
+      .header-search-trigger {
+        width: 38px !important;
+        height: 38px !important;
+        min-width: 38px !important;
+        min-height: 38px !important;
+        padding: 0 !important;
+        border-radius: 50% !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border: 1px solid #cbd5e1 !important;
+        background: #ffffff !important;
+        color: #475569 !important;
+        font-size: 0.9rem !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+        flex-shrink: 0 !important;
+      }
+      .header-search-trigger span {
+        display: none !important;
+      }
+      .header-search-trigger:hover {
+        border-color: var(--pwc-orange) !important;
+        color: var(--pwc-orange) !important;
+        background: #fffaf5 !important;
+      }
+      .mobile-menu-btn {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
+        border-radius: 8px !important;
+        border: 1px solid #cbd5e1 !important;
+        background: #ffffff !important;
+        color: #1e293b !important;
+        font-size: 1.2rem !important;
+        padding: 0 !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+        flex-shrink: 0 !important;
+      }
+      .mobile-menu-btn:hover,
+      .mobile-menu-btn:active {
+        background: #fff7ed !important;
+        color: var(--pwc-orange) !important;
+        border-color: var(--pwc-orange) !important;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .btn-header-cta,
+      .btn-contact-nav {
+        padding: 0.45rem 0.85rem !important;
+        font-size: 0.78rem !important;
+        white-space: nowrap !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .btn-header-cta,
+      .btn-contact-nav {
+        display: none !important;
+      }
+      .header {
+        padding: 0.55rem 0.95rem !important;
+      }
+      .brand-logo-link {
+        gap: 0.15rem !important;
+        flex-shrink: 1 !important;
+        min-width: 0 !important;
+      }
+      .brand-logo-img {
+        height: 38px !important;
+        width: auto !important;
+        max-width: 48px !important;
+      }
+      .brand-mstel {
+        font-size: 1.22rem !important;
+        line-height: 1 !important;
+      }
+      .brand-consulting {
+        font-size: 0.94rem !important;
+        line-height: 1 !important;
+      }
+      .top-announcement-bar {
+        padding: 0.45rem 0.95rem !important;
+      }
+      .announcement-inner {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.45rem !important;
+      }
+      .announcement-text {
+        font-size: 0.78rem !important;
+        line-height: 1.35 !important;
+      }
+      .announcement-action-btn {
+        padding: 0.22rem 0.7rem !important;
+        font-size: 0.72rem !important;
+        align-self: flex-start !important;
+      }
+      .top-bar {
+        padding: 0.25rem 0.95rem !important;
+        gap: 1.25rem !important;
+        font-size: 0.72rem !important;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .header {
+        padding: 0.45rem 0.75rem !important;
+      }
+      .brand-logo-img {
+        height: 30px !important;
+        max-width: 38px !important;
+      }
+      .brand-mstel {
+        font-size: 1.05rem !important;
+      }
+      .brand-consulting {
+        font-size: 0.82rem !important;
+      }
+      .header-search-trigger {
+        width: 34px !important;
+        height: 34px !important;
+        min-width: 34px !important;
+        min-height: 34px !important;
+      }
+      .mobile-menu-btn {
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
+        min-height: 36px !important;
+        font-size: 1.05rem !important;
+      }
+      .header-right {
+        gap: 0.4rem !important;
+      }
+    }
+
 </style>
 </head>
 <body>
+  <!-- Persistent Top Announcement Alert Bar -->
+  <div class="top-announcement-bar">
+    <div class="announcement-inner">
+      <span class="announcement-text">
+        <i class="fa-solid fa-triangle-exclamation announcement-icon"></i>
+        <span><strong>Mandatory NDPA Compliance Audit Return Deadline:</strong> The annual filing window is closing. Protect your organization from penalties.</span>
+      </span>
+      <a href="service-car.html" class="announcement-action-btn">
+        <span>File Your 2026 CAR Now</span>
+        <i class="fa-solid fa-arrow-right text-xs"></i>
+      </a>
+    </div>
+  </div>
+
 
   <!-- Top Utility Bar (PwC Standard) -->
   <div class="top-bar">
@@ -1127,7 +1676,7 @@
     </a>
 
     <ul class="main-nav">
-      <!-- Services Mega-Dropdown -->
+      <!-- 1. Services Mega-Dropdown (3 Columns from PDF) -->
       <li class="nav-item-dropdown">
         <a href="index.html#services" class="nav-dropdown-trigger">
           <span>Services</span>
@@ -1136,34 +1685,45 @@
         
         <div class="mega-dropdown-menu">
           <div class="mega-dropdown-grid">
-            <!-- Column 1: By Solution -->
+            
+            <!-- Column 1: Regulatory & Audit -->
             <div>
-              <h5 class="mega-col-heading">By Solution</h5>
+              <h5 class="mega-col-heading">Regulatory &amp; Audit</h5>
               <ul class="mega-subnav-list">
                 <li><a href="service-car.html">Compliance Audit Return (CAR)</a></li>
                 <li><a href="service-audit.html">Data Protection Audit</a></li>
-                <li><a href="service-training.html">Data Protection Training</a></li>
-                <li><a href="service-policies.html">Privacy Policies & Notices</a></li>
-                <li><a href="service-ropa.html">ROPA Data Lineage</a></li>
+                <li><a href="service-ropa.html">ROPA</a></li>
+                <li><a href="service-dpia.html">DPIA &amp; LIA</a></li>
               </ul>
             </div>
 
-            <!-- Column 2: By Practice -->
+            <!-- Column 2: Operational Privacy -->
             <div>
-              <h5 class="mega-col-heading">By Practice</h5>
+              <h5 class="mega-col-heading">Operational Privacy</h5>
               <ul class="mega-subnav-list">
-                <li><a href="service-dpia.html">DPIA & LIA Assessments</a></li>
-                <li><a href="service-dpo.html">Outsourced DPO (DPOaaS)</a></li>
-                <li><a href="service-cyber.html">Cybersecurity & Pen-Testing</a></li>
-                <li><a href="service-gov.html">Corporate Governance</a></li>
-                <li><a href="index.html#service-cookie">Cookie & Consent Compliance</a></li>
+                <li><a href="service-dpo.html">Outsourced DPO</a></li>
+                <li><a href="service-policies.html">Privacy Policies</a></li>
+                <li><a href="service-policies.html#dpa">Data Processing Agreements</a></li>
+                <li><a href="service-training.html">Data Protection Training</a></li>
               </ul>
             </div>
+
+            <!-- Column 3: Advanced Advisory -->
+            <div>
+              <h5 class="mega-col-heading">Advanced Advisory</h5>
+              <ul class="mega-subnav-list">
+                <li><a href="service-ai.html">AI Consulting</a></li>
+                <li><a href="service-cyber.html">Cybersecurity &amp; Pen Testing</a></li>
+                <li><a href="service-gov.html">Corporate Governance</a></li>
+                <li><a href="index.html#service-cookie">Cookie Consent Compliance</a></li>
+              </ul>
+            </div>
+
           </div>
         </div>
       </li>
 
-      <!-- Blog Dropdown (renamed from Topics) -->
+      <!-- 2. Blog Dropdown (Connecting dedicated pages) -->
       <li class="nav-item-dropdown">
         <a href="topics.html" class="nav-dropdown-trigger">
           <span>Blog</span>
@@ -1172,16 +1732,16 @@
         
         <div class="simple-dropdown-menu">
           <ul class="simple-dropdown-list">
-            <li><a href="topics.html#ai-business"><i class="fa-solid fa-robot"></i> Artificial Intelligence for Business</a></li>
-            <li><a href="topics.html#cybersecurity"><i class="fa-solid fa-shield-halved"></i> Cyber Security</a></li>
-            <li><a href="topics.html#ndpa-laws"><i class="fa-solid fa-scale-balanced"></i> Data Protection Laws</a></li>
-            <li><a href="topics.html#risks"><i class="fa-solid fa-triangle-exclamation"></i> Risks</a></li>
-            <li><a href="topics.html#ndpc-updates"><i class="fa-solid fa-landmark"></i> Regulatory Guidance: NDPC updates</a></li>
+            <li><a href="service-ai.html"><i class="fa-solid fa-robot"></i> Artificial Intelligence for Business</a></li>
+            <li><a href="service-cyber.html"><i class="fa-solid fa-shield-halved"></i> Cyber Security</a></li>
+            <li><a href="service-policies.html"><i class="fa-solid fa-scale-balanced"></i> Data Protection Laws</a></li>
+            <li><a href="service-gov.html"><i class="fa-solid fa-triangle-exclamation"></i> Risks</a></li>
+            <li><a href="publication-detail.html"><i class="fa-solid fa-landmark"></i> Regulatory Guidance: NDPC updates</a></li>
           </ul>
         </div>
       </li>
 
-      <!-- Our organisation Dropdown -->
+      <!-- 3. Our organisation Dropdown (Connecting dedicated pages) -->
       <li class="nav-item-dropdown">
         <a href="organisation.html" class="nav-dropdown-trigger">
           <span>Our organisation</span>
@@ -1190,19 +1750,26 @@
         
         <div class="simple-dropdown-menu">
           <ul class="simple-dropdown-list">
-            <li><a href="organisation.html#board"><i class="fa-solid fa-landmark"></i> Advisory Board</a></li>
-            <li><a href="organisation.html#consultants"><i class="fa-solid fa-user-tie"></i> Consultants</a></li>
-            <li><a href="organisation.html#values"><i class="fa-solid fa-handshake"></i> Purpose & Values</a></li>
-            <li><a href="organisation.html#governance"><i class="fa-solid fa-certificate"></i> Licensed DPCO Credentials</a></li>
+            <li><a href="organisation-board.html"><i class="fa-solid fa-landmark"></i> Advisory Board</a></li>
+            <li><a href="organisation-consultants.html"><i class="fa-solid fa-user-tie"></i> Consultants</a></li>
+            <li><a href="organisation-values.html"><i class="fa-solid fa-handshake"></i> Purpose &amp; Values</a></li>
+            <li><a href="organisation-governance.html"><i class="fa-solid fa-certificate"></i> Governance (Licensed DPCO)</a></li>
           </ul>
         </div>
       </li>
 
+      <!-- 4. Contact -->
       <li><a href="contact.html">Contact</a></li>
     </ul>
 
     <div class="header-right">
-      <a href="index.html#contact" class="btn-contact-nav">File CAR Before deadline</a>
+      <div class="header-search-wrap">
+        <button class="header-search-trigger" onclick="openSearchModal()" aria-label="Search site">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>Search</span>
+        </button>
+      </div>
+      <a href="contact.html" class="btn-contact-nav btn-header-cta" style="background: var(--pwc-orange); border-color: var(--pwc-orange); color: #ffffff;">Request Free Assessment</a>
       <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
         <i class="fa-solid fa-bars"></i>
       </button>
@@ -1238,20 +1805,20 @@
         <div>
           <div class="mobile-nav-group-title">Our Organisation</div>
           <ul class="mobile-nav-links">
-            <li><a href="organisation.html#board" onclick="toggleMobileMenu()">Advisory Board <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="organisation.html#consultants" onclick="toggleMobileMenu()">Consultants <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="organisation.html#values" onclick="toggleMobileMenu()">Purpose & Values <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="organisation.html#governance" onclick="toggleMobileMenu()">Licensed DPCO Credentials <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="organisation-board.html" onclick="toggleMobileMenu()">Advisory Board <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="organisation-consultants.html" onclick="toggleMobileMenu()">Consultants <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="organisation-values.html" onclick="toggleMobileMenu()">Purpose & Values <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="organisation-governance.html" onclick="toggleMobileMenu()">Licensed DPCO Credentials <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
           </ul>
         </div>
         <div>
-          <div class="mobile-nav-group-title">Blog & Regulatory Updates</div>
+          <div class="mobile-nav-group-title">Blog & Insights</div>
           <ul class="mobile-nav-links">
-            <li><a href="topics.html#ai-business" onclick="toggleMobileMenu()">Artificial Intelligence for Business <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="topics.html#cybersecurity" onclick="toggleMobileMenu()">Cyber Security <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="topics.html#ndpa-laws" onclick="toggleMobileMenu()">Data Protection Laws <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="topics.html#risks" onclick="toggleMobileMenu()">Risks <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="topics.html#ndpc-updates" onclick="toggleMobileMenu()">Regulatory Guidance: NDPC Updates <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="service-ai.html" onclick="toggleMobileMenu()">Artificial Intelligence for Business <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="service-cyber.html" onclick="toggleMobileMenu()">Cyber Security <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="service-policies.html" onclick="toggleMobileMenu()">Data Protection Laws <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="service-gov.html" onclick="toggleMobileMenu()">Risks <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="publication-detail.html" onclick="toggleMobileMenu()">Regulatory Guidance: NDPC Updates <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
           </ul>
         </div>
         <div>
@@ -1288,7 +1855,7 @@
       <div class="hero-banner-wrap">
         <img src="assets/services/service-training.jpg" alt="Nigerian Corporate Privacy Trainer leading Data Protection Training session" class="hero-banner-img">
         <div class="pwc-orange-polygon">
-          <span>Statutory Workforce Capacity Building & Masterclasses</span>
+          <span>Statutory Data Protection & Privacy Training</span>
         </div>
       </div>
     </section>
@@ -1325,16 +1892,16 @@
       <h2 class="tabs-section-title">4 Specialized Data Protection Training Streams</h2>
       
       <div class="pwc-nav-tabs">
-        <button class="pwc-tab-btn active" onclick="switchTab(event, 'tab-board')">1. Boardroom Data Protection</button>
-        <button class="pwc-tab-btn" onclick="switchTab(event, 'tab-dpo')">2. Certified DPO Bootcamp</button>
-        <button class="pwc-tab-btn" onclick="switchTab(event, 'tab-staff')">3. Workforce NDPA Training</button>
-        <button class="pwc-tab-btn" onclick="switchTab(event, 'tab-dsar')">4. DSAR & Breach Drills</button>
+        <button class="pwc-tab-btn active" onclick="switchTab(event, 'tab-board')">1. Executive Data Protection</button>
+        <button class="pwc-tab-btn" onclick="switchTab(event, 'tab-dpo')">2. DPO Privacy Compliance</button>
+        <button class="pwc-tab-btn" onclick="switchTab(event, 'tab-staff')">3. Workforce Data Protection</button>
+        <button class="pwc-tab-btn" onclick="switchTab(event, 'tab-dsar')">4. Privacy Rights & Incident Drills</button>
       </div>
 
       <div id="tab-board" class="pwc-tab-pane active">
         <img src="assets/services/service-gov.jpg" alt="Nigerian Boardroom Masterclass" class="tab-pane-img">
         <div class="tab-pane-content">
-          <h3>Board of Directors Data Protection Governance</h3>
+          <h3>Executive Data Protection & Statutory Governance</h3>
           <p>Tailored briefings for Executive and Non-Executive Directors examining statutory fiduciary liabilities under NDPA 2023, personal director liability, corporate CAR filing duties, and regulatory sanction trends up to 2% of annual turnover.</p>
           <a href="service-gov.html" class="btn-pwc-orange">
             <span>Commission Board Retreat</span>
@@ -1346,7 +1913,7 @@
       <div id="tab-dpo" class="pwc-tab-pane">
         <img src="assets/services/service-dpo.jpg" alt="Nigerian Certified DPO Bootcamp" class="tab-pane-img">
         <div class="tab-pane-content">
-          <h3>Appointed DPO Certification Program</h3>
+          <h3>Data Protection Officer (DPO) Statutory Compliance</h3>
           <p>Rigorous hands-on training for designated Data Protection Officers: mastering Section 24 ROPA catalogs, conducting high-risk DPIAs, managing 72-hour breach desks, and liaising with the NDPC.</p>
           <a href="service-dpo.html" class="btn-pwc-orange">
             <span>DPO Certification Specs</span>
@@ -1358,7 +1925,7 @@
       <div id="tab-staff" class="pwc-tab-pane">
         <img src="assets/services/service-training.jpg" alt="Nigerian Workforce Training" class="tab-pane-img">
         <div class="tab-pane-content">
-          <h3>Workforce Data Protection & Privacy Compliance</h3>
+          <h3>Workforce Data Protection & Lawful Processing</h3>
           <p>Engaging, micro-learning modules covering NDPA 2023 lawful data handling, customer consent capture, data minimization rules, subject access requests (DSAR), and instant privacy incident escalation protocols.</p>
           <a href="contact.html?service=training" class="btn-pwc-orange">
             <span>Request LMS Demo</span>
@@ -1370,7 +1937,7 @@
       <div id="tab-dsar" class="pwc-tab-pane">
         <img src="assets/services/service-cyber.jpg" alt="Data Subject Rights & Breach Drills" class="tab-pane-img">
         <div class="tab-pane-content">
-          <h3>Data Subject Rights (DSAR) & 72-Hour Breach Drills</h3>
+          <h3>Data Subject Privacy Rights & Breach Notification Drills</h3>
           <p>Operational practicums for frontline and compliance teams: handling 30-day statutory Data Subject Access Requests (rectification, objection, erasure) and executing mandatory 72-hour breach containment drills mandated by the NDPC.</p>
           <a href="contact.html?service=training" class="btn-pwc-orange">
             <span>Inquire DSAR Drills</span>
@@ -1761,6 +2328,9 @@
     <!-- ==========================================================================
        PwC MULTI-COLUMN MEGA FOOTER (Standardized Across All Pages)
        ========================================================================== -->
+    <!-- ==========================================================================
+       PwC MULTI-COLUMN MEGA FOOTER (Standardized Across All Pages)
+       ========================================================================== -->
   <footer class="pwc-footer">
     <div class="pwc-footer-container">
       <div class="pwc-footer-columns">
@@ -1772,12 +2342,12 @@
             <li><a href="service-car.html">Compliance Audit Return (CAR)</a></li>
             <li><a href="service-audit.html">Data Protection Audit</a></li>
             <li><a href="service-training.html">Data Protection Training</a></li>
-            <li><a href="service-policies.html">Privacy Policies & Notices</a></li>
+            <li><a href="service-policies.html">Privacy Policies &amp; Notices</a></li>
             <li><a href="service-ropa.html">ROPA Data Lineage</a></li>
-            <li><a href="service-dpia.html">DPIA & LIA Assessments</a></li>
+            <li><a href="service-dpia.html">DPIA &amp; LIA Assessments</a></li>
             <li><a href="service-dpo.html">Outsourced DPO</a></li>
-            <li><a href="service-cyber.html">Cybersecurity & Pen-Testing</a></li>
-            <li><a href="index.html#service-cookie">Cookie & Consent Compliance</a></li>
+            <li><a href="service-cyber.html">Cybersecurity &amp; Pen-Testing</a></li>
+            <li><a href="index.html#service-cookie">Cookie Consent Compliance</a></li>
             <li><a href="service-gov.html">Corporate Governance</a></li>
           </ul>
         </div>
@@ -1794,25 +2364,33 @@
           </ul>
         </div>
 
-        <!-- Col 3: Our organisation -->
+        <!-- Col 3: Our organisation & Regulatory Filings -->
         <div class="footer-col">
           <h5>Our organisation</h5>
           <ul>
             <li><a href="organisation.html#board">Advisory Board</a></li>
             <li><a href="organisation.html#consultants">Consultants</a></li>
-            <li><a href="organisation.html#values">Purpose & Values</a></li>
+            <li><a href="organisation.html#values">Purpose &amp; Values</a></li>
             <li><a href="organisation.html#governance">Licensed DPCO Credentials</a></li>
+            <li><a href="service-training.html#faq">Frequently Asked Questions (FAQ)</a></li>
+            <li><a href="service-car.html" style="color: var(--pwc-orange); font-weight: 700;">File CAR Before Deadline to Avoid Penalty &rarr;</a></li>
           </ul>
         </div>
 
-        <!-- Col 4: Offices -->
+        <!-- Col 4: National Practice & Official Trust Badges -->
         <div class="footer-col">
-          <h5>Offices</h5>
+          <h5>National Practice</h5>
           <ul>
-            <li><a href="contact.html">Nigeria</a></li>
-            <li><a href="contact.html">Virtual Practice</a></li>
-            <li><a href="index.html#contact">File CAR Before deadline</a></li>
+            <li><a href="contact.html">Nigeria (Virtual Practice)</a></li>
+            <li><a href="contact.html" style="color: var(--pwc-orange); font-weight: 700;"><i class="fa-solid fa-headset"></i> Talk to Our Experienced Consultants for Free</a></li>
+            <li><a href="service-car.html">Statutory Filing Deadline Desk</a></li>
           </ul>
+
+          <!-- Official NDPC Trust Badge -->
+          <div style="margin-top: 1.25rem;">
+            <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #64748b; font-weight: 700; display: block; margin-bottom: 0.4rem;">Official Authority Credential</span>
+            <img src="assets/ndpc-badge.svg" alt="National Data Protection Commission (NDPC) Licensed DPCO" style="max-width: 290px; width: 100%; height: auto; display: block;">
+          </div>
         </div>
 
       </div>
@@ -1823,17 +2401,48 @@
           <img src="logo.jpg" alt="Amstel Consulting" style="height: 38px; width: auto;">
           <span class="brand-logo-text"><span class="brand-mstel" style="color: #1a2a47; font-size: 1.25rem;">mstel</span> <span class="brand-consulting" style="color: #d04a02; font-size: 1rem;">Consulting</span></span>
         </div>
-        <div>
-          &copy; 2026 Amstel Consulting Nigeria (amstelconsulting.ng). All rights reserved. Licensed Data Protection Compliance Organisation (DPCO) under NDPA 2023.
+        <div style="max-width: 620px; line-height: 1.5;">
+          Licensed as a Data Protection Compliance Organization (DPCO) by the National Data Protection Commission | License No: DPCO/XXXX/2026. &copy; 2026 Amstel Consulting Nigeria. All rights reserved.
         </div>
-        <div style="display: flex; gap: 1.5rem;">
+        <div style="display: flex; gap: 1.25rem; flex-wrap: wrap;">
           <a href="service-policies.html">Privacy Statement</a>
-          <a href="contact.html">Legal Disclaimers</a>
-          <a href="contact.html">Regulatory Filings</a>
+          <a href="service-policies.html#cookies">Cookie Policy</a>
+          <a href="contact.html">Legal Disclaimer</a>
+          <a href="contact.html">Terms and Conditions</a>
+          <a href="contact.html">Contact</a>
         </div>
       </div>
     </div>
   </footer>
+
+  <!-- Sitewide Sticky Footer Consultant Button -->
+  <div class="sticky-talk-consultant">
+    <a href="contact.html" class="sticky-talk-btn">
+      <i class="fa-solid fa-headset" style="color: var(--pwc-orange);"></i>
+      <span>Talk to Our Experienced Consultants for Free</span>
+    </a>
+  </div>
+
+  <!-- Search Modal Overlay -->
+  <div id="siteSearchModal" class="search-modal-overlay" onclick="if(event.target===this) closeSearchModal()">
+    <div class="search-modal-card">
+      <div class="search-input-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="siteSearchInput" placeholder="Search services, NDPA regulations, DPCO audit rules..." oninput="handleSearch(this.value)">
+        <button onclick="closeSearchModal()" class="search-close-btn">&times;</button>
+      </div>
+      <div id="searchResults" class="search-results-list">
+        <div class="search-quick-links">
+          <span>Quick links:</span>
+          <a href="service-car.html">Compliance Audit Return (CAR)</a>
+          <a href="service-dpo.html">Outsourced DPO</a>
+          <a href="service-audit.html">Data Protection Audit</a>
+          <a href="service-training.html">Data Protection Training</a>
+          <a href="topics.html#ndpa-laws">NDPA 2023 Statutory Laws</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
     function toggleMobileMenu() {
@@ -1862,5 +2471,51 @@
     }
   </script>
 
+
+  <script>
+    function openSearchModal() {
+      const modal = document.getElementById('siteSearchModal');
+      if (modal) {
+        modal.classList.add('open');
+        setTimeout(() => {
+          const inp = document.getElementById('siteSearchInput');
+          if (inp) inp.focus();
+        }, 100);
+      }
+    }
+
+    function closeSearchModal() {
+      const modal = document.getElementById('siteSearchModal');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function handleSearch(val) {
+      const res = document.getElementById('searchResults');
+      if (!res) return;
+      if (!val || val.trim() === '') {
+        res.innerHTML = '<div class="search-quick-links"><span>Quick links:</span><a href="service-car.html">Compliance Audit Return (CAR)</a><a href="service-dpo.html">Outsourced DPO</a><a href="service-audit.html">Data Protection Audit</a><a href="service-training.html">Data Protection Training</a><a href="topics.html#ndpa-laws">NDPA 2023 Statutory Laws</a></div>';
+        return;
+      }
+      const q = val.toLowerCase();
+      const allServices = [
+        { name: 'Compliance Audit Return (CAR)', url: 'service-car.html', desc: 'Statutory annual audit filing with NDPC before March 15.' },
+        { name: 'Data Protection Audit', url: 'service-audit.html', desc: 'Comprehensive technical and operational gap assessments.' },
+        { name: 'Data Protection Training', url: 'service-training.html', desc: 'Workforce NDPA e-learning & DPO masterclasses.' },
+        { name: 'Privacy Policies & Notices', url: 'service-policies.html', desc: 'Layered transparency notices and vendor DPAs.' },
+        { name: 'ROPA (Record of Processing Activities)', url: 'service-ropa.html', desc: 'Article 24 data lineage and processing inventory.' },
+        { name: 'DPIA & LIA Assessments', url: 'service-dpia.html', desc: 'High-risk 5x5 threat and impact assessments.' },
+        { name: 'Outsourced DPO', url: 'service-dpo.html', desc: 'Accredited external DPO designation & NDPC liaison.' },
+        { name: 'Cybersecurity & Pen-Testing', url: 'service-cyber.html', desc: 'Security posture hardening, vulnerability assessment & pen-testing.' },
+        { name: 'Corporate Governance', url: 'service-gov.html', desc: 'Boardroom digital trust charters and fiduciary risk monitoring.' },
+        { name: 'Cookie & Consent Compliance', url: 'index.html#service-cookie', desc: 'Zero-party consent telemetry and tracking audits.' }
+      ];
+      const filtered = allServices.filter(s => s.name.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q));
+      if (filtered.length === 0) {
+        res.innerHTML = '<p style="color: #64748b; font-size: 0.9rem;">No direct matching service found. <a href="contact.html" style="color: var(--pwc-orange);">Contact our advisory desk</a> for assistance.</p>';
+      } else {
+        res.innerHTML = filtered.map(s => '<div style="padding: 0.65rem 0; border-bottom: 1px solid #f1f5f9;"><a href="' + s.url + '" style="font-weight: 700; color: #0f172a; text-decoration: none; display: block; font-size: 0.95rem;">' + s.name + '</a><span style="font-size: 0.8rem; color: #64748b;">' + s.desc + '</span></div>').join('');
+      }
+    }
+  </script>
 </body>
 </html>
