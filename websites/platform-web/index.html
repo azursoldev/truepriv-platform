@@ -1540,27 +1540,623 @@
       border: none;
     }
 
-    /* Responsive */
+    /* ==========================================================================
+       MOBILE NAVIGATION & INTERACTIVE RESPONSIVE DRAWER
+       ========================================================================== */
+    .mobile-menu-btn {
+      display: none;
+      background: #f8fafc;
+      border: 1px solid var(--ot-gray-200);
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      font-size: 1.15rem;
+      color: var(--ot-black);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      padding: 0;
+      flex-shrink: 0;
+    }
+    .mobile-menu-btn:hover {
+      background: var(--ot-gray-200);
+      color: var(--ot-accent);
+    }
+    .mobile-nav-drawer {
+      display: none;
+      position: fixed;
+      top: 74px;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-bottom: 2px solid var(--ot-gray-200);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+      z-index: 999;
+      padding: 1.5rem 1.25rem;
+      animation: slideDownNav 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mobile-nav-drawer.open {
+      display: block;
+    }
+    @keyframes slideDownNav {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .mobile-nav-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--ot-gray-200);
+      padding-bottom: 1.25rem;
+    }
+    .mobile-nav-link {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ot-gray-900);
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.15s;
+    }
+    .mobile-nav-link:hover {
+      background: var(--ot-gray-100);
+      color: var(--ot-accent);
+    }
+    .mobile-nav-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .mobile-btn-signin {
+      text-align: center;
+      padding: 0.75rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: 1.5px solid var(--ot-gray-300);
+      border-radius: 8px;
+      color: var(--ot-black);
+      display: block;
+      transition: all 0.2s;
+    }
+    .mobile-btn-signin:hover {
+      border-color: var(--ot-black);
+      background: var(--ot-gray-50);
+    }
+
+    /* ==========================================================================
+       RESPONSIVE BREAKPOINTS (Desktop -> Tablet -> Mobile)
+       ========================================================================== */
     @media (max-width: 1024px) {
-      .hero-headline { font-size: 3rem; }
-      .hero-pillars-row { grid-template-columns: 1fr; gap: 1.5rem; }
+      .hero-headline { font-size: 2.85rem; line-height: 1.15; }
+      .hero-pillars-row { grid-template-columns: 1fr; gap: 1.75rem; }
       .case-study-card { grid-template-columns: 1fr; }
-      .solutions-grid { grid-template-columns: 1fr; }
-      .pricing-cards-3col { grid-template-columns: 1fr; }
-      .resources-cards-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-top-grid { grid-template-columns: 1fr 1fr; }
-      .newsletter-grid { grid-template-columns: 1fr; }
+      .case-video-media { min-height: 280px; height: 280px; }
+      .solutions-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .pricing-cards-3col { grid-template-columns: 1fr; max-width: 580px; margin: 0 auto; gap: 2rem; }
+      .resources-cards-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+      .footer-top-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+      .newsletter-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     }
 
     @media (max-width: 768px) {
-      .ot-nav-menu { display: none; }
-      .hero-headline { font-size: 2.4rem; }
-      .mockup-layout { grid-template-columns: 1fr; }
-      .mockup-sidebar { display: none; }
-      .analyst-cards-grid { grid-template-columns: 1fr; }
-      .customer-logos-row { gap: 2rem; }
-      .footer-top-grid { grid-template-columns: 1fr; }
-      .footer-bottom-row { flex-direction: column; text-align: center; }
+      /* Global Mobile Safety */
+      html, body {
+        overflow-x: hidden;
+        max-width: 100vw;
+      }
+      .ot-container {
+        padding: 0 1.25rem;
+      }
+
+      /* Top Announcement Banner */
+      .top-banner {
+        font-size: 0.76rem;
+        padding: 0.5rem 0.85rem;
+        gap: 0.35rem;
+        line-height: 1.45;
+        text-align: center;
+        flex-direction: column;
+      }
+
+      /* Header & Mobile Toggle */
+      .ot-header {
+        height: 64px;
+      }
+      .mobile-nav-drawer {
+        top: 64px;
+      }
+      .ot-nav-menu {
+        display: none !important;
+      }
+      .mobile-menu-btn {
+        display: inline-flex;
+      }
+      .header-actions {
+        gap: 0.6rem;
+      }
+      .header-actions .icon-action {
+        display: none;
+      }
+      .header-actions .btn-sign-in {
+        display: none;
+      }
+      .header-actions .btn-pill-black {
+        padding: 0.45rem 0.85rem;
+        font-size: 0.8rem;
+        gap: 0.3rem;
+      }
+      .brand-logo-wrap {
+        gap: 0.5rem;
+      }
+      .truepriv-logo-badge {
+        width: 32px;
+        height: 32px;
+        border-radius: 7px;
+      }
+      .truepriv-logo-badge svg {
+        width: 18px;
+        height: 18px;
+      }
+      .truepriv-logo-text {
+        font-size: 1.3rem;
+      }
+
+      /* Hero Section Typography & Spacing */
+      .hero-section {
+        padding: 2.5rem 0 1.75rem;
+      }
+      .hero-kicker {
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        margin-bottom: 0.75rem;
+      }
+      .hero-headline {
+        font-size: 2.15rem;
+        line-height: 1.2;
+        letter-spacing: -0.025em;
+        margin-bottom: 1rem;
+      }
+      .hero-headline br {
+        display: none;
+      }
+      .hero-subtext {
+        font-size: 0.96rem;
+        line-height: 1.55;
+        margin-bottom: 2rem;
+      }
+
+      /* Hero Platform UI Mockup Window */
+      .hero-mockup-wrapper {
+        margin: 0 auto 2.5rem;
+        border-radius: 12px;
+      }
+      .mockup-header-bar {
+        padding: 0.55rem 0.85rem;
+        gap: 0.5rem;
+      }
+      .mockup-address-bar {
+        width: auto;
+        flex: 1;
+        font-size: 0.65rem;
+        padding: 0.2rem 0.5rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .mockup-header-bar > div:last-child {
+        display: none;
+      }
+      .mockup-layout {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .mockup-sidebar {
+        display: none;
+      }
+      .mockup-main {
+        padding: 1.25rem 1rem;
+      }
+      .mockup-top-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.75rem;
+      }
+      .mockup-flow-title h3 {
+        font-size: 1rem;
+        line-height: 1.35;
+      }
+      .mockup-flow-title p {
+        font-size: 0.74rem;
+      }
+      .stepper-flow {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+        padding: 0.85rem 1rem;
+        margin-bottom: 1.25rem;
+      }
+      .step-divider-line {
+        display: none;
+      }
+      .step-node {
+        font-size: 0.75rem;
+        gap: 0.45rem;
+      }
+      .step-circle {
+        width: 22px;
+        height: 22px;
+        font-size: 0.68rem;
+        flex-shrink: 0;
+      }
+      .mockup-cards-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.85rem;
+      }
+      .mock-panel {
+        padding: 1rem;
+      }
+      .mock-stat {
+        font-size: 1.45rem;
+      }
+
+      /* 3 Pillars Below Hero */
+      .hero-pillars-row {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 2rem;
+        padding-top: 2rem;
+      }
+      .pillar-col h3 {
+        font-size: 1.15rem;
+        margin-bottom: 0.35rem;
+      }
+      .pillar-col p {
+        font-size: 0.92rem;
+        line-height: 1.5;
+      }
+      .explore-link-wrap {
+        margin-top: 1.75rem;
+      }
+
+      /* Section 2: Dark Customer Section & Case Study */
+      .dark-customer-section {
+        padding: 3.5rem 0;
+      }
+      .dark-header {
+        margin-bottom: 2rem;
+      }
+      .dark-header h2 {
+        font-size: 1.75rem;
+        line-height: 1.25;
+        margin-bottom: 0.75rem;
+      }
+      .dark-header p {
+        font-size: 0.95rem;
+        line-height: 1.55;
+      }
+      .customer-logos-row {
+        gap: 1.5rem 2rem;
+        margin-bottom: 2.5rem;
+      }
+      .customer-logo-item {
+        font-size: 1.15rem;
+      }
+      .case-study-card {
+        grid-template-columns: 1fr;
+        border-radius: 12px;
+      }
+      .case-video-media {
+        min-height: 210px;
+        height: 210px;
+      }
+      .case-quote-content {
+        padding: 1.5rem 1.25rem;
+      }
+      .case-quote-text {
+        font-size: 1.05rem;
+        line-height: 1.45;
+        margin-bottom: 1.25rem;
+      }
+      .case-author-box {
+        margin-bottom: 1.25rem;
+      }
+      .btn-case-link {
+        width: 100%;
+        justify-content: center;
+        font-size: 0.88rem;
+        padding: 0.7rem 1.25rem;
+      }
+
+      /* Section 3: Analysts */
+      .analyst-section {
+        padding: 3.5rem 0;
+      }
+      .analyst-heading {
+        font-size: 1.75rem;
+        line-height: 1.25;
+        margin-bottom: 2rem;
+      }
+      .analyst-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+      .analyst-card {
+        padding: 1.5rem 1.25rem;
+        min-height: auto;
+      }
+      .analyst-logo-tag {
+        font-size: 1.25rem;
+        margin-bottom: 0.6rem;
+      }
+      .analyst-body-text {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 1.25rem;
+      }
+
+      /* Section 4: Integrated Solutions */
+      .solutions-section {
+        padding: 3.5rem 0;
+      }
+      .solutions-header {
+        margin-bottom: 1.75rem;
+      }
+      .solutions-header h2 {
+        font-size: 1.75rem;
+        line-height: 1.25;
+      }
+      .solutions-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+      .solution-card, .solution-card.card-reversed {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5rem 1.25rem;
+        gap: 0.75rem;
+      }
+      .wireframe-visual {
+        order: -1;
+        width: 72px;
+        height: 72px;
+        margin-bottom: 0.25rem;
+      }
+      .wireframe-visual svg {
+        width: 72px;
+        height: 72px;
+      }
+      .solution-content h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.35rem;
+      }
+      .solution-content p {
+        font-size: 0.88rem;
+        line-height: 1.5;
+        margin-bottom: 0.85rem;
+      }
+
+      /* Section 5: Pricing */
+      .pricing-wrap-section {
+        padding: 3.5rem 0;
+      }
+      .pricing-title-box {
+        margin-bottom: 1.75rem;
+      }
+      .pricing-title-box h2 {
+        font-size: 1.75rem;
+        line-height: 1.25;
+        margin-bottom: 0.4rem;
+      }
+      .pricing-title-box p {
+        font-size: 0.92rem;
+      }
+      .pricing-toggle-container {
+        margin-bottom: 2rem;
+        gap: 0.65rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .pricing-cards-3col {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 100%;
+      }
+      .pricing-box {
+        padding: 2rem 1.25rem;
+        border-radius: 14px;
+      }
+      .tier-header h3 {
+        font-size: 1.3rem;
+      }
+      .tier-amount {
+        font-size: 2.15rem;
+      }
+      .tier-feature-list {
+        gap: 0.65rem;
+        margin: 1.25rem 0 1.75rem;
+        padding-top: 1.25rem;
+      }
+      .tier-feature-list li {
+        font-size: 0.85rem;
+      }
+
+      /* Section 6: Resources */
+      .resources-section {
+        padding: 3.5rem 0;
+      }
+      .resources-header h2 {
+        font-size: 1.75rem;
+        line-height: 1.25;
+        margin-bottom: 1.75rem;
+      }
+      .resources-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+      .resource-visual-header {
+        height: 120px;
+      }
+      .resource-body {
+        padding: 1.25rem;
+      }
+      .resource-title {
+        font-size: 0.98rem;
+        margin-bottom: 1.25rem;
+      }
+
+      /* Section 7: Dark CTA Banner */
+      .cta-banner-section {
+        padding: 3.5rem 0;
+      }
+      .cta-banner-content h2 {
+        font-size: 1.85rem;
+        line-height: 1.25;
+        margin-bottom: 0.85rem;
+      }
+      .cta-banner-content p {
+        font-size: 0.95rem;
+        line-height: 1.55;
+        margin-bottom: 1.75rem;
+      }
+      .btn-pill-white {
+        width: 100%;
+        justify-content: center;
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+      }
+
+      /* Section 8: Newsletter */
+      .newsletter-section {
+        padding: 3rem 0;
+      }
+      .newsletter-grid {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+      }
+      .newsletter-text h2 {
+        font-size: 1.75rem;
+        line-height: 1.25;
+        margin-bottom: 0.4rem;
+      }
+      .newsletter-text p {
+        font-size: 0.92rem;
+        line-height: 1.5;
+      }
+      .newsletter-input {
+        padding: 0.75rem 1rem;
+        font-size: 0.88rem;
+      }
+      .btn-newsletter-submit {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+      }
+
+      /* Section 9: Footer */
+      .ot-footer {
+        padding: 3.5rem 0 2rem;
+      }
+      .footer-top-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding-bottom: 2.5rem;
+        margin-bottom: 2rem;
+      }
+      .footer-huge-mark svg {
+        width: 56px;
+      }
+      .footer-bottom-row {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        gap: 1rem;
+      }
+      .footer-legal-links {
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+
+      /* Cookies & Modals */
+      .cookie-banner-wrap {
+        grid-template-columns: 1fr;
+        padding: 1.25rem 1rem;
+        left: 0.75rem;
+        right: 0.75rem;
+        bottom: 0.75rem;
+        gap: 1rem;
+        border-radius: 10px;
+      }
+      .cookie-tab-icon {
+        display: none;
+      }
+      .cookie-action-btn {
+        padding: 0.55rem 1rem;
+        font-size: 0.82rem;
+      }
+      .cookie-floating-icon {
+        bottom: 14px;
+        left: 14px;
+        width: 40px;
+        height: 40px;
+      }
+      .modal-box {
+        padding: 1.5rem 1.25rem;
+        border-radius: 12px;
+        margin: 1rem;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      .cookie-modal-box {
+        padding: 1.5rem 1.25rem;
+        border-radius: 12px;
+        margin: 1rem;
+        max-height: 85vh;
+        overflow-y: auto;
+      }
+      .pref-group {
+        padding: 0.75rem 0.85rem;
+        gap: 0.75rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .ot-container {
+        padding: 0 1rem;
+      }
+      .hero-headline {
+        font-size: 1.85rem;
+        line-height: 1.22;
+      }
+      .truepriv-logo-text {
+        font-size: 1.2rem;
+      }
+      .truepriv-logo-badge {
+        width: 28px;
+        height: 28px;
+      }
+      .truepriv-logo-badge svg {
+        width: 16px;
+        height: 16px;
+      }
+      .header-actions .btn-pill-black {
+        padding: 0.4rem 0.75rem;
+        font-size: 0.78rem;
+      }
+      .stepper-flow {
+        grid-template-columns: 1fr;
+      }
+      .pricing-box {
+        padding: 1.75rem 1rem;
+      }
+      .tier-amount {
+        font-size: 1.95rem;
+      }
     }
     /* ==========================================================================
        TRUEPRIV BRAND LOGO STYLES (Exact User Screenshot)
@@ -1826,18 +2422,6 @@
       transform: translateX(20px);
     }
 
-    @media (max-width: 900px) {
-      .cookie-banner-wrap {
-        grid-template-columns: 1fr;
-        padding: 1.5rem;
-        left: 1rem;
-        right: 1rem;
-        bottom: 1rem;
-      }
-      .cookie-tab-icon {
-        display: none;
-      }
-    }
   </style>
 </head>
 <body>
@@ -1897,11 +2481,44 @@
           <i class="fa-solid fa-globe icon-action" title="Language: Global (EN)"></i>
           <a href="https://truepriv-saas.vercel.app" class="btn-sign-in">Sign in</a>
           <button class="btn-pill-black" onclick="openDemoModal()">Book a demo</button>
+          <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle Navigation" onclick="toggleMobileNav()">
+            <i class="fa-solid fa-bars"></i>
+          </button>
         </div>
 
       </div>
     </div>
   </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-drawer" id="mobileNavDrawer">
+    <div class="mobile-nav-group">
+      <a href="#solutions" class="mobile-nav-link" onclick="closeMobileNav()">
+        <span>Solutions</span>
+        <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem; color: #94a3b8;"></i>
+      </a>
+      <a href="#solutions" class="mobile-nav-link" onclick="closeMobileNav()">
+        <span>Platform</span>
+        <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem; color: #94a3b8;"></i>
+      </a>
+      <a href="#pricing" class="mobile-nav-link" onclick="closeMobileNav()">
+        <span>Pricing</span>
+        <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem; color: #94a3b8;"></i>
+      </a>
+      <a href="#resources" class="mobile-nav-link" onclick="closeMobileNav()">
+        <span>Resources</span>
+        <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem; color: #94a3b8;"></i>
+      </a>
+      <a href="#analysts" class="mobile-nav-link" onclick="closeMobileNav()">
+        <span>Analyst Reports</span>
+        <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem; color: #94a3b8;"></i>
+      </a>
+    </div>
+    <div class="mobile-nav-actions">
+      <a href="https://truepriv-saas.vercel.app" class="mobile-btn-signin">Sign In to Console</a>
+      <button class="btn-pill-black" style="width: 100%; justify-content: center; padding: 0.75rem;" onclick="closeMobileNav(); openDemoModal();">Book a Demo</button>
+    </div>
+  </div>
 
   <!-- ==========================================================================
        3. HERO SECTION
@@ -2193,11 +2810,6 @@
 
         <!-- Solution 2: Consent & Preferences -->
         <div class="solution-card">
-          <div class="solution-content">
-            <h3>Consent & Preferences</h3>
-            <p>Collect omnichannel consent, zero-cookie SDK preferences, and honor first-party consumer choices.</p>
-            <a href="https://truepriv-saas.vercel.app" class="card-action">Learn More &rarr;</a>
-          </div>
           <div class="wireframe-visual">
             <!-- Isometric Matrix / Grid Lines -->
             <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
@@ -2210,15 +2822,15 @@
               <circle cx="50" cy="50" r="8" fill="#2563eb" stroke="#0a0e14" stroke-width="1.5"/>
             </svg>
           </div>
+          <div class="solution-content">
+            <h3>Consent & Preferences</h3>
+            <p>Collect omnichannel consent, zero-cookie SDK preferences, and honor first-party consumer choices.</p>
+            <a href="https://truepriv-saas.vercel.app" class="card-action">Learn More &rarr;</a>
+          </div>
         </div>
 
         <!-- Solution 3: Data Protection & Privacy Management -->
         <div class="solution-card">
-          <div class="solution-content">
-            <h3>Data Protection & RoPA</h3>
-            <p>Automate Section 24 data mapping, lawful basis inventories, and cross-border adequacy transfers.</p>
-            <a href="https://truepriv-saas.vercel.app" class="card-action">Learn More &rarr;</a>
-          </div>
           <div class="wireframe-visual">
             <!-- Layered Planes Vector -->
             <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
@@ -2228,15 +2840,15 @@
               <circle cx="50" cy="56" r="3" fill="#2563eb"/>
             </svg>
           </div>
+          <div class="solution-content">
+            <h3>Data Protection & RoPA</h3>
+            <p>Automate Section 24 data mapping, lawful basis inventories, and cross-border adequacy transfers.</p>
+            <a href="https://truepriv-saas.vercel.app" class="card-action">Learn More &rarr;</a>
+          </div>
         </div>
 
         <!-- Solution 4: Statutory CAR & DPCO Assurance -->
-        <div class="solution-card card-reversed">
-          <div class="solution-content">
-            <h3>Statutory CAR & Audit Return</h3>
-            <p>Mandatory March 15 annual audit filing, GAID 5-domain evidence desk, and certified DPCO seal.</p>
-            <a href="https://truepriv-saas.vercel.app" class="card-action">Learn More &rarr;</a>
-          </div>
+        <div class="solution-card">
           <div class="wireframe-visual">
             <!-- 3D Pyramid / Tetrahedron with Blue Facet -->
             <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
@@ -2245,6 +2857,11 @@
               <polygon points="50,15 15,75 50,90" fill="none" stroke="#0a0e14" stroke-width="1.8"/>
               <circle cx="50" cy="15" r="3" fill="#0a0e14"/>
             </svg>
+          </div>
+          <div class="solution-content">
+            <h3>Statutory CAR & Audit Return</h3>
+            <p>Mandatory March 15 annual audit filing, GAID 5-domain evidence desk, and certified DPCO seal.</p>
+            <a href="https://truepriv-saas.vercel.app" class="card-action">Learn More &rarr;</a>
           </div>
         </div>
 
@@ -2269,11 +2886,6 @@
 
         <!-- Solution 6: Third-Party Risk Management -->
         <div class="solution-card">
-          <div class="solution-content">
-            <h3>Third-Party Risk Management</h3>
-            <p>Continuously monitor vendor security postures, Data Transfer Agreements (DTAs), and supply chains.</p>
-            <a href="https://truepriv-saas.vercel.app" class="card-action">Learn More &rarr;</a>
-          </div>
           <div class="wireframe-visual">
             <!-- Interconnected Nodes Hexagon -->
             <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
@@ -2282,6 +2894,11 @@
               <line x1="18" y1="36" x2="82" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="2 2"/>
               <circle cx="50" cy="54" r="5" fill="#ffc72c" stroke="#0a0e14" stroke-width="1.5"/>
             </svg>
+          </div>
+          <div class="solution-content">
+            <h3>Third-Party Risk Management</h3>
+            <p>Continuously monitor vendor security postures, Data Transfer Agreements (DTAs), and supply chains.</p>
+            <a href="https://truepriv-saas.vercel.app" class="card-action">Learn More &rarr;</a>
           </div>
         </div>
 
@@ -2782,6 +3399,27 @@
         document.getElementById('price-dpco').innerText = '₦470,000';
         document.getElementById('period-dpco').innerText = '/ month';
       }
+    }
+
+    // Mobile Menu Drawer Handlers
+    function toggleMobileNav() {
+      const drawer = document.getElementById('mobileNavDrawer');
+      const btn = document.getElementById('mobileMenuToggle');
+      if (drawer) {
+        drawer.classList.toggle('open');
+        if (drawer.classList.contains('open')) {
+          btn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+        } else {
+          btn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        }
+      }
+    }
+
+    function closeMobileNav() {
+      const drawer = document.getElementById('mobileNavDrawer');
+      const btn = document.getElementById('mobileMenuToggle');
+      if (drawer) drawer.classList.remove('open');
+      if (btn) btn.innerHTML = '<i class="fa-solid fa-bars"></i>';
     }
 
     // Modal Handlers
