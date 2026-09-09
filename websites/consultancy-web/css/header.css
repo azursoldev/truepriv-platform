@@ -363,9 +363,7 @@
 }
 
 .simple-dropdown-list li a {
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.75rem !important;
+  display: block !important;
   padding: 0.65rem 0.85rem !important;
   font-size: 0.9rem !important;
   font-weight: 600 !important;
@@ -373,19 +371,17 @@
   border-radius: 6px !important;
   background: transparent !important;
   transition: all 0.15s ease !important;
+  line-height: 1.4 !important;
 }
 
 .simple-dropdown-list li a:hover {
   background: #fff5ee !important;
   color: var(--pwc-orange, #eb5f07) !important;
-  padding-left: 0.95rem !important;
+  padding-left: 1.15rem !important;
 }
 
 .simple-dropdown-list li a i {
-  color: var(--pwc-orange, #eb5f07) !important;
-  font-size: 0.85rem !important;
-  width: 16px !important;
-  text-align: center !important;
+  display: none !important;
 }
 
 /* 8. HEADER RIGHT SECTION (Search, CTA Button, Hamburger) */

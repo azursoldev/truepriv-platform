@@ -75,11 +75,11 @@
 
         <div class="simple-dropdown-menu">
           <ul class="simple-dropdown-list">
-            <li><a href="service-ai.html"><i class="fa-solid fa-robot"></i> Artificial Intelligence for Business</a></li>
-            <li><a href="service-cyber.html"><i class="fa-solid fa-shield-halved"></i> Cyber Security</a></li>
-            <li><a href="service-policies.html"><i class="fa-solid fa-scale-balanced"></i> Data Protection Laws</a></li>
-            <li><a href="service-gov.html"><i class="fa-solid fa-triangle-exclamation"></i> Risks</a></li>
-            <li><a href="publication-detail.html"><i class="fa-solid fa-landmark"></i> Regulatory Guidance: NDPC updates</a></li>
+            <li><a href="service-ai.html">Artificial Intelligence for Business</a></li>
+            <li><a href="service-cyber.html">Cyber Security</a></li>
+            <li><a href="service-policies.html">Data Protection Laws</a></li>
+            <li><a href="service-gov.html">Risks</a></li>
+            <li><a href="publication-detail.html">Regulatory Guidance: NDPC updates</a></li>
           </ul>
         </div>
       </li>
@@ -93,10 +93,10 @@
 
         <div class="simple-dropdown-menu">
           <ul class="simple-dropdown-list">
-            <li><a href="organisation-board.html"><i class="fa-solid fa-landmark"></i> Advisory Board</a></li>
-            <li><a href="organisation-consultants.html"><i class="fa-solid fa-user-tie"></i> Consultants</a></li>
-            <li><a href="organisation-values.html"><i class="fa-solid fa-handshake"></i> Purpose &amp; Values</a></li>
-            <li><a href="organisation-governance.html"><i class="fa-solid fa-certificate"></i> Governance (Licensed DPCO)</a></li>
+            <li><a href="organisation-board.html">Advisory Board</a></li>
+            <li><a href="organisation-consultants.html">Consultants</a></li>
+            <li><a href="organisation-values.html">Purpose &amp; Values</a></li>
+            <li><a href="organisation-governance.html">Governance (Licensed DPCO)</a></li>
           </ul>
         </div>
       </li>
