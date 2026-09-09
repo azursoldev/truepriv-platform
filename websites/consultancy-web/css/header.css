@@ -79,29 +79,29 @@
 
 /* 2. TOP UTILITY BAR */
 .top-bar {
-  background: var(--pwc-white);
-  border-bottom: 1px solid var(--pwc-gray-border);
-  padding: 0.35rem 3.5rem;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 2rem;
-  font-size: 0.78rem;
-  color: var(--pwc-gray-text);
+  background: var(--pwc-white) !important;
+  border-bottom: 1px solid var(--pwc-gray-border) !important;
+  padding: 0.35rem 3.5rem !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  gap: 2rem !important;
+  font-size: 0.78rem !important;
+  color: var(--pwc-gray-text) !important;
 }
 
 .top-bar-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  text-decoration: none;
-  color: var(--pwc-gray-text);
-  font-weight: 500;
-  transition: color 0.2s ease;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+  text-decoration: none !important;
+  color: var(--pwc-gray-text) !important;
+  font-weight: 500 !important;
+  transition: color 0.2s ease !important;
 }
 
 .top-bar-item:hover {
-  color: var(--pwc-orange);
+  color: var(--pwc-orange) !important;
 }
 
 /* 3. MAIN NAVIGATION HEADER CONTAINER */
@@ -126,7 +126,7 @@
   display: inline-flex;
   align-items: flex-end;
   text-decoration: none;
-  gap: 0.15rem;
+  gap: 0.4rem;
 }
 
 .brand-logo-img {
