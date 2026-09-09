@@ -79,7 +79,7 @@
             <li><a href="service-cyber.html">Cyber Security</a></li>
             <li><a href="service-policies.html">Data Protection Laws</a></li>
             <li><a href="service-gov.html">Risks</a></li>
-            <li><a href="publication-detail.html">Regulatory Guidance: NDPC updates</a></li>
+            <li><a href="publication-detail.html">Regulatory Guidance</a></li>
           </ul>
         </div>
       </li>
