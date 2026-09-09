@@ -143,21 +143,21 @@
   gap: 0.35rem;
   position: relative;
   top: -5px;
-  left: -8px;
+  left: -14px;
   padding-bottom: 2px;
 }
 
 .brand-mstel {
-  font-size: 1.45rem;
-  font-weight: 800;
+  font-size: 1.25rem;
+  font-weight: 600;
   color: #1a2a47;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   line-height: 1;
   font-family: var(--font-sans);
 }
 
 .brand-consulting {
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 600;
   color: var(--pwc-orange, #eb5f07);
   letter-spacing: -0.01em;
@@ -170,13 +170,19 @@
   height: 38px;
 }
 
+.footer-logo-wrap .brand-logo-text {
+  left: -12px;
+}
+
 .footer-logo-wrap .brand-mstel {
-  font-size: 1.25rem;
+  font-size: 1.05rem;
+  font-weight: 600;
   color: #1a2a47;
 }
 
 .footer-logo-wrap .brand-consulting {
-  font-size: 1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
   color: var(--pwc-orange, #eb5f07);
 }
 
@@ -760,11 +766,13 @@
   }
 
   .brand-mstel {
-    font-size: 1.22rem !important;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
   }
 
   .brand-consulting {
-    font-size: 0.94rem !important;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
   }
 
   .top-announcement-bar {
@@ -805,11 +813,13 @@
   }
 
   .brand-mstel {
-    font-size: 1.05rem !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
   }
 
   .brand-consulting {
-    font-size: 0.82rem !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
   }
 
   .header-search-trigger {
