@@ -86,8 +86,8 @@
           <ul class="simple-dropdown-list">
             <li><a href="organisation-board.html">Advisory Board</a></li>
             <li><a href="organisation-consultants.html">Consultants</a></li>
-            <li><a href="organisation-values.html">Purpose &amp; Values</a></li>
-            <li><a href="organisation-governance.html">Governance (Licensed DPCO)</a></li>
+            <li><a href="organisation-values.html">About Us</a></li>
+            <li><a href="organisation-governance.html">Governance</a></li>
           </ul>
         </div>
       </li>
@@ -142,8 +142,8 @@
           <ul class="mobile-nav-links">
             <li><a href="organisation-board.html" onclick="toggleMobileMenu()">Advisory Board <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
             <li><a href="organisation-consultants.html" onclick="toggleMobileMenu()">Consultants <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="organisation-values.html" onclick="toggleMobileMenu()">Purpose &amp; Values <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="organisation-governance.html" onclick="toggleMobileMenu()">Licensed DPCO Credentials <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="organisation-values.html" onclick="toggleMobileMenu()">About Us <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="organisation-governance.html" onclick="toggleMobileMenu()">Governance <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
           </ul>
         </div>
         <div>
@@ -247,8 +247,8 @@
     { title: 'Corporate Governance', url: 'service-gov.html', desc: 'Boardroom oversight, privacy governance risk matrices, and compliance.' },
     { title: 'Advisory Board', url: 'organisation-board.html', desc: 'Distinguished governance and privacy leadership advisory board.' },
     { title: 'Consultants', url: 'organisation-consultants.html', desc: 'Certified privacy engineers, legal counsels, and security architects.' },
-    { title: 'Purpose & Values', url: 'organisation-values.html', desc: 'Our mission, ethical values, and regulatory integrity commitments.' },
-    { title: 'Licensed DPCO Credentials', url: 'organisation-governance.html', desc: 'Official NDPC accreditation license DPCO/XXXX/2026.' },
+    { title: 'About Us', url: 'organisation-values.html', desc: 'Our mission, ethical values, and regulatory integrity commitments.' },
+    { title: 'Governance', url: 'organisation-governance.html', desc: 'Corporate governance and regulatory compliance.' },
     { title: 'Artificial Intelligence for Business', url: 'service-ai.html', desc: 'AI compliance, algorithmic accountability, and automated decision rights.' },
     { title: 'Regulatory Guidance: NDPC Updates', url: 'publication-detail.html', desc: 'Official guidance, compliance circulars, and enforcement advisories.' },
     { title: 'Contact & Practice Offices', url: 'contact.html', desc: 'Engage our licensed DPCO practice partners and request a formal RFP.' }
