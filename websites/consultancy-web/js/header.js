@@ -30,33 +30,24 @@
         <div class="mega-dropdown-menu">
           <div class="mega-dropdown-grid">
             
-            <!-- Column 1: Regulatory & Audit -->
+            <!-- Column 1 -->
             <div>
-              <h5 class="mega-col-heading">Regulatory &amp; Audit</h5>
               <ul class="mega-subnav-list">
                 <li><a href="service-car.html">Compliance Audit Return (CAR)</a></li>
+                <li><a href="service-dpo.html">Outsourced DPO</a></li>
                 <li><a href="service-audit.html">Data Protection Audit</a></li>
+                <li><a href="service-dpia.html">DPIA &amp; LIA</a></li>
                 <li><a href="service-training.html">Data Protection Training</a></li>
-                <li><a href="service-policies.html">Privacy Policies &amp; Notices</a></li>
+                <li><a href="service-ropa.html">Privacy Policies &amp; ROPA</a></li>
               </ul>
             </div>
 
-            <!-- Column 2: Governance & Operations -->
+            <!-- Column 2 -->
             <div>
-              <h5 class="mega-col-heading">Governance &amp; Operations</h5>
               <ul class="mega-subnav-list">
-                <li><a href="service-ropa.html">ROPA Data Lineage</a></li>
-                <li><a href="service-dpia.html">DPIA &amp; LIA Assessments</a></li>
-                <li><a href="service-dpo.html">Outsourced DPO (DPOaaS)</a></li>
-              </ul>
-            </div>
-
-            <!-- Column 3: Advanced Advisory -->
-            <div>
-              <h5 class="mega-col-heading">Advanced Advisory</h5>
-              <ul class="mega-subnav-list">
-                <li><a href="service-ai.html">AI Consulting</a></li>
+                <li><a href="service-policies.html">Data Processing Agreements</a></li>
                 <li><a href="service-cyber.html">Cybersecurity &amp; Pen Testing</a></li>
+                <li><a href="service-ai.html">AI Consulting</a></li>
                 <li><a href="service-gov.html">Corporate Governance</a></li>
                 <li><a href="index.html#service-cookie">Cookie Consent Compliance</a></li>
               </ul>
@@ -134,15 +125,16 @@
           <div class="mobile-nav-group-title">Services</div>
           <ul class="mobile-nav-links">
             <li><a href="service-car.html" onclick="toggleMobileMenu()">Compliance Audit Return (CAR) <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="service-dpo.html" onclick="toggleMobileMenu()">Outsourced DPO <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
             <li><a href="service-audit.html" onclick="toggleMobileMenu()">Data Protection Audit <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="service-dpia.html" onclick="toggleMobileMenu()">DPIA &amp; LIA <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
             <li><a href="service-training.html" onclick="toggleMobileMenu()">Data Protection Training <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="service-policies.html" onclick="toggleMobileMenu()">Privacy Policies &amp; Notices <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="service-ropa.html" onclick="toggleMobileMenu()">ROPA Data Lineage <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="service-dpia.html" onclick="toggleMobileMenu()">DPIA &amp; LIA Assessments <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="service-dpo.html" onclick="toggleMobileMenu()">Outsourced DPO (DPOaaS) <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="service-cyber.html" onclick="toggleMobileMenu()">Cybersecurity &amp; Pen-Testing <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="service-ropa.html" onclick="toggleMobileMenu()">Privacy Policies &amp; ROPA <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="service-policies.html" onclick="toggleMobileMenu()">Data Processing Agreements <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="service-cyber.html" onclick="toggleMobileMenu()">Cybersecurity &amp; Pen Testing <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="service-ai.html" onclick="toggleMobileMenu()">AI Consulting <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
             <li><a href="service-gov.html" onclick="toggleMobileMenu()">Corporate Governance <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="index.html#service-cookie" onclick="toggleMobileMenu()">Cookie &amp; Consent Compliance <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="index.html#service-cookie" onclick="toggleMobileMenu()">Cookie Consent Compliance <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
           </ul>
         </div>
         <div>
