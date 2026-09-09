@@ -1,0 +1,2108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Annual Report and Transparency Report — Our Organisation | Amstel Consulting</title>
+  <meta name="description" content="View and download Amstel Consulting's 2024/2025 Annual Report and Transparency Report, featuring reflections of the Executive Board on regulatory integrity, audit quality, and sustainable governance.">
+  <link rel="canonical" href="https://consultancy-web-virid-seven.vercel.app/organisation.html">
+  <link rel="icon" type="image/jpeg" href="logo.jpg">
+
+  <!-- Google Fonts: Georgia/Times serif, Inter sans-serif, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/header.css">
+
+  <style>
+    :root {
+      --pwc-orange: #d85604;
+      --pwc-orange-dark: #b84500;
+      --pwc-peach-light: #fff7f2;
+      --pwc-charcoal: #2d2d2d;
+      --pwc-black: #000000;
+      --pwc-white: #ffffff;
+      --pwc-gray-bg: #f8f9fa;
+      --pwc-gray-border: #e2e8f0;
+      --pwc-gray-text: #4a5568;
+      --font-serif: 'Georgia', 'Times New Roman', serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--pwc-white);
+      color: var(--pwc-charcoal);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* Top Utility Bar */
+    .top-bar {
+      background: var(--pwc-charcoal);
+      color: #cbd5e1;
+      padding: 0.4rem 3.5rem;
+      font-size: 0.78rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1.75rem;
+      border-bottom: 1px solid #3d3d3d;
+    }
+    .top-bar-item { color: #cbd5e1; transition: color 0.2s; display: inline-flex; align-items: center; gap: 0.35rem; }
+    .top-bar-item:hover { color: var(--pwc-orange); }
+
+    /* Main Navigation Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--pwc-gray-border);
+      padding: 0.75rem 3.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .main-nav { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
+    .main-nav > li { position: relative; }
+    .main-nav a {
+      color: var(--pwc-charcoal);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 0.45rem 0.85rem;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border-radius: 9999px;
+    }
+    .main-nav a:hover, .main-nav > li:hover > a { color: var(--pwc-charcoal); background: #f1f3f5; }
+    .nav-chevron { font-size: 0.65rem; color: #94a3b8; transition: transform 0.2s ease; }
+    .main-nav > li:hover .nav-chevron { transform: rotate(180deg); color: var(--pwc-charcoal); }
+
+    /* Mega Dropdowns Base */
+    .mega-dropdown-menu {
+      position: absolute;
+      top: 100%; left: 0; width: 780px;
+      background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px;
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.04);
+      padding: 2.25rem 2.5rem; opacity: 0; visibility: hidden;
+      transform: translateY(10px); transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000; pointer-events: none;
+    }
+    .mega-dropdown-menu::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
+    .main-nav > li:hover .mega-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(6px); pointer-events: auto; }
+    .mega-dropdown-grid { display: grid; grid-template-columns: 1.15fr 1.15fr 1fr; gap: 2.5rem; }
+    .mega-col-heading { font-size: 0.82rem; font-weight: 700; color: #64748b; margin-bottom: 1.25rem; letter-spacing: 0.3px; }
+    .mega-subnav-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+    .mega-subnav-list li a {
+      color: #0f172a !important; font-size: 0.93rem !important; font-weight: 600 !important;
+      padding: 0.25rem 0 !important; border-radius: 0 !important; background: transparent !important;
+      display: block !important; transition: all 0.15s ease !important;
+    }
+    .mega-subnav-list li a:hover { color: var(--pwc-orange) !important; transform: translateX(4px); }
+    .mega-view-all-link {
+      display: inline-flex !important; align-items: center !important; gap: 0.45rem !important;
+      margin-top: 1.5rem !important; font-size: 0.85rem !important; font-weight: 700 !important;
+      color: #0f172a !important; padding: 0 !important; border-radius: 0 !important;
+      background: transparent !important; transition: all 0.15s ease !important;
+    }
+
+    /* ==========================================================================
+       PwC INDUSTRIES MEGA-DROPDOWN
+       ========================================================================== */
+    .industries-mega-dropdown {
+      position: absolute; top: 100%; left: -200px; width: 1040px;
+      background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.16), 0 8px 24px -4px rgba(0, 0, 0, 0.06);
+      padding: 2.25rem 2.5rem 2.5rem; opacity: 0; visibility: hidden;
+      transform: translateY(10px); transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000; pointer-events: none;
+    }
+    .industries-mega-dropdown::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
+    .main-nav > li:hover .industries-mega-dropdown { opacity: 1; visibility: visible; transform: translateY(6px); pointer-events: auto; }
+    .ind-dropdown-topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.75rem; padding-bottom: 0.85rem; border-bottom: 1px solid #f1f5f9; }
+    .ind-dropdown-title { font-family: var(--font-sans); font-size: 1.4rem; font-weight: 800; color: #0f172a; letter-spacing: -0.02em; }
+    .ind-dropdown-close { font-size: 1.3rem; color: #94a3b8; cursor: pointer; background: none; border: none; transition: color 0.15s ease; display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; }
+    .ind-dropdown-close:hover { color: var(--pwc-orange); background: #f8fafc; }
+    .ind-mega-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1.35fr; gap: 2.25rem; }
+    .ind-links-col { display: flex; flex-direction: column; gap: 0.35rem; }
+    .ind-link-item {
+      display: flex !important; justify-content: space-between !important; align-items: center !important;
+      padding: 0.65rem 0.6rem !important; border-radius: 4px !important; color: #1e293b !important;
+      font-size: 0.94rem !important; font-weight: 500 !important; text-decoration: none !important;
+      background: transparent !important; transition: all 0.15s ease !important;
+    }
+    .ind-link-item:hover { color: var(--pwc-orange) !important; background: #fff7f2 !important; padding-left: 0.85rem !important; }
+    .ind-link-item .ind-chevron { font-size: 0.72rem; color: #94a3b8; transition: transform 0.15s ease, color 0.15s ease; }
+    .ind-link-item:hover .ind-chevron { color: var(--pwc-orange); transform: translateX(3px); }
+    .ind-view-all { display: inline-flex !important; align-items: center !important; gap: 0.45rem !important; margin-top: 1.25rem !important; padding: 0.4rem 0.6rem !important; font-size: 0.88rem !important; font-weight: 700 !important; color: var(--pwc-orange) !important; }
+    .ind-featured-col { padding-left: 1.75rem; border-left: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 1.25rem; }
+    .ind-featured-heading { font-size: 0.95rem; font-weight: 800; color: #0f172a; margin-bottom: 0.25rem; letter-spacing: 0.2px; }
+    .ind-featured-card { display: flex !important; align-items: center !important; gap: 1rem !important; padding: 0.6rem !important; border-radius: 6px !important; transition: all 0.2s ease !important; }
+    .ind-featured-card:hover { background: #f8fafc !important; transform: translateY(-2px); }
+    .ind-featured-thumb-wrap { width: 95px; height: 64px; border-radius: 4px; overflow: hidden; position: relative; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); }
+    .ind-featured-thumb-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .thumb-orange-strip { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: var(--pwc-orange); }
+    .ind-featured-text { font-family: var(--font-serif); font-size: 0.98rem; font-weight: 700; color: #0f172a; line-height: 1.35; transition: color 0.15s ease; }
+    .ind-featured-card:hover .ind-featured-text { color: var(--pwc-orange); }
+
+    /* ==========================================================================
+       PwC OUR ORGANISATION MEGA-DROPDOWN (SCREENSHOT 1 EXACT)
+       ========================================================================== */
+    .org-mega-dropdown {
+      position: absolute;
+      top: 100%;
+      left: -420px;
+      width: 1060px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.16), 0 8px 24px -4px rgba(0, 0, 0, 0.06);
+      padding: 2.25rem 2.5rem 2.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .org-mega-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: 0;
+      right: 0;
+      height: 16px;
+    }
+
+    .main-nav > li:hover .org-mega-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(6px);
+      pointer-events: auto;
+    }
+
+    .org-dropdown-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.75rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .org-dropdown-title {
+      font-family: var(--font-sans);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+    }
+
+    .org-dropdown-close {
+      font-size: 1.3rem;
+      color: #94a3b8;
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+
+    .org-dropdown-close:hover {
+      color: var(--pwc-orange);
+      background: #f8fafc;
+    }
+
+    .org-mega-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1.35fr;
+      gap: 2.25rem;
+    }
+
+    .org-links-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .org-link-item {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      padding: 0.6rem 0.5rem !important;
+      border-radius: 4px !important;
+      color: #1e293b !important;
+      font-size: 0.93rem !important;
+      font-weight: 500 !important;
+      text-decoration: none !important;
+      background: transparent !important;
+      transition: all 0.15s ease !important;
+      line-height: 1.35 !important;
+    }
+
+    .org-link-item:hover {
+      color: var(--pwc-orange) !important;
+      background: #fff7f2 !important;
+      padding-left: 0.75rem !important;
+    }
+
+    .org-link-item .org-chevron {
+      font-size: 0.72rem;
+      color: #94a3b8;
+      transition: transform 0.15s ease, color 0.15s ease;
+    }
+
+    .org-link-item:hover .org-chevron {
+      color: var(--pwc-orange);
+      transform: translateX(3px);
+    }
+
+    .org-link-item .org-external-icon {
+      font-size: 0.72rem;
+      color: #94a3b8;
+    }
+
+    /* Featured Column */
+    .org-featured-col {
+      padding-left: 1.75rem;
+      border-left: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+    }
+
+    .org-featured-heading {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 0.15rem;
+      letter-spacing: 0.2px;
+    }
+
+    .org-featured-card {
+      display: flex !important;
+      align-items: center !important;
+      gap: 1rem !important;
+      text-decoration: none !important;
+      padding: 0.5rem !important;
+      border-radius: 6px !important;
+      transition: all 0.2s ease !important;
+      background: transparent !important;
+    }
+
+    .org-featured-card:hover {
+      background: #f8fafc !important;
+      transform: translateY(-2px);
+    }
+
+    .org-featured-thumb-wrap {
+      width: 95px;
+      height: 62px;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .org-featured-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .org-featured-text {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.3;
+      transition: color 0.15s ease;
+    }
+
+    .org-featured-card:hover .org-featured-text {
+      color: var(--pwc-orange);
+    }
+
+    .header-right { display: flex; align-items: center; gap: 1.5rem; }
+    .btn-contact-nav {
+      background: var(--pwc-black);
+      color: var(--pwc-white);
+      padding: 0.65rem 1.4rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .btn-contact-nav:hover { background: var(--pwc-orange); }
+
+    /* ==========================================================================
+       PwC OUR ORGANISATION INNER PAGE (EXACT SCREENSHOT 2 LAYOUT)
+       ========================================================================== */
+    .pwc-page-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 2rem 2rem 5rem;
+    }
+
+    /* Breadcrumbs */
+    .detail-breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      color: #94a3b8;
+      margin-bottom: 2rem;
+    }
+    .detail-breadcrumbs a { color: #64748b; transition: color 0.15s; }
+    .detail-breadcrumbs a:hover { color: var(--pwc-orange); }
+
+    /* Headline Area */
+    .report-hero-headline {
+      font-family: var(--font-serif);
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--pwc-charcoal);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 2.25rem;
+    }
+
+    /* Top Architectural Curved Canopy Visual */
+    .report-canopy-visual {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 4.5rem;
+      background: #e2e8f0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    }
+    .report-canopy-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 2 Large Feature Cards (Transparency Report + Annual Report) */
+    .two-reports-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      margin-bottom: 5rem;
+    }
+    .report-feature-card {
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      border: 1px solid #f1f5f9;
+      border-radius: 4px;
+      transition: all 0.25s ease;
+    }
+    .report-feature-card:hover {
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      transform: translateY(-3px);
+    }
+    .report-card-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+      background: #f1f5f9;
+    }
+    .report-card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .report-feature-card:hover .report-card-img-wrap img {
+      transform: scale(1.03);
+    }
+    /* Angled orange polygon overlay across card image */
+    .card-orange-polygon {
+      position: absolute;
+      top: 50%;
+      left: 20%;
+      transform: translateY(-50%);
+      width: 260px;
+      height: 42px;
+      background: var(--pwc-orange);
+      clip-path: polygon(18% 0%, 100% 0%, 82% 100%, 0% 100%);
+      z-index: 2;
+    }
+    .report-card-body {
+      padding: 1.75rem 1.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .report-card-body h3 {
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--pwc-charcoal);
+      margin-bottom: 0.75rem;
+      line-height: 1.25;
+    }
+    .report-card-body p {
+      font-size: 0.95rem;
+      color: var(--pwc-gray-text);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+    .report-action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--pwc-orange);
+      margin-top: auto;
+    }
+    .report-action-link:hover {
+      text-decoration: underline;
+    }
+
+    
+    /* Subnav Bar & Client Organisation Sections */
+    .org-hero-lead {
+      font-size: 1.15rem;
+      color: var(--pwc-gray-text);
+      line-height: 1.65;
+      max-width: 860px;
+      margin-bottom: 2rem;
+    }
+
+    .org-subnav-bar {
+      display: flex;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      margin-bottom: 3.5rem;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 1.25rem;
+    }
+
+    .org-subnav-pill {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--pwc-charcoal);
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      text-decoration: none;
+    }
+
+    .org-subnav-pill:hover, .org-subnav-pill.active {
+      background: var(--pwc-orange);
+      border-color: var(--pwc-orange);
+      color: #ffffff;
+    }
+
+    .org-content-section {
+      margin-bottom: 5.5rem;
+      padding-top: 3.5rem;
+      border-top: 1px solid var(--pwc-gray-border);
+      scroll-margin-top: 90px;
+    }
+
+    .org-section-header {
+      margin-bottom: 2.75rem;
+    }
+
+    .org-section-kicker {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--pwc-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.75px;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .org-section-header h2 {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--pwc-charcoal);
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    .org-section-header p {
+      font-size: 1.05rem;
+      color: var(--pwc-gray-text);
+      max-width: 820px;
+      line-height: 1.6;
+    }
+
+    /* Profiles Grid: Advisory Board & Consultants */
+    .org-profiles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    .org-profile-card {
+      background: #ffffff;
+      border: 1px solid var(--pwc-gray-border);
+      border-radius: 4px;
+      padding: 2.25rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .org-profile-card:hover {
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.07);
+      transform: translateY(-3px);
+      border-color: #cbd5e1;
+    }
+
+    .org-profile-avatar-wrap {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+      border: 2px solid var(--pwc-orange);
+      flex-shrink: 0;
+      background: #0f172a;
+    }
+
+    .org-profile-avatar-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .org-profile-name {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--pwc-charcoal);
+      margin-bottom: 0.35rem;
+      line-height: 1.3;
+    }
+
+    .org-profile-role {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--pwc-orange);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .org-profile-bio {
+      font-size: 0.88rem;
+      color: var(--pwc-gray-text);
+      line-height: 1.65;
+    }
+
+    /* Purpose & Values Cards */
+    .org-values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .org-value-card {
+      background: #ffffff;
+      border: 1px solid var(--pwc-gray-border);
+      border-top: 3px solid var(--pwc-orange);
+      padding: 2.25rem 1.75rem;
+      border-radius: 4px;
+      transition: all 0.25s ease;
+    }
+
+    .org-value-card:hover {
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+      transform: translateY(-2px);
+    }
+
+    .org-value-icon {
+      font-size: 1.75rem;
+      color: var(--pwc-orange);
+      margin-bottom: 1.15rem;
+    }
+
+    .org-value-card h4 {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--pwc-charcoal);
+      margin-bottom: 0.75rem;
+    }
+
+    .org-value-card p {
+      font-size: 0.9rem;
+      color: var(--pwc-gray-text);
+      line-height: 1.6;
+    }
+
+    /* Governance 2-Column Block */
+    .org-governance-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.25rem;
+      background: #fafafa;
+      border: 1px solid var(--pwc-gray-border);
+      border-radius: 4px;
+      padding: 2.75rem 2.25rem;
+    }
+
+    .org-gov-feature h4 {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--pwc-charcoal);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .org-gov-feature h4 i {
+      color: var(--pwc-orange);
+      font-size: 1.15rem;
+    }
+
+    .org-gov-feature p {
+      font-size: 0.92rem;
+      color: var(--pwc-gray-text);
+      line-height: 1.65;
+    }
+
+    /* Contact Us Section */
+    .contact-us-section {
+      margin-bottom: 5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--pwc-gray-border);
+    }
+    .contact-us-title {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--pwc-charcoal);
+      margin-bottom: 2rem;
+    }
+    .spokesperson-card {
+      display: flex;
+      gap: 1.75rem;
+      align-items: center;
+      padding: 2rem;
+      border: 1px solid var(--pwc-gray-border);
+      border-radius: 4px;
+      background: #fafafa;
+      max-width: 580px;
+    }
+    .spokesperson-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 2px solid var(--pwc-orange);
+    }
+    .spokesperson-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .spokesperson-info h4 {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--pwc-charcoal);
+      margin-bottom: 0.25rem;
+    }
+    .spokesperson-role {
+      font-size: 0.88rem;
+      color: #64748b;
+      margin-bottom: 0.4rem;
+    }
+    .spokesperson-tel {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.75rem;
+    }
+    .spokesperson-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+    .spokesperson-actions a {
+      color: var(--pwc-orange);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .spokesperson-actions a:hover {
+      text-decoration: underline;
+    }
+
+    /* Cinematic Dark CTA Banner (Screenshot 2 Exact) */
+    .dark-pwc-cta-banner {
+      background: #111111;
+      color: #ffffff;
+      padding: 5rem 4rem;
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .dark-cta-headline {
+      font-family: var(--font-serif);
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1.18;
+      max-width: 820px;
+      margin-bottom: 1.75rem;
+    }
+    .dark-cta-headline span {
+      font-size: 1.3rem;
+      font-family: var(--font-sans);
+      font-weight: 400;
+      display: block;
+      color: #94a3b8;
+      margin-bottom: 0.75rem;
+    }
+    .dark-cta-orange-polygon {
+      width: 260px;
+      height: 38px;
+      background: var(--pwc-orange);
+      clip-path: polygon(18% 0%, 100% 0%, 82% 100%, 0% 100%);
+      margin-bottom: 2.25rem;
+    }
+    .btn-dark-banner-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: 2px solid #ffffff;
+      color: #ffffff;
+      padding: 0.8rem 1.8rem;
+      font-size: 0.92rem;
+      font-weight: 700;
+      border-radius: 2px;
+      width: fit-content;
+      transition: all 0.2s ease;
+    }
+    .btn-dark-banner-link:hover {
+      background: var(--pwc-orange);
+      border-color: var(--pwc-orange);
+      color: #ffffff;
+    }
+
+    /* Follow Us Bar (Screenshot 2 Exact) */
+    .follow-us-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      padding: 2.5rem 0 3.5rem;
+      border-top: 1px solid #f1f5f9;
+    }
+    .follow-us-label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--pwc-charcoal);
+    }
+    .social-icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      color: var(--pwc-charcoal);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+    }
+    .social-icon-btn:hover {
+      background: var(--pwc-orange);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    /* Global 5-Column Footer */
+    .pwc-footer {
+      background: var(--pwc-charcoal);
+      color: #ffffff;
+      padding: 4.5rem 0 2.5rem;
+      border-top: 1px solid #3d3d3d;
+      font-size: 0.88rem;
+    }
+    .footer-cols-5 {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1.1fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 3.5rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .footer-col h5 {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      color: #ffffff;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 0.5rem;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .footer-col a { color: #94a3b8; transition: color 0.2s; font-size: 0.85rem; }
+    .footer-col a:hover { color: var(--pwc-orange); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #64748b;
+      font-size: 0.8rem;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1024px) {
+      .header { padding: 0.75rem 1.5rem; }
+      .industries-mega-dropdown { width: 92vw; left: -10vw; padding: 1.5rem; }
+      .ind-mega-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .ind-featured-col { border-left: none; padding-left: 0; border-top: 1px solid #e2e8f0; padding-top: 1.25rem; grid-column: span 2; }
+      .org-mega-dropdown { width: 92vw; left: -30vw; padding: 1.5rem; }
+      .org-mega-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .org-featured-col { border-left: none; padding-left: 0; border-top: 1px solid #e2e8f0; padding-top: 1.25rem; grid-column: span 2; }
+      .two-reports-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .org-profiles-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .org-values-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .org-governance-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .footer-cols-5 { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .report-hero-headline { font-size: 2.75rem; }
+    }
+    @media (max-width: 640px) {
+      .main-nav { display: none; }
+      .report-canopy-visual { height: 230px; }
+      .two-reports-grid { grid-template-columns: 1fr; }
+      .org-profiles-grid { grid-template-columns: 1fr; }
+      .org-values-grid { grid-template-columns: 1fr; }
+      .org-subnav-bar { flex-direction: column; }
+      .footer-cols-5 { grid-template-columns: 1fr; }
+      .dark-pwc-cta-banner { padding: 3rem 1.5rem; }
+      .dark-cta-headline { font-size: 2rem; }
+      .spokesperson-card { flex-direction: column; text-align: center; }
+    }
+  
+        .btn-contact-nav {
+      background: var(--pwc-charcoal);
+      color: var(--pwc-white) !important;
+      font-size: 0.85rem !important;
+      font-weight: 700 !important;
+      padding: 0.55rem 1.25rem !important;
+      border-radius: 9999px !important;
+      transition: all 0.2s ease !important;
+    }
+
+    .btn-contact-nav:hover {
+      background: var(--pwc-orange) !important;
+      color: var(--pwc-white) !important;
+    }
+
+    .simple-dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 320px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.04);
+      padding: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .simple-dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: 0;
+      right: 0;
+      height: 16px;
+    }
+
+    .main-nav > li:hover .simple-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(6px);
+      pointer-events: auto;
+    }
+
+    .simple-dropdown-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .simple-dropdown-list li a {
+      display: flex !important;
+      align-items: center !important;
+      gap: 0.75rem !important;
+      padding: 0.6rem 0.75rem !important;
+      font-size: 0.9rem !important;
+      font-weight: 600 !important;
+      color: #1e293b !important;
+      border-radius: 6px !important;
+      background: transparent !important;
+      transition: all 0.15s ease !important;
+    }
+
+    .simple-dropdown-list li a:hover {
+      background: #fff5ee !important;
+      color: var(--pwc-orange) !important;
+      padding-left: 0.95rem !important;
+    }
+
+    .simple-dropdown-list li a i {
+      color: var(--pwc-orange);
+      font-size: 0.85rem;
+      width: 16px;
+      text-align: center;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 0.55rem 0.8rem;
+      color: var(--pwc-charcoal);
+      font-size: 1.15rem;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+      font-weight: 700;
+    }
+
+    .mobile-menu-btn:hover {
+      background: #f8fafc;
+      color: var(--pwc-orange);
+      border-color: var(--pwc-orange);
+    }
+
+    .mobile-nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-nav-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-nav-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 88vw;
+      max-width: 380px;
+      background: #ffffff;
+      z-index: 2010;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .mobile-nav-overlay.open .mobile-nav-drawer {
+      transform: translateX(0);
+    }
+
+    .mobile-drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .mobile-drawer-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #64748b;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      line-height: 1;
+    }
+
+    .mobile-drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .mobile-nav-group-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #94a3b8;
+      margin-bottom: 0.5rem;
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .mobile-nav-links li a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.55rem 0.75rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #1e293b;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.15s ease;
+    }
+
+    .mobile-nav-links li a:hover {
+      background: #fff5ee;
+      color: var(--pwc-orange);
+    }
+
+    .mobile-drawer-footer {
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid #e2e8f0;
+      background: #fafafa;
+    }
+
+    .btn-mobile-car {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      background: var(--pwc-orange);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.85rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(235, 95, 7, 0.25);
+    }
+
+    .pwc-footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 3.5rem;
+    }
+
+    .pwc-footer-columns {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr;
+      gap: 2.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .pwc-footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding-top: 2rem;
+    }
+
+    .pwc-footer-bottom a {
+      color: #94a3b8;
+      text-decoration: none;
+    }
+
+    .pwc-footer-bottom a:hover {
+      color: var(--pwc-orange);
+    }
+
+    @media (max-width: 1024px) {
+      .header .main-nav { display: none !important; }
+      .mobile-menu-btn { display: inline-flex !important; }
+      .pwc-footer-columns { grid-template-columns: 1fr 1fr !important; }
+      .pwc-footer-container { padding: 0 1.5rem !important; }
+    }
+
+    @media (max-width: 640px) {
+      .pwc-footer-columns { grid-template-columns: 1fr !important; }
+    }
+
+  
+    
+    /* ==========================================================================
+       PwC MULTI-COLUMN FOOTER (Standardized 4-Column Light Theme Across All Pages)
+       ========================================================================== */
+    .pwc-footer {
+      background: #f2f2f2 !important;
+      border-top: 1px solid #e0e0e0 !important;
+      padding: 4.5rem 3.5rem 2.5rem !important;
+      color: #53565a !important;
+      font-size: 0.88rem !important;
+    }
+
+    .pwc-footer-container {
+      max-width: 1280px !important;
+      margin: 0 auto !important;
+      padding: 0 !important;
+    }
+
+    .pwc-footer-columns {
+      display: grid !important;
+      grid-template-columns: 1.4fr 1.3fr 1.1fr 1fr !important;
+      gap: 3rem !important;
+      padding-bottom: 3.5rem !important;
+      border-bottom: 1px solid #e0e0e0 !important;
+    }
+
+    .footer-col h5 {
+      font-family: var(--font-serif, 'Georgia', serif) !important;
+      font-size: 1.15rem !important;
+      font-weight: 700 !important;
+      color: #2d2d2d !important;
+      margin-bottom: 1.25rem !important;
+    }
+
+    .footer-col ul {
+      list-style: none !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0.6rem !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .footer-col a {
+      color: #53565a !important;
+      text-decoration: none !important;
+      font-size: 0.84rem !important;
+      transition: color 0.2s ease !important;
+    }
+
+    .footer-col a:hover {
+      color: #d04a02 !important;
+    }
+
+    .pwc-footer-bottom {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      padding-top: 2rem !important;
+      font-size: 0.78rem !important;
+      color: #53565a !important;
+      flex-wrap: wrap !important;
+      gap: 1.5rem !important;
+    }
+
+    .pwc-footer-bottom a {
+      color: #53565a !important;
+      text-decoration: none !important;
+    }
+
+    .pwc-footer-bottom a:hover {
+      color: #d04a02 !important;
+    }
+
+    @media (max-width: 1024px) {
+      .pwc-footer { padding: 3.5rem 1.5rem 2rem !important; }
+      .pwc-footer-columns { grid-template-columns: 1fr 1fr !important; gap: 2.5rem !important; }
+    }
+    @media (max-width: 640px) {
+      .pwc-footer { padding: 3rem 1.25rem 2rem !important; }
+      .pwc-footer-columns { grid-template-columns: 1fr !important; gap: 2rem !important; }
+    }
+
+
+    /* Top Announcement Alert Bar */
+    .top-announcement-bar {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 0.55rem 1.5rem;
+      font-size: 0.84rem;
+      border-bottom: 2px solid var(--pwc-orange);
+      position: relative;
+      z-index: 1050;
+    }
+    .announcement-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .announcement-text {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #f1f5f9;
+      font-size: 0.85rem;
+    }
+    .announcement-text strong {
+      color: #ffffff;
+    }
+    .announcement-icon {
+      color: #f59e0b;
+      font-size: 0.95rem;
+    }
+    .announcement-action-btn {
+      background: var(--pwc-orange);
+      color: #ffffff !important;
+      padding: 0.28rem 0.95rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.78rem;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .announcement-action-btn:hover {
+      background: #b23e00;
+      transform: translateY(-1px);
+    }
+
+    /* Header Search Button */
+    .header-search-wrap {
+      display: flex;
+      align-items: center;
+    }
+    .header-search-trigger {
+      background: transparent;
+      border: 1px solid #cbd5e1;
+      border-radius: 20px;
+      padding: 0.4rem 0.9rem;
+      color: #475569;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.2s;
+    }
+    .header-search-trigger:hover {
+      border-color: var(--pwc-orange);
+      color: var(--pwc-orange);
+      background: #fffaf5;
+    }
+
+    /* Search Modal Overlay */
+    .search-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 2000;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 10vh;
+    }
+    .search-modal-overlay.open {
+      display: flex;
+    }
+    .search-modal-card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 640px;
+      border-radius: 8px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      animation: modalFadeDown 0.2s ease-out;
+    }
+    @keyframes modalFadeDown {
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .search-input-wrap {
+      display: flex;
+      align-items: center;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid #e2e8f0;
+      gap: 1rem;
+    }
+    .search-input-wrap i {
+      color: var(--pwc-orange);
+      font-size: 1.2rem;
+    }
+    .search-input-wrap input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 1.1rem;
+      font-family: var(--font-sans);
+      color: #0f172a;
+    }
+    .search-close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #94a3b8;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .search-results-list {
+      padding: 1.5rem;
+      max-height: 380px;
+      overflow-y: auto;
+    }
+    .search-quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .search-quick-links span {
+      font-size: 0.82rem;
+      color: #64748b;
+      margin-right: 0.5rem;
+    }
+    .search-quick-links a {
+      background: #f1f5f9;
+      color: #334155;
+      padding: 0.35rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .search-quick-links a:hover {
+      background: var(--pwc-orange);
+      color: #ffffff;
+    }
+
+    /* Sticky Footer Consultant Button */
+    .sticky-talk-consultant {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 999;
+    }
+    .sticky-talk-btn {
+      background: #0f172a;
+      color: #ffffff !important;
+      border: 2px solid var(--pwc-orange);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      border-radius: 50px;
+      padding: 0.75rem 1.4rem;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      transition: all 0.25s ease;
+    }
+    .sticky-talk-btn:hover {
+      background: var(--pwc-orange);
+      border-color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(208, 74, 2, 0.35);
+    }
+    @media (max-width: 768px) {
+      .sticky-talk-consultant {
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+      }
+      .sticky-talk-btn {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        padding: 0.85rem 1rem;
+        font-size: 0.82rem;
+      }
+    }
+
+
+
+    /* PwC / ONE-TRUST DROPDOWN MENU STYLES (FIXED & STANDARDIZED) */
+    .nav-item-dropdown {
+      position: relative !important;
+    }
+
+    .mega-dropdown-menu {
+      position: absolute !important;
+      top: 100% !important;
+      left: 0 !important;
+      width: 840px !important;
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 12px !important;
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.15), 0 8px 16px -4px rgba(0, 0, 0, 0.06) !important;
+      padding: 2.25rem 2.5rem !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      transform: translateY(10px) !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      z-index: 1000 !important;
+      pointer-events: none !important;
+    }
+
+    .mega-dropdown-menu::before {
+      content: '' !important;
+      position: absolute !important;
+      top: -16px !important;
+      left: 0 !important;
+      right: 0 !important;
+      height: 16px !important;
+    }
+
+    .main-nav > li:hover .mega-dropdown-menu,
+    .nav-item-dropdown:hover .mega-dropdown-menu {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: translateY(6px) !important;
+      pointer-events: auto !important;
+    }
+
+    .mega-dropdown-grid {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr 1fr !important;
+      gap: 2.25rem !important;
+    }
+
+    .mega-col-heading {
+      font-size: 0.82rem !important;
+      font-weight: 700 !important;
+      color: #64748b !important;
+      margin-bottom: 1.25rem !important;
+      letter-spacing: 0.3px !important;
+      text-transform: none !important;
+    }
+
+    .mega-subnav-list {
+      list-style: none !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0.75rem !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .mega-subnav-list li a {
+      color: #0f172a !important;
+      font-size: 0.93rem !important;
+      font-weight: 600 !important;
+      padding: 0.25rem 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      display: block !important;
+      transition: all 0.15s ease !important;
+      line-height: 1.35 !important;
+    }
+
+    .mega-subnav-list li a:hover {
+      color: var(--pwc-orange, #d04a02) !important;
+      transform: translateX(4px) !important;
+    }
+
+    .simple-dropdown-menu {
+      position: absolute !important;
+      top: 100% !important;
+      left: 0 !important;
+      width: 320px !important;
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 12px !important;
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.15), 0 8px 16px -4px rgba(0, 0, 0, 0.06) !important;
+      padding: 1rem !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      transform: translateY(10px) !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      z-index: 1000 !important;
+      pointer-events: none !important;
+    }
+
+    .simple-dropdown-menu::before {
+      content: '' !important;
+      position: absolute !important;
+      top: -16px !important;
+      left: 0 !important;
+      right: 0 !important;
+      height: 16px !important;
+    }
+
+    .main-nav > li:hover .simple-dropdown-menu,
+    .nav-item-dropdown:hover .simple-dropdown-menu {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: translateY(6px) !important;
+      pointer-events: auto !important;
+    }
+
+    .simple-dropdown-list {
+      list-style: none !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0.35rem !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .simple-dropdown-list li a {
+      display: flex !important;
+      align-items: center !important;
+      gap: 0.75rem !important;
+      padding: 0.6rem 0.75rem !important;
+      font-size: 0.9rem !important;
+      font-weight: 600 !important;
+      color: #1e293b !important;
+      border-radius: 6px !important;
+      background: transparent !important;
+      transition: all 0.15s ease !important;
+    }
+
+    .simple-dropdown-list li a:hover {
+      background: #fff5ee !important;
+      color: var(--pwc-orange, #d04a02) !important;
+      padding-left: 0.95rem !important;
+    }
+
+    .simple-dropdown-list li a i {
+      color: var(--pwc-orange, #d04a02) !important;
+      font-size: 0.85rem !important;
+      width: 16px !important;
+      text-align: center !important;
+    }
+
+
+    .org-content-section { scroll-margin-top: 100px; }
+  
+    
+
+</style>
+</head>
+<body>
+  <!-- Unified Site Header (Single Source: js/header.js & css/header.css) -->
+  <div id="site-header"></div>
+  <script src="js/header.js"></script>
+
+  
+
+  <!-- Main Content Container (PwC Layout with Client's 5 Core Sections) -->
+  <main class="pwc-page-container">
+
+    <!-- Breadcrumbs -->
+    <div class="detail-breadcrumbs">
+      <a href="index.html">Amstel Consulting</a>
+      <span>&gt;</span>
+      <span style="color: #0f172a; font-weight: 700;">Our Organisation</span>
+    </div>
+
+    <!-- Main Page Headline -->
+    <h1 class="report-hero-headline" style="margin-bottom: 0.85rem;">Our Organisation</h1>
+    <p class="org-hero-lead">Distinguished leadership, accredited practitioner excellence, and institutional governance principles safeguarding Nigeria's digital economy across 13 economic sectors.</p>
+
+    <!-- Subnav Tabs for the 5 Client Sections -->
+    <div class="org-subnav-bar">
+      <a href="organisation.html" class="org-subnav-pill active"><i class="fa-solid fa-building"></i> Our Organisation</a>
+      <a href="organisation-board.html" class="org-subnav-pill"><i class="fa-solid fa-landmark"></i> Advisory Board</a>
+      <a href="organisation-consultants.html" class="org-subnav-pill"><i class="fa-solid fa-user-tie"></i> Consultants</a>
+      <a href="organisation-values.html" class="org-subnav-pill"><i class="fa-solid fa-compass"></i> Purpose & Values</a>
+      <a href="organisation-governance.html" class="org-subnav-pill"><i class="fa-solid fa-shield-halved"></i> Governance</a>
+    </div>
+
+    <!-- 1. OUR ORGANISATION: Overview & Reports (Screenshot 2 Exact) -->
+    <section id="overview" style="scroll-margin-top: 100px;">
+      <!-- Top Architectural Curved Canopy Visual (Screenshot 2 Exact) -->
+      <div class="report-canopy-visual">
+        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1600&q=80" alt="Architectural Canopy Sculpture">
+      </div>
+
+      <!-- 2 Large Feature Cards: Transparency Report + Annual Report (Screenshot 2 Exact) -->
+      <div id="reports" class="two-reports-grid" style="scroll-margin-top: 100px;">
+        <!-- Card 1: Transparency Report -->
+        <div class="report-feature-card">
+          <div class="report-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="Transparency Report Team">
+            <div class="card-orange-polygon"></div>
+          </div>
+          <div class="report-card-body">
+            <h3>Transparency Report 2024/2025</h3>
+            <p>Read here the reflection of the Executive Board of Amstel Consulting on statutory data protection compliance, regulatory assurance methodologies, and fiduciary audit governance under the Nigeria Data Protection Act (NDPA) 2023.</p>
+            <a href="#transparency-modal" class="report-action-link" onclick="alert('Transparency Report 2024/2025 is available for statutory verification. Contact Monique de Jong below for direct regulatory copy.'); return false;">
+              <span>Read the reflection of the Executive Board</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2: Annual Report -->
+        <div class="report-feature-card">
+          <div class="report-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80" alt="Annual Report Technology & Robotics">
+            <div class="card-orange-polygon"></div>
+          </div>
+          <div class="report-card-body">
+            <h3>Annual Report 2024/2025</h3>
+            <p>View and download our 2024/2025 annual report and transparency report here. Learn how our multidisciplinary teams of DPCO auditors, cybersecurity analysts, and legal fellows helped protect data sovereignty across 13 economic sectors.</p>
+            <a href="#annual-report-modal" class="report-action-link" onclick="alert('Annual Report 2024/2025 download initiated. Executive summary and financial governance disclosures verified.'); return false;">
+              <span>View and download our 2024/2025 annual report here</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ADVISORY BOARD -->
+    <section id="board" class="org-content-section">
+      <div class="org-section-header">
+        <span class="org-section-kicker">Leadership & Oversight</span>
+        <h2>Advisory Board</h2>
+        <p>Distinguished jurists, sovereign policy strategists, and regulatory pioneers providing independent fiduciary oversight and governance counsel to our practice.</p>
+      </div>
+
+      <div class="org-profiles-grid">
+        <div class="org-profile-card">
+          <div class="org-profile-avatar-wrap">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" alt="Hon. Justice A. Bello">
+          </div>
+          <h4 class="org-profile-name">Hon. Justice (Rtd.) A. Bello, SAN</h4>
+          <div class="org-profile-role">Chairman, Advisory Board</div>
+          <p class="org-profile-bio">Over 35 years of jurisprudence in commercial law, constitutional compliance, and institutional regulatory oversight across West Africa.</p>
+        </div>
+
+        <div class="org-profile-card">
+          <div class="org-profile-avatar-wrap">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80" alt="Dr. Olufunke Adeyemi">
+          </div>
+          <h4 class="org-profile-name">Dr. Olufunke Adeyemi, FNCS</h4>
+          <div class="org-profile-role">Vice Chair & Sovereign Data Advisor</div>
+          <p class="org-profile-bio">Former Director of Digital Economy and sovereign ICT strategy, advising on national data sovereignty, identity systems, and critical infrastructure.</p>
+        </div>
+
+        <div class="org-profile-card">
+          <div class="org-profile-avatar-wrap">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" alt="Tariq Ibrahim">
+          </div>
+          <h4 class="org-profile-name">Tariq Ibrahim, MNI</h4>
+          <div class="org-profile-role">Senior Advisor, Public Policy & Governance</div>
+          <p class="org-profile-bio">Distinguished national policy strategist specializing in federal MDA administrative governance, inter-agency harmonizations, and statutory compliance.</p>
+        </div>
+
+        <div class="org-profile-card">
+          <div class="org-profile-avatar-wrap">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" alt="Sir Nnamdi Okoli">
+          </div>
+          <h4 class="org-profile-name">Sir Nnamdi Okoli, KBE</h4>
+          <div class="org-profile-role">Advisor, Banking & Financial Regulations</div>
+          <p class="org-profile-bio">Veteran financial sector regulator with extensive experience in Central Bank prudential guidelines, capital markets, and cross-border financial data flows.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. CONSULTANTS -->
+    <section id="consultants" class="org-content-section">
+      <div class="org-section-header">
+        <span class="org-section-kicker">Practitioner Excellence</span>
+        <h2>Consultants & Practice Leaders</h2>
+        <p>Our multidisciplinary practice leaders combine deep regulatory insight, forensic audit precision, and enterprise architecture experience across 13 economic sectors.</p>
+      </div>
+
+      <div class="org-profiles-grid">
+        <div class="org-profile-card">
+          <div class="org-profile-avatar-wrap">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Dr. Emeka Dan-Ogun">
+          </div>
+          <h4 class="org-profile-name">Dr. Emeka Dan-Ogun, Esq.</h4>
+          <div class="org-profile-role">Senior Managing Partner & Lead DPCO Practitioner</div>
+          <p class="org-profile-bio">Senior privacy attorney and licensed DPCO practitioner leading statutory NDPA audits, cross-border corporate transactions, and complex regulatory defense.</p>
+        </div>
+
+        <div class="org-profile-card">
+          <div class="org-profile-avatar-wrap">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80" alt="Fatima O. Al-Hassan">
+          </div>
+          <h4 class="org-profile-name">Fatima O. Al-Hassan, CISM</h4>
+          <div class="org-profile-role">Head of Cybersecurity & AI Governance</div>
+          <p class="org-profile-bio">Former Tier-1 Bank Chief Information Security Officer leading technical threat assessments, ISO 27001 certifications, and ethical AI auditing practices.</p>
+        </div>
+
+        <div class="org-profile-card">
+          <div class="org-profile-avatar-wrap">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" alt="Kelechi Okafor">
+          </div>
+          <h4 class="org-profile-name">Kelechi Okafor, FCA</h4>
+          <div class="org-profile-role">Director, Statutory CAR Assurance</div>
+          <p class="org-profile-bio">Senior chartered audit director overseeing statutory Compliance Audit Returns (CAR) for commercial banks, telecoms, and designated Major Importance entities.</p>
+        </div>
+
+        <div class="org-profile-card">
+          <div class="org-profile-avatar-wrap">
+            <img src="https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=300&q=80" alt="Dr. Amina Yusuf">
+          </div>
+          <h4 class="org-profile-name">Dr. Amina Yusuf, CIPP/E</h4>
+          <div class="org-profile-role">Practice Lead, Health & Public Sector Privacy</div>
+          <p class="org-profile-bio">Certified international privacy specialist leading large-scale Data Protection Impact Assessments (DPIAs) across hospital networks and public identity registries.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. PURPOSE & VALUES -->
+    <section id="values" class="org-content-section">
+      <div class="org-section-header">
+        <span class="org-section-kicker">Core Principles</span>
+        <h2>Purpose & Values</h2>
+        <p>Our foundational tenets underpinning institutional trust, statutory truth, and digital sovereignty across Nigeria and the wider African economic corridor.</p>
+      </div>
+
+      <div class="org-values-grid">
+        <div class="org-value-card">
+          <div class="org-value-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <h4>Institutional Integrity</h4>
+          <p>Uncompromising adherence to statutory truth and fiduciary client duty. We provide transparent, uncompromised assurance that withstands regulatory scrutiny.</p>
+        </div>
+
+        <div class="org-value-card">
+          <div class="org-value-icon"><i class="fa-solid fa-award"></i></div>
+          <h4>Statutory Excellence</h4>
+          <p>Delivering gold-standard DPCO filings, 100% NDPC acceptance rates, and meticulous legal precision across all 13 economic sectors.</p>
+        </div>
+
+        <div class="org-value-card">
+          <div class="org-value-icon"><i class="fa-solid fa-building-columns"></i></div>
+          <h4>Sovereign Resilience</h4>
+          <p>Safeguarding Nigeria's sovereign digital economy by fortifying the privacy architectures of critical national assets and financial systems.</p>
+        </div>
+
+        <div class="org-value-card">
+          <div class="org-value-icon"><i class="fa-solid fa-lightbulb"></i></div>
+          <h4>Innovation with Governance</h4>
+          <p>Enabling enterprises to rapidly scale cloud, AI, and digital customer journeys with built-in, unshakeable regulatory compliance.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. GOVERNANCE -->
+    <section id="governance" class="org-content-section">
+      <div class="org-section-header">
+        <span class="org-section-kicker">Fiduciary Standards</span>
+        <h2>Governance & Quality Assurance</h2>
+        <p>Institutional protocols ensuring audit independence, ethical firewall enforcement, and verifiable adherence to NDPC licensing charters.</p>
+      </div>
+
+      <div class="org-governance-grid">
+        <div class="org-gov-feature">
+          <h4><i class="fa-solid fa-file-signature"></i> Dual-Sign-Off Audit Protocol</h4>
+          <p>Every statutory CAR audit report, DPIA assessment, and technical remediation dossier undergoes dual independent review by a Senior Legal Partner and a Certified Technical Audit Director prior to regulatory submission.</p>
+        </div>
+
+        <div class="org-gov-feature">
+          <h4><i class="fa-solid fa-scale-balanced"></i> Conflict-of-Interest Firewalls</h4>
+          <p>We maintain strict ethical separation between assurance audit engagements and commercial implementation, ensuring complete objectivity and compliance with NDPC accreditation charters.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Us Section: Official Spokesperson (Screenshot 2 Exact) -->
+    <section class="contact-us-section">
+      <h3 class="contact-us-title">Contact us</h3>
+
+      <div class="spokesperson-card">
+        <div class="spokesperson-avatar">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80" alt="Monique de Jong">
+        </div>
+        <div class="spokesperson-info">
+          <h4>Monique de Jong</h4>
+          <div class="spokesperson-role">Woordvoerder & Spokesperson, Amstel Consulting</div>
+          <div class="spokesperson-tel">Tel: +31 (0)64 329 88 53</div>
+          <div class="spokesperson-actions">
+            <a href="https://linkedin.com" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            <a href="mailto:monique.dejong@amstelconsulting.ng"><i class="fa-solid fa-envelope"></i> Email</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cinematic Dark CTA Banner (Screenshot 2 Exact) -->
+    <section class="dark-pwc-cta-banner">
+      <div class="dark-cta-headline">
+        <span>We help you meet tomorrow's tech demands</span>
+        so you can compete at a speed that rewrites the rules
+      </div>
+      <div class="dark-cta-orange-polygon"></div>
+      <a href="contact.html" class="btn-dark-banner-link">
+        <span>See how</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </section>
+
+    <!-- Follow Us Social Bar (Screenshot 2 Exact) -->
+    <section class="follow-us-section">
+      <span class="follow-us-label">Follow us</span>
+      <a href="https://linkedin.com" target="_blank" class="social-icon-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="https://facebook.com" target="_blank" class="social-icon-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://x.com" target="_blank" class="social-icon-btn" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://youtube.com" target="_blank" class="social-icon-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://instagram.com" target="_blank" class="social-icon-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    </section>
+
+  </main>
+
+  <!-- Global 5-Column Footer (Screenshot 2 Exact) -->
+    <!-- ==========================================================================
+       PwC MULTI-COLUMN MEGA FOOTER (Standardized Across All Pages)
+       ========================================================================== -->
+    <!-- ==========================================================================
+       PwC MULTI-COLUMN MEGA FOOTER (Standardized Across All Pages)
+       ========================================================================== -->
+    <!-- ==========================================================================
+       PwC MULTI-COLUMN MEGA FOOTER (Standardized Across All Pages)
+       ========================================================================== -->
+    <!-- ==========================================================================
+       PwC MULTI-COLUMN MEGA FOOTER (Standardized Across All Pages)
+       ========================================================================== -->
+    <!-- ==========================================================================
+       PwC MULTI-COLUMN MEGA FOOTER (Standardized Across All Pages)
+       ========================================================================== -->
+  <footer class="pwc-footer">
+    <div class="pwc-footer-container">
+      <div class="pwc-footer-columns">
+        
+        <!-- Col 1: Services -->
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="service-car.html">Compliance Audit Return (CAR)</a></li>
+            <li><a href="service-audit.html">Data Protection Audit</a></li>
+            <li><a href="service-training.html">Data Protection Training</a></li>
+            <li><a href="service-policies.html">Privacy Policies &amp; Notices</a></li>
+            <li><a href="service-ropa.html">ROPA Data Lineage</a></li>
+            <li><a href="service-dpia.html">DPIA &amp; LIA Assessments</a></li>
+            <li><a href="service-dpo.html">Outsourced DPO</a></li>
+            <li><a href="service-cyber.html">Cybersecurity &amp; Pen-Testing</a></li>
+            <li><a href="index.html#service-cookie">Cookie Consent Compliance</a></li>
+            <li><a href="service-gov.html">Corporate Governance</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 2: Blog -->
+        <div class="footer-col">
+          <h5>Blog</h5>
+          <ul>
+            <li><a href="topics.html#ai-business">Artificial Intelligence for Business</a></li>
+            <li><a href="topics.html#cybersecurity">Cyber Security</a></li>
+            <li><a href="topics.html#ndpa-laws">Data Protection Laws</a></li>
+            <li><a href="topics.html#risks">Risks</a></li>
+            <li><a href="topics.html#ndpc-updates">Regulatory Guidance: NDPC updates</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Our Organisation & Regulatory Filings -->
+        <div class="footer-col">
+          <h5>Our Organisation</h5>
+          <ul>
+            <li><a href="organisation.html#board">Advisory Board</a></li>
+            <li><a href="organisation.html#consultants">Consultants</a></li>
+            <li><a href="organisation.html#values">Purpose &amp; Values</a></li>
+            <li><a href="organisation.html#governance">Licensed DPCO Credentials</a></li>
+            <li><a href="service-training.html#faq">Frequently Asked Questions (FAQ)</a></li>
+            <li><a href="service-car.html" style="color: var(--pwc-orange); font-weight: 700;">File CAR Before Deadline to Avoid Penalty &rarr;</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: National Practice & Official Trust Badges -->
+        <div class="footer-col">
+          <h5>National Practice</h5>
+          <ul>
+            <li><a href="contact.html">Nigeria (Virtual Practice)</a></li>
+            <li><a href="contact.html" style="color: var(--pwc-orange); font-weight: 700;"><i class="fa-solid fa-headset"></i> Talk to Our Experienced Consultants for Free</a></li>
+            <li><a href="service-car.html">Statutory Filing Deadline Desk</a></li>
+          </ul>
+
+          <!-- Official NDPC Trust Badge -->
+          <div style="margin-top: 1.25rem;">
+            <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #64748b; font-weight: 700; display: block; margin-bottom: 0.4rem;">Official Authority Credential</span>
+            <img src="assets/ndpc-badge.svg" alt="National Data Protection Commission (NDPC) Licensed DPCO" style="max-width: 290px; width: 100%; height: auto; display: block;">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar with Logo & Legal -->
+      <div class="pwc-footer-bottom">
+        <div class="footer-logo-wrap">
+          <img src="logo.jpg" alt="Amstel Consulting" class="brand-logo-img">
+          <span class="brand-logo-text"><span class="brand-mstel">mstel</span> <span class="brand-consulting">Consulting</span></span>
+        </div>
+        <div style="max-width: 620px; line-height: 1.5;">
+          Licensed as a Data Protection Compliance Organization (DPCO) by the National Data Protection Commission | License No: DPCO/XXXX/2026. &copy; 2026 Amstel Consulting Nigeria. All rights reserved.
+        </div>
+        <div style="display: flex; gap: 1.25rem; flex-wrap: wrap;">
+          <a href="service-policies.html">Privacy Statement</a>
+          <a href="service-policies.html#cookies">Cookie Policy</a>
+          <a href="contact.html">Legal Disclaimer</a>
+          <a href="contact.html">Terms and Conditions</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sitewide Sticky Footer Consultant Button -->
+  <div class="sticky-talk-consultant">
+    <a href="contact.html" class="sticky-talk-btn">
+      <i class="fa-solid fa-headset" style="color: var(--pwc-orange);"></i>
+      <span>Talk to Our Experienced Consultants for Free</span>
+    </a>
+  </div>
+
+  <!-- Search Modal Overlay -->
+  <div id="siteSearchModal" class="search-modal-overlay" onclick="if(event.target===this) closeSearchModal()">
+    <div class="search-modal-card">
+      <div class="search-input-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="siteSearchInput" placeholder="Search services, NDPA regulations, DPCO audit rules..." oninput="handleSearch(this.value)">
+        <button onclick="closeSearchModal()" class="search-close-btn">&times;</button>
+      </div>
+      <div id="searchResults" class="search-results-list">
+        <div class="search-quick-links">
+          <span>Quick links:</span>
+          <a href="service-car.html">Compliance Audit Return (CAR)</a>
+          <a href="service-dpo.html">Outsourced DPO</a>
+          <a href="service-audit.html">Data Protection Audit</a>
+          <a href="service-training.html">Data Protection Training</a>
+          <a href="topics.html#ndpa-laws">NDPA 2023 Statutory Laws</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+
+
+  <script>
+    function openSearchModal() {
+      const modal = document.getElementById('siteSearchModal');
+      if (modal) {
+        modal.classList.add('open');
+        setTimeout(() => {
+          const inp = document.getElementById('siteSearchInput');
+          if (inp) inp.focus();
+        }, 100);
+      }
+    }
+
+    function closeSearchModal() {
+      const modal = document.getElementById('siteSearchModal');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function handleSearch(val) {
+      const res = document.getElementById('searchResults');
+      if (!res) return;
+      if (!val || val.trim() === '') {
+        res.innerHTML = '<div class="search-quick-links"><span>Quick links:</span><a href="service-car.html">Compliance Audit Return (CAR)</a><a href="service-dpo.html">Outsourced DPO</a><a href="service-audit.html">Data Protection Audit</a><a href="service-training.html">Data Protection Training</a><a href="topics.html#ndpa-laws">NDPA 2023 Statutory Laws</a></div>';
+        return;
+      }
+      const q = val.toLowerCase();
+      const allServices = [
+        { name: 'Compliance Audit Return (CAR)', url: 'service-car.html', desc: 'Statutory annual audit filing with NDPC before March 15.' },
+        { name: 'Data Protection Audit', url: 'service-audit.html', desc: 'Comprehensive technical and operational gap assessments.' },
+        { name: 'Data Protection Training', url: 'service-training.html', desc: 'Workforce NDPA e-learning & DPO masterclasses.' },
+        { name: 'Privacy Policies & Notices', url: 'service-policies.html', desc: 'Layered transparency notices and vendor DPAs.' },
+        { name: 'ROPA (Record of Processing Activities)', url: 'service-ropa.html', desc: 'Article 24 data lineage and processing inventory.' },
+        { name: 'DPIA & LIA Assessments', url: 'service-dpia.html', desc: 'High-risk 5x5 threat and impact assessments.' },
+        { name: 'Outsourced DPO', url: 'service-dpo.html', desc: 'Accredited external DPO designation & NDPC liaison.' },
+        { name: 'Cybersecurity & Pen-Testing', url: 'service-cyber.html', desc: 'Security posture hardening, vulnerability assessment & pen-testing.' },
+        { name: 'Corporate Governance', url: 'service-gov.html', desc: 'Boardroom digital trust charters and fiduciary risk monitoring.' },
+        { name: 'Cookie & Consent Compliance', url: 'index.html#service-cookie', desc: 'Zero-party consent telemetry and tracking audits.' }
+      ];
+      const filtered = allServices.filter(s => s.name.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q));
+      if (filtered.length === 0) {
+        res.innerHTML = '<p style="color: #64748b; font-size: 0.9rem;">No direct matching service found. <a href="contact.html" style="color: var(--pwc-orange);">Contact our advisory desk</a> for assistance.</p>';
+      } else {
+        res.innerHTML = filtered.map(s => '<div style="padding: 0.65rem 0; border-bottom: 1px solid #f1f5f9;"><a href="' + s.url + '" style="font-weight: 700; color: #0f172a; text-decoration: none; display: block; font-size: 0.95rem;">' + s.name + '</a><span style="font-size: 0.8rem; color: #64748b;">' + s.desc + '</span></div>').join('');
+      }
+    }
+  </script>
+</body>
+</html>

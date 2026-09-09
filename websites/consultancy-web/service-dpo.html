@@ -1,0 +1,2136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Outsourced DPO (DPOaaS) | Amstel Consulting</title>
+  <meta name="description" content="Statutory Data Protection Officer as a Service (DPOaaS) under NDPA Section 32, 72-hour breach response command, and 30-day DSAR desk management.">
+  <link rel="canonical" href="https://consultancy-web-virid-seven.vercel.app/service-dpo.html">
+  <link rel="icon" type="image/jpeg" href="logo.jpg">
+
+  <!-- Google Fonts: Georgia/Times serif, Inter sans-serif, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/header.css">
+
+  <style>
+    :root {
+      --pwc-orange: #d85604;
+      --pwc-orange-dark: #b84500;
+      --pwc-peach-light: #fff7f2;
+      --pwc-peach-med: #ffe8dc;
+      --pwc-peach-dark: #ffd3bd;
+      --pwc-charcoal: #2d2d2d;
+      --pwc-black: #000000;
+      --pwc-white: #ffffff;
+      --pwc-gray-bg: #f8f9fa;
+      --pwc-gray-border: #e2e8f0;
+      --pwc-gray-text: #4a5568;
+      --font-serif: 'Georgia', 'Times New Roman', serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--pwc-white);
+      color: var(--pwc-charcoal);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .top-bar {
+      background: var(--pwc-charcoal);
+      color: #cbd5e1;
+      padding: 0.4rem 3.5rem;
+      font-size: 0.78rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1.75rem;
+      border-bottom: 1px solid #3d3d3d;
+    }
+    .top-bar-item { color: #cbd5e1; transition: color 0.2s; display: inline-flex; align-items: center; gap: 0.35rem; }
+    .top-bar-item:hover { color: var(--pwc-orange); }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--pwc-gray-border);
+      padding: 0.75rem 3.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .main-nav { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
+    .main-nav > li { position: relative; }
+    .main-nav a {
+      color: var(--pwc-charcoal);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 0.45rem 0.85rem;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border-radius: 9999px;
+    }
+    .main-nav a:hover, .main-nav > li:hover > a { color: var(--pwc-charcoal); background: #f1f3f5; }
+    .nav-chevron { font-size: 0.65rem; color: #94a3b8; transition: transform 0.2s ease; }
+    .main-nav > li:hover .nav-chevron { transform: rotate(180deg); color: var(--pwc-charcoal); }
+
+    .mega-dropdown-menu {
+      position: absolute;
+      top: 100%; left: 0; width: 780px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.04);
+      padding: 2.25rem 2.5rem;
+      opacity: 0; visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000; pointer-events: none;
+    }
+    .mega-dropdown-menu::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
+    .main-nav > li:hover .mega-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(6px); pointer-events: auto; }
+    .mega-dropdown-grid { display: grid; grid-template-columns: 1.15fr 1.15fr 1fr; gap: 2.5rem; }
+    .mega-col-heading { font-size: 0.82rem; font-weight: 700; color: #64748b; margin-bottom: 1.25rem; letter-spacing: 0.3px; }
+    .mega-subnav-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+    .mega-subnav-list li a {
+      color: #0f172a !important; font-size: 0.93rem !important; font-weight: 600 !important;
+      padding: 0.25rem 0 !important; border-radius: 0 !important; background: transparent !important;
+      display: block !important; transition: all 0.15s ease !important;
+    }
+    .mega-subnav-list li a:hover { color: var(--pwc-orange) !important; transform: translateX(4px); }
+    .mega-view-all-link {
+      display: inline-flex !important; align-items: center !important; gap: 0.45rem !important;
+      margin-top: 1.5rem !important; font-size: 0.85rem !important; font-weight: 700 !important;
+      color: #0f172a !important; padding: 0 !important; border-radius: 0 !important;
+      background: transparent !important; transition: all 0.15s ease !important;
+    }
+    .mega-view-all-link:hover { color: var(--pwc-orange) !important; gap: 0.7rem !important; }
+
+        /* ==========================================================================
+       PwC INDUSTRIES MEGA-DROPDOWN (EXACT PwC NETHERLANDS SCREENSHOT LAYOUT)
+       ========================================================================== */
+    .industries-mega-dropdown {
+      position: absolute;
+      top: 100%;
+      left: -200px;
+      width: 1040px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.16), 0 8px 24px -4px rgba(0, 0, 0, 0.06);
+      padding: 2.25rem 2.5rem 2.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .industries-mega-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: 0;
+      right: 0;
+      height: 16px;
+    }
+
+    .main-nav > li:hover .industries-mega-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(6px);
+      pointer-events: auto;
+    }
+
+    .ind-dropdown-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.75rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .ind-dropdown-title {
+      font-family: var(--font-sans);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+    }
+
+    .ind-dropdown-close {
+      font-size: 1.3rem;
+      color: #94a3b8;
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+
+    .ind-dropdown-close:hover {
+      color: var(--pwc-orange);
+      background: #f8fafc;
+    }
+
+    .ind-mega-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1.35fr;
+      gap: 2.25rem;
+    }
+
+    .ind-links-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .ind-link-item {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      padding: 0.65rem 0.6rem !important;
+      border-radius: 4px !important;
+      color: #1e293b !important;
+      font-size: 0.94rem !important;
+      font-weight: 500 !important;
+      text-decoration: none !important;
+      background: transparent !important;
+      transition: all 0.15s ease !important;
+    }
+
+    .ind-link-item:hover {
+      color: var(--pwc-orange) !important;
+      background: #fff7f2 !important;
+      padding-left: 0.85rem !important;
+    }
+
+    .ind-link-item .ind-chevron {
+      font-size: 0.72rem;
+      color: #94a3b8;
+      transition: transform 0.15s ease, color 0.15s ease;
+    }
+
+    .ind-link-item:hover .ind-chevron {
+      color: var(--pwc-orange);
+      transform: translateX(3px);
+    }
+
+    .ind-view-all {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 0.45rem !important;
+      margin-top: 1.25rem !important;
+      padding: 0.4rem 0.6rem !important;
+      font-size: 0.88rem !important;
+      font-weight: 700 !important;
+      color: var(--pwc-orange) !important;
+      transition: gap 0.2s ease !important;
+    }
+
+    .ind-view-all:hover {
+      gap: 0.75rem !important;
+    }
+
+    /* Featured Column */
+    .ind-featured-col {
+      padding-left: 1.75rem;
+      border-left: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .ind-featured-heading {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 0.25rem;
+      letter-spacing: 0.2px;
+    }
+
+    .ind-featured-card {
+      display: flex !important;
+      align-items: center !important;
+      gap: 1rem !important;
+      text-decoration: none !important;
+      padding: 0.6rem !important;
+      border-radius: 6px !important;
+      transition: all 0.2s ease !important;
+      background: transparent !important;
+    }
+
+    .ind-featured-card:hover {
+      background: #f8fafc !important;
+      transform: translateY(-2px);
+    }
+
+    .ind-featured-thumb-wrap {
+      width: 95px;
+      height: 64px;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .ind-featured-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .thumb-orange-strip {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--pwc-orange);
+    }
+
+    .ind-featured-text {
+      font-family: var(--font-serif);
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.35;
+      transition: color 0.15s ease;
+    }
+
+    .ind-featured-card:hover .ind-featured-text {
+      color: var(--pwc-orange);
+    }
+
+    
+    /* ==========================================================================
+       PwC OUR ORGANISATION MEGA-DROPDOWN (SCREENSHOT 1 EXACT)
+       ========================================================================== */
+    .org-mega-dropdown {
+      position: absolute;
+      top: 100%;
+      left: -420px;
+      width: 1060px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.16), 0 8px 24px -4px rgba(0, 0, 0, 0.06);
+      padding: 2.25rem 2.5rem 2.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .org-mega-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: 0;
+      right: 0;
+      height: 16px;
+    }
+
+    .main-nav > li:hover .org-mega-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(6px);
+      pointer-events: auto;
+    }
+
+    .org-dropdown-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.75rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .org-dropdown-title {
+      font-family: var(--font-sans);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+    }
+
+    .org-dropdown-close {
+      font-size: 1.3rem;
+      color: #94a3b8;
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+
+    .org-dropdown-close:hover {
+      color: var(--pwc-orange);
+      background: #f8fafc;
+    }
+
+    .org-mega-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1.35fr;
+      gap: 2.25rem;
+    }
+
+    .org-links-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .org-link-item {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      padding: 0.6rem 0.5rem !important;
+      border-radius: 4px !important;
+      color: #1e293b !important;
+      font-size: 0.93rem !important;
+      font-weight: 500 !important;
+      text-decoration: none !important;
+      background: transparent !important;
+      transition: all 0.15s ease !important;
+      line-height: 1.35 !important;
+    }
+
+    .org-link-item:hover {
+      color: var(--pwc-orange) !important;
+      background: #fff7f2 !important;
+      padding-left: 0.75rem !important;
+    }
+
+    .org-link-item .org-chevron {
+      font-size: 0.72rem;
+      color: #94a3b8;
+      transition: transform 0.15s ease, color 0.15s ease;
+    }
+
+    .org-link-item:hover .org-chevron {
+      color: var(--pwc-orange);
+      transform: translateX(3px);
+    }
+
+    .org-link-item .org-external-icon {
+      font-size: 0.72rem;
+      color: #94a3b8;
+    }
+
+    /* Featured Column */
+    .org-featured-col {
+      padding-left: 1.75rem;
+      border-left: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+    }
+
+    .org-featured-heading {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 0.15rem;
+      letter-spacing: 0.2px;
+    }
+
+    .org-featured-card {
+      display: flex !important;
+      align-items: center !important;
+      gap: 1rem !important;
+      text-decoration: none !important;
+      padding: 0.5rem !important;
+      border-radius: 6px !important;
+      transition: all 0.2s ease !important;
+      background: transparent !important;
+    }
+
+    .org-featured-card:hover {
+      background: #f8fafc !important;
+      transform: translateY(-2px);
+    }
+
+    .org-featured-thumb-wrap {
+      width: 95px;
+      height: 62px;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .org-featured-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .org-featured-text {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.3;
+      transition: color 0.15s ease;
+    }
+
+    .org-featured-card:hover .org-featured-text {
+      color: var(--pwc-orange);
+    }
+
+    .header-right { display: flex; align-items: center; gap: 1.5rem; }
+    .btn-contact-nav {
+      background: var(--pwc-black); color: var(--pwc-white); padding: 0.65rem 1.4rem;
+      font-size: 0.88rem; font-weight: 700; border-radius: 4px; transition: all 0.2s;
+    }
+    .btn-contact-nav:hover { background: var(--pwc-orange); }
+
+    .pwc-detail-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+    .btn-pwc-orange {
+      background: var(--pwc-orange); color: #ffffff; padding: 0.85rem 1.85rem;
+      font-size: 0.92rem; font-weight: 700; border-radius: 2px;
+      display: inline-flex; align-items: center; gap: 0.5rem; border: none; cursor: pointer; transition: all 0.2s ease;
+    }
+    .btn-pwc-orange:hover { background: var(--pwc-orange-dark); transform: translateX(3px); }
+
+    .btn-pwc-outline {
+      background: transparent; color: var(--pwc-charcoal); border: 2px solid var(--pwc-charcoal);
+      padding: 0.8rem 1.75rem; font-size: 0.92rem; font-weight: 700; border-radius: 2px;
+      display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s;
+    }
+    .btn-pwc-outline:hover { background: var(--pwc-charcoal); color: #ffffff; }
+
+    /* 1. Page Title & Banner */
+    .page-title-section { padding: 3rem 0 1.5rem; }
+    .breadcrumbs-detail { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: #64748b; margin-bottom: 1.25rem; }
+    .breadcrumbs-detail a:hover { color: var(--pwc-orange); }
+    .page-main-headline { font-family: var(--font-serif); font-size: 3.6rem; font-weight: 700; color: var(--pwc-charcoal); line-height: 1.1; letter-spacing: -0.02em; }
+    .hero-banner-wrap { position: relative; width: 100%; height: 380px; margin: 1.5rem 0 4.5rem; border-radius: 4px; overflow: hidden; }
+    .hero-banner-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .pwc-orange-polygon {
+      position: absolute; bottom: 25%; left: 35%; width: 55%; height: 72px; background: var(--pwc-orange);
+      clip-path: polygon(8% 0, 100% 0, 92% 100%, 0% 100%); display: flex; align-items: center;
+      padding-left: 3.5rem; color: #ffffff; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.5px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+
+    /* 2. Overview Split */
+    .split-intro-section { padding-bottom: 5rem; }
+    .split-intro-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 4rem; align-items: center; }
+    .split-intro-left h2 { font-family: var(--font-serif); font-size: 2.25rem; font-weight: 700; color: var(--pwc-charcoal); line-height: 1.25; margin-bottom: 1.25rem; }
+    .split-intro-left p { font-size: 1.05rem; color: var(--pwc-gray-text); line-height: 1.7; margin-bottom: 1.25rem; }
+    .bullet-check-list { list-style: none; margin: 1.5rem 0 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .bullet-check-list li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.98rem; color: #1e293b; font-weight: 600; }
+    .bullet-check-list li i { color: var(--pwc-orange); margin-top: 0.25rem; }
+    .split-intro-right img { width: 100%; height: 380px; object-fit: cover; border-radius: 4px; box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
+
+    /* 3. Tabs */
+    .tabs-section { padding: 4.5rem 0; border-top: 1px solid var(--pwc-gray-border); }
+    .tabs-section-title { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 2rem; }
+    .pwc-nav-tabs { display: flex; gap: 2.5rem; border-bottom: 2px solid #e2e8f0; margin-bottom: 3rem; overflow-x: auto; }
+    .pwc-tab-btn {
+      background: none; border: none; font-family: inherit; font-size: 1.05rem; font-weight: 600;
+      color: #64748b; padding: 0.75rem 0 1rem; cursor: pointer; position: relative; white-space: nowrap; transition: all 0.2s;
+    }
+    .pwc-tab-btn:hover { color: var(--pwc-orange); }
+    .pwc-tab-btn.active { color: var(--pwc-orange); font-weight: 700; }
+    .pwc-tab-btn.active::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 3px; background: var(--pwc-orange); }
+    .pwc-tab-pane { display: none; grid-template-columns: 0.95fr 1.05fr; gap: 4rem; align-items: center; }
+    .pwc-tab-pane.active { display: grid; }
+    .tab-pane-img { width: 100%; height: 360px; object-fit: cover; border-radius: 4px; }
+    .tab-pane-content h3 { font-family: var(--font-serif); font-size: 1.85rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 1rem; line-height: 1.3; }
+    .tab-pane-content p { font-size: 1rem; color: var(--pwc-gray-text); line-height: 1.7; margin-bottom: 1.5rem; }
+
+    /* 4. FAQ */
+    .faq-section { padding: 5rem 0; border-top: 1px solid var(--pwc-gray-border); }
+    .faq-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4.5rem; align-items: start; }
+    .faq-grid h2 { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 2rem; }
+    .accordion-list { display: flex; flex-direction: column; border-top: 1px solid #e2e8f0; }
+    .accordion-item { border-bottom: 1px solid #e2e8f0; }
+    .accordion-header {
+      width: 100%; background: none; border: none; padding: 1.25rem 0; text-align: left;
+      font-size: 1.05rem; font-weight: 700; color: var(--pwc-charcoal); cursor: pointer; display: flex;
+      justify-content: space-between; align-items: center; gap: 1rem; font-family: inherit; transition: color 0.2s;
+    }
+    .accordion-header:hover { color: var(--pwc-orange); }
+    .accordion-icon { font-size: 1.1rem; color: var(--pwc-orange); transition: transform 0.25s ease; }
+    .accordion-item.open .accordion-icon { transform: rotate(45deg); }
+    .accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0, 1, 0, 1); color: var(--pwc-gray-text); font-size: 0.95rem; line-height: 1.7; }
+    .accordion-item.open .accordion-body { max-height: 400px; padding-bottom: 1.25rem; }
+    .faq-tall-img { width: 100%; height: 520px; object-fit: cover; border-radius: 4px; box-shadow: 0 10px 24px rgba(0,0,0,0.06); }
+
+    /* 5. Focus Split */
+    .focus-split-section { padding: 5rem 0; border-top: 1px solid var(--pwc-gray-border); }
+    .focus-split-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 4rem; align-items: center; }
+    .focus-split-grid img { width: 100%; height: 380px; object-fit: cover; border-radius: 4px; }
+    .focus-split-grid h3 { font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 1rem; line-height: 1.3; }
+    .focus-split-grid p { font-size: 1.02rem; color: var(--pwc-gray-text); line-height: 1.7; margin-bottom: 1.25rem; }
+
+    /* 6. Twin Cards */
+    .twin-cards-section { padding: 2rem 0 5rem; }
+    .twin-cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .twin-peach-card { background: var(--pwc-peach-light); border-top: 4px solid var(--pwc-orange); padding: 3rem 2.5rem; border-radius: 2px; display: flex; flex-direction: column; justify-content: space-between; }
+    .twin-peach-card h3 { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 1rem; line-height: 1.3; }
+    .twin-peach-card p { font-size: 0.95rem; color: var(--pwc-gray-text); line-height: 1.65; margin-bottom: 2rem; }
+
+    /* 7. Process */
+    .process-section { padding: 5rem 0; border-top: 1px solid var(--pwc-gray-border); }
+    .process-section h2 { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 3rem; }
+    .process-steps-nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 3.5rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 1.5rem; }
+    .step-nav-item { text-align: center; cursor: pointer; position: relative; }
+    .step-icon-wrap {
+      width: 64px; height: 64px; margin: 0 auto 0.75rem; border: 2px solid var(--pwc-orange);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--pwc-orange);
+      font-size: 1.35rem; background: #ffffff; transition: all 0.2s;
+    }
+    .step-nav-item:hover .step-icon-wrap, .step-nav-item.active .step-icon-wrap { background: var(--pwc-orange); color: #ffffff; }
+    .step-nav-title { font-size: 0.88rem; font-weight: 700; color: var(--pwc-charcoal); }
+    .process-feature-split { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 4rem; align-items: center; background: #f8fafc; padding: 2.5rem; border-radius: 4px; border: 1px solid #e2e8f0; }
+    .process-feature-split img { width: 100%; height: 320px; object-fit: cover; border-radius: 4px; }
+    .process-feature-split h3 { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 1rem; }
+    .process-feature-split p { font-size: 0.98rem; color: var(--pwc-gray-text); line-height: 1.7; margin-bottom: 1.5rem; }
+
+    /* 8. Pillars */
+    .pillars-section { padding: 5.5rem 0; border-top: 1px solid var(--pwc-gray-border); }
+    .pillars-section h2 { font-family: var(--font-serif); font-size: 2.3rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 1rem; max-width: 800px; }
+    .pillars-section p.sub-lead { font-size: 1.05rem; color: var(--pwc-gray-text); margin-bottom: 4rem; max-width: 760px; }
+    .staggered-columns-wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; align-items: end; }
+    .stagger-col { padding: 2.5rem 2rem; border-radius: 4px 4px 0 0; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s; }
+    .stagger-col:hover { transform: translateY(-6px); }
+    .stagger-1 { height: 420px; background: var(--pwc-peach-light); border-top: 4px solid #f97316; }
+    .stagger-2 { height: 480px; background: var(--pwc-peach-med); border-top: 4px solid var(--pwc-orange); }
+    .stagger-3 { height: 540px; background: var(--pwc-orange); color: #ffffff; border-top: 4px solid var(--pwc-black); }
+    .stagger-badge { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 800; margin-bottom: 1rem; display: inline-block; letter-spacing: 1px; }
+    .stagger-1 .stagger-badge, .stagger-2 .stagger-badge { color: var(--pwc-orange); }
+    .stagger-3 .stagger-badge { color: #ffe4d6; }
+    .stagger-col h3 { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.25; }
+    .stagger-3 h3 { color: #ffffff; }
+    .stagger-col p { font-size: 0.92rem; line-height: 1.65; margin-bottom: 1.5rem; }
+    .stagger-1 p, .stagger-2 p { color: #475569; }
+    .stagger-3 p { color: #ffede3; }
+    .stagger-points { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; font-size: 0.86rem; font-weight: 600; margin-top: auto; }
+    .stagger-points li { display: flex; align-items: center; gap: 0.5rem; }
+    .stagger-1 .stagger-points i, .stagger-2 .stagger-points i { color: var(--pwc-orange); }
+    .stagger-3 .stagger-points i { color: #ffffff; }
+
+    /* 9. Hex */
+    .hex-section { padding: 5rem 0; background: #fbfcfd; border-top: 1px solid var(--pwc-gray-border); }
+    .hex-section h2 { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; text-align: center; color: var(--pwc-charcoal); margin-bottom: 3.5rem; }
+    .hex-cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+    .hex-card { background: #ffffff; border: 1px solid var(--pwc-gray-border); border-radius: 4px; padding: 2.5rem 2rem; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-between; transition: all 0.2s; }
+    .hex-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.06); border-color: #cbd5e1; }
+    .pwc-hex-icon {
+      width: 80px; height: 80px; background: var(--pwc-peach-light); border: 3px solid var(--pwc-orange);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      display: flex; align-items: center; justify-content: center; color: var(--pwc-orange); font-size: 1.8rem; margin-bottom: 1.75rem;
+    }
+    .hex-card h3 { font-family: var(--font-serif); font-size: 1.35rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 0.75rem; }
+    .hex-card p { font-size: 0.92rem; color: var(--pwc-gray-text); line-height: 1.6; margin-bottom: 1.75rem; }
+
+    /* 10. Callout */
+    .callout-bar-section { background: var(--pwc-peach-light); border-top: 1px solid var(--pwc-peach-med); border-bottom: 1px solid var(--pwc-peach-med); padding: 3rem 0; text-align: center; }
+    .callout-bar-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+    .callout-bar-inner h3 { font-family: var(--font-serif); font-size: 1.65rem; font-weight: 700; color: var(--pwc-charcoal); text-align: left; }
+
+    /* 11. Case Study */
+    .case-study-section { padding: 5rem 0; border-top: 1px solid var(--pwc-gray-border); }
+    .case-study-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4.5rem; align-items: center; }
+    .case-study-left h2 { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 1rem; line-height: 1.25; }
+    .case-study-left p { font-size: 1.02rem; color: var(--pwc-gray-text); line-height: 1.7; margin-bottom: 1.5rem; }
+    .case-study-right img { width: 100%; height: 380px; object-fit: cover; border-radius: 4px; box-shadow: 0 10px 24px rgba(0,0,0,0.06); }
+
+    /* 12. Accreditation */
+    .accreditation-section { padding: 3.5rem 0; background: #ffffff; border-top: 1px solid var(--pwc-gray-border); }
+    .accreditation-wrap { display: flex; align-items: center; gap: 3rem; padding: 2rem 2.5rem; border: 1px solid #e2e8f0; border-radius: 4px; background: #f8fafc; }
+    .accreditation-seal {
+      width: 110px; height: 110px; border: 3px solid #0284c7; border-radius: 50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: #0284c7; font-family: var(--font-mono); font-weight: 800; text-align: center; flex-shrink: 0; line-height: 1.1; padding: 0.5rem;
+    }
+    .accreditation-seal span.small { font-size: 0.65rem; }
+    .accreditation-seal span.big { font-size: 1.1rem; color: #0369a1; }
+    .accreditation-text p { font-size: 0.95rem; color: #334155; line-height: 1.65; }
+
+    /* 13. Insights */
+    .related-insights-section { padding: 5rem 0; border-top: 1px solid var(--pwc-gray-border); }
+    .related-insights-section h2 { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 2.5rem; }
+    .insights-4col-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .insight-mini-card { border: 1px solid var(--pwc-gray-border); border-radius: 2px; overflow: hidden; display: flex; flex-direction: column; background: #ffffff; transition: transform 0.2s; }
+    .insight-mini-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.06); }
+    .insight-mini-card img { width: 100%; height: 160px; object-fit: cover; }
+    .insight-mini-body { padding: 1.25rem 1rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
+    .insight-mini-tag { font-family: var(--font-mono); font-size: 0.7rem; color: var(--pwc-orange); font-weight: 700; margin-bottom: 0.4rem; display: block; }
+    .insight-mini-body h4 { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 700; color: var(--pwc-charcoal); line-height: 1.35; margin-bottom: 1rem; }
+    .insight-mini-link { font-size: 0.8rem; font-weight: 700; color: var(--pwc-orange); display: inline-flex; align-items: center; gap: 0.35rem; margin-top: auto; }
+
+    /* 14. Contacts */
+    .key-contacts-section { padding: 5rem 0; border-top: 1px solid var(--pwc-gray-border); }
+    .key-contacts-section h2 { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--pwc-charcoal); margin-bottom: 2.5rem; }
+    .contacts-2col-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .expert-card { display: flex; gap: 1.75rem; padding: 2rem; border: 1px solid var(--pwc-gray-border); border-radius: 4px; background: #fdfdfd; align-items: center; }
+    .expert-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--pwc-charcoal); color: var(--pwc-orange); font-family: var(--font-serif); font-size: 1.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 2px solid var(--pwc-orange); flex-shrink: 0; }
+    .expert-info h3 { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; color: var(--pwc-charcoal); }
+    .expert-role { font-size: 0.84rem; font-weight: 700; color: var(--pwc-orange); margin: 0.2rem 0 0.6rem; }
+    .expert-link { font-size: 0.85rem; font-weight: 700; color: var(--pwc-charcoal); display: inline-flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+    .expert-link:hover { color: var(--pwc-orange); }
+
+    /* 15. Closing Banner */
+    .closing-hero-wrap { position: relative; background: #0f172a; padding: 6rem 0; overflow: hidden; }
+    .closing-hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.25; }
+    .closing-hero-content { position: relative; z-index: 2; max-width: 800px; }
+    .closing-kicker { font-size: 0.85rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; display: block; }
+    .closing-title { font-family: var(--font-serif); font-size: 3.2rem; font-weight: 700; color: #ffffff; line-height: 1.15; margin-bottom: 2rem; }
+    .closing-title span.orange { color: var(--pwc-orange); }
+
+    /* 16. Footer */
+    .pwc-footer { background: var(--pwc-charcoal); color: #ffffff; padding: 4.5rem 0 2.5rem; border-top: 1px solid #3d3d3d; font-size: 0.88rem; }
+    .footer-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; margin-bottom: 3.5rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    .footer-col h5 { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem; color: #ffffff; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-col a { color: #94a3b8; transition: color 0.2s; font-size: 0.85rem; }
+    .footer-col a:hover { color: var(--pwc-orange); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; color: #64748b; font-size: 0.8rem; flex-wrap: wrap; gap: 1.5rem; }
+
+    @media (max-width: 1024px) {
+      .header { padding: 0.75rem 1.5rem; }
+      .industries-mega-dropdown { width: 92vw; left: -10vw; padding: 1.5rem; }
+      .ind-mega-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .ind-featured-col { border-left: none; padding-left: 0; border-top: 1px solid #e2e8f0; padding-top: 1.25rem; grid-column: span 2; }
+      .org-mega-dropdown { width: 92vw; left: -30vw; padding: 1.5rem; }
+      .org-mega-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .org-featured-col { border-left: none; padding-left: 0; border-top: 1px solid #e2e8f0; padding-top: 1.25rem; grid-column: span 2; }
+
+      .split-intro-grid, .pwc-tab-pane, .faq-grid, .focus-split-grid, .process-feature-split, .case-study-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .staggered-columns-wrap { grid-template-columns: 1fr; }
+      .stagger-col { height: auto !important; }
+      .hex-cards-grid { grid-template-columns: 1fr; }
+      .twin-cards-grid { grid-template-columns: 1fr; }
+      .insights-4col-grid { grid-template-columns: 1fr 1fr; }
+      .contacts-2col-grid { grid-template-columns: 1fr; }
+      .footer-cols { grid-template-columns: 1fr 1fr; }
+      .page-main-headline { font-size: 2.8rem; }
+    }
+    @media (max-width: 640px) {
+      .main-nav { display: none; }
+      .insights-4col-grid { grid-template-columns: 1fr; }
+      .footer-cols { grid-template-columns: 1fr; }
+      .process-steps-nav { grid-template-columns: 1fr 1fr; }
+    }
+  
+        .btn-contact-nav {
+      background: var(--pwc-charcoal);
+      color: var(--pwc-white) !important;
+      font-size: 0.85rem !important;
+      font-weight: 700 !important;
+      padding: 0.55rem 1.25rem !important;
+      border-radius: 9999px !important;
+      transition: all 0.2s ease !important;
+    }
+
+    .btn-contact-nav:hover {
+      background: var(--pwc-orange) !important;
+      color: var(--pwc-white) !important;
+    }
+
+    .simple-dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 320px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.04);
+      padding: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .simple-dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: 0;
+      right: 0;
+      height: 16px;
+    }
+
+    .main-nav > li:hover .simple-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(6px);
+      pointer-events: auto;
+    }
+
+    .simple-dropdown-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .simple-dropdown-list li a {
+      display: flex !important;
+      align-items: center !important;
+      gap: 0.75rem !important;
+      padding: 0.6rem 0.75rem !important;
+      font-size: 0.9rem !important;
+      font-weight: 600 !important;
+      color: #1e293b !important;
+      border-radius: 6px !important;
+      background: transparent !important;
+      transition: all 0.15s ease !important;
+    }
+
+    .simple-dropdown-list li a:hover {
+      background: #fff5ee !important;
+      color: var(--pwc-orange) !important;
+      padding-left: 0.95rem !important;
+    }
+
+    .simple-dropdown-list li a i {
+      color: var(--pwc-orange);
+      font-size: 0.85rem;
+      width: 16px;
+      text-align: center;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 0.55rem 0.8rem;
+      color: var(--pwc-charcoal);
+      font-size: 1.15rem;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+      font-weight: 700;
+    }
+
+    .mobile-menu-btn:hover {
+      background: #f8fafc;
+      color: var(--pwc-orange);
+      border-color: var(--pwc-orange);
+    }
+
+    .mobile-nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-nav-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-nav-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 88vw;
+      max-width: 380px;
+      background: #ffffff;
+      z-index: 2010;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .mobile-nav-overlay.open .mobile-nav-drawer {
+      transform: translateX(0);
+    }
+
+    .mobile-drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .mobile-drawer-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #64748b;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      line-height: 1;
+    }
+
+    .mobile-drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .mobile-nav-group-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #94a3b8;
+      margin-bottom: 0.5rem;
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .mobile-nav-links li a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.55rem 0.75rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #1e293b;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.15s ease;
+    }
+
+    .mobile-nav-links li a:hover {
+      background: #fff5ee;
+      color: var(--pwc-orange);
+    }
+
+    .mobile-drawer-footer {
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid #e2e8f0;
+      background: #fafafa;
+    }
+
+    .btn-mobile-car {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      background: var(--pwc-orange);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.85rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(235, 95, 7, 0.25);
+    }
+
+    .pwc-footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 3.5rem;
+    }
+
+    .pwc-footer-columns {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr;
+      gap: 2.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .pwc-footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding-top: 2rem;
+    }
+
+    .pwc-footer-bottom a {
+      color: #94a3b8;
+      text-decoration: none;
+    }
+
+    .pwc-footer-bottom a:hover {
+      color: var(--pwc-orange);
+    }
+
+    @media (max-width: 1024px) {
+      .header .main-nav { display: none !important; }
+      .mobile-menu-btn { display: inline-flex !important; }
+      .pwc-footer-columns { grid-template-columns: 1fr 1fr !important; }
+      .pwc-footer-container { padding: 0 1.5rem !important; }
+    }
+
+    @media (max-width: 640px) {
+      .pwc-footer-columns { grid-template-columns: 1fr !important; }
+    }
+
+  
+    
+    /* ==========================================================================
+       PwC MULTI-COLUMN FOOTER (Standardized 4-Column Light Theme Across All Pages)
+       ========================================================================== */
+    .pwc-footer {
+      background: #f2f2f2 !important;
+      border-top: 1px solid #e0e0e0 !important;
+      padding: 4.5rem 3.5rem 2.5rem !important;
+      color: #53565a !important;
+      font-size: 0.88rem !important;
+    }
+
+    .pwc-footer-container {
+      max-width: 1280px !important;
+      margin: 0 auto !important;
+      padding: 0 !important;
+    }
+
+    .pwc-footer-columns {
+      display: grid !important;
+      grid-template-columns: 1.4fr 1.3fr 1.1fr 1fr !important;
+      gap: 3rem !important;
+      padding-bottom: 3.5rem !important;
+      border-bottom: 1px solid #e0e0e0 !important;
+    }
+
+    .footer-col h5 {
+      font-family: var(--font-serif, 'Georgia', serif) !important;
+      font-size: 1.15rem !important;
+      font-weight: 700 !important;
+      color: #2d2d2d !important;
+      margin-bottom: 1.25rem !important;
+    }
+
+    .footer-col ul {
+      list-style: none !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0.6rem !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .footer-col a {
+      color: #53565a !important;
+      text-decoration: none !important;
+      font-size: 0.84rem !important;
+      transition: color 0.2s ease !important;
+    }
+
+    .footer-col a:hover {
+      color: #d04a02 !important;
+    }
+
+    .pwc-footer-bottom {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      padding-top: 2rem !important;
+      font-size: 0.78rem !important;
+      color: #53565a !important;
+      flex-wrap: wrap !important;
+      gap: 1.5rem !important;
+    }
+
+    .pwc-footer-bottom a {
+      color: #53565a !important;
+      text-decoration: none !important;
+    }
+
+    .pwc-footer-bottom a:hover {
+      color: #d04a02 !important;
+    }
+
+    @media (max-width: 1024px) {
+      .pwc-footer { padding: 3.5rem 1.5rem 2rem !important; }
+      .pwc-footer-columns { grid-template-columns: 1fr 1fr !important; gap: 2.5rem !important; }
+    }
+    @media (max-width: 640px) {
+      .pwc-footer { padding: 3rem 1.25rem 2rem !important; }
+      .pwc-footer-columns { grid-template-columns: 1fr !important; gap: 2rem !important; }
+    }
+
+
+    /* Top Announcement Alert Bar */
+    .top-announcement-bar {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 0.55rem 1.5rem;
+      font-size: 0.84rem;
+      border-bottom: 2px solid var(--pwc-orange);
+      position: relative;
+      z-index: 1050;
+    }
+    .announcement-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .announcement-text {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #f1f5f9;
+      font-size: 0.85rem;
+    }
+    .announcement-text strong {
+      color: #ffffff;
+    }
+    .announcement-icon {
+      color: #f59e0b;
+      font-size: 0.95rem;
+    }
+    .announcement-action-btn {
+      background: var(--pwc-orange);
+      color: #ffffff !important;
+      padding: 0.28rem 0.95rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.78rem;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .announcement-action-btn:hover {
+      background: #b23e00;
+      transform: translateY(-1px);
+    }
+
+    /* Header Search Button */
+    .header-search-wrap {
+      display: flex;
+      align-items: center;
+    }
+    .header-search-trigger {
+      background: transparent;
+      border: 1px solid #cbd5e1;
+      border-radius: 20px;
+      padding: 0.4rem 0.9rem;
+      color: #475569;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.2s;
+    }
+    .header-search-trigger:hover {
+      border-color: var(--pwc-orange);
+      color: var(--pwc-orange);
+      background: #fffaf5;
+    }
+
+    /* Search Modal Overlay */
+    .search-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 2000;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 10vh;
+    }
+    .search-modal-overlay.open {
+      display: flex;
+    }
+    .search-modal-card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 640px;
+      border-radius: 8px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      animation: modalFadeDown 0.2s ease-out;
+    }
+    @keyframes modalFadeDown {
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .search-input-wrap {
+      display: flex;
+      align-items: center;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid #e2e8f0;
+      gap: 1rem;
+    }
+    .search-input-wrap i {
+      color: var(--pwc-orange);
+      font-size: 1.2rem;
+    }
+    .search-input-wrap input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 1.1rem;
+      font-family: var(--font-sans);
+      color: #0f172a;
+    }
+    .search-close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #94a3b8;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .search-results-list {
+      padding: 1.5rem;
+      max-height: 380px;
+      overflow-y: auto;
+    }
+    .search-quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .search-quick-links span {
+      font-size: 0.82rem;
+      color: #64748b;
+      margin-right: 0.5rem;
+    }
+    .search-quick-links a {
+      background: #f1f5f9;
+      color: #334155;
+      padding: 0.35rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .search-quick-links a:hover {
+      background: var(--pwc-orange);
+      color: #ffffff;
+    }
+
+    /* Sticky Footer Consultant Button */
+    .sticky-talk-consultant {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 999;
+    }
+    .sticky-talk-btn {
+      background: #0f172a;
+      color: #ffffff !important;
+      border: 2px solid var(--pwc-orange);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      border-radius: 50px;
+      padding: 0.75rem 1.4rem;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      transition: all 0.25s ease;
+    }
+    .sticky-talk-btn:hover {
+      background: var(--pwc-orange);
+      border-color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(208, 74, 2, 0.35);
+    }
+    @media (max-width: 768px) {
+      .sticky-talk-consultant {
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+      }
+      .sticky-talk-btn {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        padding: 0.85rem 1rem;
+        font-size: 0.82rem;
+      }
+    }
+
+
+
+    /* PwC / ONE-TRUST DROPDOWN MENU STYLES (FIXED & STANDARDIZED) */
+    .nav-item-dropdown {
+      position: relative !important;
+    }
+
+    .mega-dropdown-menu {
+      position: absolute !important;
+      top: 100% !important;
+      left: 0 !important;
+      width: 840px !important;
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 12px !important;
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.15), 0 8px 16px -4px rgba(0, 0, 0, 0.06) !important;
+      padding: 2.25rem 2.5rem !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      transform: translateY(10px) !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      z-index: 1000 !important;
+      pointer-events: none !important;
+    }
+
+    .mega-dropdown-menu::before {
+      content: '' !important;
+      position: absolute !important;
+      top: -16px !important;
+      left: 0 !important;
+      right: 0 !important;
+      height: 16px !important;
+    }
+
+    .main-nav > li:hover .mega-dropdown-menu,
+    .nav-item-dropdown:hover .mega-dropdown-menu {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: translateY(6px) !important;
+      pointer-events: auto !important;
+    }
+
+    .mega-dropdown-grid {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr 1fr !important;
+      gap: 2.25rem !important;
+    }
+
+    .mega-col-heading {
+      font-size: 0.82rem !important;
+      font-weight: 700 !important;
+      color: #64748b !important;
+      margin-bottom: 1.25rem !important;
+      letter-spacing: 0.3px !important;
+      text-transform: none !important;
+    }
+
+    .mega-subnav-list {
+      list-style: none !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0.75rem !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .mega-subnav-list li a {
+      color: #0f172a !important;
+      font-size: 0.93rem !important;
+      font-weight: 600 !important;
+      padding: 0.25rem 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      display: block !important;
+      transition: all 0.15s ease !important;
+      line-height: 1.35 !important;
+    }
+
+    .mega-subnav-list li a:hover {
+      color: var(--pwc-orange, #d04a02) !important;
+      transform: translateX(4px) !important;
+    }
+
+    .simple-dropdown-menu {
+      position: absolute !important;
+      top: 100% !important;
+      left: 0 !important;
+      width: 320px !important;
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 12px !important;
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.15), 0 8px 16px -4px rgba(0, 0, 0, 0.06) !important;
+      padding: 1rem !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      transform: translateY(10px) !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      z-index: 1000 !important;
+      pointer-events: none !important;
+    }
+
+    .simple-dropdown-menu::before {
+      content: '' !important;
+      position: absolute !important;
+      top: -16px !important;
+      left: 0 !important;
+      right: 0 !important;
+      height: 16px !important;
+    }
+
+    .main-nav > li:hover .simple-dropdown-menu,
+    .nav-item-dropdown:hover .simple-dropdown-menu {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: translateY(6px) !important;
+      pointer-events: auto !important;
+    }
+
+    .simple-dropdown-list {
+      list-style: none !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0.35rem !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .simple-dropdown-list li a {
+      display: flex !important;
+      align-items: center !important;
+      gap: 0.75rem !important;
+      padding: 0.6rem 0.75rem !important;
+      font-size: 0.9rem !important;
+      font-weight: 600 !important;
+      color: #1e293b !important;
+      border-radius: 6px !important;
+      background: transparent !important;
+      transition: all 0.15s ease !important;
+    }
+
+    .simple-dropdown-list li a:hover {
+      background: #fff5ee !important;
+      color: var(--pwc-orange, #d04a02) !important;
+      padding-left: 0.95rem !important;
+    }
+
+    .simple-dropdown-list li a i {
+      color: var(--pwc-orange, #d04a02) !important;
+      font-size: 0.85rem !important;
+      width: 16px !important;
+      text-align: center !important;
+    }
+
+
+    
+
+</style>
+</head>
+<body>
+  <!-- Unified Site Header (Single Source: js/header.js & css/header.css) -->
+  <div id="site-header"></div>
+  <script src="js/header.js"></script>
+
+  
+
+  <!-- Main Content Container -->
+  <main class="pwc-detail-container">
+
+    <!-- 1. TOP TITLE & PwC HERO BANNER -->
+    <section class="page-title-section">
+      <div class="breadcrumbs-detail">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <a href="index.html#services">Services</a>
+        <span>/</span>
+        <span>Outsourced DPO (DPOaaS)</span>
+      </div>
+
+      <h1 class="page-main-headline">Outsourced DPO (DPO-as-a-Service)</h1>
+
+      <div class="hero-banner-wrap">
+        <img src="assets/services/service-dpo.jpg" alt="Outsourced DPO Executive" class="hero-banner-img">
+        <div class="pwc-orange-polygon">
+          <span>Statutory Section 32 &amp; Executive Privacy Oversight</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. EXECUTIVE OVERVIEW SPLIT BLOCK -->
+    <section class="split-intro-section">
+      <div class="split-intro-grid">
+        <div class="split-intro-left">
+          <h2>Enterprise-Grade Privacy Governance—Without the In-House Overhead. Hire Your External DPO.</h2>
+          <p>
+            Recruiting, training, and maintaining a full-time, expert Data Protection Officer (DPO) who understands the evolving Nigerian regulatory landscape is exceptionally costly and operationally intense. Yet, the law demands dedicated oversight.
+          </p>
+          <p>
+            Gain an elite, on-demand privacy team for a fraction of the cost of an internal executive hire. Our Outsourced DPO service gives you continuous oversight of your ROPA, DPIAs, third-party data processing agreements, and an immediate, battle-tested 72-hour breach response window.
+          </p>
+          <ul class="bullet-check-list">
+            <li><i class="fa-solid fa-circle-check"></i> Formal registration of certified DPCO partner with NDPC as your official DPO</li>
+            <li><i class="fa-solid fa-circle-check"></i> End-to-end 30-day statutory citizen DSAR request management desk</li>
+            <li><i class="fa-solid fa-circle-check"></i> 24/7 incident triage with 72-hour Section 40 breach escalation command</li>
+          </ul>
+          <a href="contact.html?service=dpo" class="btn-pwc-orange">
+            <span>Hire Us As Your External DPO</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+        <div class="split-intro-right">
+          <img src="assets/services/service-dpo.jpg" alt="Executive Nigerian Data Protection Officer">
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TABBED DEEP-DIVE SECTION -->
+    <section class="tabs-section">
+      <h2 class="tabs-section-title">The 4 Operating Pillars of Our DPOaaS Model</h2>
+      
+      <div class="pwc-nav-tabs">
+        <button class="pwc-tab-btn active" onclick="switchTab(event, 'tab-liaison')">1. Statutory Liaison</button>
+        <button class="pwc-tab-btn" onclick="switchTab(event, 'tab-dsar')">2. DSAR Desk</button>
+        <button class="pwc-tab-btn" onclick="switchTab(event, 'tab-breach')">3. Breach Command</button>
+        <button class="pwc-tab-btn" onclick="switchTab(event, 'tab-board')">4. Board Governance</button>
+      </div>
+
+      <div id="tab-liaison" class="pwc-tab-pane active">
+        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1000&q=80" alt="Statutory NDPC Liaison" class="tab-pane-img">
+        <div class="tab-pane-content">
+          <h3>Official Designation & Regulatory Representation</h3>
+          <p>We lodge formal notification with the NDPC designating Amstel Consulting as your external DPO. We serve as your authoritative point of contact for regulatory inquiries, compliance inspections, and statutory filings.</p>
+            <span>Breach Protocol Guide</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div id="tab-board" class="pwc-tab-pane">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80" alt="Executive Board Reporting" class="tab-pane-img">
+        <div class="tab-pane-content">
+          <h3>Executive Board & Audit Committee Reporting</h3>
+          <p>Quarterly executive briefings for your Board of Directors, providing quantifiable risk matrices, vendor audit outcomes, employee training metrics, and compliance readiness scorecards.</p>
+          <a href="service-gov.html" class="btn-pwc-orange">
+            <span>Explore Corporate Governance</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. INTERACTIVE FAQ ACCORDION + TALL DISPLAY PHOTO -->
+    <section class="faq-section">
+      <div class="faq-grid">
+        <div>
+          <h2>Frequently Asked Questions</h2>
+          <div class="accordion-list">
+            
+            <div class="accordion-item open">
+              <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>Does the NDPA 2023 allow outsourcing the DPO role?</span>
+                <i class="fa-solid fa-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Yes. Under Section 32(1) and Section 32(2) of the NDPA, an organization may fulfill its statutory requirement by retaining an external individual or licensed corporate body (such as Amstel Consulting) with proven expertise in data protection law and practice.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>Why is an outsourced DPO preferable to internal appointment?</span>
+                <i class="fa-solid fa-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Internal appointments often suffer from severe conflicts of interest (e.g., assigning the Head of IT or Legal who manages data processing systems to audit themselves). An outsourced DPCO ensures genuine independence, continuous regulatory updates, and avoids expensive executive payroll overheads.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>How does our team contact the outsourced DPO day-to-day?</span>
+                <i class="fa-solid fa-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Your staff and customers are given a dedicated email alias (e.g., dpo@yourcompany.com) managed directly by our team, complemented by a dedicated Slack/Teams channel and bi-weekly sync meetings with your leadership.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>How does DPOaaS streamline our annual CAR filing?</span>
+                <i class="fa-solid fa-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Because we continuously monitor your systems, update ROPAs, log DSARs, and verify vendor DPAs throughout the year, the annual Compliance Audit Return (CAR) on March 15 becomes a seamless, routine verification rather than a stressful last-minute fire drill.
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div>
+          <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1000&q=80" alt="Executive privacy oversight" class="faq-tall-img">
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. FOCUS SPLIT BLOCK -->
+    <section class="focus-split-section">
+      <div class="focus-split-grid">
+        <img src="https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?auto=format&fit=crop&w=1000&q=80" alt="Board governance session">
+        <div>
+          <h3>Eliminate Conflict of Interest with Independent DPCO Oversight</h3>
+          <p>
+            Regulatory audits routinely penalize organizations that designate an in-house Chief Technology Officer or Chief Marketing Officer as DPO, citing structural conflicts of interest.
+          </p>
+          <p>
+            Retaining Amstel Consulting provides unimpeachable statutory independence. We report directly to your Board Audit Committee, ensuring executive protection and flawless regulatory adherence.
+          </p>
+          <a href="service-gov.html" class="btn-pwc-outline">
+            <span>Explore Corporate Governance &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. TWIN HIGHLIGHT BOXES -->
+    <section class="twin-cards-section">
+      <div class="twin-cards-grid">
+        <div class="twin-peach-card">
+          <div>
+            <h3>Fractional DPO Retainer</h3>
+            <p>Tailored for high-growth fintechs, health startups, and mid-tier enterprises needing 20-40 hours of expert DPCO guidance per month.</p>
+          </div>
+          <a href="contact.html?service=dpo" class="btn-pwc-orange" style="align-self: flex-start;">
+            <span>Inquire Fractional Retainer</span>
+          </a>
+        </div>
+
+        <div class="twin-peach-card">
+          <div>
+            <h3>Enterprise Dedicated DPO Office</h3>
+            <p>Comprehensive embedded privacy bureau for commercial banks, insurance groups, telcos, and multinational corporations.</p>
+          </div>
+          <a href="contact.html?service=dpo" class="btn-pwc-orange" style="align-self: flex-start;">
+            <span>Inquire Enterprise Office</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. PROCESS STEPS -->
+    <section class="process-section">
+      <h2>Our 4-Phase DPO Onboarding & Governance Lifecycle</h2>
+      
+      <div class="process-steps-nav">
+        <div class="step-nav-item active">
+          <div class="step-icon-wrap"><i class="fa-solid fa-address-card"></i></div>
+          <div class="step-nav-title">Phase 01: Registration</div>
+        </div>
+        <div class="step-nav-item">
+          <div class="step-icon-wrap"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+          <div class="step-nav-title">Phase 02: Desk Setup</div>
+        </div>
+        <div class="step-nav-item">
+          <div class="step-icon-wrap"><i class="fa-solid fa-clock-rotate-left"></i></div>
+          <div class="step-nav-title">Phase 03: Routine Ops</div>
+        </div>
+        <div class="step-nav-item">
+          <div class="step-icon-wrap"><i class="fa-solid fa-award"></i></div>
+          <div class="step-nav-title">Phase 04: Annual CAR</div>
+        </div>
+      </div>
+
+      <div class="process-feature-split">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80" alt="Executive DPO strategy session">
+        <div>
+          <h3>Turnkey Data Protection Office & Institutional Oversight</h3>
+          <p>
+            Every client retained under our DPOaaS program receives full-spectrum regulatory oversight from our accredited DPCO fellows, centralizing your DSAR workflows, vendor agreements, ROPA inventories, and 72-hour breach desk in a dedicated enterprise compliance framework.
+          </p>
+          <a href="contact.html?service=dpo" class="btn-pwc-outline">
+            <span>Consult Our DPO Practice &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. STAGGERED 3-LEVEL MATURITY PILLARS -->
+    <section class="pillars-section">
+      <h2>Where does your organization's DPO governance stand?</h2>
+      <p class="sub-lead">Benchmark your privacy oversight against recognized standards under the NDPA 2023.</p>
+
+      <div class="staggered-columns-wrap">
+        
+        <div class="stagger-col stagger-1">
+          <div>
+            <span class="stagger-badge">STAGE 01 &bull; FOUNDATION</span>
+            <h3>Informal Internal Role</h3>
+            <p>An in-house IT manager or legal counsel tasked with privacy without specialized certification or dedicated hours. Inherent conflict of interest.</p>
+          </div>
+          <ul class="stagger-points">
+            <li><i class="fa-solid fa-check"></i> Unregistered with NDPC</li>
+            <li><i class="fa-solid fa-check"></i> Delayed DSAR response risk</li>
+            <li><i class="fa-solid fa-check"></i> Vulnerable to conflict-of-interest penalties</li>
+          </ul>
+        </div>
+
+        <div class="stagger-col stagger-2">
+          <div>
+            <span class="stagger-badge">STAGE 02 &bull; SCALED</span>
+            <h3>Retained DPCO DPOaaS</h3>
+            <p>Certified external DPO formally designated with NDPC. Active 30-day DSAR desk, routine staff training, and vendor risk reviews.</p>
+          </div>
+          <ul class="stagger-points">
+            <li><i class="fa-solid fa-check"></i> Full Section 32 compliance</li>
+            <li><i class="fa-solid fa-check"></i> 72-hour breach command ready</li>
+            <li><i class="fa-solid fa-check"></i> Uncompromised independence</li>
+            <li><i class="fa-solid fa-check"></i> Certified DPCO sign-off</li>
+          </ul>
+        </div>
+
+        <div class="stagger-col stagger-3">
+          <div>
+            <span class="stagger-badge">STAGE 03 &bull; INDUSTRY LEADER</span>
+            <h3>Integrated Privacy Bureau</h3>
+            <p>Autonomous privacy office integrated with Truepriv SaaS, Board audit committee representation, continuous cloud scanning, and zero-penalty track record.</p>
+          </div>
+          <ul class="stagger-points">
+            <li><i class="fa-solid fa-check"></i> Real-time DSAR management workflows</li>
+            <li><i class="fa-solid fa-check"></i> Board-level digital trust charters</li>
+            <li><i class="fa-solid fa-check"></i> Seamless statutory March 15 CAR</li>
+            <li><i class="fa-solid fa-check"></i> Industry-leading NDPC rating</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 9. 3 VALUE PILLAR CARDS WITH HEXAGONS -->
+    <section class="hex-section">
+      <h2>Why organizations choose our DPO-as-a-Service model</h2>
+      <div class="hex-cards-grid">
+        
+        <div class="hex-card">
+          <div class="pwc-hex-icon"><i class="fa-solid fa-user-tie"></i></div>
+          <h3>Section 32 Compliance</h3>
+          <p>Fulfill statutory DCMI requirements immediately with formal NDPC registration and official DPCO credentials.</p>
+          <a href="service-car.html" class="btn-pwc-orange" style="width: 100%; justify-content: center;">
+            <span>CAR Alignment</span>
+          </a>
+        </div>
+
+        <div class="hex-card">
+          <div class="pwc-hex-icon"><i class="fa-solid fa-bell"></i></div>
+          <h3>72-Hour Rapid Command</h3>
+          <p>Rest easy knowing our crisis specialists are on standby 24/7 to contain incidents and handle NDPC statutory notifications.</p>
+          <a href="topics.html#breach" class="btn-pwc-orange" style="width: 100%; justify-content: center;">
+            <span>Breach Protocols</span>
+          </a>
+        </div>
+
+        <div class="hex-card">
+          <div class="pwc-hex-icon"><i class="fa-solid fa-laptop-code"></i></div>
+          <h3>Continuous Regulatory Liaison</h3>
+          <p>Gain ongoing statutory representation, compliance audit trails, and dedicated regulatory liaison included with your retainer.</p>
+          <a href="contact.html?service=dpo" class="btn-pwc-orange" style="width: 100%; justify-content: center;">
+            <span>Engage DPO Team</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 10. CALLOUT BAR -->
+    <section class="callout-bar-section">
+      <div class="callout-bar-inner">
+        <h3>Need to designate a certified Data Protection Officer today?</h3>
+        <a href="contact.html?service=dpo" class="btn-pwc-orange">
+          <span>Inquire DPO Retainer &rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 11. CASE STUDY -->
+    <section class="case-study-section">
+      <div class="case-study-grid">
+        <div class="case-study-left">
+          <h2>Case Study: Rapidly Expanding Multichannel Insurtech DPOaaS</h2>
+          <p>
+            A fast-growing Nigerian insurtech scaling across 1.2 million active policyholders needed dedicated DPO leadership to satisfy National Insurance Commission (NAICOM) and NDPC statutory requirements.
+          </p>
+          <p>
+            Amstel Consulting was appointed as external DPO, processed 340+ customer DSARs within an average turnaround of 48 hours, renegotiated 38 underwriter data sharing agreements, and filed flawless annual CAR returns two years running with zero regulatory sanctions.
+          </p>
+          <a href="contact.html" class="btn-pwc-orange">
+            <span>Discuss Insurtech DPO Model</span>
+          </a>
+        </div>
+        <div class="case-study-right">
+          <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1000&q=80" alt="Insurtech executive review meeting">
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. ACCREDITATION -->
+    <section class="accreditation-section">
+      <div class="accreditation-wrap">
+        <div class="accreditation-seal">
+          <span class="small">LICENSED</span>
+          <span class="big">DPCO</span>
+          <span class="small">NDPC / 2026</span>
+        </div>
+        <div class="accreditation-text">
+          <p>
+            <strong>Accredited DPO Oversight Authority:</strong> Amstel Consulting Nigeria is fully certified and licensed by the Nigeria Data Protection Commission (NDPC). External DPO assignments executed by our practice fulfill all statutory requirements under Section 32 of the NDPA 2023.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. RELATED INSIGHTS -->
+    <section class="related-insights-section">
+      <h2>Related insights and publications</h2>
+      <div class="insights-4col-grid">
+        
+        <div class="insight-mini-card">
+          <img src="https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=600&q=80" alt="DCMI Designation">
+          <div class="insight-mini-body">
+            <div>
+              <span class="insight-mini-tag">STATUTORY MANDATE</span>
+              <h4>DCMI Criteria Under NDPA Section 32</h4>
+            </div>
+            <a href="topics.html#car-deadline" class="insight-mini-link">Read analysis &rarr;</a>
+          </div>
+        </div>
+
+        <div class="insight-mini-card">
+          <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" alt="Breach Command">
+          <div class="insight-mini-body">
+            <div>
+              <span class="insight-mini-tag">CRISIS PLAYBOOK</span>
+              <h4>The 72-Hour Breach Escalation Window</h4>
+            </div>
+            <a href="topics.html#breach" class="insight-mini-link">Read analysis &rarr;</a>
+          </div>
+        </div>
+
+        <div class="insight-mini-card">
+          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" alt="DSAR Management">
+          <div class="insight-mini-body">
+            <div>
+              <span class="insight-mini-tag">CITIZEN RIGHTS</span>
+              <h4>Fulfilling DSARs within 30 Days</h4>
+            </div>
+            <a href="service-policies.html" class="insight-mini-link">Read analysis &rarr;</a>
+          </div>
+        </div>
+
+        <div class="insight-mini-card">
+          <img src="assets/services/service-ai.jpg" alt="AI Governance">
+          <div class="insight-mini-body">
+            <div>
+              <span class="insight-mini-tag">AI OVERSIGHT</span>
+              <h4>DPO Duties in Automated Systems</h4>
+            </div>
+            <a href="service-ai.html" class="insight-mini-link">Read analysis &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 14. KEY CONTACTS -->
+    <section class="key-contacts-section">
+      <h2>Key practice contacts</h2>
+      <div class="contacts-2col-grid">
+        
+        <div class="expert-card">
+          <div class="expert-avatar">CE</div>
+          <div class="expert-info">
+            <h3>Barr. Chimaobi Eze</h3>
+            <div class="expert-role">Senior Partner &bull; Licensed DPCO Director & Counsel</div>
+            <a href="contact.html?service=dpo" class="expert-link">
+              <span>Contact partner</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="expert-card">
+          <div class="expert-avatar">BS</div>
+          <div class="expert-info">
+            <h3>Engr. Babatunde Sanusi</h3>
+            <div class="expert-role">Partner &bull; Enterprise Tech & Data Architecture</div>
+            <a href="contact.html?service=dpo" class="expert-link">
+              <span>Contact partner</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 15. CLOSING BANNER -->
+  <section class="closing-hero-wrap">
+    <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1600&q=80" alt="DPO leadership" class="closing-hero-bg">
+    <div class="pwc-detail-container">
+      <div class="closing-hero-content">
+        <span class="closing-kicker">We lead your statutory privacy program</span>
+        <h2 class="closing-title">so you can <span class="orange">focus on expanding your core business operations.</span></h2>
+        <a href="contact.html" class="btn-pwc-orange">
+          <span>Inquire Outsourced DPO Retainer</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16. FOOTER -->
+    <!-- ==========================================================================
+       PwC MULTI-COLUMN MEGA FOOTER (Standardized Across All Pages)
+       ========================================================================== -->
+    <!-- ==========================================================================
+       PwC MULTI-COLUMN MEGA FOOTER (Standardized Across All Pages)
+       ========================================================================== -->
+    <!-- ==========================================================================
+       PwC MULTI-COLUMN MEGA FOOTER (Standardized Across All Pages)
+       ========================================================================== -->
+    <!-- ==========================================================================
+       PwC MULTI-COLUMN MEGA FOOTER (Standardized Across All Pages)
+       ========================================================================== -->
+    <!-- ==========================================================================
+       PwC MULTI-COLUMN MEGA FOOTER (Standardized Across All Pages)
+       ========================================================================== -->
+  <footer class="pwc-footer">
+    <div class="pwc-footer-container">
+      <div class="pwc-footer-columns">
+        
+        <!-- Col 1: Services -->
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="service-car.html">Compliance Audit Return (CAR)</a></li>
+            <li><a href="service-audit.html">Data Protection Audit</a></li>
+            <li><a href="service-training.html">Data Protection Training</a></li>
+            <li><a href="service-policies.html">Privacy Policies &amp; Notices</a></li>
+            <li><a href="service-ropa.html">ROPA Data Lineage</a></li>
+            <li><a href="service-dpia.html">DPIA &amp; LIA Assessments</a></li>
+            <li><a href="service-dpo.html">Outsourced DPO</a></li>
+            <li><a href="service-cyber.html">Cybersecurity &amp; Pen-Testing</a></li>
+            <li><a href="index.html#service-cookie">Cookie Consent Compliance</a></li>
+            <li><a href="service-gov.html">Corporate Governance</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 2: Blog -->
+        <div class="footer-col">
+          <h5>Blog</h5>
+          <ul>
+            <li><a href="topics.html#ai-business">Artificial Intelligence for Business</a></li>
+            <li><a href="topics.html#cybersecurity">Cyber Security</a></li>
+            <li><a href="topics.html#ndpa-laws">Data Protection Laws</a></li>
+            <li><a href="topics.html#risks">Risks</a></li>
+            <li><a href="topics.html#ndpc-updates">Regulatory Guidance: NDPC updates</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Our Organisation & Regulatory Filings -->
+        <div class="footer-col">
+          <h5>Our Organisation</h5>
+          <ul>
+            <li><a href="organisation.html#board">Advisory Board</a></li>
+            <li><a href="organisation.html#consultants">Consultants</a></li>
+            <li><a href="organisation.html#values">Purpose &amp; Values</a></li>
+            <li><a href="organisation.html#governance">Licensed DPCO Credentials</a></li>
+            <li><a href="service-training.html#faq">Frequently Asked Questions (FAQ)</a></li>
+            <li><a href="service-car.html" style="color: var(--pwc-orange); font-weight: 700;">File CAR Before Deadline to Avoid Penalty &rarr;</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: National Practice & Official Trust Badges -->
+        <div class="footer-col">
+          <h5>National Practice</h5>
+          <ul>
+            <li><a href="contact.html">Nigeria (Virtual Practice)</a></li>
+            <li><a href="contact.html" style="color: var(--pwc-orange); font-weight: 700;"><i class="fa-solid fa-headset"></i> Talk to Our Experienced Consultants for Free</a></li>
+            <li><a href="service-car.html">Statutory Filing Deadline Desk</a></li>
+          </ul>
+
+          <!-- Official NDPC Trust Badge -->
+          <div style="margin-top: 1.25rem;">
+            <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #64748b; font-weight: 700; display: block; margin-bottom: 0.4rem;">Official Authority Credential</span>
+            <img src="assets/ndpc-badge.svg" alt="National Data Protection Commission (NDPC) Licensed DPCO" style="max-width: 290px; width: 100%; height: auto; display: block;">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar with Logo & Legal -->
+      <div class="pwc-footer-bottom">
+        <div class="footer-logo-wrap">
+          <img src="logo.jpg" alt="Amstel Consulting" class="brand-logo-img">
+          <span class="brand-logo-text"><span class="brand-mstel">mstel</span> <span class="brand-consulting">Consulting</span></span>
+        </div>
+        <div style="max-width: 620px; line-height: 1.5;">
+          Licensed as a Data Protection Compliance Organization (DPCO) by the National Data Protection Commission | License No: DPCO/XXXX/2026. &copy; 2026 Amstel Consulting Nigeria. All rights reserved.
+        </div>
+        <div style="display: flex; gap: 1.25rem; flex-wrap: wrap;">
+          <a href="service-policies.html">Privacy Statement</a>
+          <a href="service-policies.html#cookies">Cookie Policy</a>
+          <a href="contact.html">Legal Disclaimer</a>
+          <a href="contact.html">Terms and Conditions</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sitewide Sticky Footer Consultant Button -->
+  <div class="sticky-talk-consultant">
+    <a href="contact.html" class="sticky-talk-btn">
+      <i class="fa-solid fa-headset" style="color: var(--pwc-orange);"></i>
+      <span>Talk to Our Experienced Consultants for Free</span>
+    </a>
+  </div>
+
+  <!-- Search Modal Overlay -->
+  <div id="siteSearchModal" class="search-modal-overlay" onclick="if(event.target===this) closeSearchModal()">
+    <div class="search-modal-card">
+      <div class="search-input-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="siteSearchInput" placeholder="Search services, NDPA regulations, DPCO audit rules..." oninput="handleSearch(this.value)">
+        <button onclick="closeSearchModal()" class="search-close-btn">&times;</button>
+      </div>
+      <div id="searchResults" class="search-results-list">
+        <div class="search-quick-links">
+          <span>Quick links:</span>
+          <a href="service-car.html">Compliance Audit Return (CAR)</a>
+          <a href="service-dpo.html">Outsourced DPO</a>
+          <a href="service-audit.html">Data Protection Audit</a>
+          <a href="service-training.html">Data Protection Training</a>
+          <a href="topics.html#ndpa-laws">NDPA 2023 Statutory Laws</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function switchTab(e, tabId) {
+      document.querySelectorAll('.pwc-tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.pwc-tab-pane').forEach(pane => pane.classList.remove('active'));
+      e.currentTarget.classList.add('active');
+      const targetPane = document.getElementById(tabId);
+      if (targetPane) targetPane.classList.add('active');
+    }
+
+    function toggleAccordion(btn) {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('open'));
+      if (!isOpen) {
+        item.classList.add('open');
+      }
+    }
+  </script>
+
+
+  
+
+
+  <script>
+    function openSearchModal() {
+      const modal = document.getElementById('siteSearchModal');
+      if (modal) {
+        modal.classList.add('open');
+        setTimeout(() => {
+          const inp = document.getElementById('siteSearchInput');
+          if (inp) inp.focus();
+        }, 100);
+      }
+    }
+
+    function closeSearchModal() {
+      const modal = document.getElementById('siteSearchModal');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function handleSearch(val) {
+      const res = document.getElementById('searchResults');
+      if (!res) return;
+      if (!val || val.trim() === '') {
+        res.innerHTML = '<div class="search-quick-links"><span>Quick links:</span><a href="service-car.html">Compliance Audit Return (CAR)</a><a href="service-dpo.html">Outsourced DPO</a><a href="service-audit.html">Data Protection Audit</a><a href="service-training.html">Data Protection Training</a><a href="topics.html#ndpa-laws">NDPA 2023 Statutory Laws</a></div>';
+        return;
+      }
+      const q = val.toLowerCase();
+      const allServices = [
+        { name: 'Compliance Audit Return (CAR)', url: 'service-car.html', desc: 'Statutory annual audit filing with NDPC before March 15.' },
+        { name: 'Data Protection Audit', url: 'service-audit.html', desc: 'Comprehensive technical and operational gap assessments.' },
+        { name: 'Data Protection Training', url: 'service-training.html', desc: 'Workforce NDPA e-learning & DPO masterclasses.' },
+        { name: 'Privacy Policies & Notices', url: 'service-policies.html', desc: 'Layered transparency notices and vendor DPAs.' },
+        { name: 'ROPA (Record of Processing Activities)', url: 'service-ropa.html', desc: 'Article 24 data lineage and processing inventory.' },
+        { name: 'DPIA & LIA Assessments', url: 'service-dpia.html', desc: 'High-risk 5x5 threat and impact assessments.' },
+        { name: 'Outsourced DPO', url: 'service-dpo.html', desc: 'Accredited external DPO designation & NDPC liaison.' },
+        { name: 'Cybersecurity & Pen-Testing', url: 'service-cyber.html', desc: 'Security posture hardening, vulnerability assessment & pen-testing.' },
+        { name: 'Corporate Governance', url: 'service-gov.html', desc: 'Boardroom digital trust charters and fiduciary risk monitoring.' },
+        { name: 'Cookie & Consent Compliance', url: 'index.html#service-cookie', desc: 'Zero-party consent telemetry and tracking audits.' }
+      ];
+      const filtered = allServices.filter(s => s.name.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q));
+      if (filtered.length === 0) {
+        res.innerHTML = '<p style="color: #64748b; font-size: 0.9rem;">No direct matching service found. <a href="contact.html" style="color: var(--pwc-orange);">Contact our advisory desk</a> for assistance.</p>';
+      } else {
+        res.innerHTML = filtered.map(s => '<div style="padding: 0.65rem 0; border-bottom: 1px solid #f1f5f9;"><a href="' + s.url + '" style="font-weight: 700; color: #0f172a; text-decoration: none; display: block; font-size: 0.95rem;">' + s.name + '</a><span style="font-size: 0.8rem; color: #64748b;">' + s.desc + '</span></div>').join('');
+      }
+    }
+  </script>
+</body>
+</html>
