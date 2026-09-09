@@ -11,6 +11,7 @@ export default function Header({
   onOpenChampions,
   onOpenProfile,
   onOpenAiCopilot,
+  onOpenBilling,
   isSidebarCollapsed,
   onToggleSidebar
 }) {
@@ -206,6 +207,18 @@ export default function Header({
             <i className="fa-solid fa-globe text-slate-500 text-xs"></i>
             <span className="hidden sm:inline">Public DSAR</span>
           </button>
+
+          {/* Milestone 2: Subscription & Paystack Billing */}
+          {onOpenBilling && (
+            <button
+              onClick={onOpenBilling}
+              title="Manage Plan & Statutory Compliance Entitlements"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-bold text-amber-900 hover:text-amber-950 bg-amber-50 hover:bg-amber-100/80 border border-amber-300/80 rounded-lg transition-all shadow-2xs whitespace-nowrap cursor-pointer"
+            >
+              <i className="fa-solid fa-crown text-amber-600 text-xs"></i>
+              <span className="hidden sm:inline">Plan & Billing</span>
+            </button>
+          )}
         </div>
 
         {/* 4. User Profile & Guaranteed-Visible Logout */}

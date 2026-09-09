@@ -87,7 +87,7 @@
       <!-- 3. Our Organisation Dropdown (4 Dedicated Pages) -->
       <li class="nav-item-dropdown">
         <a href="organisation.html" class="nav-dropdown-trigger">
-          <span>Our organisation</span>
+          <span>Our Organisation</span>
           <i class="fa-solid fa-chevron-down nav-chevron"></i>
         </a>
 

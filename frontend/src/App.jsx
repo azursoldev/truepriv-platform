@@ -13,11 +13,13 @@ import PolicyDesk from './components/PolicyDesk';
 import PortfolioDesk from './components/PortfolioDesk';
 import AdminUserDesk from './components/AdminUserDesk';
 import PublicDsarPortal from './components/PublicDsarPortal';
+import PublicChampionIntakePortal from './components/PublicChampionIntakePortal';
 import AuthModal from './components/AuthModal';
 import OnboardingWizard from './components/OnboardingWizard';
 import ChampionInviteModal from './components/ChampionInviteModal';
 import MyProfileDetailDesk from './components/MyProfileDetailDesk';
 import TruePrivAiCopilotDrawer from './components/TruePrivAiCopilotDrawer';
+import SubscriptionBillingModal from './components/SubscriptionBillingModal';
 import { api, getAuthToken, removeAuthToken, setActiveTenantId } from './lib/api';
 
 export default function App() {
@@ -32,6 +34,7 @@ export default function App() {
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showChampions, setShowChampions] = useState(false);
   const [showAiCopilot, setShowAiCopilot] = useState(false);
+  const [showBillingModal, setShowBillingModal] = useState(false);
 
   const initApp = async () => {
     setLoading(true);
@@ -126,6 +129,18 @@ export default function App() {
 
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
+  // Standalone Public Champion Intake Portal (Bypasses Admin Login)
+  const urlParams = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
+  const intakeToken = urlParams.get('token');
+  const isChampionIntakeRoute = typeof window !== 'undefined' && (
+    window.location.pathname.includes('champion-intake') || 
+    (intakeToken && (!getAuthToken() || urlParams.get('scope') === 'champion'))
+  );
+
+  if (isChampionIntakeRoute) {
+    return <PublicChampionIntakePortal token={intakeToken} />;
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center text-slate-700 space-y-3">
@@ -154,6 +169,7 @@ export default function App() {
         onOpenChampions={() => setActiveTab('champions-desk')}
         onOpenProfile={() => setActiveTab('my-profile')}
         onOpenAiCopilot={() => setShowAiCopilot(true)}
+        onOpenBilling={() => setShowBillingModal(true)}
         isSidebarCollapsed={sidebarCollapsed}
         onToggleSidebar={() => setSidebarCollapsed(!sidebarCollapsed)}
       />
@@ -280,6 +296,15 @@ export default function App() {
       <TruePrivAiCopilotDrawer
         isOpen={showAiCopilot}
         onClose={() => setShowAiCopilot(false)}
+      />
+
+      {/* Subscription & Paystack NGN Billing Modal */}
+      <SubscriptionBillingModal
+        isOpen={showBillingModal}
+        onClose={() => setShowBillingModal(false)}
+        onSubscriptionUpdated={async () => {
+          await refreshMetrics();
+        }}
       />
     </div>
   );

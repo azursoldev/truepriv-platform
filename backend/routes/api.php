@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VendorController;
 use App\Http\Controllers\Api\OmnichannelConsentController;
 use App\Http\Controllers\Api\AiPrivacyCopilotController;
+use App\Http\Controllers\Api\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,6 +72,11 @@ Route::prefix('v1')->group(function () {
             // Dual-Residency Data Localization
             Route::get('/localization/status', [LocalizationController::class, 'getStatus']);
             Route::put('/localization/switch', [LocalizationController::class, 'switchResidency']);
+
+            // Milestone 2: Subscriptions & Paystack NGN Billing
+            Route::get('/subscription', [SubscriptionController::class, 'show']);
+            Route::post('/subscription/initialize-paystack', [SubscriptionController::class, 'initializePaystack']);
+            Route::post('/subscription/upgrade', [SubscriptionController::class, 'upgrade']);
 
             // RoPA (Record of Processing Activities)
             Route::get('/ropa', [RopaController::class, 'index']);

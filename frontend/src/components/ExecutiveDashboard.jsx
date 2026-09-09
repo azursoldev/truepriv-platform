@@ -1,4 +1,5 @@
 import React from 'react';
+import DataResidencyCard from './DataResidencyCard';
 
 export default function ExecutiveDashboard({ 
   metrics, 
@@ -572,6 +573,9 @@ export default function ExecutiveDashboard({
         </div>
 
       </div>
+      
+      {/* 3.5 Milestone 2: Dual-Residency Data Localization Engine Card */}
+      <DataResidencyCard />
 
       {/* 4. Statutory Remediation & Automation Section */}
       <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-7 shadow-xs">

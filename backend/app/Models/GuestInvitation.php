@@ -28,6 +28,24 @@ class GuestInvitation extends Model
         'accepted_at' => 'datetime',
     ];
 
+    protected $appends = ['status', 'department_assigned'];
+
+    public function getStatusAttribute(): string
+    {
+        if ($this->accepted_at) {
+            return 'accepted';
+        }
+        if ($this->expires_at && $this->expires_at->isPast()) {
+            return 'expired';
+        }
+        return 'pending';
+    }
+
+    public function getDepartmentAssignedAttribute(): ?string
+    {
+        return $this->target_department;
+    }
+
     public function tenant(): BelongsTo
     {
         return $this->belongsTo(Tenant::class);

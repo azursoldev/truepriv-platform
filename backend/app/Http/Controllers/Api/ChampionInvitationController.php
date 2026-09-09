@@ -51,10 +51,9 @@ class ChampionInvitationController extends Controller
         $invitation = GuestInvitation::create([
             'tenant_id' => $tenantId,
             'email' => $validated['email'],
-            'department_assigned' => $validated['department_assigned'],
-            'role_scope' => 'dept_champion',
+            'target_department' => $validated['department_assigned'],
+            'assigned_role' => 'dept_champion',
             'invitation_token' => $token,
-            'status' => 'pending',
             'invited_by_user_id' => $user->id,
             'expires_at' => now()->addDays($days),
         ]);
@@ -86,7 +85,6 @@ class ChampionInvitationController extends Controller
         }
 
         if ($invitation->expires_at && $invitation->expires_at->isPast()) {
-            $invitation->update(['status' => 'expired']);
             return response()->json([
                 'success' => false,
                 'message' => 'This invitation has expired. Please request a new token from your Compliance Officer.'
@@ -98,7 +96,7 @@ class ChampionInvitationController extends Controller
             'data' => [
                 'invitation_id' => $invitation->id,
                 'tenant_name' => $invitation->tenant->name,
-                'department' => $invitation->department_assigned,
+                'department' => $invitation->target_department,
                 'email' => $invitation->email,
                 'status' => $invitation->status,
                 'expires_at' => $invitation->expires_at->toIso8601String(),
@@ -130,7 +128,7 @@ class ChampionInvitationController extends Controller
         $activity = RopaActivity::create([
             'tenant_id' => $invitation->tenant_id,
             'process_name' => $validated['process_name'],
-            'department' => $invitation->department_assigned,
+            'department' => $invitation->target_department ?? 'General',
             'business_purpose' => $validated['business_purpose'],
             'legal_basis' => $validated['legal_basis'],
             'data_subject_categories' => ['Department Specific / Employees'],
@@ -142,7 +140,6 @@ class ChampionInvitationController extends Controller
         ]);
 
         $invitation->update([
-            'status' => 'accepted',
             'accepted_at' => now(),
         ]);
 

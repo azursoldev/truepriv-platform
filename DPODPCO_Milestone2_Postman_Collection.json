@@ -1,0 +1,452 @@
+{
+	"info": {
+		"_postman_id": "9d4b1a88-2e33-4f51-b210-f47ec08b7e02",
+		"name": "DPODPCO Platform - NDPA 2023 Compliance API (Milestone 2)",
+		"description": "Comprehensive Postman Collection for Milestone 2: MDC Onboarding Wizard & Classification, Department Champion Decentralized Intake, Dual-Residency Data Localization (Galaxy Backbone vs AWS), Paystack Subscription Billing, TruePriv Autonomous AI Agent, and Ketch-Style Cookie CMP.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. MDC Classification & Onboarding Wizard",
+			"item": [
+				{
+					"name": "Get NDPA Onboarding Questions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{auth_token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/onboarding/questions",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "onboarding", "questions"]
+						},
+						"description": "Returns statutory questionnaire categories used to determine Major Data Controller (MDC) classification status under NDPA Section 65."
+					},
+					"response": []
+				},
+				{
+					"name": "Submit Onboarding Assessment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{auth_token}}" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"answers\": {\n        \"annual_data_subjects\": \"above_100k\",\n        \"processes_sensitive_personal_data\": true,\n        \"critical_national_information_infrastructure\": true,\n        \"dpo_designated\": true,\n        \"annual_turnover_above_cbn_threshold\": true\n    }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/onboarding/submit",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "onboarding", "submit"]
+						},
+						"description": "Submits organization answers, computes MDC classification score, and assigns MDC-Ultra / MDC-Extra tier."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current MDC Classification",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{auth_token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/onboarding/classification",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "onboarding", "classification"]
+						},
+						"description": "Retrieves the active tenant's MDC Tier badge, compliance obligations, and audit filing deadline."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2. Department Champion Decentralized Intake",
+			"item": [
+				{
+					"name": "List Department Invitations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{auth_token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/invitations",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "invitations"]
+						},
+						"description": "Lists all active and accepted department champion invitations created by the compliance team."
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Champion Invitation Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var res = pm.response.json();",
+									"    if (res.data && res.data.invitation_token) {",
+									"        pm.collectionVariables.set(\"champion_token\", res.data.invitation_token);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{auth_token}}" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"hr.head@apexmfb.ng\",\n    \"department_assigned\": \"Human Resources\",\n    \"notes\": \"Please document staff pension and payroll data processing\",\n    \"expires_days\": 7\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/invitations",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "invitations"]
+						},
+						"description": "Creates a secure single-purpose token for an invited department head."
+					},
+					"response": []
+				},
+				{
+					"name": "Public Token Resolution (No Auth Required)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/public/invitations/{{champion_token}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "public", "invitations", "{{champion_token}}"]
+						},
+						"description": "Public endpoint called by the champion landing page to verify token validity and department metadata without logging in."
+					},
+					"response": []
+				},
+				{
+					"name": "Public Champion Data Submission (No Auth Required)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"process_name\": \"Employee Monthly Payroll & Pension Filing\",\n    \"business_purpose\": \"Salary disbursement, PAYE state tax remittance, and statutory pension manager reporting\",\n    \"legal_basis\": \"contract\",\n    \"personal_data_elements\": [\n        \"Full Name\",\n        \"Bank Verification Number (BVN)\",\n        \"Salary & Allowances\",\n        \"Tax Identification Number (TIN)\",\n        \"Next of Kin Contact\"\n    ],\n    \"storage_location\": \"Internal HR Oracle Database & BambooHR Cloud\",\n    \"retention_period\": \"7 Years post-termination (Labour Act compliance)\",\n    \"notes\": \"Encrypted at rest with AES-256. Access restricted to Finance & HR managers.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/public/invitations/{{champion_token}}/submit",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "public", "invitations", "{{champion_token}}", "submit"]
+						},
+						"description": "Submits department ROPA activity and marks invitation as accepted."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3. Dual-Residency Data Localization Engine",
+			"item": [
+				{
+					"name": "Get Data Residency Status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{auth_token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/localization/status",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "localization", "status"]
+						},
+						"description": "Returns current active data storage location (Galaxy Backbone Nigeria vs AWS Cloud Ireland) and NDPA Section 20 compliance status."
+					},
+					"response": []
+				},
+				{
+					"name": "Switch Residency to Local Galaxy Backbone (Nigeria)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{auth_token}}" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"data_residency\": \"local_galaxy_backbone\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/localization/switch",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "localization", "switch"]
+						},
+						"description": "Switches storage destination to Tier-III Onshore National Datacenter (Abuja / Lagos)."
+					},
+					"response": []
+				},
+				{
+					"name": "Switch Residency to Global AWS (Ireland Cloud)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{auth_token}}" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"data_residency\": \"global_aws\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/localization/switch",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "localization", "switch"]
+						},
+						"description": "Switches storage destination to AWS eu-west-1 (Ireland)."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Dual-Residency Feature Flag",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/features",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "features"]
+						},
+						"description": "Public feature flags endpoint confirming active strategy and regional options."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4. Subscription & Paystack NGN Billing",
+			"item": [
+				{
+					"name": "Get Subscription & Entitlement Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{auth_token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/subscription",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "subscription"]
+						},
+						"description": "Returns active plan tier, days remaining, entitlement flags (can_export_reports), and pricing tiers."
+					},
+					"response": []
+				},
+				{
+					"name": "Initialize Paystack Checkout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{auth_token}}" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"plan_tier\": \"growth_enterprise\",\n    \"billing_cycle\": \"annual\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/subscription/initialize-paystack",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "subscription", "initialize-paystack"]
+						},
+						"description": "Calculates kobo amount (45,000,000 kobo for NGN 450,000) and returns Paystack transaction reference and public key."
+					},
+					"response": []
+				},
+				{
+					"name": "Upgrade Plan & Activate Paid Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{auth_token}}" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"plan_tier\": \"growth_enterprise\",\n    \"billing_cycle\": \"annual\",\n    \"payment_gateway\": \"paystack\",\n    \"transaction_reference\": \"TP-TXN-DEMO-001\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/subscription/upgrade",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "subscription", "upgrade"]
+						},
+						"description": "Upgrades tenant subscription to active paid tier, logs payment, and unlocks official PDF/CSV report exports."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "5. TruePriv Autonomous AI Agent",
+			"item": [
+				{
+					"name": "Query AI Privacy Copilot",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{auth_token}}" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": \"Do we need an explicit DPA signed with cloud email providers under NDPA 2023?\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/ai-copilot/query",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "ai-copilot", "query"]
+						},
+						"description": "Sends prompt to TruePriv Autonomous Privacy AI Agent with NDPA grounding."
+					},
+					"response": []
+				},
+				{
+					"name": "Run Statutory Gap Analysis",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{auth_token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/ai-copilot/gap-analysis",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "ai-copilot", "gap-analysis"]
+						},
+						"description": "Evaluates tenant RoPA, vendor DPAs, and DPIAs for statutory non-conformities."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Immutable AI Decision Ledger",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{auth_token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/ai-copilot/audit-ledger",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "ai-copilot", "audit-ledger"]
+						},
+						"description": "Fetches SHA-256 tamper-proof hash ledger of autonomous AI actions."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "6. Ketch-Style Cookie CMP & Consent Suite",
+			"item": [
+				{
+					"name": "Get Cookie Banner Configuration",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{auth_token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/cookies/config",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "cookies", "config"]
+						},
+						"description": "Fetches layout, position, theme colors, and category rules for consent banner."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Cookie Banner Configuration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" },
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{auth_token}}" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"banner_position\": \"bottom_right\",\n    \"theme_color\": \"#059669\",\n    \"enable_gpc\": true,\n    \"auto_block_scripts\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/cookies/config",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "cookies", "config"]
+						},
+						"description": "Saves CMP banner styling and zero-GTM blocking settings."
+					},
+					"response": []
+				},
+				{
+					"name": "Get CMP Telemetry & Analytics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{ "key": "Accept", "value": "application/json" },
+							{ "key": "Authorization", "value": "Bearer {{auth_token}}" }
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/cookies/analytics",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "cookies", "analytics"]
+						},
+						"description": "Returns opt-in rates, GPC signal recognitions, and category-level consent breakdowns."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000"
+		},
+		{
+			"key": "auth_token",
+			"value": ""
+		},
+		{
+			"key": "champion_token",
+			"value": ""
+		}
+	]
+}

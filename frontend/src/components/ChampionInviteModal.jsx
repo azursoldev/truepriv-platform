@@ -219,14 +219,25 @@ export default function ChampionInviteModal({ onNavigateBack }) {
                   <i className="fa-solid fa-circle-check text-emerald-600"></i>
                   <span>Invitation Link Generated:</span>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => handleCopy(latestInviteUrl, 'latest')}
-                  className="px-3 py-1 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-bold flex items-center gap-1"
-                >
-                  <i className="fa-solid fa-copy text-xs"></i>
-                  <span>{copiedToken === 'latest' ? 'Copied!' : 'Copy Link'}</span>
-                </button>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={latestInviteUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-3 py-1 bg-white hover:bg-slate-100 border border-emerald-300 text-emerald-900 rounded-lg text-xs font-bold flex items-center gap-1 shadow-2xs"
+                  >
+                    <i className="fa-solid fa-arrow-up-right-from-square text-xs text-emerald-700"></i>
+                    <span>Open Form</span>
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => handleCopy(latestInviteUrl, 'latest')}
+                    className="px-3 py-1 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-bold flex items-center gap-1 cursor-pointer"
+                  >
+                    <i className="fa-solid fa-copy text-xs"></i>
+                    <span>{copiedToken === 'latest' ? 'Copied!' : 'Copy Link'}</span>
+                  </button>
+                </div>
               </div>
               <div className="p-2.5 bg-white border border-emerald-200 rounded-xl text-[11px] font-mono text-slate-800 break-all select-all">
                 {latestInviteUrl}
@@ -288,10 +299,20 @@ export default function ChampionInviteModal({ onNavigateBack }) {
                     </div>
 
                     <div className="flex items-center gap-2 self-end sm:self-center">
+                      <a
+                        href={`${window.location.origin}/portal/champion-intake?token=${inv.invitation_token}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-2xs transition-colors"
+                        title="Open Intake Form in New Tab"
+                      >
+                        <i className="fa-solid fa-arrow-up-right-from-square text-xs text-slate-500"></i>
+                        <span>Open Form</span>
+                      </a>
                       <button
                         type="button"
                         onClick={() => handleCopy(`${window.location.origin}/portal/champion-intake?token=${inv.invitation_token}`, inv.id)}
-                        className="px-3 py-1.5 bg-white hover:bg-slate-200 border border-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-2xs transition-colors"
+                        className="px-3 py-1.5 bg-white hover:bg-slate-200 border border-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
                         title="Copy Invite URL"
                       >
                         <i className="fa-solid fa-copy text-xs text-purple-600"></i>
