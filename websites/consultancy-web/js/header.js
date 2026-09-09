@@ -15,7 +15,7 @@
   <!-- 3. Main Navigation Header -->
   <header class="header">
     <a href="index.html" class="brand-logo-link">
-      <img src="logo.jpg" alt="Amstel Consulting" class="brand-logo-img">
+      <img src="logo.png" alt="Amstel Consulting" class="brand-logo-img">
       <span class="brand-logo-text"><span class="brand-mstel">mstel</span> <span class="brand-consulting">Consulting</span></span>
     </a>
 
@@ -124,7 +124,7 @@
     <div class="mobile-nav-drawer">
       <div class="mobile-drawer-header">
         <a href="index.html" class="brand-logo-link">
-          <img src="logo.jpg" alt="Amstel Consulting" class="brand-logo-img">
+          <img src="logo.png" alt="Amstel Consulting" class="brand-logo-img">
           <span class="brand-logo-text"><span class="brand-mstel">mstel</span> <span class="brand-consulting">Consulting</span></span>
         </a>
         <button class="mobile-drawer-close" onclick="toggleMobileMenu()" aria-label="Close menu">&times;</button>
