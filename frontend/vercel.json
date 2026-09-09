@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://trueprivbackend-wj9dojck.b4a.run/api/:path*"
+      "destination": "https://asp-contacts-structured-accordingly.trycloudflare.com/api/:path*"
     },
     {
       "source": "/(.*)",
