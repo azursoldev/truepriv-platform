@@ -408,7 +408,7 @@
   };
 
   // Interactive Logic: Search Modal Triggering
-  window.openSearchModal = function () {
+  window.openSiteSearchModal = function () {
     const overlay = document.getElementById('siteSearchModal') || document.getElementById('searchModalOverlay');
     if (overlay) {
       overlay.classList.add('open');
@@ -418,26 +418,45 @@
         input.value = '';
         setTimeout(() => input.focus(), 80);
       }
-      window.renderDefaultQuickLinks();
+      if (typeof window.renderDefaultQuickLinks === 'function') {
+        window.renderDefaultQuickLinks();
+      }
     }
   };
 
-  window.closeSearchModal = function () {
+  window.closeSiteSearchModal = function () {
     const overlays = document.querySelectorAll('.search-modal-overlay');
     overlays.forEach(o => o.classList.remove('open'));
     document.body.style.overflow = '';
   };
 
+  window.openSearchModal = window.openSiteSearchModal;
+  window.closeSearchModal = window.closeSiteSearchModal;
+  window.executeSiteSearch = window.handleSearch;
+
+  // Global click handler for search trigger buttons
+  document.addEventListener('click', function (e) {
+    const trigger = e.target.closest('.header-search-trigger');
+    if (trigger) {
+      e.preventDefault();
+      window.openSiteSearchModal();
+    }
+  });
+
   // Global Event Delegations: Input, Enter key & Escape
   document.addEventListener('input', function (e) {
     if (e.target && (e.target.id === 'siteSearchInput' || e.target.classList.contains('search-input'))) {
-      window.handleSearch(e.target.value);
+      if (typeof window.executeSiteSearch === 'function') {
+        window.executeSiteSearch(e.target.value);
+      } else if (typeof window.handleSearch === 'function') {
+        window.handleSearch(e.target.value);
+      }
     }
   });
 
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
-      window.closeSearchModal();
+      window.closeSiteSearchModal();
       const overlay = document.getElementById('mobileNavOverlay');
       if (overlay && overlay.classList.contains('open')) {
         window.toggleMobileMenu();
@@ -454,4 +473,5 @@
     }
   });
 })();
+
 

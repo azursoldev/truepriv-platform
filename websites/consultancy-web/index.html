@@ -2949,8 +2949,8 @@
 
   <script>
     function openSearchModal() {
-      if (typeof window.openSearchModal === 'function') {
-        window.openSearchModal();
+      if (typeof window.openSiteSearchModal === 'function') {
+        window.openSiteSearchModal();
         return;
       }
       const modal = document.getElementById('siteSearchModal');
@@ -2965,8 +2965,8 @@
     }
 
     function closeSearchModal() {
-      if (typeof window.closeSearchModal === 'function') {
-        window.closeSearchModal();
+      if (typeof window.closeSiteSearchModal === 'function') {
+        window.closeSiteSearchModal();
         return;
       }
       const modal = document.getElementById('siteSearchModal');
@@ -2977,8 +2977,8 @@
     }
 
     function handleSearch(val) {
-      if (typeof window.handleSearch === 'function') {
-        window.handleSearch(val);
+      if (typeof window.executeSiteSearch === 'function') {
+        window.executeSiteSearch(val);
       }
     }
   </script>
