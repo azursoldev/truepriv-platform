@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Data Protection Training & Capacity Building | Amstel Consulting</title>
-  <meta name="description" content="Certified NDPA 2023 data protection training, executive boardroom masterclasses, DPO certification bootcamps, and staff awareness simulations.">
-  <link rel="canonical" href="https://consultancy-web-virid-seven.vercel.app/service-training.html">
+  <title>Cookie & Consent Compliance | Amstel Consulting</title>
+  <meta name="description" content="Zero-party consent engineering, website banner auditing, SDK tracking telemetry audits, and lawful consent registers compliant with NDPA 2023.">
+  <link rel="canonical" href="https://consultancy-web-virid-seven.vercel.app/service-cookie.html">
   <link rel="icon" type="image/jpeg" href="logo.png">
 
   <!-- Google Fonts: Georgia/Times serif, Inter sans-serif, JetBrains Mono -->
@@ -46,20 +46,6 @@
 
     a { text-decoration: none; color: inherit; }
 
-    .top-bar {
-      background: var(--pwc-white);
-      border-bottom: 1px solid var(--pwc-gray-border);
-      padding: 0.35rem 3.5rem;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 2rem;
-      font-size: 0.78rem;
-      color: var(--pwc-gray-text);
-    }
-    .top-bar-item { color: var(--pwc-gray-text); transition: color 0.2s; display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 500; }
-    .top-bar-item:hover { color: var(--pwc-orange); }
-
     .header {
       position: sticky;
       top: 0;
@@ -73,7 +59,7 @@
       align-items: center;
     }
 
-        .main-nav { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
+    .main-nav { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
     .main-nav > li { position: relative; }
     .main-nav a {
       color: var(--pwc-charcoal);
@@ -91,235 +77,10 @@
     .nav-chevron { font-size: 0.65rem; color: #94a3b8; transition: transform 0.2s ease; }
     .main-nav > li:hover .nav-chevron { transform: rotate(180deg); color: var(--pwc-charcoal); }
 
-    .btn-contact-nav {
-      background: var(--pwc-charcoal);
-      color: var(--pwc-white) !important;
-      font-size: 0.85rem !important;
-      font-weight: 700 !important;
-      padding: 0.55rem 1.25rem !important;
-      border-radius: 9999px !important;
-      transition: all 0.2s ease !important;
-    }
-
-    .btn-contact-nav:hover {
-      background: var(--pwc-orange) !important;
-      color: var(--pwc-white) !important;
-    }
-
-    .simple-dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 320px;
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.04);
-      padding: 1rem;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(10px);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 1000;
-      pointer-events: none;
-    }
-
-    .simple-dropdown-menu::before {
-      content: '';
-      position: absolute;
-      top: -16px;
-      left: 0;
-      right: 0;
-      height: 16px;
-    }
-
-    .main-nav > li:hover .simple-dropdown-menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(6px);
-      pointer-events: auto;
-    }
-
-    .simple-dropdown-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-    }
-
-    .simple-dropdown-list li a {
-      display: flex !important;
-      align-items: center !important;
-      gap: 0.75rem !important;
-      padding: 0.6rem 0.75rem !important;
-      font-size: 0.9rem !important;
-      font-weight: 600 !important;
-      color: #1e293b !important;
-      border-radius: 6px !important;
-      background: transparent !important;
-      transition: all 0.15s ease !important;
-    }
-
-    .simple-dropdown-list li a:hover {
-      background: #fff5ee !important;
-      color: var(--pwc-orange) !important;
-      padding-left: 0.95rem !important;
-    }
-
-    .simple-dropdown-list li a i {
-      color: var(--pwc-orange);
-      font-size: 0.85rem;
-      width: 16px;
-      text-align: center;
-    }
-
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 0.55rem 0.8rem;
-      color: var(--pwc-charcoal);
-      font-size: 1.15rem;
-      cursor: pointer;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-      transition: all 0.2s ease;
-      font-weight: 700;
-    }
-
-    .mobile-menu-btn:hover {
-      background: #f8fafc;
-      color: var(--pwc-orange);
-      border-color: var(--pwc-orange);
-    }
-
-    .mobile-nav-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(15, 23, 42, 0.65);
-      backdrop-filter: blur(4px);
-      z-index: 2000;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .mobile-nav-overlay.open {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .mobile-nav-drawer {
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      width: 88vw;
-      max-width: 380px;
-      background: #ffffff;
-      z-index: 2010;
-      transform: translateX(100%);
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      display: flex;
-      flex-direction: column;
-      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
-    }
-
-    .mobile-nav-overlay.open .mobile-nav-drawer {
-      transform: translateX(0);
-    }
-
-    .mobile-drawer-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.25rem 1.5rem;
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    .mobile-drawer-close {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      color: #64748b;
-      cursor: pointer;
-      padding: 0.25rem 0.5rem;
-      line-height: 1;
-    }
-
-    .mobile-drawer-body {
-      flex: 1;
-      overflow-y: auto;
-      padding: 1.25rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .mobile-nav-group-title {
-      font-size: 0.75rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #94a3b8;
-      margin-bottom: 0.5rem;
-    }
-
-    .mobile-nav-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .mobile-nav-links li a {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.55rem 0.75rem;
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: #1e293b;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: all 0.15s ease;
-    }
-
-    .mobile-nav-links li a:hover {
-      background: #fff5ee;
-      color: var(--pwc-orange);
-    }
-
-    .mobile-drawer-footer {
-      padding: 1.25rem 1.5rem;
-      border-top: 1px solid #e2e8f0;
-      background: #fafafa;
-    }
-
-    .btn-mobile-car {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      width: 100%;
-      background: var(--pwc-orange);
-      color: #ffffff;
-      font-weight: 700;
-      font-size: 0.95rem;
-      padding: 0.85rem;
-      border-radius: 9999px;
-      text-decoration: none;
-      box-shadow: 0 4px 12px rgba(235, 95, 7, 0.25);
-    }
-
     .mega-dropdown-menu {
       position: absolute;
-      top: 100%; left: 0; width: 620px;
+      top: 100%; left: 0; width: 580px;
+      max-width: 92vw;
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 12px;
@@ -332,7 +93,7 @@
     }
     .mega-dropdown-menu::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
     .main-nav > li:hover .mega-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(6px); pointer-events: auto; }
-    .mega-dropdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .mega-dropdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
     .mega-col-heading { font-size: 0.82rem; font-weight: 700; color: #64748b; margin-bottom: 1.25rem; letter-spacing: 0.3px; }
     .mega-subnav-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
     .mega-subnav-list li a {
@@ -948,21 +709,22 @@
 
     /* 16. Footer */
     .pwc-footer { background: var(--pwc-charcoal); color: #ffffff; padding: 4.5rem 0 2.5rem; border-top: 1px solid #3d3d3d; font-size: 0.88rem; }
-    .pwc-footer-container { max-width: 1280px; margin: 0 auto; padding: 0 3.5rem; }
-    .pwc-footer-columns { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 3.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    .footer-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; margin-bottom: 3.5rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
     .footer-col h5 { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem; color: #ffffff; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
     .footer-col a { color: #94a3b8; transition: color 0.2s; font-size: 0.85rem; }
     .footer-col a:hover { color: var(--pwc-orange); }
-    .pwc-footer-bottom { display: flex; justify-content: space-between; align-items: center; color: #94a3b8; font-size: 0.8rem; flex-wrap: wrap; gap: 1.5rem; padding-top: 2rem; }
-    .pwc-footer-bottom a { color: #94a3b8; text-decoration: none; }
-    .pwc-footer-bottom a:hover { color: var(--pwc-orange); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; color: #64748b; font-size: 0.8rem; flex-wrap: wrap; gap: 1.5rem; }
 
     @media (max-width: 1024px) {
-      .top-bar { padding: 0.35rem 1.5rem; }
       .header { padding: 0.75rem 1.5rem; }
-      .main-nav { display: none; }
-      .mobile-menu-btn { display: inline-flex; }
+      .industries-mega-dropdown { width: 92vw; left: -10vw; padding: 1.5rem; }
+      .ind-mega-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .ind-featured-col { border-left: none; padding-left: 0; border-top: 1px solid #e2e8f0; padding-top: 1.25rem; grid-column: span 2; }
+      .org-mega-dropdown { width: 92vw; left: -30vw; padding: 1.5rem; }
+      .org-mega-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .org-featured-col { border-left: none; padding-left: 0; border-top: 1px solid #e2e8f0; padding-top: 1.25rem; grid-column: span 2; }
+
       .split-intro-grid, .pwc-tab-pane, .faq-grid, .focus-split-grid, .process-feature-split, .case-study-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .staggered-columns-wrap { grid-template-columns: 1fr; }
       .stagger-col { height: auto !important; }
@@ -970,15 +732,287 @@
       .twin-cards-grid { grid-template-columns: 1fr; }
       .insights-4col-grid { grid-template-columns: 1fr 1fr; }
       .contacts-2col-grid { grid-template-columns: 1fr; }
-      .pwc-footer-columns { grid-template-columns: 1fr 1fr; }
-      .pwc-footer-container { padding: 0 1.5rem; }
+      .footer-cols { grid-template-columns: 1fr 1fr; }
       .page-main-headline { font-size: 2.8rem; }
     }
     @media (max-width: 640px) {
+      .main-nav { display: none; }
       .insights-4col-grid { grid-template-columns: 1fr; }
-      .pwc-footer-columns { grid-template-columns: 1fr; }
+      .footer-cols { grid-template-columns: 1fr; }
       .process-steps-nav { grid-template-columns: 1fr 1fr; }
     }
+  
+        .btn-contact-nav {
+      background: var(--pwc-charcoal);
+      color: var(--pwc-white) !important;
+      font-size: 0.85rem !important;
+      font-weight: 700 !important;
+      padding: 0.55rem 1.25rem !important;
+      border-radius: 9999px !important;
+      transition: all 0.2s ease !important;
+    }
+
+    .btn-contact-nav:hover {
+      background: var(--pwc-orange) !important;
+      color: var(--pwc-white) !important;
+    }
+
+    .simple-dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 320px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.04);
+      padding: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .simple-dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: 0;
+      right: 0;
+      height: 16px;
+    }
+
+    .main-nav > li:hover .simple-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(6px);
+      pointer-events: auto;
+    }
+
+    .simple-dropdown-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .simple-dropdown-list li a {
+      display: flex !important;
+      align-items: center !important;
+      gap: 0.75rem !important;
+      padding: 0.6rem 0.75rem !important;
+      font-size: 0.9rem !important;
+      font-weight: 600 !important;
+      color: #1e293b !important;
+      border-radius: 6px !important;
+      background: transparent !important;
+      transition: all 0.15s ease !important;
+    }
+
+    .simple-dropdown-list li a:hover {
+      background: #fff5ee !important;
+      color: var(--pwc-orange) !important;
+      padding-left: 0.95rem !important;
+    }
+
+    .simple-dropdown-list li a i {
+      color: var(--pwc-orange);
+      font-size: 0.85rem;
+      width: 16px;
+      text-align: center;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 0.55rem 0.8rem;
+      color: var(--pwc-charcoal);
+      font-size: 1.15rem;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+      font-weight: 700;
+    }
+
+    .mobile-menu-btn:hover {
+      background: #f8fafc;
+      color: var(--pwc-orange);
+      border-color: var(--pwc-orange);
+    }
+
+    .mobile-nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-nav-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-nav-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 88vw;
+      max-width: 380px;
+      background: #ffffff;
+      z-index: 2010;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .mobile-nav-overlay.open .mobile-nav-drawer {
+      transform: translateX(0);
+    }
+
+    .mobile-drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .mobile-drawer-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #64748b;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      line-height: 1;
+    }
+
+    .mobile-drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .mobile-nav-group-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #94a3b8;
+      margin-bottom: 0.5rem;
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .mobile-nav-links li a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.55rem 0.75rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #1e293b;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.15s ease;
+    }
+
+    .mobile-nav-links li a:hover {
+      background: #fff5ee;
+      color: var(--pwc-orange);
+    }
+
+    .mobile-drawer-footer {
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid #e2e8f0;
+      background: #fafafa;
+    }
+
+    .btn-mobile-car {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      background: var(--pwc-orange);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.85rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(235, 95, 7, 0.25);
+    }
+
+    .pwc-footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 3.5rem;
+    }
+
+    .pwc-footer-columns {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr;
+      gap: 2.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .pwc-footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding-top: 2rem;
+    }
+
+    .pwc-footer-bottom a {
+      color: #94a3b8;
+      text-decoration: none;
+    }
+
+    .pwc-footer-bottom a:hover {
+      color: var(--pwc-orange);
+    }
+
+    @media (max-width: 1024px) {
+      .header .main-nav { display: none !important; }
+      .mobile-menu-btn { display: inline-flex !important; }
+      .pwc-footer-columns { grid-template-columns: 1fr 1fr !important; }
+      .pwc-footer-container { padding: 0 1.5rem !important; }
+    }
+
+    @media (max-width: 640px) {
+      .pwc-footer-columns { grid-template-columns: 1fr !important; }
+    }
+
   
     
     /* ==========================================================================
@@ -1433,6 +1467,574 @@
   <script src="js/header.js"></script>
 
   
+
+  <!-- Main Content Container -->
+  <main class="pwc-detail-container">
+
+    <!-- 1. TOP TITLE & PwC HERO BANNER -->
+    <section class="page-title-section">
+      <div class="breadcrumbs-detail">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <a href="index.html#services">Services</a>
+        <span>/</span>
+        <span>Cookie & Consent Compliance</span>
+      </div>
+
+      <h1 class="page-main-headline">Cookie & Consent Compliance</h1>
+
+      <div class="hero-banner-wrap">
+        <img src="assets/services/service-cookie.jpg" alt="Cookie and Consent Compliance Dashboard" class="hero-banner-img">
+        <div class="pwc-orange-polygon">
+          <span>Zero-Party Consent Architecture & Auditable Telemetry Assurance</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. EXECUTIVE OVERVIEW SPLIT BLOCK -->
+    <section class="split-intro-section">
+      <div class="split-intro-grid">
+        <div class="split-intro-left">
+          <h2>Neutralize unconsented tracker liabilities and engineer auditable digital trust</h2>
+          <p>
+            In modern digital business, hidden tracking pixels, third-party analytics scripts, and behavioral adtech cookies represent an immediate statutory vulnerability. Under Sections 25 and 26 of the Nigeria Data Protection Act (NDPA) 2023, data processing based on consent requires freely given, specific, informed, and unambiguous affirmative action.
+          </p>
+          <p>
+            Amstel Consulting deploys advanced Consent Management Platform (CMP) engineering paired with rigorous headless browser telemetry audits. We identify rogue trackers, eliminate deceptive dark patterns, enforce strict script blocking before consent, and generate cryptographically verifiable proof-of-consent registers.
+          </p>
+          <ul class="bullet-check-list">
+            <li><i class="fa-solid fa-circle-check"></i> Zero-dark-pattern CMP deployment compliant with NDPC statutory guidelines</li>
+            <li><i class="fa-solid fa-circle-check"></i> Deep telemetry script sweeping across web properties and mobile SDKs</li>
+            <li><i class="fa-solid fa-circle-check"></i> Tamper-evident proof-of-consent logs formatted for annual CAR statutory audit</li>
+          </ul>
+          <a href="contact.html?service=cookie" class="btn-pwc-orange">
+            <span>Request Telemetry & Cookie Audit</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+        <div class="split-intro-right">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=80" alt="Legal drafting consultation">
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TABBED DEEP-DIVE SECTION -->
+    <section class="tabs-section">
+      <h2 class="tabs-section-title">The 4 Pillars of Enterprise Consent Architecture</h2>
+      
+      <div class="pwc-nav-tabs">
+        <button class="pwc-tab-btn active" onclick="switchTab(event, 'tab-consumer')">1. CMP Architecture</button>
+        <button class="pwc-tab-btn" onclick="switchTab(event, 'tab-b2b')">2. Telemetry Sweeping</button>
+        <button class="pwc-tab-btn" onclick="switchTab(event, 'tab-internal')">3. Proof-of-Consent Logs</button>
+        <button class="pwc-tab-btn" onclick="switchTab(event, 'tab-retention')">4. Mobile App SDKs</button>
+      </div>
+
+      <div id="tab-consumer" class="pwc-tab-pane active">
+        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1000&q=80" alt="Customer Privacy Notices" class="tab-pane-img">
+        <div class="tab-pane-content">
+          <h3>Consent Management Platform (CMP) Engineering</h3>
+          <p>Zero-dark-pattern banner architectures designed for high opt-in compliance without deceptive design. Enforces granular category selection (Essential, Analytics, Marketing, Functional) with strict client-side tag blocking until user action.</p>
+          <a href="contact.html?service=cookie" class="btn-pwc-orange">
+            <span>Deploy Enterprise CMP</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div id="tab-b2b" class="pwc-tab-pane">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1000&q=80" alt="B2B Vendor DPAs" class="tab-pane-img">
+        <div class="tab-pane-content">
+          <h3>Automated Telemetry & Tag Sweeping</h3>
+          <p>Continuous dynamic scanning of websites to uncover zombie tags, unapproved advertising pixels (Meta, Google, TikTok, LinkedIn), iframe exfiltration, and third-party data leakage that bypass standard firewalls.</p>
+          <a href="service-audit.html" class="btn-pwc-orange">
+            <span>Schedule Telemetry Sweep</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div id="tab-internal" class="pwc-tab-pane">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80" alt="Internal Employee Charters" class="tab-pane-img">
+        <div class="tab-pane-content">
+          <h3>Cryptographic Proof-of-Consent Logging</h3>
+          <p>Immutable, time-stamped consent receipts recording the exact banner version, user consent choices, IP anonymization state, and timestamp. Fully audit-ready for statutory NDPC GAID regulatory inspection.</p>
+          <a href="contact.html?service=cookie" class="btn-pwc-orange">
+            <span>Inspect Consent Ledgers</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div id="tab-retention" class="pwc-tab-pane">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80" alt="Data Retention Charters" class="tab-pane-img">
+        <div class="tab-pane-content">
+          <h3>Mobile Application SDK Governance</h3>
+          <p>Full-stack consent orchestration for iOS and Android native apps. Seamlessly bridges Apple App Tracking Transparency (ATT) and Android Privacy Sandbox with NDPA statutory requirements for consumer telemetry.</p>
+          <a href="service-cyber.html" class="btn-pwc-orange">
+            <span>Audit Mobile App SDKs</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. INTERACTIVE FAQ ACCORDION + TALL DISPLAY PHOTO -->
+    <section class="faq-section">
+      <div class="faq-grid">
+        <div>
+          <h2>Frequently Asked Questions</h2>
+          <div class="accordion-list">
+            
+            <div class="accordion-item open">
+              <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>Are pre-ticked cookie checkboxes legal under NDPA 2023?</span>
+                <i class="fa-solid fa-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Strictly prohibited. Under Section 26 of the NDPA 2023, consent must represent a clear affirmative action. Pre-ticked checkboxes, forced cookie walls, or implicit consent through scrolling are categorized as regulatory non-compliance by the NDPC.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>Can Google Analytics or Meta Pixels load before the user clicks Accept?</span>
+                <i class="fa-solid fa-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                No. Non-essential tracking scripts must be technically blocked from executing until the visitor provides explicit opt-in consent. Amstel Consulting integrates conditional script loaders ensuring zero data is transmitted prematurely.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>How does cookie telemetry impact our annual CAR statutory filing?</span>
+                <i class="fa-solid fa-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Telemetry and consent compliance are directly scored under Domain 2 (Lawful Grounds & Transparency) of the NDPC General Application and Implementation Directive (GAID). Documented proof of consent is mandatory to achieve full accreditation marks.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>Do mobile apps require consent banners under Nigerian law?</span>
+                <i class="fa-solid fa-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Yes. Any mobile application collecting device advertising identifiers (IDFA/GAID), biometric telemetry, precise GPS coordinates, or third-party analytics must present an in-app consent disclosure before accessing device sensors or sending telemetry.
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div>
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80" alt="Legal drafting dashboard" class="faq-tall-img">
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. FOCUS SPLIT BLOCK -->
+    <section class="focus-split-section">
+      <div class="focus-split-grid">
+        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1000&q=80" alt="Legal gavel and contracts">
+        <div>
+          <h3>Eliminate Deceptive Dark Patterns & Invisible Tag Exfiltration</h3>
+          <p>
+            Regulators worldwide and the NDPC are aggressively cracking down on deceptive cookie banners that make rejecting cookies harder than accepting them. Sub-second tracking pixels frequently leak personal data to offshore data brokers without authorization.
+          </p>
+          <p>
+            Amstel Consulting engineers transparent, frictionless user experiences that maximize legitimate consent capture while maintaining complete technical defensibility under statutory privacy audits.
+          </p>
+          <a href="service-cyber.html" class="btn-pwc-outline">
+            <span>Explore Cyber & Security Audits &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. TWIN HIGHLIGHT BOXES -->
+    <section class="twin-cards-section">
+      <div class="twin-cards-grid">
+        <div class="twin-peach-card">
+          <div>
+            <h3>Policy Diagnostic Audit</h3>
+            <p>Commission a rapid 72-hour diagnostic review of your current public website terms, customer consent notices, and mobile app disclaimers.</p>
+          </div>
+          <a href="contact.html?service=policies" class="btn-pwc-orange" style="align-self: flex-start;">
+            <span>Request Diagnostic Review</span>
+          </a>
+        </div>
+
+        <div class="twin-peach-card">
+          <div>
+            <h3>Turnkey B2B DPA Pack</h3>
+            <p>Obtain an institutional suite of controller-processor agreements and sub-processor schedules ready for enterprise vendor negotiations.</p>
+          </div>
+          <a href="contact.html?service=policies" class="btn-pwc-orange" style="align-self: flex-start;">
+            <span>Download DPA Framework</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. PROCESS STEPS -->
+    <section class="process-section">
+      <h2>Our 4-Phase Policy Modernization Lifecycle</h2>
+      
+      <div class="process-steps-nav">
+        <div class="step-nav-item active">
+          <div class="step-icon-wrap"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <div class="step-nav-title">Phase 01: Ingestion Mapping</div>
+        </div>
+        <div class="step-nav-item">
+          <div class="step-icon-wrap"><i class="fa-solid fa-pen-nib"></i></div>
+          <div class="step-nav-title">Phase 02: Legal Drafting</div>
+        </div>
+        <div class="step-nav-item">
+          <div class="step-icon-wrap"><i class="fa-solid fa-gavel"></i></div>
+          <div class="step-nav-title">Phase 03: Executive Review</div>
+        </div>
+        <div class="step-nav-item">
+          <div class="step-icon-wrap"><i class="fa-solid fa-globe"></i></div>
+          <div class="step-nav-title">Phase 04: Deployment</div>
+        </div>
+      </div>
+
+      <div class="process-feature-split">
+        <img src="https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?auto=format&fit=crop&w=1000&q=80" alt="Executive review meeting">
+        <div>
+          <h3>Plain Language Combined with Uncompromised Legal Rigor</h3>
+          <p>
+            Regulatory authorities reject opaque, confusing legal jargon. Our drafting methodology prioritizes readable, modular privacy notices that earn consumer trust while offering unbreakable protection in court.
+          </p>
+          <a href="contact.html?service=policies" class="btn-pwc-outline">
+            <span>Speak with DPCO Legal Counsel &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. STAGGERED 3-LEVEL MATURITY PILLARS -->
+    <section class="pillars-section">
+      <h2>Where do your privacy policies stand on the institutional curve?</h2>
+      <p class="sub-lead">Benchmark your documentation against the 3 recognized stages of enterprise regulatory maturity in Nigeria.</p>
+
+      <div class="staggered-columns-wrap">
+        
+        <div class="stagger-col stagger-1">
+          <div>
+            <span class="stagger-badge">STAGE 01 &bull; FOUNDATION</span>
+            <h3>Static Web Notice</h3>
+            <p>A generic foreign terms template copied from another site. No documented retention schedules, missing NDPA statutory rights, and zero vendor agreements.</p>
+          </div>
+          <ul class="stagger-points">
+            <li><i class="fa-solid fa-check"></i> Basic website footer disclaimer</li>
+            <li><i class="fa-solid fa-check"></i> Vague purpose statements</li>
+            <li><i class="fa-solid fa-check"></i> High regulatory audit vulnerability</li>
+          </ul>
+        </div>
+
+        <div class="stagger-col stagger-2">
+          <div>
+            <span class="stagger-badge">STAGE 02 &bull; SCALED</span>
+            <h3>Statutory Compliance</h3>
+            <p>Comprehensive NDPA Section 27 compliant notices across portals, standardized vendor DPAs with audit rights, and employee privacy handbooks.</p>
+          </div>
+          <ul class="stagger-points">
+            <li><i class="fa-solid fa-check"></i> Explicit lawful processing bases</li>
+            <li><i class="fa-solid fa-check"></i> Binding third-party processor covenants</li>
+            <li><i class="fa-solid fa-check"></i> Formal DSAR complaint protocol</li>
+            <li><i class="fa-solid fa-check"></i> Certified DPCO legal sign-off</li>
+          </ul>
+        </div>
+
+        <div class="stagger-col stagger-3">
+          <div>
+            <span class="stagger-badge">STAGE 03 &bull; INDUSTRY LEADER</span>
+            <h3>Dynamic Digital Trust</h3>
+            <p>Multi-layered contextual notices integrated into user journeys, automated consent synchronization with Truepriv SaaS, and cross-border adequacy compliance.</p>
+          </div>
+          <ul class="stagger-points">
+            <li><i class="fa-solid fa-check"></i> In-app dynamic preference centers</li>
+            <li><i class="fa-solid fa-check"></i> Real-time consent revocations</li>
+            <li><i class="fa-solid fa-check"></i> Cross-border BCR / SCC architecture</li>
+            <li><i class="fa-solid fa-check"></i> Flawless NDPC regulatory scorecard</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 9. 3 VALUE PILLAR CARDS WITH HEXAGONS -->
+    <section class="hex-section">
+      <h2>How our legal practice protects your enterprise</h2>
+      <div class="hex-cards-grid">
+        
+        <div class="hex-card">
+          <div class="pwc-hex-icon"><i class="fa-solid fa-file-shield"></i></div>
+          <h3>NDPA Section 27 Rigor</h3>
+          <p>Drafted specifically to reflect Nigeria’s statutory privacy landscape, regulatory reporting obligations, and judicial standards.</p>
+          <a href="service-car.html" class="btn-pwc-orange" style="width: 100%; justify-content: center;">
+            <span>CAR Alignment</span>
+          </a>
+        </div>
+
+        <div class="hex-card">
+          <div class="pwc-hex-icon"><i class="fa-solid fa-handshake"></i></div>
+          <h3>Contractual Shielding</h3>
+          <p>Insulate your organization from vendor negligence with indemnities, liability caps, and certified sub-processor disclosures.</p>
+          <a href="service-audit.html" class="btn-pwc-orange" style="width: 100%; justify-content: center;">
+            <span>Vendor Audit</span>
+          </a>
+        </div>
+
+        <div class="hex-card">
+          <div class="pwc-hex-icon"><i class="fa-solid fa-passport"></i></div>
+          <h3>Licensed DPCO Assurance</h3>
+          <p>Every policy drafted or reviewed by Amstel Consulting bears our official DPCO license seal for authoritative verification.</p>
+          <a href="organisation.html#governance" class="btn-pwc-orange" style="width: 100%; justify-content: center;">
+            <span>Our Credentials</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 10. CALLOUT BAR -->
+    <section class="callout-bar-section">
+      <div class="callout-bar-inner">
+        <h3>Are your privacy policies and vendor contracts legally enforceable today?</h3>
+        <a href="contact.html?service=policies" class="btn-pwc-orange">
+          <span>Book Policy Review &rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 11. CASE STUDY -->
+    <section class="case-study-section">
+      <div class="case-study-grid">
+        <div class="case-study-left">
+          <h2>Case Study: Modernizing HealthTech Patient Consent & Cloud DPAs</h2>
+          <p>
+            A national electronic medical records (EMR) provider managing health records across 40 hospital networks needed to reconcile strict patient confidentiality with third-party telemedicine integrations.
+          </p>
+          <p>
+            Amstel Consulting drafted customized patient consent flows, healthcare professional non-disclosure covenants, and multi-tier cloud vendor DPAs compliant with NDPA Section 28 (Sensitive Personal Data) and federal healthcare regulations, eliminating civil litigation risk.
+          </p>
+          <a href="contact.html" class="btn-pwc-orange">
+            <span>Read Healthcare Case Study</span>
+          </a>
+        </div>
+        <div class="case-study-right">
+          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80" alt="Healthcare medical records meeting">
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. ACCREDITATION -->
+    <section class="accreditation-section">
+      <div class="accreditation-wrap">
+        <div class="accreditation-seal">
+          <span class="small">LICENSED</span>
+          <span class="big">DPCO</span>
+          <span class="small">NDPC / 2026</span>
+        </div>
+        <div class="accreditation-text">
+          <p>
+            <strong>Accredited Legal Drafting Authority:</strong> Amstel Consulting Nigeria is fully certified and licensed by the Nigeria Data Protection Commission (NDPC). All policy frameworks, contractual addenda, and notices prepared by our practice meet statutory compliance under the NDPA 2023.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 14. KEY CONTACTS -->
+    <section class="key-contacts-section">
+      <h2>Key practice contacts</h2>
+      <div class="contacts-2col-grid">
+        
+        <div class="expert-card">
+          <div class="expert-avatar">CE</div>
+          <div class="expert-info">
+            <h3>Barr. Chimaobi Eze</h3>
+            <div class="expert-role">Senior Partner &bull; Licensed DPCO Director & Counsel</div>
+            <a href="contact.html?service=policies" class="expert-link">
+              <span>Contact partner</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="expert-card">
+          <div class="expert-avatar">BS</div>
+          <div class="expert-info">
+            <h3>Engr. Babatunde Sanusi</h3>
+            <div class="expert-role">Partner &bull; Enterprise Tech & Data Architecture</div>
+            <a href="contact.html?service=policies" class="expert-link">
+              <span>Contact partner</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 15. CLOSING BANNER -->
+  <section class="closing-hero-wrap">
+    <img src="https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=1600&q=80" alt="Legal leadership" class="closing-hero-bg">
+    <div class="pwc-detail-container">
+      <div class="closing-hero-content">
+        <span class="closing-kicker">We protect your legal standing</span>
+        <h2 class="closing-title">so you can <span class="orange">transact, innovate, and partner with certainty.</span></h2>
+        <a href="contact.html" class="btn-pwc-orange">
+          <span>Schedule Legal Scoping</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16. FOOTER -->
+    <!-- ==========================================================================
+       PwC MULTI-COLUMN MEGA FOOTER (Standardized Across All Pages)
+       ========================================================================== -->
+    <!-- ==========================================================================
+       PwC MULTI-COLUMN MEGA FOOTER (Standardized Across All Pages)
+       ========================================================================== -->
+    <!-- ==========================================================================
+       PwC MULTI-COLUMN MEGA FOOTER (Standardized Across All Pages)
+       ========================================================================== -->
+    <!-- ==========================================================================
+       PwC MULTI-COLUMN MEGA FOOTER (Standardized Across All Pages)
+       ========================================================================== -->
+    <!-- ==========================================================================
+       PwC MULTI-COLUMN MEGA FOOTER (Standardized Across All Pages)
+       ========================================================================== -->
+  <footer class="pwc-footer">
+    <div class="pwc-footer-container">
+      <div class="pwc-footer-columns">
+        
+        <!-- Col 1: Services -->
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="service-car.html">Compliance Audit Return (CAR)</a></li>
+            <li><a href="service-audit.html">Data Protection Audit</a></li>
+            <li><a href="service-training.html">Data Protection Training</a></li>
+            <li><a href="service-policies.html">Privacy Policies &amp; Notices</a></li>
+            <li><a href="service-ropa.html">ROPA Data Lineage</a></li>
+            <li><a href="service-dpia.html">DPIA &amp; LIA Assessments</a></li>
+            <li><a href="service-dpo.html">Outsourced DPO</a></li>
+            <li><a href="service-cyber.html">Cybersecurity &amp; Pen-Testing</a></li>
+            <li><a href="service-cookie.html">Cookie Consent Compliance</a></li>
+            <li><a href="service-ai.html">AI Consulting &amp; Governance</a></li>
+            <li><a href="service-gov.html">Corporate Governance</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 2: Blog -->
+        <div class="footer-col">
+          <h5>Blog</h5>
+          <ul>
+            <li><a href="topics.html#ai-business">Artificial Intelligence for Business</a></li>
+            <li><a href="topics.html#cybersecurity">Cyber Security</a></li>
+            <li><a href="topics.html#ndpa-laws">Data Protection Laws</a></li>
+            <li><a href="topics.html#risks">Risks</a></li>
+            <li><a href="topics.html#ndpc-updates">Regulatory Guidance</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Our Organisation & Regulatory Filings -->
+        <div class="footer-col">
+          <h5>Our Organisation</h5>
+          <ul>
+            <li><a href="organisation.html#board">Advisory Board</a></li>
+            <li><a href="organisation.html#consultants">Consultants</a></li>
+            <li><a href="organisation.html#values">Purpose &amp; Values</a></li>
+            <li><a href="organisation.html#governance">Licensed DPCO Credentials</a></li>
+            <li><a href="service-training.html#faq">Frequently Asked Questions (FAQ)</a></li>
+            <li><a href="service-car.html" style="color: var(--pwc-orange); font-weight: 700;">File CAR Before Deadline to Avoid Penalty &rarr;</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Legal -->
+        <div class="footer-col">
+          <h5>Legal</h5>
+          <ul>
+            <li><a href="service-policies.html">Privacy Statement</a></li>
+            <li><a href="service-policies.html#cookies">Cookie Policy</a></li>
+            <li><a href="contact.html">Legal Disclaimer</a></li>
+            <li><a href="contact.html">Terms and Conditions</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Bar with Logo & Legal -->
+      <div class="pwc-footer-bottom">
+        <div class="footer-logo-wrap">
+          <img src="logo.png" alt="Amstel Consulting" class="brand-logo-img">
+          <span class="brand-logo-text"><span class="brand-mstel">mstel</span> <span class="brand-consulting">Consulting</span></span>
+        </div>
+        <div style="max-width: 620px; line-height: 1.5;">
+          Licensed as a Data Protection Compliance Organization (DPCO) by the National Data Protection Commission | License No: DPCO/XXXX/2026. &copy; 2026 Amstel Consulting Nigeria. All rights reserved.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sitewide Sticky Footer Consultant Button -->
+  <div class="sticky-talk-consultant">
+    <a href="contact.html" class="sticky-talk-btn">
+      <i class="fa-solid fa-headset" style="color: var(--pwc-orange);"></i>
+      <span>Talk to Our Experienced Consultants for Free</span>
+    </a>
+  </div>
+
+  <!-- Search Modal Overlay -->
+  <div id="siteSearchModal" class="search-modal-overlay" onclick="if(event.target===this) closeSearchModal()">
+    <div class="search-modal-card">
+      <div class="search-input-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="siteSearchInput" placeholder="Search services, NDPA regulations, DPCO audit rules..." oninput="handleSearch(this.value)">
+        <button onclick="closeSearchModal()" class="search-close-btn">&times;</button>
+      </div>
+      <div id="searchResults" class="search-results-list">
+        <div class="search-quick-links">
+          <span>Quick links:</span>
+          <a href="service-car.html">Compliance Audit Return (CAR)</a>
+          <a href="service-dpo.html">Outsourced DPO</a>
+          <a href="service-audit.html">Data Protection Audit</a>
+          <a href="service-training.html">Data Protection Training</a>
+          <a href="topics.html#ndpa-laws">NDPA 2023 Statutory Laws</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function switchTab(e, tabId) {
+      document.querySelectorAll('.pwc-tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.pwc-tab-pane').forEach(pane => pane.classList.remove('active'));
+      e.currentTarget.classList.add('active');
+      const targetPane = document.getElementById(tabId);
+      if (targetPane) targetPane.classList.add('active');
+    }
+
+    function toggleAccordion(btn) {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('open'));
+      if (!isOpen) {
+        item.classList.add('open');
+      }
+    }
+  </script>
+
 
   
 

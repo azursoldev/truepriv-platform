@@ -49,7 +49,7 @@
                 <li><a href="service-cyber.html">Cybersecurity &amp; Pen Testing</a></li>
                 <li><a href="service-ai.html">AI Consulting</a></li>
                 <li><a href="service-gov.html">Corporate Governance</a></li>
-                <li><a href="index.html#service-cookie">Cookie Consent Compliance</a></li>
+                <li><a href="service-cookie.html">Cookie Consent Compliance</a></li>
               </ul>
             </div>
 
@@ -134,7 +134,7 @@
             <li><a href="service-cyber.html" onclick="toggleMobileMenu()">Cybersecurity &amp; Pen Testing <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
             <li><a href="service-ai.html" onclick="toggleMobileMenu()">AI Consulting <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
             <li><a href="service-gov.html" onclick="toggleMobileMenu()">Corporate Governance <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="index.html#service-cookie" onclick="toggleMobileMenu()">Cookie Consent Compliance <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="service-cookie.html" onclick="toggleMobileMenu()">Cookie Consent Compliance <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
           </ul>
         </div>
         <div>
@@ -265,7 +265,7 @@
     },
     {
       title: 'Cookie & Consent Compliance',
-      url: 'index.html#service-cookie',
+      url: 'service-cookie.html',
       badge: 'Consent CMP',
       desc: 'Zero-party consent telemetry, Ketch-style tracking audits, and compliant cookie banner management.',
       keywords: 'cookie consent cmp tracking cookies zero party banner telemetry opt in gdpr ndpa banner'
