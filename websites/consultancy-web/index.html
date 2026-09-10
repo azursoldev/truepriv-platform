@@ -2949,46 +2949,36 @@
 
   <script>
     function openSearchModal() {
+      if (typeof window.openSearchModal === 'function') {
+        window.openSearchModal();
+        return;
+      }
       const modal = document.getElementById('siteSearchModal');
       if (modal) {
         modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
         setTimeout(() => {
           const inp = document.getElementById('siteSearchInput');
           if (inp) inp.focus();
-        }, 100);
+        }, 80);
       }
     }
 
     function closeSearchModal() {
+      if (typeof window.closeSearchModal === 'function') {
+        window.closeSearchModal();
+        return;
+      }
       const modal = document.getElementById('siteSearchModal');
-      if (modal) modal.classList.remove('open');
+      if (modal) {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
     }
 
     function handleSearch(val) {
-      const res = document.getElementById('searchResults');
-      if (!res) return;
-      if (!val || val.trim() === '') {
-        res.innerHTML = '<div class="search-quick-links"><span>Quick links:</span><a href="service-car.html">Compliance Audit Return (CAR)</a><a href="service-dpo.html">Outsourced DPO</a><a href="service-audit.html">Data Protection Audit</a><a href="service-training.html">Data Protection Training</a><a href="topics.html#ndpa-laws">NDPA 2023 Statutory Laws</a></div>';
-        return;
-      }
-      const q = val.toLowerCase();
-      const allServices = [
-        { name: 'Compliance Audit Return (CAR)', url: 'service-car.html', desc: 'Statutory annual audit filing with NDPC before March 15.' },
-        { name: 'Data Protection Audit', url: 'service-audit.html', desc: 'Comprehensive technical and operational gap assessments.' },
-        { name: 'Data Protection Training', url: 'service-training.html', desc: 'Workforce NDPA e-learning & DPO masterclasses.' },
-        { name: 'Privacy Policies & Notices', url: 'service-policies.html', desc: 'Layered transparency notices and vendor DPAs.' },
-        { name: 'ROPA (Record of Processing Activities)', url: 'service-ropa.html', desc: 'Article 24 data lineage and processing inventory.' },
-        { name: 'DPIA & LIA Assessments', url: 'service-dpia.html', desc: 'High-risk 5x5 threat and impact assessments.' },
-        { name: 'Outsourced DPO', url: 'service-dpo.html', desc: 'Accredited external DPO designation & NDPC liaison.' },
-        { name: 'Cybersecurity & Pen-Testing', url: 'service-cyber.html', desc: 'Security posture hardening, vulnerability assessment & pen-testing.' },
-        { name: 'Corporate Governance', url: 'service-gov.html', desc: 'Boardroom digital trust charters and fiduciary risk monitoring.' },
-        { name: 'Cookie & Consent Compliance', url: 'index.html#service-cookie', desc: 'Zero-party consent telemetry and tracking audits.' }
-      ];
-      const filtered = allServices.filter(s => s.name.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q));
-      if (filtered.length === 0) {
-        res.innerHTML = '<p style="color: #64748b; font-size: 0.9rem;">No direct matching service found. <a href="contact.html" style="color: var(--pwc-orange);">Contact our advisory desk</a> for assistance.</p>';
-      } else {
-        res.innerHTML = filtered.map(s => '<div style="padding: 0.65rem 0; border-bottom: 1px solid #f1f5f9;"><a href="' + s.url + '" style="font-weight: 700; color: #0f172a; text-decoration: none; display: block; font-size: 0.95rem;">' + s.name + '</a><span style="font-size: 0.8rem; color: #64748b;">' + s.desc + '</span></div>').join('');
+      if (typeof window.handleSearch === 'function') {
+        window.handleSearch(val);
       }
     }
   </script>
