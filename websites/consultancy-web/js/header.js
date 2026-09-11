@@ -20,7 +20,7 @@
     </a>
 
     <ul class="main-nav">
-      <!-- 1. Services Mega-Dropdown (3 Columns from PDF) -->
+      <!-- 1. Services Mega-Dropdown (3 Columns from Specification) -->
       <li class="nav-item-dropdown">
         <a href="index.html#services" class="nav-dropdown-trigger">
           <span>Services</span>
@@ -30,26 +30,35 @@
         <div class="mega-dropdown-menu">
           <div class="mega-dropdown-grid">
             
-            <!-- Column 1 -->
-            <div>
+            <!-- Column 1: Regulatory & Audit -->
+            <div class="mega-dropdown-col">
+              <div class="mega-col-heading">Regulatory &amp; Audit</div>
               <ul class="mega-subnav-list">
                 <li><a href="service-car.html">Compliance Audit Return (CAR)</a></li>
-                <li><a href="service-dpo.html">Outsourced DPO</a></li>
                 <li><a href="service-audit.html">Data Protection Audit</a></li>
+                <li><a href="service-ropa.html">Record of Processing Activities (ROPA)</a></li>
                 <li><a href="service-dpia.html">DPIA &amp; LIA</a></li>
-                <li><a href="service-training.html">Data Protection Training</a></li>
-                <li><a href="service-ropa.html">Privacy Policies &amp; ROPA</a></li>
               </ul>
             </div>
 
-            <!-- Column 2 -->
-            <div>
+            <!-- Column 2: Operational Privacy -->
+            <div class="mega-dropdown-col">
+              <div class="mega-col-heading">Operational Privacy</div>
               <ul class="mega-subnav-list">
-                <li><a href="service-policies.html">Data Processing Agreements</a></li>
-                <li><a href="service-cyber.html">Cybersecurity &amp; Pen Testing</a></li>
+                <li><a href="service-dpo.html">Outsourced DPO</a></li>
+                <li><a href="service-policies.html">Privacy Policies</a></li>
+                <li><a href="service-policies.html#tab-b2b">Data Processing Agreements</a></li>
+                <li><a href="service-training.html">Data Protection Training</a></li>
+              </ul>
+            </div>
+
+            <!-- Column 3: Advanced Advisory -->
+            <div class="mega-dropdown-col">
+              <div class="mega-col-heading">Advanced Advisory</div>
+              <ul class="mega-subnav-list">
                 <li><a href="service-ai.html">AI Consulting</a></li>
+                <li><a href="service-cyber.html">Cybersecurity</a></li>
                 <li><a href="service-gov.html">Corporate Governance</a></li>
-                <li><a href="service-cookie.html">Cookie Consent Compliance</a></li>
               </ul>
             </div>
 
@@ -57,25 +66,7 @@
         </div>
       </li>
 
-      <!-- 2. Blog Dropdown (Connecting dedicated pages) -->
-      <li class="nav-item-dropdown">
-        <a href="topics.html" class="nav-dropdown-trigger">
-          <span>Blog</span>
-          <i class="fa-solid fa-chevron-down nav-chevron"></i>
-        </a>
-
-        <div class="simple-dropdown-menu">
-          <ul class="simple-dropdown-list">
-            <li><a href="service-ai.html">Artificial Intelligence for Business</a></li>
-            <li><a href="service-cyber.html">Cyber Security</a></li>
-            <li><a href="service-policies.html">Data Protection Laws</a></li>
-            <li><a href="service-gov.html">Risks</a></li>
-            <li><a href="publication-detail.html">Regulatory Guidance</a></li>
-          </ul>
-        </div>
-      </li>
-
-      <!-- 3. Our Organisation Dropdown (4 Dedicated Pages) -->
+      <!-- 2. Our Organisation Dropdown (About, Team, Career) -->
       <li class="nav-item-dropdown">
         <a href="organisation.html" class="nav-dropdown-trigger">
           <span>Our Organisation</span>
@@ -84,10 +75,26 @@
 
         <div class="simple-dropdown-menu">
           <ul class="simple-dropdown-list">
-            <li><a href="organisation-board.html">Advisory Board</a></li>
-            <li><a href="organisation-consultants.html">Consultants</a></li>
-            <li><a href="organisation-values.html">About Us</a></li>
-            <li><a href="organisation-governance.html">Governance</a></li>
+            <li><a href="organisation.html">About</a></li>
+            <li><a href="organisation-consultants.html">Team</a></li>
+            <li><a href="contact.html#careers">Career</a></li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- 3. Blog Dropdown -->
+      <li class="nav-item-dropdown">
+        <a href="topics.html" class="nav-dropdown-trigger">
+          <span>Blog</span>
+          <i class="fa-solid fa-chevron-down nav-chevron"></i>
+        </a>
+
+        <div class="simple-dropdown-menu">
+          <ul class="simple-dropdown-list">
+            <li><a href="publication-detail.html">Complying with Nigeria Data Protection Act (NDPA)</a></li>
+            <li><a href="service-ai.html">Artificial Intelligence for Business</a></li>
+            <li><a href="service-cyber.html">Cyber Security</a></li>
+            <li><a href="topics.html">Regulatory Guidance</a></li>
           </ul>
         </div>
       </li>
@@ -122,38 +129,46 @@
       </div>
       <div class="mobile-drawer-body">
         <div>
-          <div class="mobile-nav-group-title">Services</div>
+          <div class="mobile-nav-group-title">Regulatory &amp; Audit</div>
           <ul class="mobile-nav-links">
             <li><a href="service-car.html" onclick="toggleMobileMenu()">Compliance Audit Return (CAR) <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="service-dpo.html" onclick="toggleMobileMenu()">Outsourced DPO <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
             <li><a href="service-audit.html" onclick="toggleMobileMenu()">Data Protection Audit <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="service-ropa.html" onclick="toggleMobileMenu()">Record of Processing Activities (ROPA) <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
             <li><a href="service-dpia.html" onclick="toggleMobileMenu()">DPIA &amp; LIA <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="mobile-nav-group-title">Operational Privacy</div>
+          <ul class="mobile-nav-links">
+            <li><a href="service-dpo.html" onclick="toggleMobileMenu()">Outsourced DPO <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="service-policies.html" onclick="toggleMobileMenu()">Privacy Policies <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="service-policies.html#tab-b2b" onclick="toggleMobileMenu()">Data Processing Agreements <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
             <li><a href="service-training.html" onclick="toggleMobileMenu()">Data Protection Training <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="service-ropa.html" onclick="toggleMobileMenu()">Privacy Policies &amp; ROPA <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="service-policies.html" onclick="toggleMobileMenu()">Data Processing Agreements <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="service-cyber.html" onclick="toggleMobileMenu()">Cybersecurity &amp; Pen Testing <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="mobile-nav-group-title">Advanced Advisory</div>
+          <ul class="mobile-nav-links">
             <li><a href="service-ai.html" onclick="toggleMobileMenu()">AI Consulting <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="service-cyber.html" onclick="toggleMobileMenu()">Cybersecurity <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
             <li><a href="service-gov.html" onclick="toggleMobileMenu()">Corporate Governance <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="service-cookie.html" onclick="toggleMobileMenu()">Cookie Consent Compliance <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
           </ul>
         </div>
         <div>
           <div class="mobile-nav-group-title">Our Organisation</div>
           <ul class="mobile-nav-links">
-            <li><a href="organisation-board.html" onclick="toggleMobileMenu()">Advisory Board <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="organisation-consultants.html" onclick="toggleMobileMenu()">Consultants <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="organisation-values.html" onclick="toggleMobileMenu()">About Us <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="organisation-governance.html" onclick="toggleMobileMenu()">Governance <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="organisation.html" onclick="toggleMobileMenu()">About <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="organisation-consultants.html" onclick="toggleMobileMenu()">Team <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="contact.html#careers" onclick="toggleMobileMenu()">Career <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
           </ul>
         </div>
         <div>
-          <div class="mobile-nav-group-title">Blog &amp; Insights</div>
+          <div class="mobile-nav-group-title">Blog</div>
           <ul class="mobile-nav-links">
+            <li><a href="publication-detail.html" onclick="toggleMobileMenu()">Complying with Nigeria Data Protection Act (NDPA) <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
             <li><a href="service-ai.html" onclick="toggleMobileMenu()">Artificial Intelligence for Business <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
             <li><a href="service-cyber.html" onclick="toggleMobileMenu()">Cyber Security <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="service-policies.html" onclick="toggleMobileMenu()">Data Protection Laws <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="service-gov.html" onclick="toggleMobileMenu()">Risks <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
-            <li><a href="publication-detail.html" onclick="toggleMobileMenu()">Regulatory Guidance: NDPC Updates <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
+            <li><a href="topics.html" onclick="toggleMobileMenu()">Regulatory Guidance <i class="fa-solid fa-chevron-right text-xs"></i></a></li>
           </ul>
         </div>
         <div>
@@ -318,6 +333,13 @@
       badge: 'Contact',
       desc: 'Direct engagement with licensed DPCO partners, request a free privacy assessment, or submit an RFP.',
       keywords: 'contact help phone email office lagos abuja consult inquiry get in touch quote rfp assessment free'
+    },
+    {
+      title: 'Career & Talent Opportunities',
+      url: 'contact.html#careers',
+      badge: 'Careers',
+      desc: 'Join our team of certified DPCO data privacy auditors, cybersecurity consultants, legal advisers, and compliance directors.',
+      keywords: 'career careers jobs hiring talent opportunities recruitment work with us openings'
     }
   ];
 

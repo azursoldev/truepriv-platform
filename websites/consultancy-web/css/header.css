@@ -229,20 +229,20 @@
   color: var(--pwc-charcoal);
 }
 
-/* 6. MEGA DROPDOWN (Services - 2 Columns) */
+/* 6. MEGA DROPDOWN (Services - 3 Columns) */
 html body .mega-dropdown-menu,
 .main-nav .mega-dropdown-menu,
 .mega-dropdown-menu {
   position: absolute !important;
   top: 100% !important;
   left: 0 !important;
-  width: 580px !important;
-  max-width: 92vw !important;
+  width: 840px !important;
+  max-width: 95vw !important;
   background: #ffffff !important;
   border: 1px solid #e2e8f0 !important;
   border-radius: 12px !important;
   box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.04) !important;
-  padding: 1.5rem 1.75rem !important;
+  padding: 1.75rem 2rem !important;
   opacity: 0 !important;
   visibility: hidden !important;
   transform: translateY(10px) !important;
@@ -269,38 +269,50 @@ html body .mega-dropdown-menu,
 }
 
 html body .mega-dropdown-grid,
+html body div.mega-dropdown-grid,
 .mega-dropdown-menu .mega-dropdown-grid,
 .mega-dropdown-grid {
   display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  gap: 2rem !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 1.75rem !important;
+}
+
+.mega-dropdown-col {
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 .mega-col-heading {
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #64748b;
-  margin-bottom: 1.25rem;
-  letter-spacing: 0.3px;
-  text-transform: none;
+  font-size: 0.8rem !important;
+  font-weight: 800 !important;
+  color: #1e293b !important;
+  margin-bottom: 1.15rem !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  padding-bottom: 0.45rem !important;
+  border-bottom: 2px solid #fed7aa !important;
+  line-height: 1.3 !important;
 }
 
 .mega-subnav-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  list-style: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .mega-subnav-list li a {
   color: #0f172a !important;
-  font-size: 0.93rem !important;
+  font-size: 0.92rem !important;
   font-weight: 600 !important;
   padding: 0.25rem 0 !important;
   border-radius: 0 !important;
   background: transparent !important;
   display: block !important;
   transition: all 0.15s ease !important;
+  line-height: 1.35 !important;
 }
 
 .mega-subnav-list li a:hover {
@@ -333,12 +345,13 @@ html body .mega-dropdown-grid,
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 320px;
+  min-width: 380px;
+  max-width: 92vw;
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
   box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.12), 0 5px 15px rgba(0, 0, 0, 0.05);
-  padding: 1rem 0.75rem;
+  padding: 0.85rem 0.75rem;
   opacity: 0;
   visibility: hidden;
   transform: translateY(8px);

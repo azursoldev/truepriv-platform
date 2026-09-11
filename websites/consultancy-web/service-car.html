@@ -131,9 +131,7 @@
       opacity: 1; visibility: visible; transform: translateY(6px); pointer-events: auto;
     }
 
-    .mega-dropdown-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    .mega-dropdown-grid { display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 2.5rem;
     }
 
@@ -1817,7 +1815,7 @@
     @media (max-width: 1024px) {
       .header .main-nav { display: none !important; }
       .mobile-menu-btn { display: inline-flex !important; }
-      .pwc-footer-columns { grid-template-columns: 1fr 1fr !important; }
+      .pwc-footer-columns { grid-template-columns: repeat(3, 1fr) !important; }
       .pwc-footer-container { padding: 0 1.5rem !important; }
     }
 
@@ -1902,7 +1900,7 @@
 
     @media (max-width: 1024px) {
       .pwc-footer { padding: 3.5rem 1.5rem 2rem !important; }
-      .pwc-footer-columns { grid-template-columns: 1fr 1fr !important; gap: 2.5rem !important; }
+      .pwc-footer-columns { grid-template-columns: repeat(3, 1fr) !important; gap: 2.5rem !important; }
     }
     @media (max-width: 640px) {
       .pwc-footer { padding: 3rem 1.25rem 2rem !important; }
@@ -2125,7 +2123,7 @@
       position: absolute !important;
       top: 100% !important;
       left: 0 !important;
-      width: 580px !important;
+      width: 840px !important;
       max-width: 92vw !important;
       background: #ffffff !important;
       border: 1px solid #e2e8f0 !important;
@@ -2159,7 +2157,7 @@
 
     .mega-dropdown-grid {
       display: grid !important;
-      grid-template-columns: 1fr 1fr !important;
+      grid-template-columns: repeat(3, 1fr) !important;
       gap: 2rem !important;
     }
 
