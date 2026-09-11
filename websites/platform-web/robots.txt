@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://platform-web-six-khaki.vercel.app/sitemap.xml
