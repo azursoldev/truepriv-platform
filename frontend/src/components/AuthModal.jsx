@@ -38,52 +38,40 @@ export default function AuthModal({ onLoginSuccess }) {
     tenant_type: 'corporate', // 'corporate' | 'outsourced_dpo' | 'dpco_firm'
   });
 
-  const demoPersonas = [
+  const workspaceAccounts = [
     {
-      title: 'Corporate Data Controller',
-      icon: 'fa-solid fa-building text-emerald-700',
+      role: 'Corporate Data Controller',
+      icon: 'fa-solid fa-building text-emerald-600',
       org: 'Apex Microfinance Bank Ltd',
-      role: 'Corporate Admin / DPO',
       email: 'compliance@apexmfb.ng',
-      desc: 'Manages internal NDPA RoPA, DPIAs, 30d DSAR pipeline & breach clock.',
-      color: 'border-emerald-200 bg-emerald-50/70 text-emerald-900'
     },
     {
-      title: 'Outsourced DPO Practice',
-      icon: 'fa-solid fa-user-shield text-blue-700',
+      role: 'Outsourced DPO Practice',
+      icon: 'fa-solid fa-user-shield text-blue-600',
       org: 'Fortress Data Protection Advisory',
-      role: 'Lead DPO Consultant',
       email: 'lead.dpo@fortressadvisory.ng',
-      desc: 'Multi-client portfolio desk managing advisory for 4 client businesses.',
-      color: 'border-blue-200 bg-blue-50/70 text-blue-900'
     },
     {
-      title: 'Licensed DPCO Firm',
-      icon: 'fa-solid fa-building-columns text-purple-700',
+      role: 'Licensed DPCO Firm',
+      icon: 'fa-solid fa-building-columns text-purple-600',
       org: 'Vanguard Compliance Partners DPCO',
-      role: 'Managing Audit Partner',
       email: 'lead.partner@vanguarddpco.ng',
-      desc: 'Conducts statutory GAID annual audits and issues NDPC filing packs.',
-      color: 'border-purple-200 bg-purple-50/70 text-purple-900'
     },
     {
-      title: 'System Super Administrator',
-      icon: 'fa-solid fa-crown text-amber-700',
+      role: 'System Super Administrator',
+      icon: 'fa-solid fa-crown text-amber-600',
       org: 'Truepriv Platform Authority',
-      role: 'Platform Super Admin',
       email: 'admin@dpodpco.ng',
-      desc: 'Global multi-tenant governance, live audit stream & template licensing.',
-      color: 'border-amber-200 bg-amber-50/70 text-amber-900'
     }
   ];
 
-  const handleLogin = async (overrideEmail = null) => {
+  const handleLogin = async (e) => {
+    if (e && e.preventDefault) e.preventDefault();
     setLoading(true);
     setError(null);
-    const loginEmail = overrideEmail || email;
 
     try {
-      const res = await api.login({ email: loginEmail, password });
+      const res = await api.login({ email, password });
       if (res.success) {
         setAuthToken(res.token);
         if (res.tenant) {
@@ -321,28 +309,45 @@ export default function AuthModal({ onLoginSuccess }) {
                   </button>
                 </div>
 
-                {/* Quick 1-Click Multi-Tenant Personas */}
-                <div className="pt-3 border-t border-slate-200">
-                  <div className="flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                    <span>1-Click Multi-Tenant Personas</span>
-                    <span className="text-[10px] text-emerald-700 font-bold">Instant Login</span>
+                {/* Authorized Workspace Credentials Reference */}
+                <div className="pt-3.5 border-t border-slate-200">
+                  <div className="flex items-center justify-between text-xs mb-2.5">
+                    <span className="text-[11px] font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+                      <i className="fa-solid fa-id-badge text-slate-400"></i>
+                      Authorized Workspace Accounts
+                    </span>
+                    <span className="text-[10px] font-mono text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-md">
+                      Password: <strong className="text-slate-900 font-bold">Password123!</strong>
+                    </span>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {demoPersonas.map((p, idx) => (
-                      <button
+                    {workspaceAccounts.map((acc, idx) => (
+                      <div
                         key={idx}
-                        type="button"
-                        onClick={() => handleLogin(p.email)}
-                        className={`text-left p-2.5 rounded-xl border ${p.color} hover:scale-[1.01] transition-transform`}
+                        onClick={() => {
+                          setEmail(acc.email);
+                          setPassword('Password123!');
+                        }}
+                        className="p-2.5 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-white hover:border-slate-400 hover:shadow-xs transition-all cursor-pointer group"
+                        title="Click to fill credentials"
                       >
-                        <div className="font-bold text-xs flex items-center gap-1.5">
-                          <i className={`${p.icon} text-xs`}></i>
-                          <span>{p.title}</span>
+                        <div className="flex items-center justify-between">
+                          <div className="font-bold text-[11px] text-slate-800 flex items-center gap-1.5">
+                            <i className={`${acc.icon} text-[10px]`}></i>
+                            <span className="truncate">{acc.role}</span>
+                          </div>
+                          <span className="text-[9px] font-semibold text-slate-500 group-hover:text-slate-900 transition-colors">
+                            Fill &rarr;
+                          </span>
                         </div>
-                        <div className="text-[11px] text-slate-700 truncate mt-0.5">{p.org}</div>
-                        <div className="text-[10px] text-slate-500 mt-1 truncate">{p.desc}</div>
-                      </button>
+                        <div className="text-[11px] font-mono text-slate-700 mt-1 select-all truncate font-medium">
+                          {acc.email}
+                        </div>
+                        <div className="text-[10px] text-slate-500 mt-0.5 truncate">
+                          {acc.org}
+                        </div>
+                      </div>
                     ))}
                   </div>
                 </div>
