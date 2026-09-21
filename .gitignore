@@ -17,6 +17,7 @@ tools/node.zip
 tools/
 cloudflared.exe
 *.mp4
+*.zip
 tunnel_url.txt
 test_login.json
 
