@@ -38,33 +38,6 @@ export default function AuthModal({ onLoginSuccess }) {
     tenant_type: 'corporate', // 'corporate' | 'outsourced_dpo' | 'dpco_firm'
   });
 
-  const workspaceAccounts = [
-    {
-      role: 'Corporate Data Controller',
-      icon: 'fa-solid fa-building text-emerald-600',
-      org: 'Apex Microfinance Bank Ltd',
-      email: 'compliance@apexmfb.ng',
-    },
-    {
-      role: 'Outsourced DPO Practice',
-      icon: 'fa-solid fa-user-shield text-blue-600',
-      org: 'Fortress Data Protection Advisory',
-      email: 'lead.dpo@fortressadvisory.ng',
-    },
-    {
-      role: 'Licensed DPCO Firm',
-      icon: 'fa-solid fa-building-columns text-purple-600',
-      org: 'Vanguard Compliance Partners DPCO',
-      email: 'lead.partner@vanguarddpco.ng',
-    },
-    {
-      role: 'System Super Administrator',
-      icon: 'fa-solid fa-crown text-amber-600',
-      org: 'Truepriv Platform Authority',
-      email: 'admin@dpodpco.ng',
-    }
-  ];
-
   const handleLogin = async (e) => {
     if (e && e.preventDefault) e.preventDefault();
     setLoading(true);
@@ -298,7 +271,7 @@ export default function AuthModal({ onLoginSuccess }) {
                 </form>
 
                 {/* Switch to Register */}
-                <div className="text-center text-xs text-slate-600 pt-1">
+                <div className="text-center text-xs text-slate-600 pt-2">
                   New to Truepriv?{' '}
                   <button
                     type="button"
@@ -309,47 +282,10 @@ export default function AuthModal({ onLoginSuccess }) {
                   </button>
                 </div>
 
-                {/* Authorized Workspace Credentials Reference */}
-                <div className="pt-3.5 border-t border-slate-200">
-                  <div className="flex items-center justify-between text-xs mb-2.5">
-                    <span className="text-[11px] font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-                      <i className="fa-solid fa-id-badge text-slate-400"></i>
-                      Authorized Workspace Accounts
-                    </span>
-                    <span className="text-[10px] font-mono text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-md">
-                      Password: <strong className="text-slate-900 font-bold">Password123!</strong>
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {workspaceAccounts.map((acc, idx) => (
-                      <div
-                        key={idx}
-                        onClick={() => {
-                          setEmail(acc.email);
-                          setPassword('Password123!');
-                        }}
-                        className="p-2.5 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-white hover:border-slate-400 hover:shadow-xs transition-all cursor-pointer group"
-                        title="Click to fill credentials"
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="font-bold text-[11px] text-slate-800 flex items-center gap-1.5">
-                            <i className={`${acc.icon} text-[10px]`}></i>
-                            <span className="truncate">{acc.role}</span>
-                          </div>
-                          <span className="text-[9px] font-semibold text-slate-500 group-hover:text-slate-900 transition-colors">
-                            Fill &rarr;
-                          </span>
-                        </div>
-                        <div className="text-[11px] font-mono text-slate-700 mt-1 select-all truncate font-medium">
-                          {acc.email}
-                        </div>
-                        <div className="text-[10px] text-slate-500 mt-0.5 truncate">
-                          {acc.org}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                {/* Secure System Notice */}
+                <div className="pt-6 border-t border-slate-100 flex items-center justify-center gap-2 text-[11px] text-slate-400 font-medium">
+                  <i className="fa-solid fa-shield-halved text-emerald-600"></i>
+                  <span>NDPA 2023 Statutory Compliance Suite &bull; 256-Bit Encrypted</span>
                 </div>
               </div>
             ) : (
