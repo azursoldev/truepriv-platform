@@ -3,7 +3,9 @@
  * Handles Bearer Token Auth, Active Tenant Context (X-Tenant-ID), and Error Handling.
  */
 
-const API_BASE = '/api/v1';
+const API_BASE = (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'))
+  ? '/api/v1'
+  : 'https://trueprivbackend-fbabovnb.b4a.run/api/v1';
 
 export const getAuthToken = () => localStorage.getItem('dp_auth_token');
 export const setAuthToken = (token) => localStorage.setItem('dp_auth_token', token);
