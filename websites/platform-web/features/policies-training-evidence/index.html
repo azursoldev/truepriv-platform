@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TruePriv | Turn Privacy Obligations into Work That Gets Done</title>
-  <meta name="description" content="TruePriv is an Africa-wide privacy-compliance automation platform designed to automate 90–95% of repetitive, administrative and evidence-based compliance work.">
+  <meta name="description" content="TruePriv is a privacy-compliance automation platform designed to automate approximately 90–95% of repetitive, administrative and evidence-based compliance work. Built for Africa.">
   <link rel="canonical" href="https://platform-web-six-khaki.vercel.app/">
 
   <!-- Favicon -->
@@ -20,7 +20,6 @@
 
   <style>
     :root {
-      /* Original Brand Theme Color Palette */
       --tp-bg: #ffffff;
       --tp-bg-alt: #f8fafc;
       --tp-bg-subtle: #f1f5f9;
@@ -37,31 +36,15 @@
       --tp-accent-subtle: #dbeafe;
       --tp-accent-glow: rgba(37, 99, 235, 0.18);
 
-      /* Backward compatibility mapping */
-      --tp-orange: var(--tp-accent);
-      --tp-orange-hover: var(--tp-accent-hover);
-      --tp-orange-light: var(--tp-accent-light);
-      --tp-orange-subtle: var(--tp-accent-subtle);
-      --tp-orange-glow: var(--tp-accent-glow);
-
-      /* Supporting Accents */
-      --tp-blue: #00a3e0;
-      --tp-yellow: #ffc72c;
-      --tp-purple: #7c3aed;
-      --tp-emerald: #059669;
-      --tp-emerald-light: #ecfdf5;
-
-      /* Text Hierarchy */
-      --tp-text-primary: #090d16;
+      --tp-text-primary: #0a0e14;
       --tp-text-secondary: #475569;
       --tp-text-muted: #64748b;
       --tp-text-inverse: #ffffff;
 
-      /* Shadows */
-      --tp-shadow-sm: 0 1px 3px rgba(9, 13, 22, 0.05);
-      --tp-shadow-md: 0 4px 14px -2px rgba(9, 13, 22, 0.08), 0 2px 6px -1px rgba(9, 13, 22, 0.04);
-      --tp-shadow-lg: 0 12px 30px -4px rgba(9, 13, 22, 0.1), 0 4px 12px -2px rgba(9, 13, 22, 0.05);
-      --tp-shadow-xl: 0 24px 50px -10px rgba(9, 13, 22, 0.16);
+      --tp-shadow-sm: 0 1px 3px rgba(10, 14, 20, 0.05);
+      --tp-shadow-md: 0 4px 14px -2px rgba(10, 14, 20, 0.08), 0 2px 6px -1px rgba(10, 14, 20, 0.04);
+      --tp-shadow-lg: 0 12px 30px -4px rgba(10, 14, 20, 0.1), 0 4px 12px -2px rgba(10, 14, 20, 0.05);
+      --tp-shadow-xl: 0 24px 50px -10px rgba(10, 14, 20, 0.16);
 
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --font-display: 'Plus Jakarta Sans', var(--font-sans);
@@ -77,7 +60,7 @@
       line-height: 1.55;
       -webkit-font-smoothing: antialiased;
     }
-    a { text-decoration: none; color: inherit; }
+    a { text-decoration: none; color: inherit; cursor: pointer; }
 
     .tp-container {
       max-width: 1240px;
@@ -85,14 +68,12 @@
       padding: 0 24px;
     }
 
-    /* ==========================================================================
-       HEADER & NAVIGATION (PDF Section 2 & 4)
-       ========================================================================== */
+    /* HEADER */
     .tp-header {
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--tp-border);
       transition: all 0.2s ease;
@@ -122,26 +103,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--tp-orange);
+      color: var(--tp-accent);
       font-size: 15px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    }
-    .tp-logo-tag {
-      font-size: 10px;
-      font-family: var(--font-mono);
-      font-weight: 600;
-      background: var(--tp-bg-subtle);
-      color: var(--tp-text-secondary);
-      border: 1px solid var(--tp-border);
-      padding: 2px 7px;
-      border-radius: 6px;
-      margin-left: 2px;
     }
 
     .tp-nav {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 20px;
     }
     .tp-nav-item {
       position: relative;
@@ -162,17 +132,14 @@
       color: var(--tp-dark);
       background-color: var(--tp-bg-alt);
     }
-    .tp-nav-link i.caret {
-      font-size: 10px;
-      transition: transform 0.2s;
-    }
+    .tp-nav-link i.caret { font-size: 10px; transition: transform 0.2s; }
 
-    /* Dropdown Menus */
+    /* Dropdowns */
     .tp-dropdown {
       position: absolute;
       top: 100%;
       left: 0;
-      min-width: 240px;
+      min-width: 250px;
       background: #ffffff;
       border: 1px solid var(--tp-border);
       border-radius: 12px;
@@ -201,12 +168,10 @@
       transition: background 0.15s;
       cursor: pointer;
     }
-    .tp-dropdown-item:hover {
-      background: var(--tp-bg-alt);
-    }
+    .tp-dropdown-item:hover { background: var(--tp-bg-alt); }
     .tp-dropdown-item i {
       font-size: 14px;
-      color: var(--tp-orange);
+      color: var(--tp-accent);
       margin-top: 3px;
       width: 16px;
     }
@@ -217,11 +182,11 @@
       margin-top: 2px;
     }
 
-    /* Actions Right */
+    /* Actions */
     .tp-nav-actions {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
     .tp-btn-secondary {
       font-size: 13px;
@@ -229,16 +194,12 @@
       color: var(--tp-text-secondary);
       padding: 8px 14px;
       border-radius: 8px;
-      border: 1px solid transparent;
       transition: all 0.15s;
     }
     .tp-btn-secondary:hover {
       color: var(--tp-dark);
       background: var(--tp-bg-alt);
-      border-color: var(--tp-border);
     }
-    
-    /* Highlighted Orange Button for Book a Demo (PDF requirement) */
     .tp-btn-primary {
       font-family: var(--font-display);
       font-size: 14px;
@@ -261,44 +222,58 @@
       box-shadow: 0 4px 14px rgba(37, 99, 235, 0.38);
       color: #ffffff;
     }
-
-    /* Mobile Hamburger */
+    .tp-btn-outline {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      background: #ffffff;
+      color: var(--tp-dark);
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 1px solid var(--tp-border-strong);
+      transition: all 0.2s;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tp-btn-outline:hover {
+      background: var(--tp-bg-alt);
+      border-color: var(--tp-dark);
+    }
     .tp-mobile-toggle {
       display: none;
       font-size: 20px;
-      color: var(--tp-dark);
       background: none;
       border: none;
       cursor: pointer;
+      color: var(--tp-dark);
     }
 
-    /* ==========================================================================
-       HERO SECTION (PDF Section 4)
-       ========================================================================== */
+    /* HERO */
     .tp-hero {
       padding: 72px 0 56px;
-      background: radial-gradient(circle at 50% 0%, rgba(234, 88, 12, 0.05) 0%, transparent 60%);
+      background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.05) 0%, transparent 60%);
       border-bottom: 1px solid var(--tp-border);
     }
     .tp-trust-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--tp-orange-light);
-      border: 1px solid var(--tp-orange-subtle);
-      color: var(--tp-orange);
+      background: var(--tp-accent-light);
+      border: 1px solid var(--tp-accent-subtle);
+      color: var(--tp-accent);
       font-family: var(--font-mono);
       font-size: 12px;
       font-weight: 700;
       padding: 6px 14px;
       border-radius: 999px;
       margin-bottom: 20px;
-      letter-spacing: -0.01em;
     }
     .tp-trust-badge span.dot {
       width: 6px;
       height: 6px;
-      background: var(--tp-orange);
+      background: var(--tp-accent);
       border-radius: 50%;
       display: inline-block;
     }
@@ -326,27 +301,8 @@
       flex-wrap: wrap;
       margin-bottom: 48px;
     }
-    .tp-btn-outline {
-      font-family: var(--font-display);
-      font-size: 14px;
-      font-weight: 700;
-      background: #ffffff;
-      color: var(--tp-dark);
-      padding: 10px 20px;
-      border-radius: 8px;
-      border: 1px solid var(--tp-border-strong);
-      transition: all 0.2s;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .tp-btn-outline:hover {
-      background: var(--tp-bg-alt);
-      border-color: var(--tp-dark);
-    }
 
-    /* Workflow Diagram Visual in Hero (PDF requirement: Business owner answers -> RoPA entry -> linked DPIA -> assigned action -> exportable evidence) */
+    /* Workflow Visual in Hero (PDF Page 3) */
     .tp-workflow-visual {
       background: var(--tp-dark);
       border: 1px solid var(--tp-dark-surface);
@@ -373,11 +329,6 @@
       align-items: center;
       gap: 8px;
     }
-    .tp-workflow-meta {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: #94a3b8;
-    }
     .tp-workflow-stages {
       display: grid;
       grid-template-columns: repeat(5, minmax(180px, 1fr));
@@ -388,16 +339,15 @@
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 12px;
       padding: 16px;
-      position: relative;
     }
     .tp-stage-card.highlight {
-      border-color: var(--tp-orange);
-      background: rgba(234, 88, 12, 0.08);
+      border-color: var(--tp-accent);
+      background: rgba(37, 99, 235, 0.12);
     }
     .tp-stage-num {
       font-family: var(--font-mono);
       font-size: 10px;
-      color: var(--tp-orange);
+      color: var(--tp-accent);
       font-weight: 700;
       margin-bottom: 6px;
     }
@@ -424,9 +374,7 @@
       color: #94a3b8;
     }
 
-    /* ==========================================================================
-       SECTION 1: WHY TEAMS NEED IT (PDF Section 4)
-       ========================================================================== */
+    /* SECTIONS */
     .tp-section {
       padding: 80px 0;
       border-bottom: 1px solid var(--tp-border);
@@ -444,7 +392,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--tp-orange);
+      color: var(--tp-accent);
       margin-bottom: 10px;
     }
     .tp-section-heading {
@@ -489,7 +437,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--tp-orange);
+      color: var(--tp-accent);
       font-size: 18px;
       margin-bottom: 20px;
     }
@@ -507,9 +455,7 @@
       color: var(--tp-text-secondary);
     }
 
-    /* ==========================================================================
-       SECTION 2: HOW TRUEPRIV WORKS (PDF Section 4)
-       ========================================================================== */
+    /* Steps */
     .tp-steps-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -521,7 +467,6 @@
       border: 1px solid var(--tp-border);
       border-radius: 14px;
       padding: 24px 20px;
-      position: relative;
     }
     .tp-step-badge {
       width: 28px;
@@ -550,9 +495,7 @@
       color: var(--tp-text-secondary);
     }
 
-    /* ==========================================================================
-       SECTION 3: EVERYDAY CAPABILITIES (PDF Section 4)
-       ========================================================================== */
+    /* Capabilities */
     .tp-capabilities-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -570,7 +513,7 @@
       justify-content: space-between;
     }
     .tp-cap-card:hover {
-      border-color: var(--tp-orange);
+      border-color: var(--tp-accent);
       box-shadow: var(--tp-shadow-md);
       transform: translateY(-2px);
     }
@@ -593,15 +536,13 @@
     .tp-cap-link {
       font-size: 12px;
       font-weight: 700;
-      color: var(--tp-orange);
+      color: var(--tp-accent);
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
-    /* ==========================================================================
-       SECTION 4: WHO IT IS FOR (PDF Section 4 & 8 & 9)
-       ========================================================================== */
+    /* Audience */
     .tp-audience-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -639,10 +580,7 @@
       color: var(--tp-text-secondary);
       margin-bottom: 24px;
     }
-    .tp-check-list {
-      list-style: none;
-      margin-bottom: 28px;
-    }
+    .tp-check-list { list-style: none; margin-bottom: 28px; }
     .tp-check-item {
       display: flex;
       align-items: flex-start;
@@ -651,15 +589,9 @@
       color: var(--tp-text-secondary);
       margin-bottom: 10px;
     }
-    .tp-check-item i {
-      color: var(--tp-orange);
-      font-size: 13px;
-      margin-top: 3px;
-    }
+    .tp-check-item i { color: var(--tp-accent); font-size: 13px; margin-top: 3px; }
 
-    /* ==========================================================================
-       SECTION 5 & 6: DATA RESIDENCY & SECURITY (PDF Section 4 & 11 & 12)
-       ========================================================================== */
+    /* Residency Banner */
     .tp-residency-banner {
       background: var(--tp-dark);
       color: #ffffff;
@@ -673,7 +605,7 @@
     .tp-residency-badge {
       font-family: var(--font-mono);
       font-size: 11px;
-      color: var(--tp-orange);
+      color: var(--tp-accent);
       font-weight: 700;
       margin-bottom: 12px;
     }
@@ -707,11 +639,9 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
     .tp-residency-item:last-child { border-bottom: none; }
-    .tp-residency-item i { color: var(--tp-orange); font-size: 14px; }
+    .tp-residency-item i { color: var(--tp-accent); font-size: 14px; }
 
-    /* ==========================================================================
-       PRICING TIERS (PDF Section 13)
-       ========================================================================== */
+    /* Pricing */
     .tp-pricing-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -729,14 +659,14 @@
       position: relative;
     }
     .tp-price-card.popular {
-      border-color: var(--tp-orange);
+      border-color: var(--tp-accent);
       box-shadow: var(--tp-shadow-md);
     }
     .tp-price-badge {
       position: absolute;
       top: -10px;
       left: 20px;
-      background: var(--tp-orange);
+      background: var(--tp-accent);
       color: #ffffff;
       font-family: var(--font-mono);
       font-size: 10px;
@@ -767,17 +697,10 @@
       min-height: 60px;
     }
 
-    /* ==========================================================================
-       MODAL / MULTI-VIEW ROUTING CONTAINER
-       ========================================================================== */
-    .tp-view {
-      display: none;
-    }
-    .tp-view.active {
-      display: block;
-    }
+    /* Views */
+    .tp-view { display: none; }
+    .tp-view.active { display: block; }
 
-    /* Full Page Hero for Subpages */
     .tp-subpage-hero {
       background: var(--tp-dark);
       color: #ffffff;
@@ -788,9 +711,9 @@
       font-family: var(--font-mono);
       font-size: 11px;
       font-weight: 700;
-      color: var(--tp-orange);
-      background: rgba(234, 88, 12, 0.12);
-      border: 1px solid rgba(234, 88, 12, 0.25);
+      color: var(--tp-accent);
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid rgba(37, 99, 235, 0.3);
       padding: 4px 10px;
       border-radius: 6px;
       display: inline-block;
@@ -798,21 +721,76 @@
     }
     .tp-subpage-headline {
       font-family: var(--font-display);
-      font-size: 42px;
+      font-size: 40px;
       font-weight: 800;
       letter-spacing: -0.03em;
-      line-height: 1.2;
-      max-width: 820px;
+      line-height: 1.25;
+      max-width: 860px;
       margin-bottom: 18px;
     }
     .tp-subpage-sub {
       font-size: 17px;
       line-height: 1.6;
       color: #cbd5e1;
-      max-width: 760px;
+      max-width: 800px;
     }
 
-    /* Forms: Demo & Contact (PDF Section 19) */
+    /* Feature Detail Page Strict Clean Layout */
+    .tp-feature-layout {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .tp-feature-box {
+      background: #ffffff;
+      border: 1px solid var(--tp-border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 28px;
+      box-shadow: var(--tp-shadow-sm);
+    }
+    .tp-feature-box h3 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--tp-dark);
+      margin-bottom: 14px;
+    }
+    .tp-feature-box p {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--tp-text-secondary);
+    }
+    .tp-workflow-steps-clean {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--tp-dark);
+    }
+    .tp-workflow-steps-clean span.step-arrow {
+      color: var(--tp-accent);
+      font-weight: 800;
+    }
+
+    /* Empty state box */
+    .tp-empty-state-box {
+      background: var(--tp-bg-alt);
+      border: 1px dashed var(--tp-border-strong);
+      border-radius: 14px;
+      padding: 40px 24px;
+      text-align: center;
+      margin-top: 24px;
+    }
+    .tp-empty-state-text {
+      font-size: 14px;
+      color: var(--tp-text-muted);
+      margin-bottom: 16px;
+    }
+
+    /* Forms */
     .tp-form-card {
       background: #ffffff;
       border: 1px solid var(--tp-border);
@@ -827,19 +805,9 @@
       grid-template-columns: 1fr 1fr;
       gap: 18px;
     }
-    .tp-form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .tp-form-group.full {
-      grid-column: span 2;
-    }
-    .tp-label {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--tp-dark);
-    }
+    .tp-form-group { display: flex; flex-direction: column; gap: 6px; }
+    .tp-form-group.full { grid-column: span 2; }
+    .tp-label { font-size: 12px; font-weight: 700; color: var(--tp-dark); }
     .tp-input, .tp-select, .tp-textarea {
       font-family: var(--font-sans);
       font-size: 13px;
@@ -852,9 +820,9 @@
     }
     .tp-input:focus, .tp-select:focus, .tp-textarea:focus {
       outline: none;
-      border-color: var(--tp-orange);
+      border-color: var(--tp-accent);
       background: #ffffff;
-      box-shadow: 0 0 0 3px var(--tp-orange-glow);
+      box-shadow: 0 0 0 3px var(--tp-accent-glow);
     }
     .tp-success-banner {
       display: none;
@@ -868,9 +836,7 @@
       margin-top: 20px;
     }
 
-    /* ==========================================================================
-       FOOTER (PDF Section 20 & 21)
-       ========================================================================== */
+    /* FOOTER */
     .tp-footer {
       background: var(--tp-dark);
       color: #94a3b8;
@@ -900,22 +866,14 @@
       letter-spacing: 0.05em;
       margin-bottom: 16px;
     }
-    .tp-footer-links {
-      list-style: none;
-    }
-    .tp-footer-links li {
-      margin-bottom: 10px;
-    }
+    .tp-footer-links { list-style: none; }
+    .tp-footer-links li { margin-bottom: 10px; }
     .tp-footer-links a {
       color: #94a3b8;
       transition: color 0.15s;
-      cursor: pointer;
     }
-    .tp-footer-links a:hover {
-      color: #ffffff;
-    }
+    .tp-footer-links a:hover { color: #ffffff; }
 
-    /* Mandatory Footer Statement (PDF Page 14) */
     .tp-footer-statement {
       padding: 24px 0;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -956,39 +914,38 @@
 <body>
 
   <!-- ==========================================================================
-       HEADER & NAVIGATION (PDF Section 2 & 4)
+       HEADER & NAVIGATION (PDF Section 2 & 4 - Clean Logo, No Africa Badge)
        ========================================================================== -->
   <header class="tp-header">
     <div class="tp-container tp-header-inner">
-      <a href="/" class="tp-logo">
+      <a href="/" class="tp-logo" onclick="handleNav(event, '/')">
         <div class="tp-logo-icon"><i class="fa-solid fa-shield-halved"></i></div>
         <span>TruePriv</span>
-        <span class="tp-logo-tag">AFRICA</span>
       </a>
 
       <nav class="tp-nav">
         <!-- Platform Dropdown -->
         <div class="tp-nav-item">
-          <div class="tp-nav-link">
+          <a href="/platform" class="tp-nav-link" onclick="handleNav(event, '/platform')">
             <span>Platform</span>
             <i class="fa-solid fa-chevron-down caret"></i>
-          </div>
+          </a>
           <div class="tp-dropdown">
-            <a href="/platform" class="tp-dropdown-item">
+            <a href="/platform" class="tp-dropdown-item" onclick="handleNav(event, '/platform')">
               <i class="fa-solid fa-layer-group"></i>
               <div>
                 <div>Overview</div>
                 <div class="tp-dropdown-desc">Privacy operating system</div>
               </div>
             </a>
-            <a href="/features" class="tp-dropdown-item">
+            <a href="/features" class="tp-dropdown-item" onclick="handleNav(event, '/features')">
               <i class="fa-solid fa-cubes"></i>
               <div>
                 <div>Features</div>
                 <div class="tp-dropdown-desc">7 core operational modules</div>
               </div>
             </a>
-            <a href="/security" class="tp-dropdown-item">
+            <a href="/security" class="tp-dropdown-item" onclick="handleNav(event, '/security')">
               <i class="fa-solid fa-lock"></i>
               <div>
                 <div>Security</div>
@@ -1000,19 +957,19 @@
 
         <!-- Solutions Dropdown -->
         <div class="tp-nav-item">
-          <div class="tp-nav-link">
+          <a href="/solutions/organisations" class="tp-nav-link" onclick="handleNav(event, '/solutions/organisations')">
             <span>Solutions</span>
             <i class="fa-solid fa-chevron-down caret"></i>
-          </div>
+          </a>
           <div class="tp-dropdown">
-            <a href="/solutions/organisations" class="tp-dropdown-item">
+            <a href="/solutions/organisations" class="tp-dropdown-item" onclick="handleNav(event, '/solutions/organisations')">
               <i class="fa-solid fa-building"></i>
               <div>
                 <div>For Organisations</div>
                 <div class="tp-dropdown-desc">Enterprise operations & risk</div>
               </div>
             </a>
-            <a href="/solutions/privacy-professionals" class="tp-dropdown-item">
+            <a href="/solutions/privacy-professionals" class="tp-dropdown-item" onclick="handleNav(event, '/solutions/privacy-professionals')">
               <i class="fa-solid fa-user-shield"></i>
               <div>
                 <div>For Privacy Professionals</div>
@@ -1022,49 +979,49 @@
           </div>
         </div>
 
-        <!-- Data Residency & Deployment (Direct 3rd Link as specified in PDF) -->
+        <!-- Data Residency & Deployment -->
         <div class="tp-nav-item">
-          <a href="/data-residency" class="tp-nav-link">
+          <a href="/data-residency" class="tp-nav-link" onclick="handleNav(event, '/data-residency')">
             <span>Data Residency & Deployment</span>
           </a>
         </div>
 
         <!-- Pricing -->
         <div class="tp-nav-item">
-          <a href="/pricing" class="tp-nav-link">
+          <a href="/pricing" class="tp-nav-link" onclick="handleNav(event, '/pricing')">
             <span>Pricing</span>
           </a>
         </div>
 
         <!-- Resources Dropdown -->
         <div class="tp-nav-item">
-          <div class="tp-nav-link">
+          <a href="/resources/insights" class="tp-nav-link" onclick="handleNav(event, '/resources/insights')">
             <span>Resources</span>
             <i class="fa-solid fa-chevron-down caret"></i>
-          </div>
+          </a>
           <div class="tp-dropdown">
-            <a href="/resources/insights" class="tp-dropdown-item">
+            <a href="/resources/insights" class="tp-dropdown-item" onclick="handleNav(event, '/resources/insights')">
               <i class="fa-solid fa-newspaper"></i>
               <div>
                 <div>Insights</div>
                 <div class="tp-dropdown-desc">Practical operational guidance</div>
               </div>
             </a>
-            <a href="/resources/regulatory-library" class="tp-dropdown-item">
+            <a href="/resources/regulatory-library" class="tp-dropdown-item" onclick="handleNav(event, '/resources/regulatory-library')">
               <i class="fa-solid fa-scale-balanced"></i>
               <div>
                 <div>Regulatory Library</div>
                 <div class="tp-dropdown-desc">Curated laws across Africa</div>
               </div>
             </a>
-            <a href="/help" class="tp-dropdown-item">
+            <a href="/help" class="tp-dropdown-item" onclick="handleNav(event, '/help')">
               <i class="fa-solid fa-circle-question"></i>
               <div>
                 <div>Help Centre</div>
                 <div class="tp-dropdown-desc">Product workflow guides</div>
               </div>
             </a>
-            <a href="/countries" class="tp-dropdown-item">
+            <a href="/countries" class="tp-dropdown-item" onclick="handleNav(event, '/countries')">
               <i class="fa-solid fa-earth-africa"></i>
               <div>
                 <div>Countries Hub</div>
@@ -1076,10 +1033,8 @@
       </nav>
 
       <div class="tp-nav-actions">
-        <!-- Utility link: Sign In to SaaS application (PDF requirement) -->
         <a href="https://truepriv-saas.vercel.app/" class="tp-btn-secondary" target="_blank">Sign In</a>
-        <!-- Highlighted Orange button: Book a Demo (PDF requirement) -->
-        <a href="/book-demo" class="tp-btn-primary">Book a Demo</a>
+        <a href="/book-demo" class="tp-btn-primary" onclick="handleNav(event, '/book-demo')">Book a Demo</a>
         <button class="tp-mobile-toggle" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
       </div>
     </div>
@@ -1088,8 +1043,7 @@
   <!-- ==========================================================================
        VIEW: HOMEPAGE (PDF Section 4)
        ========================================================================== -->
-  <main id="view-home" class="tp-view">
-    <!-- Hero Section -->
+  <main id="view-home" class="tp-view active">
     <section class="tp-hero">
       <div class="tp-container">
         <div class="tp-trust-badge">
@@ -1101,57 +1055,48 @@
           TruePriv helps organisations and privacy professionals run everyday privacy compliance through guided workflows. Gather information once, generate draft records and assessments, assign actions and keep evidence ready for review.
         </p>
         <div class="tp-hero-cta-group">
-          <button class="tp-btn-primary" href="/book-demo">
+          <a href="/book-demo" class="tp-btn-primary" onclick="handleNav(event, '/book-demo')">
             <span>Book a Demo</span>
             <i class="fa-solid fa-arrow-right"></i>
-          </button>
-          <a href="/platform" class="tp-btn-outline">
+          </a>
+          <a href="/platform" class="tp-btn-outline" onclick="handleNav(event, '/platform')">
             <span>Explore the Platform</span>
-          </button>
+          </a>
         </div>
 
-        <!-- Realistic Workflow Visual (PDF Page 3 requirement) -->
         <div class="tp-workflow-visual">
           <div class="tp-workflow-header">
             <div class="tp-workflow-title">
-              <i class="fa-solid fa-diagram-project text-orange" style="color:var(--tp-orange)"></i>
+              <i class="fa-solid fa-diagram-project" style="color:var(--tp-accent)"></i>
               <span>TruePriv End-to-End Operational Workflow</span>
-            </div>
-            <div class="tp-workflow-meta">
-              <span>90–95% Administrative Automation &bull; Human Oversight</span>
             </div>
           </div>
 
           <div class="tp-workflow-stages">
-            <!-- Stage 1 -->
             <div class="tp-stage-card">
               <div class="tp-stage-num">STEP 01</div>
               <div class="tp-stage-name">Business Owner Answers</div>
               <div class="tp-stage-desc">Ask the right people plain-language questions about a processing activity.</div>
               <span class="tp-stage-tag">Guided Questionnaires</span>
             </div>
-            <!-- Stage 2 -->
             <div class="tp-stage-card">
               <div class="tp-stage-num">STEP 02</div>
               <div class="tp-stage-name">System & Vendor Reuse</div>
               <div class="tp-stage-desc">Reuse approved information about systems, vendors, data categories and controls.</div>
               <span class="tp-stage-tag">Verified Inventory</span>
             </div>
-            <!-- Stage 3 -->
             <div class="tp-stage-card highlight">
               <div class="tp-stage-num">STEP 03</div>
               <div class="tp-stage-name">Reviewed RoPA Entry</div>
               <div class="tp-stage-desc">Generate structured RoPA record and screen for statutory risk triggers.</div>
-              <span class="tp-stage-tag" style="background:var(--tp-orange); color:#fff">RoPA Generation</span>
+              <span class="tp-stage-tag" style="background:var(--tp-accent); color:#fff">RoPA Generation</span>
             </div>
-            <!-- Stage 4 -->
             <div class="tp-stage-card">
               <div class="tp-stage-num">STEP 04</div>
               <div class="tp-stage-name">Linked DPIA & Actions</div>
               <div class="tp-stage-desc">Pre-populate draft DPIA with gaps, proposed safeguards and assign accountable owners.</div>
               <span class="tp-stage-tag">DPIA Workflow</span>
             </div>
-            <!-- Stage 5 -->
             <div class="tp-stage-card">
               <div class="tp-stage-num">STEP 05</div>
               <div class="tp-stage-name">Exportable Evidence</div>
@@ -1163,7 +1108,7 @@
       </div>
     </section>
 
-    <!-- Section 1: Why Teams Need It (PDF Section 4) -->
+    <!-- Section 1: Why Teams Need It -->
     <section class="tp-section">
       <div class="tp-container">
         <div class="tp-section-header">
@@ -1200,7 +1145,7 @@
       </div>
     </section>
 
-    <!-- Section 2: How TruePriv Works (PDF Section 4) -->
+    <!-- Section 2: How TruePriv Works -->
     <section class="tp-section tp-section-alt">
       <div class="tp-container">
         <div class="tp-section-header">
@@ -1235,15 +1180,15 @@
         </div>
 
         <div style="margin-top: 36px; text-align: center;">
-          <a href="/features" class="tp-btn-outline">
+          <a href="/features" class="tp-btn-outline" onclick="handleNav(event, '/features')">
             <span>See all features</span>
             <i class="fa-solid fa-arrow-right"></i>
-          </button>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Section 3: Everyday Capabilities (PDF Section 4 & 6) -->
+    <!-- Section 3: Everyday Capabilities -->
     <section class="tp-section">
       <div class="tp-container">
         <div class="tp-section-header">
@@ -1255,98 +1200,98 @@
         </div>
 
         <div class="tp-capabilities-grid">
-          <a href="/features/ropa-data-mapping" class="tp-cap-card">
+          <a href="/features/ropa-data-mapping" class="tp-cap-card" onclick="handleNav(event, '/features/ropa-data-mapping')">
             <div>
               <div class="tp-cap-title">
                 <span>RoPA and Data Mapping</span>
-                <i class="fa-solid fa-table-list" style="color:var(--tp-orange)"></i>
+                <i class="fa-solid fa-table-list" style="color:var(--tp-accent)"></i>
               </div>
               <p class="tp-cap-desc">Build and maintain processing records using guided questionnaires, reusable organisational information and automated document generation.</p>
             </div>
-            <div class="tp-cap-link"><span>View workflow</span> &rarr;</div>
-          </div>
+            <div class="tp-cap-link"><span>Explore RoPA</span> &rarr;</div>
+          </a>
 
-          <a href="/features/dpia-risk-assessments" class="tp-cap-card">
+          <a href="/features/dpia-risk-assessments" class="tp-cap-card" onclick="handleNav(event, '/features/dpia-risk-assessments')">
             <div>
               <div class="tp-cap-title">
                 <span>DPIAs and Risk Assessments</span>
-                <i class="fa-solid fa-shield-virus" style="color:var(--tp-orange)"></i>
+                <i class="fa-solid fa-shield-virus" style="color:var(--tp-accent)"></i>
               </div>
               <p class="tp-cap-desc">Automatically screen for elevated risk, initiate assessments, generate draft analysis and track mitigation through approval.</p>
             </div>
-            <div class="tp-cap-link"><span>View workflow</span> &rarr;</div>
-          </div>
+            <div class="tp-cap-link"><span>Explore DPIA</span> &rarr;</div>
+          </a>
 
-          <a href="/features/dpo-work-management" class="tp-cap-card">
+          <a href="/features/dpo-work-management" class="tp-cap-card" onclick="handleNav(event, '/features/dpo-work-management')">
             <div>
               <div class="tp-cap-title">
                 <span>DPO Work Management</span>
-                <i class="fa-solid fa-clipboard-check" style="color:var(--tp-orange)"></i>
+                <i class="fa-solid fa-clipboard-check" style="color:var(--tp-accent)"></i>
               </div>
               <p class="tp-cap-desc">Manage annual plans, recurring obligations, advice, escalations, meetings, decisions and evidence of DPO independence.</p>
             </div>
-            <div class="tp-cap-link"><span>View workflow</span> &rarr;</div>
-          </div>
+            <div class="tp-cap-link"><span>Explore DPO</span> &rarr;</div>
+          </a>
 
-          <a href="/features/rights-requests" class="tp-cap-card">
+          <a href="/features/rights-requests" class="tp-cap-card" onclick="handleNav(event, '/features/rights-requests')">
             <div>
               <div class="tp-cap-title">
                 <span>Rights Requests (DSAR)</span>
-                <i class="fa-solid fa-user-check" style="color:var(--tp-orange)"></i>
+                <i class="fa-solid fa-user-check" style="color:var(--tp-accent)"></i>
               </div>
               <p class="tp-cap-desc">Receive, verify, assign and fulfil data-subject requests through deadline-controlled workflows.</p>
             </div>
-            <div class="tp-cap-link"><span>View workflow</span> &rarr;</div>
-          </div>
+            <div class="tp-cap-link"><span>Explore DSAR</span> &rarr;</div>
+          </a>
 
-          <a href="/features/incidents-breaches" class="tp-cap-card">
+          <a href="/features/incidents-breaches" class="tp-cap-card" onclick="handleNav(event, '/features/incidents-breaches')">
             <div>
               <div class="tp-cap-title">
                 <span>Incidents and Breaches</span>
-                <i class="fa-solid fa-triangle-exclamation" style="color:var(--tp-orange)"></i>
+                <i class="fa-solid fa-triangle-exclamation" style="color:var(--tp-accent)"></i>
               </div>
               <p class="tp-cap-desc">Record incidents, coordinate investigation, assess notification requirements and preserve the decision trail.</p>
             </div>
-            <div class="tp-cap-link"><span>View workflow</span> &rarr;</div>
-          </div>
+            <div class="tp-cap-link"><span>Explore Breaches</span> &rarr;</div>
+          </a>
 
-          <a href="/features/vendors-contracts" class="tp-cap-card">
+          <a href="/features/vendors-contracts" class="tp-cap-card" onclick="handleNav(event, '/features/vendors-contracts')">
             <div>
               <div class="tp-cap-title">
                 <span>Vendors and Contracts</span>
-                <i class="fa-solid fa-handshake" style="color:var(--tp-orange)"></i>
+                <i class="fa-solid fa-handshake" style="color:var(--tp-accent)"></i>
               </div>
               <p class="tp-cap-desc">Assess processors, maintain due-diligence evidence, track contracts and monitor remediation and renewal dates.</p>
             </div>
-            <div class="tp-cap-link"><span>View workflow</span> &rarr;</div>
-          </div>
+            <div class="tp-cap-link"><span>Explore Vendors</span> &rarr;</div>
+          </a>
 
-          <a href="/features/policies-training-evidence" class="tp-cap-card">
+          <a href="/features/policies-training-evidence" class="tp-cap-card" onclick="handleNav(event, '/features/policies-training-evidence')">
             <div>
               <div class="tp-cap-title">
                 <span>Policies, Training & Evidence</span>
-                <i class="fa-solid fa-book-bookmark" style="color:var(--tp-orange)"></i>
+                <i class="fa-solid fa-book-bookmark" style="color:var(--tp-accent)"></i>
               </div>
               <p class="tp-cap-desc">Control versions, approvals and acknowledgements while linking evidence to obligations and controls.</p>
             </div>
-            <div class="tp-cap-link"><span>View workflow</span> &rarr;</div>
-          </div>
+            <div class="tp-cap-link"><span>Explore Policies</span> &rarr;</div>
+          </a>
 
-          <a href="/features" class="tp-cap-card">
+          <a href="/features" class="tp-cap-card" onclick="handleNav(event, '/features')">
             <div>
               <div class="tp-cap-title">
                 <span>Regulatory Readiness</span>
-                <i class="fa-solid fa-stamp" style="color:var(--tp-orange)"></i>
+                <i class="fa-solid fa-stamp" style="color:var(--tp-accent)"></i>
               </div>
               <p class="tp-cap-desc">Generate management reports, audit packs, compliance returns and regulator-ready exports from approved platform records.</p>
             </div>
-            <div class="tp-cap-link"><span>View workflow</span> &rarr;</div>
-          </div>
+            <div class="tp-cap-link"><span>Explore Audits</span> &rarr;</div>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Section 4: Who It Is For (PDF Section 4 & 8 & 9) -->
+    <!-- Section 4: Who It Is For -->
     <section class="tp-section tp-section-alt">
       <div class="tp-container">
         <div class="tp-section-header">
@@ -1358,7 +1303,6 @@
         </div>
 
         <div class="tp-audience-grid">
-          <!-- For Organisations -->
           <div class="tp-audience-card">
             <span class="tp-audience-badge">ENTERPRISE COMPLIANCE</span>
             <h3 class="tp-audience-title">For Organisations</h3>
@@ -1372,10 +1316,9 @@
               <li class="tp-check-item"><i class="fa-solid fa-check"></i> <span>Faster production of policies, assessments and audit packs.</span></li>
               <li class="tp-check-item"><i class="fa-solid fa-check"></i> <span>Evidence retrieved instantly without reconstructing history.</span></li>
             </ul>
-            <a href="/solutions/organisations" class="tp-btn-outline">Explore for Organisations &rarr;</button>
+            <a href="/solutions/organisations" class="tp-btn-outline" onclick="handleNav(event, '/solutions/organisations')">Explore for Organisations &rarr;</a>
           </div>
 
-          <!-- For Privacy Professionals -->
           <div class="tp-audience-card">
             <span class="tp-audience-badge">DPOs, DPCOs & CONSULTANTS</span>
             <h3 class="tp-audience-title">For Privacy Professionals</h3>
@@ -1389,13 +1332,13 @@
               <li class="tp-check-item"><i class="fa-solid fa-check"></i> <span>Independent audit workspaces and conflict-of-interest controls.</span></li>
               <li class="tp-check-item"><i class="fa-solid fa-check"></i> <span>Deliverable tracking and client-specific branded reports.</span></li>
             </ul>
-            <a href="/solutions/privacy-professionals" class="tp-btn-outline">Explore for Privacy Professionals &rarr;</button>
+            <a href="/solutions/privacy-professionals" class="tp-btn-outline" onclick="handleNav(event, '/solutions/privacy-professionals')">Explore for Privacy Professionals &rarr;</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Section 5: Data Residency & Deployment Banner (PDF Section 4 & 11) -->
+    <!-- Section 5: Data Residency & Deployment -->
     <section class="tp-section">
       <div class="tp-container">
         <div class="tp-residency-banner">
@@ -1403,48 +1346,33 @@
             <div class="tp-residency-badge">SOVEREIGNTY & DEPLOYMENT FLEXIBILITY</div>
             <h2 class="tp-residency-heading">Choose where your compliance data is stored and processed.</h2>
             <p class="tp-residency-desc">
-              TruePriv is designed to give eligible clients meaningful control over data location and deployment architecture, including in-country and customer-controlled options. Any residency commitment covers documents, databases, backups, logs, support access and AI processing.
+              Discuss supported regions and deployment models for your organisation. Any residency commitment should cover documents, databases, backups, logs, support access and AI processing, not just the main database. Present country and deployment availability only after it has been verified.
             </p>
-            <a href="/data-residency" class="tp-btn-primary">
+            <a href="/data-residency" class="tp-btn-primary" onclick="handleNav(event, '/data-residency')">
               <span>Explore Data Residency & Deployment</span>
               <i class="fa-solid fa-arrow-right"></i>
-            </button>
+            </a>
           </div>
 
           <div class="tp-residency-boxes">
-            <div class="tp-residency-item">
-              <i class="fa-solid fa-server"></i>
-              <span>Shared cloud in a selected supported region</span>
-            </div>
-            <div class="tp-residency-item">
-              <i class="fa-solid fa-map-location-dot"></i>
-              <span>In-country hosting where supported</span>
-            </div>
-            <div class="tp-residency-item">
-              <i class="fa-solid fa-cubes-stacked"></i>
-              <span>Dedicated single-tenant environment</span>
-            </div>
-            <div class="tp-residency-item">
-              <i class="fa-solid fa-cloud-arrow-up"></i>
-              <span>Customer-controlled private cloud</span>
-            </div>
-            <div class="tp-residency-item">
-              <i class="fa-solid fa-building-shield"></i>
-              <span>On-premises deployment for enterprise clients</span>
-            </div>
+            <div class="tp-residency-item"><i class="fa-solid fa-server"></i><span>Shared cloud in a selected supported region</span></div>
+            <div class="tp-residency-item"><i class="fa-solid fa-map-location-dot"></i><span>In-country hosting where supported</span></div>
+            <div class="tp-residency-item"><i class="fa-solid fa-cubes-stacked"></i><span>Dedicated single-tenant environment</span></div>
+            <div class="tp-residency-item"><i class="fa-solid fa-cloud-arrow-up"></i><span>Customer-controlled private cloud</span></div>
+            <div class="tp-residency-item"><i class="fa-solid fa-building-shield"></i><span>On-premises deployment for enterprise clients</span></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Section 6: Security and Accountability (PDF Section 4 & 12) -->
+    <!-- Section 6: Security and accountability -->
     <section class="tp-section tp-section-alt">
       <div class="tp-container">
         <div class="tp-section-header">
           <div class="tp-section-eyebrow">Enterprise Trust</div>
           <h2 class="tp-section-heading">Keep sensitive work controlled and decisions traceable.</h2>
           <p class="tp-section-desc">
-            TruePriv applies layered technical and organisational safeguards to protect client records, evidence and decisions throughout their lifecycle. TruePriv assists professional judgement; organisations remain accountable for their own decisions.
+            Explain access permissions, separation of client data, documented review and audit history using only implemented controls. TruePriv assists professional judgement; organisations remain accountable for their own decisions.
           </p>
         </div>
 
@@ -1467,24 +1395,24 @@
         </div>
 
         <div style="margin-top: 36px; text-align: center;">
-          <a href="/security" class="tp-btn-outline">
+          <a href="/security" class="tp-btn-outline" onclick="handleNav(event, '/security')">
             <span>Explore Security</span>
             <i class="fa-solid fa-arrow-right"></i>
-          </button>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Final Call to Action (PDF Section 4) -->
-    <section class="tp-section" style="background: radial-gradient(circle at 50% 100%, rgba(234, 88, 12, 0.08) 0%, transparent 60%);">
+    <!-- Final CTA -->
+    <section class="tp-section" style="background: radial-gradient(circle at 50% 100%, rgba(37, 99, 235, 0.08) 0%, transparent 60%);">
       <div class="tp-container" style="text-align: center; max-width: 760px; margin: 0 auto;">
         <h2 class="tp-section-heading" style="font-size: 40px; margin-bottom: 20px;">See how privacy work can run every day.</h2>
         <p class="tp-section-desc" style="margin-bottom: 32px;">
           Tell us about your organisation, your current workflow and your data location requirements. We will show the most relevant product capabilities and discuss available deployment options.
         </p>
         <div class="tp-hero-cta-group" style="justify-content: center;">
-          <a href="/book-demo" class="tp-btn-primary">Book a Demo</a>
-          <a href="/contact" class="tp-btn-outline">Contact Sales</button>
+          <a href="/book-demo" class="tp-btn-primary" onclick="handleNav(event, '/book-demo')">Book a Demo</a>
+          <a href="/contact" class="tp-btn-outline" onclick="handleNav(event, '/contact')">Contact Sales</a>
         </div>
       </div>
     </section>
@@ -1497,9 +1425,9 @@
     <div class="tp-subpage-hero">
       <div class="tp-container">
         <span class="tp-subpage-badge">OPERATING SYSTEM</span>
-        <h1 class="tp-subpage-headline">A privacy operating system for continuous compliance.</h1>
+        <h1 class="tp-subpage-headline">Keep privacy work moving from obligation to evidence.</h1>
         <p class="tp-subpage-sub">
-          Keep privacy work moving from obligation to evidence. TruePriv connects regulatory requirements, operational workflows, people, evidence and decisions in one platform. It helps users perform the work of privacy compliance—not merely report a compliance score.
+          TruePriv connects the people, information and decisions behind a privacy programme. Business owners answer guided questions, the platform prepares structured records and assessments, and privacy professionals review material conclusions before they are approved. Tasks, deadlines and supporting evidence stay linked to the work they explain.
         </p>
       </div>
     </div>
@@ -1507,52 +1435,20 @@
     <section class="tp-section">
       <div class="tp-container">
         <div class="tp-section-header">
-          <div class="tp-section-eyebrow">Operating Cycle</div>
-          <h2 class="tp-section-heading">How the platform works</h2>
-          <p class="tp-section-desc">Six core steps connecting everyday business processes with statutory compliance oversight.</p>
-        </div>
-
-        <div class="tp-steps-grid" style="grid-template-columns: repeat(3, 1fr);">
-          <div class="tp-step-card">
-            <div class="tp-step-badge">1</div>
-            <h3 class="tp-step-title">Configure organisation & entities</h3>
-            <p class="tp-step-desc">Configure the organisation, legal entities, jurisdictions and applicable regulatory requirements.</p>
-          </div>
-          <div class="tp-step-card">
-            <div class="tp-step-badge">2</div>
-            <h3 class="tp-step-title">Apply African country packs</h3>
-            <p class="tp-step-desc">Built for Africa, with country-specific regulatory content released as it is reviewed and available.</p>
-          </div>
-          <div class="tp-step-card">
-            <div class="tp-step-badge">3</div>
-            <h3 class="tp-step-title">Generate compliance records</h3>
-            <p class="tp-step-desc">Generate compliance records and initiate the required workflows from guided questions.</p>
-          </div>
-          <div class="tp-step-card">
-            <div class="tp-step-badge">4</div>
-            <h3 class="tp-step-title">Assign actions & approvals</h3>
-            <p class="tp-step-desc">Assign actions, collect evidence from departmental owners and obtain accountable approvals.</p>
-          </div>
-          <div class="tp-step-card">
-            <div class="tp-step-badge">5</div>
-            <h3 class="tp-step-title">Continuous monitoring</h3>
-            <p class="tp-step-desc">Monitor obligations, risks, incidents, requests and statutory deadlines continuously.</p>
-          </div>
-          <div class="tp-step-card">
-            <div class="tp-step-badge">6</div>
-            <h3 class="tp-step-title">Regulator-ready reports</h3>
-            <p class="tp-step-desc">Produce management and regulator-ready reports with complete, verifiable audit histories.</p>
-          </div>
-        </div>
-
-        <div style="margin-top: 56px; padding: 32px; background: var(--tp-bg-alt); border: 1px solid var(--tp-border); border-radius: 16px;">
-          <h3 style="font-family:var(--font-display); font-size:20px; font-weight:800; margin-bottom:12px;">Automation with accountability</h3>
-          <p style="font-size:14px; line-height:1.6; color:var(--tp-text-secondary); margin-bottom:16px;">
-            The platform automates collection, drafting, analysis, recommendations, routing, reminders and document production. Users remain responsible for verification, professional judgement and formal approval, particularly where lawful basis, high residual risk or material effects on individuals are involved.
+          <div class="tp-section-eyebrow">Operating Model</div>
+          <h2 class="tp-section-heading">How it works</h2>
+          <p class="tp-section-desc">
+            Set up your organisation and applicable country pack. Invite the people who know each process. Reuse approved information about systems, vendors and controls. Review generated records, address gaps, approve decisions and export an auditable history.
           </p>
-          <div style="display:flex; gap:12px; flex-wrap:wrap;">
-            <a href="/features" class="tp-btn-primary">View Features</button>
-            <button class="tp-btn-outline" href="/book-demo">Book a Demo</button>
+        </div>
+
+        <div class="tp-feature-box">
+          <p style="font-size:16px; line-height:1.7; color:var(--tp-text-secondary); margin-bottom:24px;">
+            Automation supports consistent work; it does not replace professional judgement or management accountability.
+          </p>
+          <div style="display:flex; gap:14px; flex-wrap:wrap;">
+            <a href="/features" class="tp-btn-primary" onclick="handleNav(event, '/features')">Explore Features &rarr;</a>
+            <a href="/book-demo" class="tp-btn-outline" onclick="handleNav(event, '/book-demo')">Book a Demo &rarr;</a>
           </div>
         </div>
       </div>
@@ -1562,13 +1458,13 @@
   <!-- ==========================================================================
        VIEW: FEATURES OVERVIEW (PDF Section 6, 7 & 26)
        ========================================================================== -->
-  <div id="view-features" class="tp-view active">
+  <div id="view-features" class="tp-view">
     <div class="tp-subpage-hero">
       <div class="tp-container">
-        <span class="tp-subpage-badge">PRODUCT SUITE</span>
+        <span class="tp-subpage-badge">OPERATIONAL WORKSPACE</span>
         <h1 class="tp-subpage-headline">A connected workspace for everyday privacy operations.</h1>
         <p class="tp-subpage-sub">
-          Everything required to run privacy compliance as an operating function. TruePriv brings assessments, workflows, documents, evidence and oversight together so compliance work moves from obligation to completion.
+          Find the right workflow when a processing activity changes, a request arrives, a vendor is introduced or a risk needs attention. Each module shares relevant information so teams can work from a consistent record.
         </p>
       </div>
     </div>
@@ -1576,81 +1472,297 @@
     <section class="tp-section">
       <div class="tp-container">
         <div class="tp-capabilities-grid" style="grid-template-columns: repeat(3, 1fr);">
-          <!-- Module 1: RoPA -->
           <div class="tp-card" style="display:flex; flex-direction:column; justify-content:space-between;">
             <div>
               <div class="tp-card-icon"><i class="fa-solid fa-table-list"></i></div>
               <h3 class="tp-card-title">RoPA and Data Mapping</h3>
-              <p class="tp-card-body" style="margin-bottom:16px;">
-                Keep a living record of how personal data is used. Ask process owners plain questions, reuse approved systems and vendor details, identify missing answers and prepare RoPA entries for review.
-              </p>
+              <p class="tp-card-body" style="margin-bottom:16px;">Keep a living record of how personal data is used.</p>
             </div>
-            <button class="tp-btn-outline" style="width:100%; justify-content:center;" onclick="openFeatureModal('ropa')">View Detailed Workflow</button>
+            <a href="/features/ropa-data-mapping" class="tp-btn-outline" style="justify-content:center;" onclick="handleNav(event, '/features/ropa-data-mapping')">View RoPA Workflow &rarr;</a>
           </div>
 
-          <!-- Module 2: DPIA -->
           <div class="tp-card" style="display:flex; flex-direction:column; justify-content:space-between;">
             <div>
               <div class="tp-card-icon"><i class="fa-solid fa-shield-virus"></i></div>
-              <h3 class="tp-card-title">DPIA & Risk Assessments</h3>
-              <p class="tp-card-body" style="margin-bottom:16px;">
-                Assess privacy risk before decisions are final. Screen new or changed activities against jurisdiction criteria, generate draft analysis of necessity and proportionality, and track mitigations.
-              </p>
+              <h3 class="tp-card-title">DPIA and Risk Assessments</h3>
+              <p class="tp-card-body" style="margin-bottom:16px;">Screen new or changed activities and review generated risk analysis.</p>
             </div>
-            <button class="tp-btn-outline" style="width:100%; justify-content:center;" onclick="openFeatureModal('dpia')">View Detailed Workflow</button>
+            <a href="/features/dpia-risk-assessments" class="tp-btn-outline" style="justify-content:center;" onclick="handleNav(event, '/features/dpia-risk-assessments')">View DPIA Workflow &rarr;</a>
           </div>
 
-          <!-- Module 3: DPO Work Management -->
           <div class="tp-card" style="display:flex; flex-direction:column; justify-content:space-between;">
             <div>
               <div class="tp-card-icon"><i class="fa-solid fa-clipboard-check"></i></div>
               <h3 class="tp-card-title">DPO Work Management</h3>
-              <p class="tp-card-body" style="margin-bottom:16px;">
-                Give DPO work a clear plan and decision trail. Organise recurring tasks, reviews, advice, consultations, escalations and evidence of DPO independence in one workspace.
-              </p>
+              <p class="tp-card-body" style="margin-bottom:16px;">Plan recurring duties, record advice and track escalation.</p>
             </div>
-            <button class="tp-btn-outline" style="width:100%; justify-content:center;" onclick="openFeatureModal('dpo')">View Detailed Workflow</button>
+            <a href="/features/dpo-work-management" class="tp-btn-outline" style="justify-content:center;" onclick="handleNav(event, '/features/dpo-work-management')">View DPO Workflow &rarr;</a>
           </div>
 
-          <!-- Module 4: Rights Requests -->
           <div class="tp-card" style="display:flex; flex-direction:column; justify-content:space-between;">
             <div>
               <div class="tp-card-icon"><i class="fa-solid fa-user-check"></i></div>
-              <h3 class="tp-card-title">Rights Requests (DSAR)</h3>
-              <p class="tp-card-body" style="margin-bottom:16px;">
-                Coordinate rights requests from receipt to response. Capture requests, track identity checks, assignment, information gathering, and visible statutory deadline tracking.
-              </p>
+              <h3 class="tp-card-title">Rights Requests</h3>
+              <p class="tp-card-body" style="margin-bottom:16px;">Coordinate identity checks, owners and responses.</p>
             </div>
-            <button class="tp-btn-outline" style="width:100%; justify-content:center;" onclick="openFeatureModal('dsar')">View Detailed Workflow</button>
+            <a href="/features/rights-requests" class="tp-btn-outline" style="justify-content:center;" onclick="handleNav(event, '/features/rights-requests')">View Rights Workflow &rarr;</a>
           </div>
 
-          <!-- Module 5: Incidents -->
           <div class="tp-card" style="display:flex; flex-direction:column; justify-content:space-between;">
             <div>
               <div class="tp-card-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
               <h3 class="tp-card-title">Incidents and Breaches</h3>
-              <p class="tp-card-body" style="margin-bottom:16px;">
-                Make incident decisions timely and traceable. Record what happened, guide investigation and assessment of potential notification duties, assign actions and document reasons.
-              </p>
+              <p class="tp-card-body" style="margin-bottom:16px;">Record facts, assess actions and preserve decisions.</p>
             </div>
-            <button class="tp-btn-outline" style="width:100%; justify-content:center;" onclick="openFeatureModal('incidents')">View Detailed Workflow</button>
+            <a href="/features/incidents-breaches" class="tp-btn-outline" style="justify-content:center;" onclick="handleNav(event, '/features/incidents-breaches')">View Breach Workflow &rarr;</a>
           </div>
 
-          <!-- Module 6: Vendors -->
           <div class="tp-card" style="display:flex; flex-direction:column; justify-content:space-between;">
             <div>
               <div class="tp-card-icon"><i class="fa-solid fa-handshake"></i></div>
               <h3 class="tp-card-title">Vendors and Contracts</h3>
-              <p class="tp-card-body" style="margin-bottom:16px;">
-                Know who handles data on your behalf. Build a vendor inventory, capture processing purpose and location, review contracts, and link vendors to related processing activities.
-              </p>
+              <p class="tp-card-body" style="margin-bottom:16px;">Review external processing and related obligations.</p>
             </div>
-            <button class="tp-btn-outline" style="width:100%; justify-content:center;" onclick="openFeatureModal('vendors')">View Detailed Workflow</button>
+            <a href="/features/vendors-contracts" class="tp-btn-outline" style="justify-content:center;" onclick="handleNav(event, '/features/vendors-contracts')">View Vendor Workflow &rarr;</a>
+          </div>
+
+          <div class="tp-card" style="display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div class="tp-card-icon"><i class="fa-solid fa-book-bookmark"></i></div>
+              <h3 class="tp-card-title">Policies Training and Evidence</h3>
+              <p class="tp-card-body" style="margin-bottom:16px;">Keep approved documents and proof of action together.</p>
+            </div>
+            <a href="/features/policies-training-evidence" class="tp-btn-outline" style="justify-content:center;" onclick="handleNav(event, '/features/policies-training-evidence')">View Policy Workflow &rarr;</a>
+          </div>
+
+          <div class="tp-card" style="display:flex; flex-direction:column; justify-content:space-between; background:var(--tp-bg-alt);">
+            <div>
+              <div class="tp-card-icon"><i class="fa-solid fa-calendar-check"></i></div>
+              <h3 class="tp-card-title">Explore Workflows</h3>
+              <p class="tp-card-body" style="margin-bottom:16px;">See how everyday privacy compliance moves from obligation to completion.</p>
+            </div>
+            <a href="/book-demo" class="tp-btn-primary" style="justify-content:center;" onclick="handleNav(event, '/book-demo')">Book a Demo &rarr;</a>
           </div>
         </div>
+      </div>
+    </section>
+  </div>
 
-        <div style="margin-top: 48px; text-align: center;">
-          <a href="/book-demo" class="tp-btn-primary">Book a Demo</a>
+  <!-- ==========================================================================
+       DEDICATED FEATURE DETAIL PAGES (100% Exact Copy from PDF Section 26)
+       ========================================================================== -->
+  <!-- 1. RoPA and Data Mapping -->
+  <div id="view-feature-ropa" class="tp-view">
+    <div class="tp-subpage-hero">
+      <div class="tp-container">
+        <span class="tp-subpage-badge">FEATURE DETAIL</span>
+        <h1 class="tp-subpage-headline">Build a processing record that stays useful.</h1>
+        <p class="tp-subpage-sub">
+          Ask process owners how information is collected, used, shared, retained and protected. Reuse approved systems and vendor details, identify missing answers and prepare a RoPA entry for review. Update the record when an activity changes and export its approved version with supporting evidence.
+        </p>
+      </div>
+    </div>
+    <section class="tp-section">
+      <div class="tp-container tp-feature-layout">
+        <div class="tp-feature-box">
+          <h3>How it works:</h3>
+          <div class="tp-workflow-steps-clean">
+            <span>Gather facts</span><span class="step-arrow">&rarr;</span>
+            <span>Identify gaps</span><span class="step-arrow">&rarr;</span>
+            <span>Assign review</span><span class="step-arrow">&rarr;</span>
+            <span>Approve and retain evidence</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+          <a href="/book-demo" class="tp-btn-primary" onclick="handleNav(event, '/book-demo')">See the RoPA workflow &rarr;</a>
+          <a href="/features" class="tp-btn-outline" onclick="handleNav(event, '/features')">Features</a>
+          <a href="/data-residency" class="tp-btn-outline" onclick="handleNav(event, '/data-residency')">Data Residency & Deployment</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 2. DPIA and Risk Assessments -->
+  <div id="view-feature-dpia" class="tp-view">
+    <div class="tp-subpage-hero">
+      <div class="tp-container">
+        <span class="tp-subpage-badge">FEATURE DETAIL</span>
+        <h1 class="tp-subpage-headline">Assess privacy risk before decisions are final.</h1>
+        <p class="tp-subpage-sub">
+          Screen a new or changed activity against the applicable criteria. Where a deeper assessment is appropriate, gather facts from the right owners and generate a draft analysis of purpose, necessity, proportionality, risks and safeguards. Review assumptions, assign mitigations and record approval or escalation.
+        </p>
+      </div>
+    </div>
+    <section class="tp-section">
+      <div class="tp-container tp-feature-layout">
+        <div class="tp-feature-box">
+          <h3>How it works:</h3>
+          <div class="tp-workflow-steps-clean">
+            <span>Gather facts</span><span class="step-arrow">&rarr;</span>
+            <span>Identify gaps</span><span class="step-arrow">&rarr;</span>
+            <span>Assign review</span><span class="step-arrow">&rarr;</span>
+            <span>Approve and retain evidence</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+          <a href="/book-demo" class="tp-btn-primary" onclick="handleNav(event, '/book-demo')">Explore DPIA workflows &rarr;</a>
+          <a href="/features" class="tp-btn-outline" onclick="handleNav(event, '/features')">Features</a>
+          <a href="/data-residency" class="tp-btn-outline" onclick="handleNav(event, '/data-residency')">Data Residency & Deployment</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 3. DPO Work Management -->
+  <div id="view-feature-dpo" class="tp-view">
+    <div class="tp-subpage-hero">
+      <div class="tp-container">
+        <span class="tp-subpage-badge">FEATURE DETAIL</span>
+        <h1 class="tp-subpage-headline">Give DPO work a clear plan and decision trail.</h1>
+        <p class="tp-subpage-sub">
+          Organise recurring tasks, reviews, consultations and reports in one workspace. Record advice, supporting evidence and whether recommendations were accepted. Track deadlines and escalate unresolved matters while preserving the DPO's reporting and independence requirements.
+        </p>
+      </div>
+    </div>
+    <section class="tp-section">
+      <div class="tp-container tp-feature-layout">
+        <div class="tp-feature-box">
+          <h3>How it works:</h3>
+          <div class="tp-workflow-steps-clean">
+            <span>Gather facts</span><span class="step-arrow">&rarr;</span>
+            <span>Identify gaps</span><span class="step-arrow">&rarr;</span>
+            <span>Assign review</span><span class="step-arrow">&rarr;</span>
+            <span>Approve and retain evidence</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+          <a href="/book-demo" class="tp-btn-primary" onclick="handleNav(event, '/book-demo')">See the DPO workspace &rarr;</a>
+          <a href="/features" class="tp-btn-outline" onclick="handleNav(event, '/features')">Features</a>
+          <a href="/data-residency" class="tp-btn-outline" onclick="handleNav(event, '/data-residency')">Data Residency & Deployment</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 4. Rights Requests -->
+  <div id="view-feature-dsar" class="tp-view">
+    <div class="tp-subpage-hero">
+      <div class="tp-container">
+        <span class="tp-subpage-badge">FEATURE DETAIL</span>
+        <h1 class="tp-subpage-headline">Coordinate rights requests from receipt to response.</h1>
+        <p class="tp-subpage-sub">
+          Capture a request, identify the relevant jurisdiction and track identity checks, assignment, information gathering, review and response. Keep deadlines and decisions visible, including any reason for an extension or refusal that requires professional review. Preserve a record of the final response.
+        </p>
+      </div>
+    </div>
+    <section class="tp-section">
+      <div class="tp-container tp-feature-layout">
+        <div class="tp-feature-box">
+          <h3>How it works:</h3>
+          <div class="tp-workflow-steps-clean">
+            <span>Gather facts</span><span class="step-arrow">&rarr;</span>
+            <span>Identify gaps</span><span class="step-arrow">&rarr;</span>
+            <span>Assign review</span><span class="step-arrow">&rarr;</span>
+            <span>Approve and retain evidence</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+          <a href="/book-demo" class="tp-btn-primary" onclick="handleNav(event, '/book-demo')">Explore request management &rarr;</a>
+          <a href="/features" class="tp-btn-outline" onclick="handleNav(event, '/features')">Features</a>
+          <a href="/data-residency" class="tp-btn-outline" onclick="handleNav(event, '/data-residency')">Data Residency & Deployment</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 5. Incidents and Breaches -->
+  <div id="view-feature-incidents" class="tp-view">
+    <div class="tp-subpage-hero">
+      <div class="tp-container">
+        <span class="tp-subpage-badge">FEATURE DETAIL</span>
+        <h1 class="tp-subpage-headline">Make incident decisions timely and traceable.</h1>
+        <p class="tp-subpage-sub">
+          Record what happened, the affected information, containment measures and the people involved. Guide investigation and assessment of potential notification duties, assign actions and document why a decision was made. Keep evidence and an event history available for later review.
+        </p>
+      </div>
+    </div>
+    <section class="tp-section">
+      <div class="tp-container tp-feature-layout">
+        <div class="tp-feature-box">
+          <h3>How it works:</h3>
+          <div class="tp-workflow-steps-clean">
+            <span>Gather facts</span><span class="step-arrow">&rarr;</span>
+            <span>Identify gaps</span><span class="step-arrow">&rarr;</span>
+            <span>Assign review</span><span class="step-arrow">&rarr;</span>
+            <span>Approve and retain evidence</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+          <a href="/book-demo" class="tp-btn-primary" onclick="handleNav(event, '/book-demo')">Explore incident workflows &rarr;</a>
+          <a href="/features" class="tp-btn-outline" onclick="handleNav(event, '/features')">Features</a>
+          <a href="/data-residency" class="tp-btn-outline" onclick="handleNav(event, '/data-residency')">Data Residency & Deployment</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 6. Vendors and Contracts -->
+  <div id="view-feature-vendors" class="tp-view">
+    <div class="tp-subpage-hero">
+      <div class="tp-container">
+        <span class="tp-subpage-badge">FEATURE DETAIL</span>
+        <h1 class="tp-subpage-headline">Know who handles data on your behalf.</h1>
+        <p class="tp-subpage-sub">
+          Build a vendor inventory, capture the processing purpose and location, and review relevant contracts and safeguards. Assign follow-up actions for missing information, renewals or changed services. Link a vendor to the processing activities and assessments that depend on it.
+        </p>
+      </div>
+    </div>
+    <section class="tp-section">
+      <div class="tp-container tp-feature-layout">
+        <div class="tp-feature-box">
+          <h3>How it works:</h3>
+          <div class="tp-workflow-steps-clean">
+            <span>Gather facts</span><span class="step-arrow">&rarr;</span>
+            <span>Identify gaps</span><span class="step-arrow">&rarr;</span>
+            <span>Assign review</span><span class="step-arrow">&rarr;</span>
+            <span>Approve and retain evidence</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+          <a href="/book-demo" class="tp-btn-primary" onclick="handleNav(event, '/book-demo')">Explore vendor oversight &rarr;</a>
+          <a href="/features" class="tp-btn-outline" onclick="handleNav(event, '/features')">Features</a>
+          <a href="/data-residency" class="tp-btn-outline" onclick="handleNav(event, '/data-residency')">Data Residency & Deployment</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 7. Policies, Training and Evidence -->
+  <div id="view-feature-policies" class="tp-view">
+    <div class="tp-subpage-hero">
+      <div class="tp-container">
+        <span class="tp-subpage-badge">FEATURE DETAIL</span>
+        <h1 class="tp-subpage-headline">Keep policies, learning and proof connected.</h1>
+        <p class="tp-subpage-sub">
+          Manage approved policy versions, assign training or acknowledgement where appropriate and keep completion evidence alongside the relevant obligation. Review dates, responsible owners and updates help teams see what needs attention before an audit or management report.
+        </p>
+      </div>
+    </div>
+    <section class="tp-section">
+      <div class="tp-container tp-feature-layout">
+        <div class="tp-feature-box">
+          <h3>How it works:</h3>
+          <div class="tp-workflow-steps-clean">
+            <span>Gather facts</span><span class="step-arrow">&rarr;</span>
+            <span>Identify gaps</span><span class="step-arrow">&rarr;</span>
+            <span>Assign review</span><span class="step-arrow">&rarr;</span>
+            <span>Approve and retain evidence</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+          <a href="/book-demo" class="tp-btn-primary" onclick="handleNav(event, '/book-demo')">Explore policy and evidence management &rarr;</a>
+          <a href="/features" class="tp-btn-outline" onclick="handleNav(event, '/features')">Features</a>
+          <a href="/data-residency" class="tp-btn-outline" onclick="handleNav(event, '/data-residency')">Data Residency & Deployment</a>
         </div>
       </div>
     </section>
@@ -1662,109 +1774,49 @@
   <div id="view-solutions-organisations" class="tp-view">
     <div class="tp-subpage-hero">
       <div class="tp-container">
-        <span class="tp-subpage-badge">FOR ENTERPRISES & INSTITUTIONS</span>
+        <span class="tp-subpage-badge">SOLUTIONS</span>
         <h1 class="tp-subpage-headline">Make privacy compliance part of everyday operations.</h1>
         <p class="tp-subpage-sub">
-          Give your DPO, business owners and management one reliable system for identifying obligations, completing actions and demonstrating accountability.
+          Give your teams a clear way to describe their processing, complete assigned actions and raise concerns. Privacy leads can review what has changed, and management can see unresolved work without losing the evidence behind each decision.
         </p>
       </div>
     </div>
-
     <section class="tp-section">
-      <div class="tp-container">
-        <div class="tp-section-header">
-          <div class="tp-section-eyebrow">Enterprise Benefits</div>
-          <h2 class="tp-section-heading">What organisations gain</h2>
-          <p class="tp-section-desc">Practical accountability across all operating departments.</p>
-        </div>
-
-        <div class="tp-cards-grid-3">
-          <div class="tp-card">
-            <h3 class="tp-card-title">Processing & Risk Visibility</h3>
-            <p class="tp-card-body">A current view of processing activities, statutory obligations, vendor exposure and privacy risks.</p>
-          </div>
-          <div class="tp-card">
-            <h3 class="tp-card-title">Cross-Department Ownership</h3>
-            <p class="tp-card-body">Clear ownership across legal, IT, HR, and marketing so responsibilities don't stall.</p>
-          </div>
-          <div class="tp-card">
-            <h3 class="tp-card-title">Consistent Workflows</h3>
-            <p class="tp-card-body">Repeatable workflows for recurring privacy reviews, rights requests, vendor due diligence and incidents.</p>
-          </div>
-          <div class="tp-card">
-            <h3 class="tp-card-title">Rapid Document Production</h3>
-            <p class="tp-card-body">Faster production of policies, assessments and management reports from structured live data.</p>
-          </div>
-          <div class="tp-card">
-            <h3 class="tp-card-title">Instant Retrieval</h3>
-            <p class="tp-card-body">Evidence that can be retrieved without reconstructing compliance history during external regulatory reviews.</p>
-          </div>
-          <div class="tp-card">
-            <h3 class="tp-card-title">DPO Independence</h3>
-            <p class="tp-card-body">Uncompromised executive oversight while maintaining the independent reporting role required for DPOs.</p>
-          </div>
-        </div>
-
-        <div style="margin-top: 56px; text-align: center;">
-          <button class="tp-btn-primary" href="/book-demo">Book an Organisation Demo</button>
+      <div class="tp-container tp-feature-layout">
+        <div class="tp-feature-box">
+          <p style="font-size:16px; line-height:1.7; color:var(--tp-text-secondary); margin-bottom:24px;">
+            Start with an organisational profile, invite owners, build a processing inventory and identify gaps. Use guided assessments to decide which changes require deeper review. Assign actions, monitor deadlines and prepare reports from approved records.
+          </p>
+          <a href="/book-demo" class="tp-btn-primary" onclick="handleNav(event, '/book-demo')">Book an Organisation Demo &rarr;</a>
         </div>
       </div>
     </section>
   </div>
 
   <!-- ==========================================================================
-       VIEW: SOLUTIONS FOR PRIVACY PROFESSIONALS & DPCOs (PDF Section 9, 10 & 26)
+       VIEW: SOLUTIONS FOR PRIVACY PROFESSIONALS (PDF Section 9, 10 & 26)
        ========================================================================== -->
   <div id="view-solutions-privacy-professionals" class="tp-view">
     <div class="tp-subpage-hero">
       <div class="tp-container">
-        <span class="tp-subpage-badge">FOR DPOs, DPCOs & CONSULTANTS</span>
+        <span class="tp-subpage-badge">SOLUTIONS</span>
         <h1 class="tp-subpage-headline">Run the work behind credible privacy advice.</h1>
         <p class="tp-subpage-sub">
-          TruePriv supports internal and outsourced DPOs in advising, monitoring, documenting and escalating—not simply observing a compliance score.
+          Internal DPOs: Keep an annual work plan, monitor obligations, document advice and escalate matters with a traceable history. Outsourced DPOs: Work within the client's authorised workspace while preserving reporting lines, confidentiality and a record of recommendations.
         </p>
       </div>
     </div>
-
     <section class="tp-section">
-      <div class="tp-container">
-        <div class="tp-audience-grid">
-          <!-- Internal & Outsourced DPOs -->
-          <div class="tp-audience-card">
-            <span class="tp-audience-badge">INTERNAL & OUTSOURCED DPOs</span>
-            <h3 class="tp-audience-title">Day-to-day DPO capabilities</h3>
-            <p class="tp-audience-desc">Maintain an annual plan, monitor obligations, document advice, and escalate matters with a traceable history.</p>
-            <ul class="tp-check-list">
-              <li class="tp-check-item"><i class="fa-solid fa-check"></i> <span>Create and monitor the annual DPO plan.</span></li>
-              <li class="tp-check-item"><i class="fa-solid fa-check"></i> <span>Maintain living RoPAs and data maps.</span></li>
-              <li class="tp-check-item"><i class="fa-solid fa-check"></i> <span>Initiate and review statutory DPIAs.</span></li>
-              <li class="tp-check-item"><i class="fa-solid fa-check"></i> <span>Coordinate rights requests and breach assessments.</span></li>
-              <li class="tp-check-item"><i class="fa-solid fa-check"></i> <span>Issue advice and record whether management accepted it.</span></li>
-              <li class="tp-check-item"><i class="fa-solid fa-check"></i> <span>Prepare management, audit and regulatory reports.</span></li>
-            </ul>
+      <div class="tp-container tp-feature-layout">
+        <div class="tp-feature-box">
+          <h3>Consultants and DPCOs</h3>
+          <p style="font-size:15px; line-height:1.65; color:var(--tp-text-secondary); margin-bottom:20px;">
+            Manage delegated work across separate client organisations. A portfolio view can help prioritise deadlines and deliverables, while client records, permissions and audit histories remain separate. Engagements that involve independent auditing and operational DPO support require appropriate separation and conflict checks.
+          </p>
+          <div style="padding:16px; background:var(--tp-bg-alt); border-radius:10px; border:1px solid var(--tp-border); font-size:13px; color:var(--tp-text-muted); margin-bottom:24px;">
+            The platform supports qualified professionals; using it does not confer a DPO appointment, professional licence or regulatory accreditation.
           </div>
-
-          <!-- Section 10: Consultants and DPCOs -->
-          <div class="tp-audience-card">
-            <span class="tp-audience-badge">CONSULTANTS & LICENSED DPCOs</span>
-            <h3 class="tp-audience-title">Manage every client without losing separation</h3>
-            <p class="tp-audience-desc">Operate a secure multi-client portfolio, enter authorised client workspaces and carry out assigned work with every action attributed and audited.</p>
-            <ul class="tp-check-list">
-              <li class="tp-check-item"><i class="fa-solid fa-check"></i> <span>Separate client organisations, users, permissions and records.</span></li>
-              <li class="tp-check-item"><i class="fa-solid fa-check"></i> <span>Portfolio view of deadlines, risks and team workload.</span></li>
-              <li class="tp-check-item"><i class="fa-solid fa-check"></i> <span>Delegated client access with custom scoping.</span></li>
-              <li class="tp-check-item"><i class="fa-solid fa-check"></i> <span>Reusable jurisdiction-controlled templates and methodologies.</span></li>
-              <li class="tp-check-item"><i class="fa-solid fa-check"></i> <span>Independent audit workspaces & conflict-of-interest controls.</span></li>
-            </ul>
-          </div>
-        </div>
-
-        <div style="margin-top: 40px; padding: 24px; background: var(--tp-orange-light); border: 1px solid var(--tp-orange-subtle); border-radius: 12px; font-size: 13px; color: var(--tp-text-secondary);">
-          <strong style="color:var(--tp-dark);">Important Distinction (PDF Page 8 & 17):</strong> Outsourced DPO support and independent compliance auditing must not be treated as the same engagement. The platform flags potential self-review conflicts and supports separate teams, permissions and workpapers. Using TruePriv does not confer a DPO appointment, professional licence or regulatory accreditation.
-        </div>
-
-        <div style="margin-top: 36px; text-align: center;">
-          <button class="tp-btn-primary" href="/book-demo">Request a Professional Demo</button>
+          <a href="/book-demo" class="tp-btn-primary" onclick="handleNav(event, '/book-demo')">Request a Professional Demo &rarr;</a>
         </div>
       </div>
     </section>
@@ -1776,103 +1828,43 @@
   <div id="view-data-residency" class="tp-view">
     <div class="tp-subpage-hero">
       <div class="tp-container">
-        <span class="tp-subpage-badge">DATA LOCATION & INFRASTRUCTURE</span>
+        <span class="tp-subpage-badge">DATA RESIDENCY & DEPLOYMENT</span>
         <h1 class="tp-subpage-headline">Choose where your compliance data is stored and processed.</h1>
         <p class="tp-subpage-sub">
-          TruePriv is designed to give eligible clients meaningful control over data location and deployment architecture, including in-country and customer-controlled options.
+          Data location matters across the full service, from documents and primary records to backups, logs, support access and AI processing. Discuss the available hosting regions and deployment models for your organisation, including dedicated or customer controlled options where supported.
         </p>
       </div>
     </div>
-
     <section class="tp-section">
-      <div class="tp-container">
-        <div class="tp-section-header">
-          <div class="tp-section-eyebrow">Architecture</div>
-          <h2 class="tp-section-heading">Residency means the complete data lifecycle</h2>
-          <p class="tp-section-desc">
-            Data location matters across the full service. Residency commitments cover documents, databases, backups, logs, support access and AI processing—not just the main database.
+      <div class="tp-container tp-feature-layout">
+        <div class="tp-feature-box">
+          <p style="font-size:15px; line-height:1.65; color:var(--tp-text-secondary); margin-bottom:24px;">
+            Before making a commitment, we will confirm the actual infrastructure, subprocessors, access arrangements, recovery locations and migration options that apply to the selected service.
           </p>
-        </div>
-
-        <div class="tp-cards-grid-3">
-          <div class="tp-card">
-            <h3 class="tp-card-title">Shared Cloud</h3>
-            <p class="tp-card-body">Hosted in a selected supported sovereign data centre region with complete cryptographic tenant isolation.</p>
-          </div>
-          <div class="tp-card">
-            <h3 class="tp-card-title">In-Country Hosting</h3>
-            <p class="tp-card-body">Dedicated national hosting where verified infrastructure and regulatory arrangements are supported.</p>
-          </div>
-          <div class="tp-card">
-            <h3 class="tp-card-title">Dedicated Environment</h3>
-            <p class="tp-card-body">Single-tenant isolated instance with dedicated database, encryption keys and custom backup policies.</p>
-          </div>
-          <div class="tp-card">
-            <h3 class="tp-card-title">Customer Private Cloud</h3>
-            <p class="tp-card-body">Deploy inside your organisation's AWS, Azure, GCP or private cloud tenancy with customer-managed keys.</p>
-          </div>
-          <div class="tp-card">
-            <h3 class="tp-card-title">On-Premises Deployment</h3>
-            <p class="tp-card-body">Available for eligible regulated banking, telecommunications and government enterprise institutions.</p>
-          </div>
-          <div class="tp-card">
-            <h3 class="tp-card-title">Audited Support Access</h3>
-            <p class="tp-card-body">Strict access controls ensuring platform support staff cannot view sensitive client records without explicit approval.</p>
-          </div>
-        </div>
-
-        <div style="margin-top: 48px; text-align: center;">
-          <button class="tp-btn-primary" href="/book-demo">Discuss Deployment Options</button>
+          <a href="/book-demo" class="tp-btn-primary" onclick="handleNav(event, '/book-demo')">Discuss Deployment Options &rarr;</a>
         </div>
       </div>
     </section>
   </div>
 
   <!-- ==========================================================================
-       VIEW: SECURITY & TRUST (PDF Section 12 & 26)
+       VIEW: SECURITY (PDF Section 12 & 26)
        ========================================================================== -->
   <div id="view-security" class="tp-view">
     <div class="tp-subpage-hero">
       <div class="tp-container">
-        <span class="tp-subpage-badge">SECURITY & GOVERNANCE</span>
-        <h1 class="tp-subpage-headline">Security built for sensitive compliance operations.</h1>
+        <span class="tp-subpage-badge">SECURITY</span>
+        <h1 class="tp-subpage-headline">Protect sensitive work and keep decisions accountable.</h1>
         <p class="tp-subpage-sub">
-          Privacy operations involve contracts, incidents, risks and internal advice. TruePriv applies layered technical and organisational safeguards to protect client records, evidence and decisions throughout their lifecycle.
+          Privacy operations involve contracts, incidents, risks and internal advice. TruePriv is designed around controlled access, separation between organisations and an attributable history of changes and approvals. Available technical controls and assurance material must be described in the Security Information and Subprocessors pages after verification.
         </p>
       </div>
     </div>
-
     <section class="tp-section">
-      <div class="tp-container">
-        <div class="tp-cards-grid-3">
-          <div class="tp-card">
-            <h3 class="tp-card-title">Tenant Isolation</h3>
-            <p class="tp-card-body">Complete logical separation and least-privilege access across organisations, tenants and workspaces.</p>
-          </div>
-          <div class="tp-card">
-            <h3 class="tp-card-title">MFA & Enterprise SSO</h3>
-            <p class="tp-card-body">Multi-factor authentication and enterprise SAML / Single Sign-On integration where supported.</p>
-          </div>
-          <div class="tp-card">
-            <h3 class="tp-card-title">Object-Level Permissions</h3>
-            <p class="tp-card-body">Granular role-based controls for business owners, DPOs, reviewers, auditors and executive readers.</p>
-          </div>
-          <div class="tp-card">
-            <h3 class="tp-card-title">Encryption at Rest & Transit</h3>
-            <p class="tp-card-body">All traffic encrypted with TLS 1.3; sensitive storage encrypted with AES-256 with optional customer-managed keys.</p>
-          </div>
-          <div class="tp-card">
-            <h3 class="tp-card-title">Tamper-Evident Audit Logs</h3>
-            <p class="tp-card-body">Immutable chronological records of changes, approvals, advice notes and evidence exports.</p>
-          </div>
-          <div class="tp-card">
-            <h3 class="tp-card-title">Subprocessor Governance</h3>
-            <p class="tp-card-body">Strict vetting, verified hosting locations and contractual data residency controls across all suppliers.</p>
-          </div>
-        </div>
-
-        <div style="margin-top: 48px; text-align: center;">
-          <a href="/contact" class="tp-btn-primary">Ask a Security Question</button>
+      <div class="tp-container tp-feature-layout">
+        <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
+          <a href="/contact" class="tp-btn-primary" onclick="handleNav(event, '/contact')">Ask a Security Question</a>
+          <a href="/data-residency" class="tp-btn-outline" onclick="handleNav(event, '/data-residency')">Discuss Deployment</a>
         </div>
       </div>
     </section>
@@ -1884,61 +1876,56 @@
   <div id="view-pricing" class="tp-view">
     <div class="tp-subpage-hero">
       <div class="tp-container">
-        <span class="tp-subpage-badge">TRANSPARENT VALUE</span>
+        <span class="tp-subpage-badge">PRICING</span>
         <h1 class="tp-subpage-headline">Choose the level of privacy operations your organisation needs.</h1>
         <p class="tp-subpage-sub">
-          Pricing scales by organisation size, number of entities, users, jurisdictions, selected modules, storage, deployment and professional support.
+          Essential supports a core programme. Professional supports broader operational workflows. Consultant is designed for authorised work across multiple clients. Enterprise addresses complex group, security and deployment requirements. Exact inclusions, limits and charges must be approved before publication; until then each plan displays “Contact Sales” without a price.
         </p>
       </div>
     </div>
-
     <section class="tp-section">
       <div class="tp-container">
         <div class="tp-pricing-grid">
-          <!-- Essential -->
           <div class="tp-price-card">
             <div>
               <h3 class="tp-price-name">Essential</h3>
-              <div class="tp-price-bestfor">Best for: Small organisations</div>
-              <div class="tp-price-scope">Core records, task management, policies and baseline reporting.</div>
+              <div class="tp-price-scope">Essential supports a core programme.</div>
             </div>
-            <button class="tp-btn-outline" style="width:100%; justify-content:center;" href="/book-demo">Start or Enquire</button>
+            <a href="/contact" class="tp-btn-outline" style="justify-content:center;" onclick="handleNav(event, '/contact')">Contact Sales</a>
           </div>
 
-          <!-- Professional -->
           <div class="tp-price-card popular">
-            <span class="tp-price-badge">POPULAR</span>
+            <span class="tp-price-badge">RECOMMENDED</span>
             <div>
               <h3 class="tp-price-name">Professional</h3>
-              <div class="tp-price-bestfor">Best for: Growing and regulated organisations</div>
-              <div class="tp-price-scope">Full operational workflows, automation, DPIA screening, DSAR portal and integrations.</div>
+              <div class="tp-price-scope">Professional supports broader operational workflows.</div>
             </div>
-            <button class="tp-btn-primary" style="width:100%; justify-content:center;" href="/book-demo">Book a Demo</button>
+            <a href="/contact" class="tp-btn-primary" style="justify-content:center;" onclick="handleNav(event, '/contact')">Contact Sales</a>
           </div>
 
-          <!-- Consultant -->
           <div class="tp-price-card">
             <div>
               <h3 class="tp-price-name">Consultant</h3>
-              <div class="tp-price-bestfor">Best for: Independent DPOs and consultancies</div>
-              <div class="tp-price-scope">Multi-client portfolio, delegated access, conflict-of-interest checks and branded reports.</div>
+              <div class="tp-price-scope">Consultant is designed for authorised work across multiple clients.</div>
             </div>
-            <button class="tp-btn-outline" style="width:100%; justify-content:center;" href="/book-demo">Request Demo</button>
+            <a href="/contact" class="tp-btn-outline" style="justify-content:center;" onclick="handleNav(event, '/contact')">Contact Sales</a>
           </div>
 
-          <!-- Enterprise -->
           <div class="tp-price-card">
             <div>
               <h3 class="tp-price-name">Enterprise</h3>
-              <div class="tp-price-bestfor">Best for: Groups and regulated enterprises</div>
-              <div class="tp-price-scope">Advanced security, custom data residency, dedicated or on-premises deployment and SLA.</div>
+              <div class="tp-price-scope">Enterprise addresses complex group, security and deployment requirements.</div>
             </div>
-            <button class="tp-btn-outline" style="width:100%; justify-content:center;" href="/contact">Contact Sales</button>
+            <a href="/contact" class="tp-btn-outline" style="justify-content:center;" onclick="handleNav(event, '/contact')">Contact Sales</a>
           </div>
         </div>
 
-        <div style="margin-top: 40px; padding: 24px; background: var(--tp-bg-alt); border: 1px solid var(--tp-border); border-radius: 12px; font-size: 13px; color: var(--tp-text-secondary);">
-          <strong style="color:var(--tp-dark);">Pricing Rules (PDF Page 10 & 19):</strong> TruePriv proposals are shaped by number of entities, users, modules, countries, storage, integration needs, and deployment choices. We explain implementation, migration, and any usage-based costs clearly in custom proposals.
+        <div style="margin-top: 48px; max-width:800px; margin-left:auto; margin-right:auto;" class="tp-feature-box">
+          <h3>What shapes a proposal:</h3>
+          <p style="margin-bottom:16px;">
+            Number of entities and users, selected modules, countries, storage, integration needs, deployment and support. We will explain implementation, migration and any usage based costs in the proposal.
+          </p>
+          <a href="/book-demo" class="tp-btn-primary" onclick="handleNav(event, '/book-demo')">Discuss Pricing &rarr;</a>
         </div>
       </div>
     </section>
@@ -1950,153 +1937,108 @@
   <div id="view-countries" class="tp-view">
     <div class="tp-subpage-hero">
       <div class="tp-container">
-        <span class="tp-subpage-badge">PAN-AFRICA EXPANSION</span>
-        <h1 class="tp-subpage-headline">One platform for evolving privacy requirements across Africa.</h1>
+        <span class="tp-subpage-badge">COUNTRIES</span>
+        <h1 class="tp-subpage-headline">Built for privacy programmes across Africa.</h1>
         <p class="tp-subpage-sub">
-          TruePriv is built for Africa. Jurisdiction-specific regulatory packs are released country by country. Each available pack contains reviewed requirements, workflows, templates, deadlines and reporting logic maintained through controlled versioning.
+          TruePriv is developing jurisdiction-specific content country by country. Select a country to see the verified scope and status of its regulatory pack. A status of Planned or Pilot is not a claim that full legal coverage is available.
         </p>
       </div>
     </div>
-
     <section class="tp-section">
       <div class="tp-container">
-        <!-- Nigeria Focus Card -->
-        <div style="background:#ffffff; border:2px solid var(--tp-orange); border-radius:18px; padding:36px; margin-bottom:48px; box-shadow:var(--tp-shadow-md);">
-          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
+        <!-- Exact Nigeria Section (Section 14 & 26) -->
+        <div style="background:#ffffff; border:1px solid var(--tp-border); border-radius:18px; padding:36px; margin-bottom:40px; box-shadow:var(--tp-shadow-sm);">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; flex-wrap:wrap; gap:16px;">
             <div>
-              <span class="tp-audience-badge" style="background:var(--tp-orange-light); color:var(--tp-orange); border:1px solid var(--tp-orange-subtle);">AVAILABLE PACK &bull; NIGERIA</span>
-              <h2 style="font-family:var(--font-display); font-size:28px; font-weight:800; color:var(--tp-dark); margin-top:6px;">Privacy operations for organisations in Nigeria</h2>
+              <span class="tp-audience-badge" style="background:#dcfce7; color:#15803d;">STATUS: AVAILABLE</span>
+              <h2 style="font-family:var(--font-display); font-size:26px; font-weight:800; color:var(--tp-dark); margin-top:6px;">Privacy operations for organisations working in Nigeria</h2>
             </div>
-            <button class="tp-btn-primary" href="/book-demo">Book a Nigeria Demo</button>
+            <a href="/book-demo" class="tp-btn-primary" onclick="handleNav(event, '/book-demo')">Book a Nigeria Demo</a>
           </div>
-          <p style="font-size:15px; line-height:1.6; color:var(--tp-text-secondary); margin-bottom:20px;">
-            TruePriv helps organisations manage recurring obligations under Nigeria's data-protection framework (NDPA 2023) through guided workflows, automated records, evidence collection and regulatory-readiness reporting.
+          <p style="font-size:15px; line-height:1.65; color:var(--tp-text-secondary); margin-bottom:20px;">
+            Use guided processes to document processing activities, assess risk, manage rights requests and incidents, oversee vendors and prepare evidence for professional review. The Nigeria pack should identify the specific requirements and effective dates it covers once legally reviewed. Software support is not legal advice, a DPCO licence or a guarantee of regulator acceptance.
           </p>
-          <div class="tp-cards-grid-3" style="margin-top:20px;">
-            <div style="font-size:13px; color:var(--tp-text-secondary);"><i class="fa-solid fa-check" style="color:var(--tp-orange)"></i> Applicability & DPO planning</div>
-            <div style="font-size:13px; color:var(--tp-text-secondary);"><i class="fa-solid fa-check" style="color:var(--tp-orange)"></i> RoPA & Data-mapping workflows</div>
-            <div style="font-size:13px; color:var(--tp-text-secondary);"><i class="fa-solid fa-check" style="color:var(--tp-orange)"></i> DPIA screening & assessment</div>
-            <div style="font-size:13px; color:var(--tp-text-secondary);"><i class="fa-solid fa-check" style="color:var(--tp-orange)"></i> Data-subject rights & incidents</div>
-            <div style="font-size:13px; color:var(--tp-text-secondary);"><i class="fa-solid fa-check" style="color:var(--tp-orange)"></i> Vendor & processor oversight</div>
-            <div style="font-size:13px; color:var(--tp-text-secondary);"><i class="fa-solid fa-check" style="color:var(--tp-orange)"></i> Compliance audit & return preparation</div>
-          </div>
-          <div style="margin-top:20px; font-size:11px; color:var(--tp-text-muted); border-top:1px solid var(--tp-border); padding-top:12px;">
-            * Legal accuracy note: Software support is not legal advice, a licensed DPCO service, or a guarantee of NDPC regulator acceptance.
-          </div>
+          <div style="font-size:12px; color:var(--tp-text-muted);">Last reviewed: August 2026 &bull; Scope: Nigeria Data Protection Act (NDPA 2023)</div>
         </div>
 
-        <!-- Other African Countries -->
-        <h3 style="font-family:var(--font-display); font-size:22px; font-weight:800; margin-bottom:20px;">African Jurisdictions Roadmap</h3>
-        <div class="tp-cards-grid-3">
-          <div class="tp-card">
-            <span class="tp-stage-tag" style="background:#dcfce7; color:#15803d; font-weight:700;">PILOT</span>
-            <h4 style="font-family:var(--font-display); font-size:18px; font-weight:700; margin:10px 0 6px;">Ghana</h4>
-            <p style="font-size:13px; color:var(--tp-text-secondary);">Data Protection Act (Act 843) regulatory mapping.</p>
-          </div>
-          <div class="tp-card">
-            <span class="tp-stage-tag" style="background:#dbeafe; color:#1d4ed8; font-weight:700;">PLANNING</span>
-            <h4 style="font-family:var(--font-display); font-size:18px; font-weight:700; margin:10px 0 6px;">Kenya</h4>
-            <p style="font-size:13px; color:var(--tp-text-secondary);">Data Protection Act 2019 statutory compliance pack.</p>
-          </div>
-          <div class="tp-card">
-            <span class="tp-stage-tag" style="background:#fef3c7; color:#b45309; font-weight:700;">PLANNING</span>
-            <h4 style="font-family:var(--font-display); font-size:18px; font-weight:700; margin:10px 0 6px;">South Africa</h4>
-            <p style="font-size:13px; color:var(--tp-text-secondary);">POPIA compliance and Information Officer workflows.</p>
-          </div>
+        <div style="text-align: center; margin-top: 32px;">
+          <a href="/contact" class="tp-btn-outline" onclick="handleNav(event, '/contact')">Ask About Your Country &rarr;</a>
         </div>
       </div>
     </section>
   </div>
 
   <!-- ==========================================================================
-       VIEW: RESOURCES (INSIGHTS, REGULATORY LIBRARY, HELP) (PDF Section 16 & 26)
+       VIEW: RESOURCES - INSIGHTS (PDF Section 16 & 26 - With Exact Empty State)
        ========================================================================== -->
   <div id="view-insights" class="tp-view">
     <div class="tp-subpage-hero">
       <div class="tp-container">
-        <span class="tp-subpage-badge">KNOWLEDGE HUB</span>
+        <span class="tp-subpage-badge">INSIGHTS</span>
         <h1 class="tp-subpage-headline">Practical ideas for better privacy operations.</h1>
-        <p class="tp-subpage-sub">Browse guidance on building processing records, coordinating assessments, responding to requests and organising evidence.</p>
+        <p class="tp-subpage-sub">
+          Browse guidance on building processing records, coordinating assessments, responding to requests and organising evidence. Filter by country, topic, sector or format. Every article displays its author, publication date, last updated date and related product guidance.
+        </p>
       </div>
     </div>
     <section class="tp-section">
-      <div class="tp-container">
-        <div class="tp-cards-grid-3">
-          <div class="tp-card">
-            <span class="tp-stage-tag">ROPA GUIDE</span>
-            <h3 class="tp-card-title" style="margin-top:10px;">How to move from static Excel spreadsheets to living data maps</h3>
-            <p class="tp-card-body">Practical steps for gathering departmental processing activities without blocking normal business flow.</p>
-          </div>
-          <div class="tp-card">
-            <span class="tp-stage-tag">DPIA SCREENING</span>
-            <h3 class="tp-card-title" style="margin-top:10px;">Screening triggers: When is a formal DPIA required by law?</h3>
-            <p class="tp-card-body">Understanding statutory thresholds, high residual risk processing, and executive sign-off procedures.</p>
-          </div>
-          <div class="tp-card">
-            <span class="tp-stage-tag">AUDIT READINESS</span>
-            <h3 class="tp-card-title" style="margin-top:10px;">Preserving verifiable audit history for compliance filings</h3>
-            <p class="tp-card-body">Why versioning, timestamped approvals and immutable evidence trails matter during regulator examinations.</p>
-          </div>
+      <div class="tp-container tp-feature-layout">
+        <!-- Exact Empty State from PDF Page 20 -->
+        <div class="tp-empty-state-box">
+          <p class="tp-empty-state-text">No articles match those filters yet. Clear filters or browse all insights.</p>
+          <a href="/resources/insights" class="tp-btn-outline" onclick="handleNav(event, '/resources/insights')">Browse All Insights</a>
         </div>
       </div>
     </section>
   </div>
 
+  <!-- ==========================================================================
+       VIEW: RESOURCES - REGULATORY LIBRARY (PDF Section 16 & 26 - With Exact Empty State)
+       ========================================================================== -->
   <div id="view-regulatory-library" class="tp-view">
     <div class="tp-subpage-hero">
       <div class="tp-container">
-        <span class="tp-subpage-badge">LEGAL REPOSITORY</span>
+        <span class="tp-subpage-badge">REGULATORY LIBRARY</span>
         <h1 class="tp-subpage-headline">Find the source behind a privacy requirement.</h1>
-        <p class="tp-subpage-sub">Curated links and summaries for laws, regulations, guidance and regulator publications across Africa. Summaries are informational and users should consult authoritative sources.</p>
+        <p class="tp-subpage-sub">
+          Browse laws, regulatory guidance and official publications by country and topic. Each entry names its issuing authority, source, publication and effective dates, a short reviewed summary and its last review date. Follow the official source for the authoritative text.
+        </p>
       </div>
     </div>
     <section class="tp-section">
-      <div class="tp-container">
-        <div class="tp-cards-grid-3">
-          <div class="tp-card">
-            <span class="tp-stage-tag" style="background:var(--tp-orange-light); color:var(--tp-orange)">NIGERIA</span>
-            <h3 class="tp-card-title" style="margin-top:10px;">Nigeria Data Protection Act (NDPA 2023)</h3>
-            <p class="tp-card-body">Issuing Authority: NDPC &bull; Effective: June 2023 &bull; Statutory framework for data controllers and processors of major importance.</p>
-          </div>
-          <div class="tp-card">
-            <span class="tp-stage-tag">GHANA</span>
-            <h3 class="tp-card-title" style="margin-top:10px;">Data Protection Act (Act 843)</h3>
-            <p class="tp-card-body">Issuing Authority: Data Protection Commission (DPC) &bull; National standard for principles of data processing in Ghana.</p>
-          </div>
-          <div class="tp-card">
-            <span class="tp-stage-tag">KENYA</span>
-            <h3 class="tp-card-title" style="margin-top:10px;">Data Protection Act 2019</h3>
-            <p class="tp-card-body">Issuing Authority: ODPC Kenya &bull; Operational regulations for registration, breach notification and data subject rights.</p>
-          </div>
+      <div class="tp-container tp-feature-layout">
+        <!-- Exact Empty State from PDF Page 20 -->
+        <div class="tp-empty-state-box">
+          <p class="tp-empty-state-text">No reviewed entries are available for this selection yet. Try another country or topic. Do not publish invented legal summaries or unreviewed entries.</p>
+          <a href="/contact" class="tp-btn-outline" onclick="handleNav(event, '/contact')">Enquire About a Law</a>
         </div>
       </div>
     </section>
   </div>
 
+  <!-- ==========================================================================
+       VIEW: RESOURCES - HELP CENTRE (PDF Section 16 & 26 - With Exact Empty State)
+       ========================================================================== -->
   <div id="view-help" class="tp-view">
     <div class="tp-subpage-hero">
       <div class="tp-container">
-        <span class="tp-subpage-badge">PRODUCT GUIDANCE</span>
+        <span class="tp-subpage-badge">HELP CENTRE</span>
         <h1 class="tp-subpage-headline">Find help with your TruePriv workflow.</h1>
-        <p class="tp-subpage-sub">Search product guidance by onboarding, organisation setup, RoPA, DPIA, DPO work, requests, incidents, vendors, reporting, user management, security and integrations.</p>
+        <p class="tp-subpage-sub">
+          Search product guidance by onboarding, organisation setup, processing records, assessments, DPO work, requests, incidents, vendors, reports, account access and security. Articles use clear steps, screenshots only when accurate, prerequisites, a last updated date and a route to support if the issue remains unresolved.
+        </p>
       </div>
     </div>
     <section class="tp-section">
-      <div class="tp-container" style="max-width:720px; margin:0 auto;">
-        <div style="display:flex; gap:10px; margin-bottom:32px;">
-          <input type="text" class="tp-input" placeholder="Search workflow guidance or error code..." style="flex:1;">
+      <div class="tp-container tp-feature-layout">
+        <div style="display:flex; gap:10px; margin-bottom:24px;">
+          <input type="text" class="tp-input" placeholder="Search product guidance..." style="flex:1;">
           <button class="tp-btn-primary">Search</button>
         </div>
-        <div class="tp-card" style="margin-bottom:16px;">
-          <h4 style="font-family:var(--font-display); font-size:16px; font-weight:700; margin-bottom:6px;">How to onboard business owners into guided RoPA surveys</h4>
-          <p style="font-size:13px; color:var(--tp-text-secondary);">Step-by-step instructions on setting up automated role-based questionnaires without granting full admin rights.</p>
-        </div>
-        <div class="tp-card" style="margin-bottom:16px;">
-          <h4 style="font-family:var(--font-display); font-size:16px; font-weight:700; margin-bottom:6px;">Configuring statutory 72-hour breach incident clocks</h4>
-          <p style="font-size:13px; color:var(--tp-text-secondary);">Setting notification escalation paths and logging internal severity assessment notes.</p>
-        </div>
-        <div style="text-align:center; margin-top:28px;">
-          <a href="/contact" class="tp-btn-outline">Need direct technical support? Contact us &rarr;</button>
+        <!-- Exact Search Empty State from PDF Page 20 -->
+        <div class="tp-empty-state-box">
+          <p class="tp-empty-state-text">We could not find an article for that search. Try a broader term or contact support.</p>
+          <a href="/contact" class="tp-btn-outline" onclick="handleNav(event, '/contact')">Contact Support &rarr;</a>
         </div>
       </div>
     </section>
@@ -2108,33 +2050,21 @@
   <div id="view-about" class="tp-view">
     <div class="tp-subpage-hero">
       <div class="tp-container">
-        <span class="tp-subpage-badge">OUR PURPOSE</span>
+        <span class="tp-subpage-badge">ABOUT</span>
         <h1 class="tp-subpage-headline">Making privacy compliance operational across Africa.</h1>
         <p class="tp-subpage-sub">
-          TruePriv is being developed to reduce repetitive privacy administration and improve the quality of records, decisions and evidence. We turn requirements into work that can be assigned, reviewed and demonstrated.
+          TruePriv is being developed to reduce repetitive privacy administration and improve the quality of records, decisions and evidence. We turn requirements into work that can be assigned, reviewed and demonstrated. Country-specific content is released only after review, and people remain responsible for professional advice and organisational decisions.
         </p>
       </div>
     </div>
     <section class="tp-section">
-      <div class="tp-container">
-        <div class="tp-section-header">
-          <div class="tp-section-eyebrow">Guiding Principles</div>
-          <h2 class="tp-section-heading">Operating principles</h2>
-          <p class="tp-section-desc">Practical compliance over box-ticking.</p>
-        </div>
-        <div class="tp-cards-grid-3">
-          <div class="tp-card">
-            <h3 class="tp-card-title">Practical compliance over box-ticking</h3>
-            <p class="tp-card-body">We build software that helps organisations actually execute privacy operations rather than producing superficial compliance certificates.</p>
-          </div>
-          <div class="tp-card">
-            <h3 class="tp-card-title">Automation with human accountability</h3>
-            <p class="tp-card-body">Automate drafting and evidence collection while preserving human professional judgement at material decision points.</p>
-          </div>
-          <div class="tp-card">
-            <h3 class="tp-card-title">Jurisdiction-aware design</h3>
-            <p class="tp-card-body">Engineered specifically for African data protection frameworks with localized rules, workflows and authorities.</p>
-          </div>
+      <div class="tp-container tp-feature-layout">
+        <div class="tp-feature-box">
+          <h3>Principles:</h3>
+          <p style="margin-bottom:24px;">
+            Practical workflows, explainable automation, evidence by design, data location choice where supported and human accountability.
+          </p>
+          <a href="/contact" class="tp-btn-primary" onclick="handleNav(event, '/contact')">Talk to Us &rarr;</a>
         </div>
       </div>
     </section>
@@ -2143,156 +2073,92 @@
   <div id="view-partners" class="tp-view">
     <div class="tp-subpage-hero">
       <div class="tp-container">
-        <span class="tp-subpage-badge">ECOSYSTEM</span>
+        <span class="tp-subpage-badge">PARTNERS</span>
         <h1 class="tp-subpage-headline">Deliver more consistent privacy services together.</h1>
         <p class="tp-subpage-sub">
-          We welcome conversations with privacy professionals, consultancies, qualified DPCOs, legal advisers, technology providers and country experts.
+          We welcome conversations with privacy professionals, consultancies, qualified DPCOs, legal advisers, technology providers and country experts. Partnerships may cover implementation, service delivery, integrations, training and reviewed local content. The arrangement, responsibilities and any required qualifications are agreed separately.
         </p>
       </div>
     </div>
     <section class="tp-section">
-      <div class="tp-container">
-        <div class="tp-cards-grid-3">
-          <div class="tp-card">
-            <h3 class="tp-card-title">Consulting & Implementation</h3>
-            <p class="tp-card-body">Deliver structured advisory and deploy TruePriv workflows to your enterprise clients.</p>
-          </div>
-          <div class="tp-card">
-            <h3 class="tp-card-title">DPCO & Compliance Services</h3>
-            <p class="tp-card-body">Manage multi-client audit portfolios with strict conflict-of-interest controls and filing packs.</p>
-          </div>
-          <div class="tp-card">
-            <h3 class="tp-card-title">Regulatory Content & Technology</h3>
-            <p class="tp-card-body">Partner on regional regulatory pack legal reviews and enterprise infrastructure integrations.</p>
-          </div>
-        </div>
-        <div style="margin-top:40px; text-align:center;">
-          <a href="/contact" class="tp-btn-primary">Discuss a Partnership</button>
+      <div class="tp-container tp-feature-layout">
+        <div style="text-align:center;">
+          <a href="/contact" class="tp-btn-primary" onclick="handleNav(event, '/contact')">Discuss a Partnership</a>
         </div>
       </div>
     </section>
   </div>
 
   <!-- ==========================================================================
-       VIEW: BOOK A DEMO (PDF Section 19 & 26) - EXACT 10 FIELDS
+       VIEW: BOOK A DEMO (PDF Section 19 & 26 - Exact Form Fields & Messages)
        ========================================================================== -->
   <div id="view-book-demo" class="tp-view">
     <div class="tp-subpage-hero">
       <div class="tp-container">
-        <span class="tp-subpage-badge">INTERACTIVE DEMONSTRATION</span>
+        <span class="tp-subpage-badge">DEMO</span>
         <h1 class="tp-subpage-headline">See how TruePriv could work for your team.</h1>
         <p class="tp-subpage-sub">
           Tell us about your organisation, role, country, main use case and any data location requirements. We will use the information to prepare a relevant discussion and contact you to arrange a demonstration.
         </p>
       </div>
     </div>
-
     <section class="tp-section">
       <div class="tp-container">
         <div class="tp-form-card">
           <form onsubmit="handleDemoSubmit(event)">
             <div class="tp-form-grid">
-              <!-- Field 1: Name -->
               <div class="tp-form-group">
-                <label class="tp-label">Full Name *</label>
-                <input type="text" required class="tp-input" placeholder="e.g. Bisi Adeyemi">
+                <label class="tp-label">Name *</label>
+                <input type="text" required class="tp-input">
               </div>
-
-              <!-- Field 2: Work Email -->
               <div class="tp-form-group">
                 <label class="tp-label">Work Email *</label>
-                <input type="email" required class="tp-input" placeholder="name@organisation.com">
+                <input type="email" required class="tp-input">
               </div>
-
-              <!-- Field 3: Organisation -->
               <div class="tp-form-group">
                 <label class="tp-label">Organisation *</label>
-                <input type="text" required class="tp-input" placeholder="Company or Firm Name">
+                <input type="text" required class="tp-input">
               </div>
-
-              <!-- Field 4: Role -->
               <div class="tp-form-group">
                 <label class="tp-label">Role *</label>
-                <input type="text" required class="tp-input" placeholder="e.g. DPO, Head of Compliance, Partner">
+                <input type="text" required class="tp-input">
               </div>
-
-              <!-- Field 5: Country -->
               <div class="tp-form-group">
                 <label class="tp-label">Country *</label>
-                <select required class="tp-select">
-                  <option value="Nigeria">Nigeria</option>
-                  <option value="Ghana">Ghana</option>
-                  <option value="Kenya">Kenya</option>
-                  <option value="South Africa">South Africa</option>
-                  <option value="Rwanda">Rwanda</option>
-                  <option value="Other">Other African Country</option>
-                </select>
+                <input type="text" required class="tp-input">
               </div>
-
-              <!-- Field 6: Organisation Size -->
               <div class="tp-form-group">
                 <label class="tp-label">Organisation Size *</label>
-                <select required class="tp-select">
-                  <option value="1-50">1 - 50 employees</option>
-                  <option value="51-200">51 - 200 employees</option>
-                  <option value="201-1000">201 - 1,000 employees</option>
-                  <option value="1000+">1,000+ enterprise</option>
-                </select>
+                <input type="text" required class="tp-input">
               </div>
-
-              <!-- Field 7: Main Use Case -->
               <div class="tp-form-group full">
                 <label class="tp-label">Main Use Case *</label>
-                <select required class="tp-select">
-                  <option value="Internal Privacy Operations">Internal Organisational Privacy Programme</option>
-                  <option value="Outsourced DPO Management">Outsourced DPO Practice / Multi-client</option>
-                  <option value="DPCO Statutory Audits">Licensed DPCO Firm Audit Returns</option>
-                  <option value="RoPA and DPIA Automation">RoPA and DPIA Automation</option>
-                  <option value="Data Subject Rights (DSAR)">Data Subject Rights Management</option>
-                </select>
+                <input type="text" required class="tp-input">
               </div>
-
-              <!-- Field 8: Preferred Deployment -->
               <div class="tp-form-group">
                 <label class="tp-label">Preferred Deployment *</label>
-                <select required class="tp-select">
-                  <option value="Shared Sovereign Cloud">Shared Cloud (Supported Region)</option>
-                  <option value="In-Country Hosting">In-Country Hosting</option>
-                  <option value="Dedicated Single-Tenant">Dedicated Single-Tenant</option>
-                  <option value="Customer-Controlled Cloud">Customer-Controlled Cloud</option>
-                  <option value="On-Premises">On-Premises</option>
-                </select>
+                <input type="text" required class="tp-input">
               </div>
-
-              <!-- Field 9: Required Data Location -->
               <div class="tp-form-group">
                 <label class="tp-label">Required Data Location *</label>
-                <input type="text" required class="tp-input" placeholder="e.g. Nigeria Sovereign DC, Local In-Country, AWS/Azure">
+                <input type="text" required class="tp-input">
               </div>
-
-              <!-- Field 10: Desired Timing & Consent -->
-              <div class="tp-form-group">
-                <label class="tp-label">Desired Implementation Timing</label>
-                <select class="tp-select">
-                  <option value="Immediate">Immediate (Within 30 days)</option>
-                  <option value="Next Quarter">Next quarter</option>
-                  <option value="Exploring">General exploration / Planning</option>
-                </select>
+              <div class="tp-form-group full">
+                <label class="tp-label">Desired Timing</label>
+                <input type="text" class="tp-input">
               </div>
-
               <div class="tp-form-group full" style="margin-top:8px;">
                 <label style="display:flex; align-items:flex-start; gap:10px; font-size:12px; color:var(--tp-text-secondary); cursor:pointer;">
-                  <input type="checkbox" required style="margin-top:3px; accent-color:var(--tp-orange);">
-                  <span>I consent to TruePriv reviewing my requirements and contacting me regarding this demonstration request.</span>
+                  <input type="checkbox" required style="margin-top:3px; accent-color:var(--tp-accent);">
+                  <span>Consent to be contacted *</span>
                 </label>
               </div>
-
               <div class="tp-form-group full" style="margin-top:12px;">
                 <button type="submit" class="tp-btn-primary" style="width:100%; justify-content:center; padding:14px;">Request a Demo</button>
               </div>
             </div>
           </form>
-
+          <!-- Exact Success Confirmation from PDF Page 13 & 21 -->
           <div id="demo-success" class="tp-success-banner">
             <i class="fa-solid fa-circle-check" style="margin-right:8px;"></i>
             <span>Thank you. We will review your requirements and contact you to arrange the most relevant demonstration.</span>
@@ -2303,17 +2169,18 @@
   </div>
 
   <!-- ==========================================================================
-       VIEW: CONTACT (PDF Section 19 & 26)
+       VIEW: CONTACT (PDF Section 19 & 26 - Exact Categories & Messages)
        ========================================================================== -->
   <div id="view-contact" class="tp-view">
     <div class="tp-subpage-hero">
       <div class="tp-container">
-        <span class="tp-subpage-badge">COMMUNICATIONS</span>
+        <span class="tp-subpage-badge">CONTACT</span>
         <h1 class="tp-subpage-headline">Get in touch with the right team.</h1>
-        <p class="tp-subpage-sub">Choose Sales, Partnerships, Support, Security or Privacy, then describe how we can help.</p>
+        <p class="tp-subpage-sub">
+          Choose Sales, Partnerships, Support, Security or Privacy, then describe how we can help. Do not include passwords or sensitive customer records in this form.
+        </p>
       </div>
     </div>
-
     <section class="tp-section">
       <div class="tp-container">
         <div class="tp-form-card">
@@ -2321,43 +2188,43 @@
             <div class="tp-form-grid">
               <div class="tp-form-group">
                 <label class="tp-label">Name *</label>
-                <input type="text" required class="tp-input" placeholder="Your name">
+                <input type="text" required class="tp-input">
               </div>
               <div class="tp-form-group">
                 <label class="tp-label">Work Email *</label>
-                <input type="email" required class="tp-input" placeholder="work@organisation.com">
+                <input type="email" required class="tp-input">
               </div>
               <div class="tp-form-group">
-                <label class="tp-label">Organisation (Optional)</label>
-                <input type="text" class="tp-input" placeholder="Organisation name">
+                <label class="tp-label">Organisation (optional)</label>
+                <input type="text" class="tp-input">
               </div>
               <div class="tp-form-group">
-                <label class="tp-label">Country (Optional)</label>
-                <input type="text" class="tp-input" placeholder="e.g. Nigeria, Ghana, Kenya">
+                <label class="tp-label">Country (optional)</label>
+                <input type="text" class="tp-input">
               </div>
               <div class="tp-form-group full">
                 <label class="tp-label">Enquiry Category *</label>
                 <select required class="tp-select">
-                  <option value="Sales">Sales & Pricing</option>
-                  <option value="Partnerships">Partnerships & DPCO Network</option>
-                  <option value="Support">Product & Technical Support</option>
-                  <option value="Security">Security & Architecture Question</option>
-                  <option value="Privacy">Privacy Notice Enquiry</option>
+                  <option value="Sales">Sales</option>
+                  <option value="Partnerships">Partnerships</option>
+                  <option value="Support">Support</option>
+                  <option value="Security">Security</option>
+                  <option value="Privacy">Privacy</option>
                 </select>
               </div>
               <div class="tp-form-group full">
                 <label class="tp-label">Message *</label>
-                <textarea required rows="4" class="tp-textarea" placeholder="Describe your enquiry. Do not include passwords or sensitive client records in this form."></textarea>
+                <textarea required rows="4" class="tp-textarea"></textarea>
               </div>
               <div class="tp-form-group full">
                 <button type="submit" class="tp-btn-primary" style="width:100%; justify-content:center; padding:14px;">Send Enquiry</button>
               </div>
             </div>
           </form>
-
+          <!-- Exact Success Confirmation from PDF Page 21 -->
           <div id="contact-success" class="tp-success-banner">
             <i class="fa-solid fa-circle-check" style="margin-right:8px;"></i>
-            <span>Thank you. Your message has been received. Our team will review and respond promptly.</span>
+            <span>Thank you. Your message has been received.</span>
           </div>
         </div>
       </div>
@@ -2365,48 +2232,36 @@
   </div>
 
   <!-- ==========================================================================
-       VIEW: LEGAL & TRUST (PDF Section 21 & 26)
+       VIEW: LEGAL (PDF Section 21 & 26)
        ========================================================================== -->
   <div id="view-legal" class="tp-view">
     <div class="tp-subpage-hero">
       <div class="tp-container">
-        <span class="tp-subpage-badge">LEGAL & TRUST NOTICES</span>
+        <span class="tp-subpage-badge">LEGAL</span>
         <h1 class="tp-subpage-headline" id="legal-title">Privacy Notice</h1>
-        <p class="tp-subpage-sub" id="legal-subtitle">Statutory transparency specifications and operational policies.</p>
+        <p class="tp-subpage-sub" id="legal-subtitle">Transparency and statutory terms.</p>
       </div>
     </div>
     <section class="tp-section">
-      <div class="tp-container" style="max-width:840px; margin:0 auto; line-height:1.7;">
-        <div id="legal-body" style="font-size:14px; color:var(--tp-text-secondary);">
-          <!-- Dynamic Legal Content populated based on clicked link -->
-        </div>
+      <div class="tp-container tp-feature-layout">
+        <div id="legal-body" style="font-size:15px; line-height:1.7; color:var(--tp-text-secondary);" class="tp-feature-box"></div>
       </div>
     </section>
   </div>
 
   <!-- ==========================================================================
-       FEATURE DETAIL MODAL (PDF Section 7 & 26 - 7 Specific Features)
-       ========================================================================== -->
-  <div id="feature-modal" style="display:none; position:fixed; inset:0; z-index:2000; background:rgba(9,13,22,0.7); backdrop-filter:blur(6px); align-items:center; justify-content:center; padding:20px;">
-    <div style="background:#ffffff; max-width:800px; width:100%; border-radius:18px; max-height:90vh; overflow-y:auto; border:1px solid var(--tp-border); box-shadow:var(--tp-shadow-xl); padding:36px; position:relative;">
-      <button onclick="closeFeatureModal()" style="position:absolute; top:20px; right:20px; background:none; border:none; font-size:20px; cursor:pointer; color:var(--tp-text-muted);">&times;</button>
-      <div id="feature-modal-content"></div>
-    </div>
-  </div>
-
-  <!-- ==========================================================================
-       FOOTER (PDF Section 20 & 21)
+       FOOTER (PDF Section 20 & 21 - Zero Unverified Badges)
        ========================================================================== -->
   <footer class="tp-footer">
     <div class="tp-container">
       <div class="tp-footer-top">
         <div class="tp-footer-brand">
-          <div class="tp-logo" onclick="navigateTo('/')" style="color:#ffffff;">
-            <div class="tp-logo-icon" style="background:var(--tp-orange); color:#ffffff;"><i class="fa-solid fa-shield-halved"></i></div>
+          <a href="/" class="tp-logo" onclick="handleNav(event, '/')" style="color:#ffffff;">
+            <div class="tp-logo-icon" style="background:var(--tp-accent); color:#ffffff;"><i class="fa-solid fa-shield-halved"></i></div>
             <span>TruePriv</span>
-          </div>
+          </a>
           <p>
-            Privacy-compliance automation platform designed for Africa. Connecting regulatory requirements, operational workflows, and audit-ready evidence.
+            Privacy-compliance automation platform designed for Africa.
           </p>
         </div>
 
@@ -2414,12 +2269,12 @@
         <div class="tp-footer-col">
           <h5>Product</h5>
           <ul class="tp-footer-links">
-            <li><a href="/platform">Platform</a></li>
-            <li><a href="/features">Features</a></li>
-            <li><a href="/data-residency">Data Residency</a></li>
-            <li><a href="/security">Security</a></li>
-            <li><a href="/pricing">Pricing</a></li>
-            <li><a href="/book-demo">Book a Demo</a></li>
+            <li><a href="/platform" onclick="handleNav(event, '/platform')">Platform</a></li>
+            <li><a href="/features" onclick="handleNav(event, '/features')">Features</a></li>
+            <li><a href="/data-residency" onclick="handleNav(event, '/data-residency')">Data Residency</a></li>
+            <li><a href="/security" onclick="handleNav(event, '/security')">Security</a></li>
+            <li><a href="/pricing" onclick="handleNav(event, '/pricing')">Pricing</a></li>
+            <li><a href="/book-demo" onclick="handleNav(event, '/book-demo')">Book a Demo</a></li>
             <li><a href="https://truepriv-saas.vercel.app/" target="_blank">Sign In</a></li>
           </ul>
         </div>
@@ -2428,11 +2283,11 @@
         <div class="tp-footer-col">
           <h5>Solutions</h5>
           <ul class="tp-footer-links">
-            <li><a href="/solutions/organisations">Organisations</a></li>
-            <li><a href="/solutions/privacy-professionals">Privacy Professionals</a></li>
-            <li><a href="/solutions/privacy-professionals">Consultants & DPCOs</a></li>
-            <li><a href="/countries">Nigeria</a></li>
-            <li><a href="/countries">Countries Index</a></li>
+            <li><a href="/solutions/organisations" onclick="handleNav(event, '/solutions/organisations')">Organisations</a></li>
+            <li><a href="/solutions/privacy-professionals" onclick="handleNav(event, '/solutions/privacy-professionals')">Privacy Professionals</a></li>
+            <li><a href="/solutions/privacy-professionals" onclick="handleNav(event, '/solutions/privacy-professionals')">Consultants & DPCOs</a></li>
+            <li><a href="/countries/nigeria" onclick="handleNav(event, '/countries/nigeria')">Nigeria</a></li>
+            <li><a href="/countries" onclick="handleNav(event, '/countries')">Countries</a></li>
           </ul>
         </div>
 
@@ -2440,10 +2295,10 @@
         <div class="tp-footer-col">
           <h5>Resources</h5>
           <ul class="tp-footer-links">
-            <li><a href="/resources/insights">Insights</a></li>
-            <li><a href="/resources/regulatory-library">Regulatory Library</a></li>
-            <li><a href="/help">Help Centre</a></li>
-            <li><a href="/platform">Product Updates</a></li>
+            <li><a href="/resources/insights" onclick="handleNav(event, '/resources/insights')">Insights</a></li>
+            <li><a href="/resources/regulatory-library" onclick="handleNav(event, '/resources/regulatory-library')">Regulatory Library</a></li>
+            <li><a href="/help" onclick="handleNav(event, '/help')">Help Centre</a></li>
+            <li><a href="/platform" onclick="handleNav(event, '/platform')">Product Updates</a></li>
           </ul>
         </div>
 
@@ -2451,9 +2306,9 @@
         <div class="tp-footer-col">
           <h5>Company</h5>
           <ul class="tp-footer-links">
-            <li><a href="/about">About</a></li>
-            <li><a href="/partners">Partners</a></li>
-            <li><a href="/contact">Contact</a></li>
+            <li><a href="/about" onclick="handleNav(event, '/about')">About</a></li>
+            <li><a href="/partners" onclick="handleNav(event, '/partners')">Partners</a></li>
+            <li><a href="/contact" onclick="handleNav(event, '/contact')">Contact</a></li>
           </ul>
         </div>
 
@@ -2461,259 +2316,149 @@
         <div class="tp-footer-col">
           <h5>Legal</h5>
           <ul class="tp-footer-links">
-            <li><a href="/legal/privacy">Privacy Notice</a></li>
-            <li><a href="/legal/cookies">Cookie Notice</a></li>
-            <li><a href="/legal/terms">Terms of Use</a></li>
-            <li><a href="/legal/acceptable-use">Acceptable Use</a></li>
-            <li><a href="/legal/security-information">Security Info</a></li>
-            <li><a href="/legal/subprocessors">Subprocessors</a></li>
+            <li><a href="/legal/privacy" onclick="handleNav(event, '/legal/privacy')">Privacy Notice</a></li>
+            <li><a href="/legal/cookies" onclick="handleNav(event, '/legal/cookies')">Cookie Notice</a></li>
+            <li><a href="/legal/terms" onclick="handleNav(event, '/legal/terms')">Terms of Use</a></li>
+            <li><a href="/legal/acceptable-use" onclick="handleNav(event, '/legal/acceptable-use')">Acceptable Use Policy</a></li>
+            <li><a href="/legal/security-information" onclick="handleNav(event, '/legal/security-information')">Security Information</a></li>
+            <li><a href="/legal/subprocessors" onclick="handleNav(event, '/legal/subprocessors')">Subprocessors</a></li>
           </ul>
         </div>
       </div>
 
-      <!-- Mandatory Footer Statement (PDF Page 14 & Section 20) -->
+      <!-- Exact Mandatory Footer Statement from PDF Page 14 -->
       <div class="tp-footer-statement">
-        <strong>Regulatory Disclaimer:</strong> TruePriv provides technology and workflow support for privacy management. It does not guarantee compliance, replace professional judgement or constitute legal advice. Regulatory obligations and required professional qualifications vary by jurisdiction.
+        TruePriv provides technology and workflow support for privacy management. It does not guarantee compliance, replace professional judgement or constitute legal advice. Regulatory obligations and required professional qualifications vary by jurisdiction.
       </div>
 
       <div class="tp-footer-bottom">
         <div>&copy; 2026 TruePriv Technology Limited. All rights reserved. Built for Africa.</div>
-        <div style="display:flex; gap:16px;">
-          <span>Galaxy Tier-III DC Sovereign Infrastructure</span>
-          <span>NDPA 2023 Aligned</span>
-        </div>
       </div>
     </div>
   </footer>
 
   <!-- ==========================================================================
-       ROUTING & INTERACTION SCRIPT
+       ROUTING SCRIPT
        ========================================================================== -->
   <script>
-    // Feature Detailed Data (PDF Section 7 & 26)
-    const featureDetails = {
-      ropa: {
-        title: "RoPA and Data Mapping",
-        headline: "Build a processing record that stays useful.",
-        desc: "Ask process owners how information is collected, used, shared, retained and protected. Reuse approved systems and vendor details, identify missing answers and prepare a RoPA entry for review. Update the record when an activity changes and export its approved version with supporting evidence.",
-        workflow: [
-          "Select or create the processing activity.",
-          "Invite departmental owners to answer role-specific questions.",
-          "Reuse approved information about systems, vendors, locations and controls.",
-          "Generate the RoPA record and identify missing or inconsistent responses.",
-          "Screen the activity against jurisdiction-specific DPIA triggers.",
-          "Export the approved RoPA with evidence and audit history."
-        ]
-      },
-      dpia: {
-        title: "DPIA and Risk Assessments",
-        headline: "Assess privacy risk before decisions are final.",
-        desc: "Screen a new or changed activity against the applicable criteria. Where a deeper assessment is appropriate, gather facts from the right owners and generate a draft analysis of purpose, necessity, proportionality, risks and safeguards. Review assumptions, assign mitigations and record approval or escalation.",
-        workflow: [
-          "Screen activity against jurisdiction-specific DPIA triggers.",
-          "Identify necessity, proportionality and high-risk processing factors.",
-          "Gather input from system architects and process leads.",
-          "Generate draft necessity, proportionality, risk and safeguards analysis.",
-          "Assign mitigation measures and route material decisions for approval.",
-          "Export approved DPIA pack with verifiable audit history."
-        ]
-      },
-      dpo: {
-        title: "DPO Work Management",
-        headline: "Give DPO work a clear plan and decision trail.",
-        desc: "Organise recurring tasks, reviews, consultations and reports in one workspace. Record advice, supporting evidence and whether recommendations were accepted. Track deadlines and escalate unresolved matters while preserving the DPO's reporting and independence requirements.",
-        workflow: [
-          "Establish the annual compliance & monitoring schedule.",
-          "Log advisory requests and formal privacy recommendations.",
-          "Track whether management accepted or rejected recommendations.",
-          "Maintain escalation records for high residual risk matters.",
-          "Assemble executive reports preserving statutory independence."
-        ]
-      },
-      dsar: {
-        title: "Rights Requests (DSAR)",
-        headline: "Coordinate rights requests from receipt to response.",
-        desc: "Capture a request, identify the relevant jurisdiction and track identity checks, assignment, information gathering, review and response. Keep deadlines and decisions visible, including any reason for an extension or refusal that requires professional review. Preserve a record of the final response.",
-        workflow: [
-          "Capture incoming request via secure intake portal.",
-          "Verify identity of data subject and assess statutory jurisdiction.",
-          "Route retrieval tasks to relevant system owners.",
-          "Review collected records and redact third-party data.",
-          "Deliver formal response within the legal timeline with audit logging."
-        ]
-      },
-      incidents: {
-        title: "Incidents and Breaches",
-        headline: "Make incident decisions timely and traceable.",
-        desc: "Record what happened, the affected information, containment measures and the people involved. Guide investigation and assessment of potential notification duties, assign actions and document why a decision was made. Keep evidence and an event history available for later review.",
-        workflow: [
-          "Record incident facts and containment actions taken.",
-          "Calculate 72-hour statutory notification countdown clock.",
-          "Evaluate severity, likelihood, and potential adverse impact on subjects.",
-          "Document management decision regarding regulatory or individual notice.",
-          "Preserve post-incident remediation evidence and lessons learned."
-        ]
-      },
-      vendors: {
-        title: "Vendors and Contracts",
-        headline: "Know who handles data on your behalf.",
-        desc: "Build a vendor inventory, capture the processing purpose and location, and review relevant contracts and safeguards. Assign follow-up actions for missing information, renewals or changed services. Link a vendor to the processing activities and assessments that depend on it.",
-        workflow: [
-          "Maintain centralized processor & third-party registry.",
-          "Review Data Processing Agreements (DPAs) and transfer mechanisms.",
-          "Conduct periodic vendor security & privacy due diligence questionnaires.",
-          "Monitor contract renewal dates and subprocessor changes.",
-          "Link processors directly to related RoPA records and DPIAs."
-        ]
-      },
-      policies: {
-        title: "Policies, Training and Evidence",
-        headline: "Keep policies, learning and proof connected.",
-        desc: "Manage approved policy versions, assign training or acknowledgement where appropriate and keep completion evidence alongside the relevant obligation. Review dates, responsible owners and updates help teams see what needs attention before an audit or management report.",
-        workflow: [
-          "Draft, version, and approve internal and external privacy policies.",
-          "Distribute policies to employees with digital acknowledgement tracking.",
-          "Store staff privacy training completion certificates.",
-          "Map active policies directly to regulatory control mandates.",
-          "Retrieve verified compliance bundles for auditors."
-        ]
-      },
-      regulatory: {
-        title: "Regulatory Readiness & Audit Packs",
-        headline: "Generate audit packs, returns and regulator-ready exports.",
-        desc: "Generate management reports, statutory returns, and regulator-ready exports directly from approved platform records without last-minute scrambling.",
-        workflow: [
-          "Compile approved RoPA entries and completed DPIAs.",
-          "Attach processor due diligence and staff acknowledgement records.",
-          "Format according to jurisdiction guidelines (e.g. NDPC statutory filing pack).",
-          "Executive sign-off and verifiable timestamp generation."
-        ]
-      }
-    };
-
-    // Legal Content Data (PDF Section 21 & 26)
-    const legalNotices = {
-      privacy: {
-        title: "Privacy Notice",
-        subtitle: "How TruePriv collects, uses, and protects personal data.",
-        body: `<p><strong>1. Controller Identity & Contact:</strong> TruePriv Technology Limited is committed to protecting the privacy of visitors to our marketing website. For enquiries, contact <a href="mailto:privacy@truepriv.com" style="color:var(--tp-orange)">privacy@truepriv.com</a>.</p>
-        <p style="margin-top:12px;"><strong>2. Visitor Data Categories:</strong> We collect business contact information (name, work email, organisation, phone number) when you voluntarily submit our 'Book a Demo' or 'Contact' forms, as well as necessary technical telemetry for website reliability.</p>
-        <p style="margin-top:12px;"><strong>3. Purposes & Lawful Basis:</strong> Information submitted through demo and contact forms is processed under legitimate business interests to review your requirements, coordinate product demonstrations, and respond to sales and partnership enquiries.</p>
-        <p style="margin-top:12px;"><strong>4. Data Retention & Transfers:</strong> Contact submissions are retained only as long as necessary to manage your enquiry. Data is processed within secure sovereign infrastructure with strict cryptographic safeguards.</p>`
-      },
-      cookies: {
-        title: "Cookie Notice",
-        subtitle: "Information regarding trackers and cookies used on this website.",
-        body: `<p>This marketing website utilizes essential first-party cookies necessary for routing, form security (CSRF protection), and site performance. We do not engage in non-essential third-party tracking or behavioral advertising without prior explicit consent.</p>`
-      },
-      terms: {
-        title: "Terms of Use",
-        subtitle: "Terms and conditions governing access to this website.",
-        body: `<p>All materials, workflows, interface designs, text, and graphics on this website are the intellectual property of TruePriv Technology Limited. Content on this site is provided for informational purposes only and does not constitute formal legal advice or statutory DPCO certification.</p>`
-      },
-      'acceptable-use': {
-        title: "Acceptable Use Policy",
-        subtitle: "Standards for interacting with TruePriv public forms and resources.",
-        body: `<p>Visitors may not submit misleading, abusive, or malicious code through demo or contact forms. Submitting passwords or confidential customer records through public contact forms is strictly prohibited.</p>`
-      },
-      'security-info': {
-        title: "Security Information",
-        subtitle: "Overview of technical safeguards and vulnerability reporting.",
-        body: `<p>TruePriv enforces multi-tenant logical isolation, TLS 1.3 transit encryption, AES-256 rest encryption, and strict role-based access control. If you identify a security concern, report it immediately to <a href="mailto:security@truepriv.com" style="color:var(--tp-orange)">security@truepriv.com</a>.</p>`
-      },
-      subprocessors: {
-        title: "Subprocessors",
-        subtitle: "Infrastructure providers supporting the TruePriv marketing website.",
-        body: `<p>The public website is hosted on high-availability global CDN infrastructure (Vercel) with strictly audited edge security. The authenticated SaaS application operates under separate, verified sovereign hosting agreements.</p>`
-      }
-    };
-
-    // Advanced HTML5 History API Router matching Client Sitemap
     const routeTitles = {
       '/': 'TruePriv | Turn Privacy Obligations into Work That Gets Done',
-      '/platform': 'Platform Overview | TruePriv Privacy Operating System',
-      '/features': 'Features Overview | TruePriv Compliance Modules',
-      '/features/ropa-data-mapping': 'RoPA and Data Mapping | TruePriv Features',
-      '/features/dpia-risk-assessments': 'DPIA and Risk Assessments | TruePriv Features',
-      '/features/dpo-work-management': 'DPO Work Management | TruePriv Features',
-      '/features/rights-requests': 'Rights Requests (DSAR) | TruePriv Features',
-      '/features/incidents-breaches': 'Incidents and Breaches | TruePriv Features',
-      '/features/vendors-contracts': 'Vendors and Contracts | TruePriv Features',
-      '/features/policies-training-evidence': 'Policies, Training & Evidence | TruePriv Features',
+      '/platform': 'Platform Overview | TruePriv',
+      '/features': 'Features Overview | TruePriv',
+      '/features/ropa-data-mapping': 'RoPA and Data Mapping | TruePriv',
+      '/features/dpia-risk-assessments': 'DPIA and Risk Assessments | TruePriv',
+      '/features/dpo-work-management': 'DPO Work Management | TruePriv',
+      '/features/rights-requests': 'Rights Requests | TruePriv',
+      '/features/incidents-breaches': 'Incidents and Breaches | TruePriv',
+      '/features/vendors-contracts': 'Vendors and Contracts | TruePriv',
+      '/features/policies-training-evidence': 'Policies Training and Evidence | TruePriv',
       '/solutions/organisations': 'Solutions for Organisations | TruePriv',
-      '/solutions/privacy-professionals': 'Solutions for Privacy Professionals & DPCOs | TruePriv',
+      '/solutions/privacy-professionals': 'Solutions for Privacy Professionals | TruePriv',
       '/data-residency': 'Data Residency & Deployment | TruePriv',
-      '/security': 'Security & Layered Governance | TruePriv',
-      '/pricing': 'Pricing & Operating Plans | TruePriv',
-      '/countries/nigeria': 'Nigeria Privacy Compliance (NDPA 2023) | TruePriv',
-      '/countries': 'Pan-Africa Regulatory Jurisdictions Hub | TruePriv',
-      '/resources/insights': 'Practical Privacy Insights | TruePriv',
-      '/resources/regulatory-library': 'Pan-African Regulatory Library | TruePriv',
-      '/help': 'Help Centre & Workflow Guides | TruePriv',
-      '/about': 'About TruePriv | Making Privacy Operational Across Africa',
-      '/partners': 'Partnerships & DPCO Network | TruePriv',
-      '/book-demo': 'Book an Interactive Demonstration | TruePriv',
-      '/contact': 'Contact Us & Departmental Routing | TruePriv',
-      '/legal/privacy': 'Privacy Notice | TruePriv Legal',
-      '/legal/cookies': 'Cookie Notice | TruePriv Legal',
-      '/legal/terms': 'Terms of Use | TruePriv Legal',
-      '/legal/acceptable-use': 'Acceptable Use Policy | TruePriv Legal',
-      '/legal/security-information': 'Security Information | TruePriv Legal',
-      '/legal/subprocessors': 'Subprocessor Directory | TruePriv Legal'
+      '/security': 'Security | TruePriv',
+      '/pricing': 'Pricing | TruePriv',
+      '/countries/nigeria': 'Nigeria | TruePriv',
+      '/countries': 'Countries | TruePriv',
+      '/resources/insights': 'Insights | TruePriv',
+      '/resources/regulatory-library': 'Regulatory Library | TruePriv',
+      '/help': 'Help Centre | TruePriv',
+      '/about': 'About | TruePriv',
+      '/partners': 'Partners | TruePriv',
+      '/book-demo': 'Book a Demo | TruePriv',
+      '/contact': 'Contact | TruePriv',
+      '/legal/privacy': 'Privacy Notice | TruePriv',
+      '/legal/cookies': 'Cookie Notice | TruePriv',
+      '/legal/terms': 'Terms of Use | TruePriv',
+      '/legal/acceptable-use': 'Acceptable Use Policy | TruePriv',
+      '/legal/security-information': 'Security Information | TruePriv',
+      '/legal/subprocessors': 'Subprocessors | TruePriv'
+    };
+
+    const legalNotices = {
+      'privacy': {
+        title: 'Privacy Notice',
+        subtitle: 'Controller identity and contact; site visitor data categories; purposes and lawful bases; recipients; international transfers; retention; rights and complaint route; effective and update dates.',
+        body: '<p>Controller identity and contact: TruePriv Technology Limited. Contact: privacy@truepriv.com.</p><p style="margin-top:12px;">Site visitor data categories: contact information submitted via demo and contact forms, and necessary website operational data.</p><p style="margin-top:12px;">Purposes and lawful bases: handling sales enquiries and demonstrational requests under legitimate business interest.</p>'
+      },
+      'cookies': {
+        title: 'Cookie Notice',
+        subtitle: 'Actual cookies and trackers, purposes, providers, duration, consent choices and withdrawal method matched to the implemented website.',
+        body: '<p>This website utilizes essential first-party cookies necessary for routing, form security, and session management. We do not operate non-essential advertising or tracking cookies without explicit consent.</p>'
+      },
+      'terms': {
+        title: 'Terms of Use',
+        subtitle: 'Site owner, permitted use, intellectual property, content limits, links, liability and governing provisions reviewed by counsel.',
+        body: '<p>All materials and workflows on this website are the intellectual property of TruePriv Technology Limited. Content is provided for operational information and does not constitute formal legal advice.</p>'
+      },
+      'acceptable-use': {
+        title: 'Acceptable Use Policy',
+        subtitle: 'Prohibited behaviour, account responsibilities, security abuse reporting and enforcement consistent with the actual SaaS terms.',
+        body: '<p>Prohibited behaviour: submitting malicious code, unauthorized vulnerability scanning, or transmitting sensitive customer records through public demonstration forms.</p>'
+      },
+      'security-information': {
+        title: 'Security Information',
+        subtitle: 'Only verified controls, incident contact, operational scope, version and update date.',
+        body: '<p>TruePriv enforces multi-tenant logical isolation, TLS 1.3 transit encryption, AES-256 rest encryption, and role-based access controls. Contact: security@truepriv.com.</p>'
+      },
+      'subprocessors': {
+        title: 'Subprocessors',
+        subtitle: 'Actual providers, service functions, processing locations, change notice mechanism and current update date.',
+        body: '<p>The public website is hosted on high-availability global CDN infrastructure (Vercel). Production SaaS instances operate under separate, verified hosting agreements.</p>'
+      }
     };
 
     function renderRoute(pathname) {
-      // Normalize pathname
-      let cleanPath = pathname.replace(/\/index\.html$/, '');
+      let cleanPath = pathname || '/';
+      cleanPath = cleanPath.replace(/\/index\.html$/, '');
       if (cleanPath.endsWith('/') && cleanPath.length > 1) {
         cleanPath = cleanPath.slice(0, -1);
       }
       if (!cleanPath) cleanPath = '/';
 
-      // Update browser document title
       if (routeTitles[cleanPath]) {
         document.title = routeTitles[cleanPath];
       }
 
-      // Hide all views
-      document.querySelectorAll('.tp-view').forEach(v => v.classList.remove('active'));
+      document.querySelectorAll('.tp-view').forEach(function(v) {
+        v.classList.remove('active');
+      });
 
-      // Check Feature Detail routes
-      if (cleanPath.startsWith('/features/')) {
-        const featureSlug = cleanPath.replace('/features/', '');
-        const featureKeyMap = {
-          'ropa-data-mapping': 'ropa',
-          'dpia-risk-assessments': 'dpia',
-          'dpo-work-management': 'dpo',
-          'rights-requests': 'dsar',
-          'incidents-breaches': 'incidents',
-          'vendors-contracts': 'vendors',
-          'policies-training-evidence': 'policies'
-        };
-        const key = featureKeyMap[featureSlug];
-        if (key && featureDetails[key]) {
-          openFeatureModal(key, false);
+      // Feature Detail Pages
+      const featureViewMap = {
+        '/features/ropa-data-mapping': 'view-feature-ropa',
+        '/features/dpia-risk-assessments': 'view-feature-dpia',
+        '/features/dpo-work-management': 'view-feature-dpo',
+        '/features/rights-requests': 'view-feature-dsar',
+        '/features/incidents-breaches': 'view-feature-incidents',
+        '/features/vendors-contracts': 'view-feature-vendors',
+        '/features/policies-training-evidence': 'view-feature-policies'
+      };
+
+      if (featureViewMap[cleanPath]) {
+        const fTarget = document.getElementById(featureViewMap[cleanPath]);
+        if (fTarget) {
+          fTarget.classList.add('active');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
           return;
         }
       }
 
-      // Check Legal routes
+      // Legal Routes
       if (cleanPath.startsWith('/legal/')) {
         const legalSlug = cleanPath.replace('/legal/', '');
-        const legalKeyMap = {
-          'privacy': 'privacy',
-          'cookies': 'cookies',
-          'terms': 'terms',
-          'acceptable-use': 'acceptable-use',
-          'security-information': 'security-info',
-          'subprocessors': 'subprocessors'
-        };
-        const key = legalKeyMap[legalSlug] || 'privacy';
-        openLegal(key, false);
+        const data = legalNotices[legalSlug] || legalNotices['privacy'];
+        document.getElementById('legal-title').innerText = data.title;
+        document.getElementById('legal-subtitle').innerText = data.subtitle;
+        document.getElementById('legal-body').innerHTML = data.body;
+        const lTarget = document.getElementById('view-legal');
+        if (lTarget) {
+          lTarget.classList.add('active');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
         return;
       }
 
-      // Standard View Map
+      // Standard Views
       const viewMap = {
         '/': 'view-home',
         '/platform': 'view-platform',
@@ -2740,120 +2485,18 @@
         target.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
-
-      // Close modal if open
-      const modal = document.getElementById("feature-modal"); if (modal) modal.style.display = "none";
     }
 
-    function navigateTo(path) {
-      if (!path.startsWith('/')) {
-        path = '/' + path;
-      }
-      if (window.location.pathname !== path) {
-        window.history.pushState({ path }, '', path);
-      }
+    function handleNav(event, path) {
+      if (event) event.preventDefault();
+      if (!path) path = '/';
+      if (!path.startsWith('/')) path = '/' + path;
+      try {
+        if (window.location.pathname !== path) {
+          window.history.pushState({ path: path }, '', path);
+        }
+      } catch (err) {}
       renderRoute(path);
-    }
-
-        // Allow native link navigation to load pages reliably across all browsers and servers
-    document.addEventListener('click', (e) => {
-      const link = e.target.closest('a');
-      if (link && link.getAttribute('href') && link.getAttribute('href').startsWith('/')) {
-        const href = link.getAttribute('href');
-        // Let browser navigate natively if holding ctrl/meta or normal link
-        if (!href.startsWith('//') && !link.hasAttribute('target')) {
-          // Allow normal browser navigation so URL updates natively
-        }
-      }
-    });
-
-    // Handle Back / Forward browser buttons
-    window.addEventListener('popstate', (e) => {
-      renderRoute(window.location.pathname);
-    });
-
-    // Feature modal pre-load
-      openFeatureModal('policies', false);
-      // Initial load
-    window.addEventListener('DOMContentLoaded', () => {
-      renderRoute(window.location.pathname);
-    });
-
-    function openFeatureModal(featureKey, pushUrl = true) {
-      const slugMap = {
-        'ropa': '/features/ropa-data-mapping',
-        'dpia': '/features/dpia-risk-assessments',
-        'dpo': '/features/dpo-work-management',
-        'dsar': '/features/rights-requests',
-        'incidents': '/features/incidents-breaches',
-        'vendors': '/features/vendors-contracts',
-        'policies': '/features/policies-training-evidence',
-        'regulatory': '/features'
-      };
-      if (pushUrl && slugMap[featureKey]) {
-        window.history.pushState({ path: slugMap[featureKey] }, '', slugMap[featureKey]);
-        if (routeTitles[slugMap[featureKey]]) {
-          document.title = routeTitles[slugMap[featureKey]];
-        }
-      }
-      const data = featureDetails[featureKey];
-      if (!data) return;
-      const modal = document.getElementById('feature-modal');
-      const content = document.getElementById('feature-modal-content');
-      
-      let stepsHtml = data.workflow.map((s, idx) => `
-        <div style="display:flex; gap:12px; margin-bottom:12px; font-size:13px; color:var(--tp-text-secondary);">
-          <span style="font-family:var(--font-mono); font-weight:700; color:var(--tp-orange); width:20px;">0${idx+1}</span>
-          <span>${s}</span>
-        </div>
-      `).join('');
-
-      content.innerHTML = `
-        <div style="font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--tp-orange); text-transform:uppercase; margin-bottom:6px;">Feature Detail Workflow</div>
-        <h2 style="font-family:var(--font-display); font-size:26px; font-weight:800; color:var(--tp-dark); margin-bottom:8px;">${data.title}</h2>
-        <h4 style="font-size:15px; font-weight:600; color:var(--tp-orange); margin-bottom:16px;">${data.headline}</h4>
-        <p style="font-size:14px; line-height:1.6; color:var(--tp-text-secondary); margin-bottom:24px;">${data.desc}</p>
-        <h4 style="font-family:var(--font-display); font-size:15px; font-weight:700; margin-bottom:14px;">5-to-7 Step Operational Workflow:</h4>
-        <div style="background:var(--tp-bg-alt); padding:20px; border-radius:12px; border:1px solid var(--tp-border); margin-bottom:24px;">
-          ${stepsHtml}
-        </div>
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <button class="tp-btn-primary" onclick="const modal = document.getElementById("feature-modal"); if (modal) modal.style.display = "none"; navigateTo('/book-demo');">Book a Demo</button>
-          <button class="tp-btn-outline" onclick="const modal = document.getElementById("feature-modal"); if (modal) modal.style.display = "none";">Close</button>
-        </div>
-      `;
-      modal.style.display = 'flex';
-    }
-
-        function closeFeatureModal() {
-      const modal = document.getElementById('feature-modal');
-      if (modal) modal.style.display = 'none';
-    }, '', '/features');
-        renderRoute('/features');
-      }
-    }
-
-    function openLegal(key, pushUrl = true) {
-      const legalSlugMap = {
-        'privacy': '/legal/privacy',
-        'cookies': '/legal/cookies',
-        'terms': '/legal/terms',
-        'acceptable-use': '/legal/acceptable-use',
-        'security-info': '/legal/security-information',
-        'subprocessors': '/legal/subprocessors'
-      };
-      if (pushUrl && legalSlugMap[key]) {
-        window.history.pushState({ path: legalSlugMap[key] }, '', legalSlugMap[key]);
-      }
-      const data = legalNotices[key];
-      if (!data) return;
-      document.getElementById('legal-title').innerText = data.title;
-      document.getElementById('legal-subtitle').innerText = data.subtitle;
-      document.getElementById('legal-body').innerHTML = data.body;
-      document.querySelectorAll('.tp-view').forEach(v => v.classList.remove('active'));
-      const target = document.getElementById('view-legal');
-      if (target) target.classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function handleDemoSubmit(e) {
@@ -2870,6 +2513,7 @@
 
     function toggleMobileMenu() {
       const nav = document.querySelector('.tp-nav');
+      if (!nav) return;
       if (nav.style.display === 'flex') {
         nav.style.display = 'none';
       } else {
@@ -2884,6 +2528,14 @@
         nav.style.borderBottom = '1px solid var(--tp-border)';
       }
     }
+
+    window.addEventListener('popstate', function() {
+      renderRoute(window.location.pathname);
+    });
+
+    window.addEventListener('DOMContentLoaded', function() {
+      renderRoute(window.location.pathname);
+    });
   </script>
 </body>
 </html>
