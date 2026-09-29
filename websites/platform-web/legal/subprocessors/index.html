@@ -1088,7 +1088,7 @@
   <!-- ==========================================================================
        VIEW: HOMEPAGE (PDF Section 4)
        ========================================================================== -->
-  <main id="view-home" class="tp-view active">
+  <main id="view-home" class="tp-view">
     <!-- Hero Section -->
     <section class="tp-hero">
       <div class="tp-container">
@@ -2367,7 +2367,7 @@
   <!-- ==========================================================================
        VIEW: LEGAL & TRUST (PDF Section 21 & 26)
        ========================================================================== -->
-  <div id="view-legal" class="tp-view">
+  <div id="view-legal" class="tp-view active">
     <div class="tp-subpage-hero">
       <div class="tp-container">
         <span class="tp-subpage-badge">LEGAL & TRUST NOTICES</span>
@@ -2773,7 +2773,9 @@
       renderRoute(window.location.pathname);
     });
 
-    // Initial load
+    // Legal pre-load
+      openLegal('subprocessors', false);
+      // Initial load
     window.addEventListener('DOMContentLoaded', () => {
       renderRoute(window.location.pathname);
     });

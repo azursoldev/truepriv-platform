@@ -1088,7 +1088,7 @@
   <!-- ==========================================================================
        VIEW: HOMEPAGE (PDF Section 4)
        ========================================================================== -->
-  <main id="view-home" class="tp-view active">
+  <main id="view-home" class="tp-view">
     <!-- Hero Section -->
     <section class="tp-hero">
       <div class="tp-container">
@@ -1562,7 +1562,7 @@
   <!-- ==========================================================================
        VIEW: FEATURES OVERVIEW (PDF Section 6, 7 & 26)
        ========================================================================== -->
-  <div id="view-features" class="tp-view">
+  <div id="view-features" class="tp-view active">
     <div class="tp-subpage-hero">
       <div class="tp-container">
         <span class="tp-subpage-badge">PRODUCT SUITE</span>
@@ -2773,7 +2773,9 @@
       renderRoute(window.location.pathname);
     });
 
-    // Initial load
+    // Feature modal pre-load
+      openFeatureModal('policies', false);
+      // Initial load
     window.addEventListener('DOMContentLoaded', () => {
       renderRoute(window.location.pathname);
     });
