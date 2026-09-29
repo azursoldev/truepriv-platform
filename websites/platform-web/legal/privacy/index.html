@@ -2742,7 +2742,7 @@
       }
 
       // Close modal if open
-      closeFeatureModal(true);
+      const modal = document.getElementById("feature-modal"); if (modal) modal.style.display = "none";
     }
 
     function navigateTo(path) {
@@ -2755,15 +2755,14 @@
       renderRoute(path);
     }
 
-    // Intercept clicks on links with data-route or href starting with /
+        // Allow native link navigation to load pages reliably across all browsers and servers
     document.addEventListener('click', (e) => {
       const link = e.target.closest('a');
       if (link && link.getAttribute('href') && link.getAttribute('href').startsWith('/')) {
         const href = link.getAttribute('href');
-        // Ignore external or file links
+        // Let browser navigate natively if holding ctrl/meta or normal link
         if (!href.startsWith('//') && !link.hasAttribute('target')) {
-          e.preventDefault();
-          navigateTo(href);
+          // Allow normal browser navigation so URL updates natively
         }
       }
     });
@@ -2819,18 +2818,17 @@
           ${stepsHtml}
         </div>
         <div style="display:flex; justify-content:space-between; align-items:center;">
-          <button class="tp-btn-primary" onclick="closeFeatureModal(true); navigateTo('/book-demo');">Book a Demo</button>
-          <button class="tp-btn-outline" onclick="closeFeatureModal(true);">Close</button>
+          <button class="tp-btn-primary" onclick="const modal = document.getElementById("feature-modal"); if (modal) modal.style.display = "none"; navigateTo('/book-demo');">Book a Demo</button>
+          <button class="tp-btn-outline" onclick="const modal = document.getElementById("feature-modal"); if (modal) modal.style.display = "none";">Close</button>
         </div>
       `;
       modal.style.display = 'flex';
     }
 
-    function closeFeatureModal(restoreUrl = false) {
+        function closeFeatureModal() {
       const modal = document.getElementById('feature-modal');
       if (modal) modal.style.display = 'none';
-      if (restoreUrl) {
-        window.history.pushState({ path: '/features' }, '', '/features');
+    }, '', '/features');
         renderRoute('/features');
       }
     }
