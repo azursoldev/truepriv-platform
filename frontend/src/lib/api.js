@@ -3,9 +3,7 @@
  * Handles Bearer Token Auth, Active Tenant Context (X-Tenant-ID), and Error Handling.
  */
 
-const API_BASE = (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'))
-  ? '/api/v1'
-  : 'https://dpoportal.auraa-digital.com/public/api/v1';
+const API_BASE = '/api/v1';
 
 export const getAuthToken = () => localStorage.getItem('dp_auth_token');
 export const setAuthToken = (token) => localStorage.setItem('dp_auth_token', token);
@@ -43,7 +41,14 @@ async function request(endpoint, options = {}) {
   const data = await response.json().catch(() => null);
 
   if (!response.ok) {
-    const error = new Error((data && data.message) || 'API Request failed');
+    let errorMsg = (data && data.message) || 'API Request failed';
+    if (data && data.errors && typeof data.errors === 'object') {
+      const firstError = Object.values(data.errors).flat()[0];
+      if (firstError) {
+        errorMsg = firstError;
+      }
+    }
+    const error = new Error(errorMsg);
     error.status = response.status;
     error.data = data;
     throw error;
