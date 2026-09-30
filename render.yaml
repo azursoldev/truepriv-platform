@@ -24,6 +24,16 @@ services:
       - key: APP_KEY
         generateValue: true
       - key: DB_CONNECTION
-        value: sqlite
+        value: pgsql
+      - key: DB_HOST
+        value: "ep-mute-band-aurnzzzy.c-10.us-east-1.aws.neon.tech;options='endpoint=ep-mute-band-aurnzzzy'"
+      - key: DB_PORT
+        value: "5432"
       - key: DB_DATABASE
-        value: /var/www/html/database/database.sqlite
+        value: "neondb"
+      - key: DB_USERNAME
+        value: "neondb_owner"
+      - key: DB_PASSWORD
+        value: "npg_bacTn3QYZ6hi"
+      - key: DB_SSLMODE
+        value: "require"
