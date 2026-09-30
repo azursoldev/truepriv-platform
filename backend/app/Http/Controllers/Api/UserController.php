@@ -95,6 +95,8 @@ class UserController extends Controller
             'department' => 'nullable|string|max:100',
             'phone' => 'nullable|string|max:30',
             'password' => 'nullable|string|min:8',
+        ]);
+
         // Security: Prevent Privilege Escalation (Corporate Admin cannot provision Super Admin)
         if ($validated['role'] === 'super_admin' && $currentUser->role !== 'super_admin') {
             return response()->json([
