@@ -95,13 +95,22 @@ class UserController extends Controller
             'department' => 'nullable|string|max:100',
             'phone' => 'nullable|string|max:30',
             'password' => 'nullable|string|min:8',
-        ]);
+        // Security: Prevent Privilege Escalation (Corporate Admin cannot provision Super Admin)
+        if ($validated['role'] === 'super_admin' && $currentUser->role !== 'super_admin') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Forbidden. Corporate administrators are strictly prohibited from provisioning global super-administrators.',
+            ], 403);
+        }
+
+        // Security: Secure password generation if not provided (eliminating predictable default passwords)
+        $initialPassword = $validated['password'] ?? \Illuminate\Support\Str::password(16, true, true, true, false);
 
         $user = User::create([
             'tenant_id' => $tenantId,
             'name' => $validated['name'],
             'email' => $validated['email'],
-            'password' => Hash::make($validated['password'] ?? 'Password123!'),
+            'password' => Hash::make($initialPassword),
             'role' => $validated['role'],
             'department' => $validated['department'] ?? 'Compliance & Risk',
             'phone' => $validated['phone'] ?? null,
@@ -167,8 +176,15 @@ class UserController extends Controller
             'phone' => 'nullable|string|max:30',
             'avatar_url' => 'nullable|string',
             'is_active' => 'sometimes|boolean',
-            'password' => 'nullable|string|min:8',
         ]);
+
+        // Security: Prevent Privilege Escalation (Corporate Admin cannot elevate user to Super Admin)
+        if (isset($validated['role']) && $validated['role'] === 'super_admin' && $currentUser->role !== 'super_admin') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Forbidden. Corporate administrators cannot elevate users to the global super_admin role.',
+            ], 403);
+        }
 
         if (isset($validated['password']) && !empty($validated['password'])) {
             $validated['password'] = Hash::make($validated['password']);
