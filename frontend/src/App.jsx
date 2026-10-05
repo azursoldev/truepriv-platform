@@ -204,6 +204,7 @@ export default function App() {
             <PortfolioDesk
               onSwitchTenant={handleSwitchTenant}
               tenantType={tenant?.type}
+              userRole={user?.role}
             />
           )}
 
