@@ -2,24 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import ExecutiveDashboard from './components/ExecutiveDashboard';
-import RopaDesk from './components/RopaDesk';
-import DpiaDesk from './components/DpiaDesk';
-import AuditDesk from './components/AuditDesk';
-import DsarDesk from './components/DsarDesk';
-import BreachDesk from './components/BreachDesk';
-import VendorDesk from './components/VendorDesk';
-import CookieDesk from './components/CookieDesk';
-import PolicyDesk from './components/PolicyDesk';
-import PortfolioDesk from './components/PortfolioDesk';
-import AdminUserDesk from './components/AdminUserDesk';
-import PublicDsarPortal from './components/PublicDsarPortal';
-import PublicChampionIntakePortal from './components/PublicChampionIntakePortal';
-import AuthModal from './components/AuthModal';
-import OnboardingWizard from './components/OnboardingWizard';
-import ChampionInviteModal from './components/ChampionInviteModal';
-import MyProfileDetailDesk from './components/MyProfileDetailDesk';
-import TruePrivAiCopilotDrawer from './components/TruePrivAiCopilotDrawer';
-import SubscriptionBillingModal from './components/SubscriptionBillingModal';
+import AdminUserDesk from './components/AdminUserDesk';          // M1: RBAC
+import AuditDesk from './components/AuditDesk';                  // M3: Audit Logging
+import PublicChampionIntakePortal from './components/PublicChampionIntakePortal'; // M3: Guest Intake
+import ChampionInviteModal from './components/ChampionInviteModal';               // M3: Guest Invitations
+import AuthModal from './components/AuthModal';                  // M2: Login/Register
+import MyProfileDetailDesk from './components/MyProfileDetailDesk'; // M2: Profile Types
+import PortfolioDesk from './components/PortfolioDesk';          // M2: DPO & DPCO Portals (PDF Sec 10)
+import DataResidencyCard from './components/DataResidencyCard';  // M3: Data Residency (PDF Sec 11)
 import { api, getAuthToken, removeAuthToken, setActiveTenantId } from './lib/api';
 
 export default function App() {
@@ -30,11 +20,6 @@ export default function App() {
   const [metrics, setMetrics] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const [showPublicPortal, setShowPublicPortal] = useState(false);
-  const [showOnboarding, setShowOnboarding] = useState(false);
-  const [showChampions, setShowChampions] = useState(false);
-  const [showAiCopilot, setShowAiCopilot] = useState(false);
-  const [showBillingModal, setShowBillingModal] = useState(false);
 
   const initApp = async () => {
     setLoading(true);
@@ -95,7 +80,7 @@ export default function App() {
     setTenant(loggedInTenant);
     setAccessibleClients(clients);
     setShowAuthModal(false);
-    setActiveTab(loggedInTenant?.type === 'dpco_firm' || loggedInTenant?.type === 'outsourced_dpo' ? 'portfolio' : 'dashboard');
+    setActiveTab('dashboard'); // M2: Always go to dashboard after login
     refreshMetrics();
   };
 
@@ -157,19 +142,15 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col selection:bg-emerald-500 selection:text-white">
-      {/* Top Navigation */}
+      {/* Top Navigation — M1-M3 */}
       <Header
         user={user}
         tenant={tenant}
         accessibleClients={accessibleClients}
         onSwitchTenant={handleSwitchTenant}
         onLogout={handleLogout}
-        onOpenPublicPortal={() => setActiveTab('public-dsar')}
-        onOpenOnboarding={() => setActiveTab('ndpa-wizard')}
-        onOpenChampions={() => setActiveTab('champions-desk')}
-        onOpenProfile={() => setActiveTab('my-profile')}
-        onOpenAiCopilot={() => setShowAiCopilot(true)}
-        onOpenBilling={() => setShowBillingModal(true)}
+        onOpenChampions={() => setActiveTab('champions-desk')} // M3: Guest Invitations
+        onOpenProfile={() => setActiveTab('my-profile')}       // M2: Profile
         isSidebarCollapsed={sidebarCollapsed}
         onToggleSidebar={() => setSidebarCollapsed(!sidebarCollapsed)}
       />
@@ -189,64 +170,34 @@ export default function App() {
 
         {/* Dynamic Main Workspace Content */}
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
+          {/* M2: Dashboard Structures */}
           {activeTab === 'dashboard' && (
             <ExecutiveDashboard
               metrics={metrics}
               userRole={user?.role}
               tenantType={tenant?.type}
               onNavigate={setActiveTab}
-              onAutoFillRopa={() => setActiveTab('ropa')}
-              onOpenOnboarding={() => setActiveTab('ndpa-wizard')}
             />
           )}
 
-          {activeTab === 'portfolio' && (
-            <PortfolioDesk
-              onSwitchTenant={handleSwitchTenant}
-              tenantType={tenant?.type}
-              userRole={user?.role}
-            />
-          )}
-
-          {activeTab === 'ropa' && (
-            <RopaDesk onRefreshMetrics={refreshMetrics} />
-          )}
-
-          {activeTab === 'dpia' && (
-            <DpiaDesk onRefreshMetrics={refreshMetrics} />
-          )}
-
-          {activeTab === 'audits' && (
-            <AuditDesk onRefreshMetrics={refreshMetrics} />
-          )}
-
-          {activeTab === 'dsar' && (
-            <DsarDesk
-              onOpenPublicPortal={() => setActiveTab('public-dsar')}
-              onRefreshMetrics={refreshMetrics}
-            />
-          )}
-
-          {activeTab === 'breaches' && (
-            <BreachDesk onRefreshMetrics={refreshMetrics} />
-          )}
-
-          {activeTab === 'vendors' && (
-            <VendorDesk onRefreshMetrics={refreshMetrics} />
-          )}
-
-          {activeTab === 'cookies' && (
-            <CookieDesk tenant={tenant} />
-          )}
-
-          {activeTab === 'policies' && (
-            <PolicyDesk tenant={tenant} />
-          )}
-
+          {/* M1+M3: User & Role Management + RBAC */}
           {activeTab === 'admin-users' && (
             <AdminUserDesk currentUser={user} onRefreshMetrics={refreshMetrics} />
           )}
 
+          {/* M3: Audit Logging Foundation */}
+          {activeTab === 'audit-logs' && (
+            <AuditDesk onRefreshMetrics={refreshMetrics} />
+          )}
+
+          {/* M3: Guest Invitations (Champions) */}
+          {activeTab === 'champions-desk' && (
+            <ChampionInviteModal
+              onNavigateBack={() => setActiveTab('dashboard')}
+            />
+          )}
+
+          {/* M2: Profile Types */}
           {activeTab === 'my-profile' && (
             <MyProfileDetailDesk
               user={user}
@@ -258,55 +209,27 @@ export default function App() {
             />
           )}
 
-          {activeTab === 'ndpa-wizard' && (
-            <OnboardingWizard
-              onNavigateBack={() => setActiveTab('dashboard')}
-              onComplete={async () => {
-                await refreshMetrics();
-              }}
+          {/* M2: DPO & DPCO Multi-Client Portfolio Workspace (PDF Sec 10) */}
+          {activeTab === 'portfolio-desk' && (
+            <PortfolioDesk
+              onSwitchTenant={handleSwitchTenant}
+              tenantType={tenant?.type}
+              userRole={user?.role}
             />
           )}
 
-          {activeTab === 'champions-desk' && (
-            <ChampionInviteModal
-              onNavigateBack={() => setActiveTab('dashboard')}
-            />
-          )}
-
-          {activeTab === 'public-dsar' && (
-            <PublicDsarPortal
-              tenant={tenant}
-              onNavigateBack={() => setActiveTab('dashboard')}
-            />
+          {/* M3: Data Residency & Sovereign Node Control (PDF Sec 11) */}
+          {activeTab === 'data-residency' && (
+            <div className="space-y-6">
+              <div className="border-b border-slate-200 pb-4">
+                <h2 className="text-xl font-black text-slate-900">Data Residency & Sovereign Node Deployment</h2>
+                <p className="text-xs text-slate-500 mt-1">Configure in-country data localization, encryption standards, and cross-border statutory nodes as specified in PDF Section 11.</p>
+              </div>
+              <DataResidencyCard onResidencyChanged={() => refreshMetrics()} />
+            </div>
           )}
         </main>
       </div>
-
-      {/* Floating TruePriv AI Agent Trigger */}
-      <button
-        onClick={() => setShowAiCopilot(true)}
-        title="Open TruePriv Autonomous Privacy AI Agent"
-        className="fixed bottom-6 right-6 z-40 bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-500 hover:to-indigo-500 text-white p-3.5 px-4 rounded-full shadow-2xl flex items-center gap-2.5 font-bold text-xs border border-sky-400/40 transition-all hover:scale-105 group cursor-pointer"
-      >
-        <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-        <i className="fa-solid fa-brain text-sm"></i>
-        <span>TruePriv AI Agent</span>
-      </button>
-
-      {/* TruePriv AI Copilot Drawer */}
-      <TruePrivAiCopilotDrawer
-        isOpen={showAiCopilot}
-        onClose={() => setShowAiCopilot(false)}
-      />
-
-      {/* Subscription & Paystack NGN Billing Modal */}
-      <SubscriptionBillingModal
-        isOpen={showBillingModal}
-        onClose={() => setShowBillingModal(false)}
-        onSubscriptionUpdated={async () => {
-          await refreshMetrics();
-        }}
-      />
     </div>
   );
 }

@@ -18,63 +18,57 @@ export default function Sidebar({
   let sectionTitle = 'Compliance Operations';
 
   if (isSuperAdmin) {
+    // Milestone 1-3: Super Admin — Platform & Tenant Management
     sectionTitle = 'Global System Governance';
     navItems = [
       { id: 'dashboard', label: 'Global Platform Hub', icon: 'fa-solid fa-gauge-high' },
-      { id: 'portfolio', label: 'Tenant Organizations', icon: 'fa-solid fa-building-columns' },
       { id: 'admin-users', label: 'Master User Governance', icon: 'fa-solid fa-users-gear', highlight: true },
-      { id: 'ropa', label: 'Industry RoPA Presets', icon: 'fa-solid fa-file-shield' },
-      { id: 'audits', label: 'Statutory Filing Registry', icon: 'fa-solid fa-clipboard-check' },
-      { id: 'breaches', label: 'National Breach Registry', icon: 'fa-solid fa-triangle-exclamation' },
-      { id: 'vendors', label: 'Vendor & TPRM Risk', icon: 'fa-solid fa-handshake-simple' },
-      { id: 'cookies', label: 'Cookie Consent SDK', icon: 'fa-solid fa-cookie-bite' },
+      { id: 'audit-logs', label: 'Security & Audit Logs', icon: 'fa-solid fa-shield-halved' },
+      { id: 'data-residency', label: 'Data Residency Node', icon: 'fa-solid fa-building-shield' },
     ];
   } else if (isDpo) {
+    // Milestone 1-3: Outsourced DPO — Multi-Client Portfolio & Governance (PDF Sec 9 & 10)
     sectionTitle = 'DPO Advisory Console';
     navItems = [
       { id: 'dashboard', label: 'DPO Practice Overview', icon: 'fa-solid fa-gauge-high' },
-      { id: 'portfolio', label: 'Multi-Client Portfolio', icon: 'fa-solid fa-network-wired', highlight: true },
-      { id: 'ropa', label: 'Client RoPA Inventory', icon: 'fa-solid fa-file-shield', count: metrics?.ropa?.total },
-      { id: 'dpia', label: 'DPIA Sign-Off Desk', icon: 'fa-solid fa-shield-halved', count: metrics?.dpia?.total },
-      { id: 'dsar', label: 'Client DSAR SLA Watch', icon: 'fa-solid fa-users-viewfinder', count: metrics?.dsar?.open_requests },
-      { id: 'breaches', label: 'Client 72h Breach Watch', icon: 'fa-solid fa-triangle-exclamation', count: metrics?.breaches?.active_incidents },
-      { id: 'vendors', label: 'Vendor & TPRM Risk', icon: 'fa-solid fa-handshake-simple', count: metrics?.vendors?.total_processors },
-      { id: 'cookies', label: 'Cookie Consent SDK', icon: 'fa-solid fa-cookie-bite' },
-      { id: 'policies', label: 'Statutory Policy Desk', icon: 'fa-solid fa-file-contract' },
+      { id: 'portfolio-desk', label: 'Client Workspaces Portfolio', icon: 'fa-solid fa-briefcase', highlight: true },
+      { id: 'admin-users', label: 'Team & Role Governance', icon: 'fa-solid fa-users-gear' },
+      { id: 'audit-logs', label: 'Audit Logs & Security', icon: 'fa-solid fa-shield-halved' },
+      { id: 'data-residency', label: 'Data Residency Node', icon: 'fa-solid fa-building-shield' },
     ];
   } else if (isDpco) {
+    // Milestone 1-3: DPCO Firm — Statutory Client Portfolio & Audit Suite (PDF Sec 10)
     sectionTitle = 'DPCO Statutory Suite';
     navItems = [
       { id: 'dashboard', label: 'Audit Practice Overview', icon: 'fa-solid fa-gauge-high' },
-      { id: 'portfolio', label: 'Client Audit Projects', icon: 'fa-solid fa-network-wired', highlight: true },
-      { id: 'audits', label: 'GAID 5-Domain Checklist', icon: 'fa-solid fa-clipboard-check', badge: metrics?.compliance_gauge?.score ? `${metrics.compliance_gauge.score}%` : null },
-      { id: 'dpia', label: 'Risk Evaluation Ledger', icon: 'fa-solid fa-shield-halved' },
-      { id: 'ropa', label: 'Client Verified RoPA', icon: 'fa-solid fa-file-shield' },
-      { id: 'vendors', label: 'Vendor & TPRM Risk', icon: 'fa-solid fa-handshake-simple', count: metrics?.vendors?.total_processors },
-      { id: 'cookies', label: 'Cookie Consent SDK', icon: 'fa-solid fa-cookie-bite' },
-      { id: 'policies', label: 'Governance Policies', icon: 'fa-solid fa-file-contract' },
+      { id: 'portfolio-desk', label: 'Client Audit Workspaces', icon: 'fa-solid fa-briefcase', highlight: true },
+      { id: 'admin-users', label: 'Team & Role Governance', icon: 'fa-solid fa-users-gear' },
+      { id: 'audit-logs', label: 'Statutory Audit Logs', icon: 'fa-solid fa-shield-halved' },
+      { id: 'data-residency', label: 'Data Residency Node', icon: 'fa-solid fa-building-shield' },
     ];
   } else {
-    // Standard Corporate Controller / Enterprise Portal
+    // Milestone 1-3: Corporate — Dashboard + User Management + Security + Data Residency
     sectionTitle = 'Corporate Operations';
     navItems = [
       { id: 'dashboard', label: 'Executive Overview', icon: 'fa-solid fa-gauge-high' },
-      { id: 'ropa', label: 'Automated RoPA', icon: 'fa-solid fa-file-shield', count: metrics?.ropa?.total },
-      { id: 'dpia', label: 'DPIA Risk Matrix', icon: 'fa-solid fa-shield-halved', count: metrics?.dpia?.total },
-      { id: 'audits', label: 'NDPC Statutory Audits', icon: 'fa-solid fa-clipboard-check', badge: metrics?.compliance_gauge?.score ? `${metrics.compliance_gauge.score}%` : null },
-      { id: 'dsar', label: '30-Day DSAR Desk', icon: 'fa-solid fa-users-viewfinder', count: metrics?.dsar?.open_requests, urgent: metrics?.dsar?.urgent_under_7_days > 0 },
-      { id: 'breaches', label: '72-Hour Breach Clock', icon: 'fa-solid fa-triangle-exclamation', count: metrics?.breaches?.active_incidents, alert: metrics?.breaches?.active_72h_clocks > 0 },
-      { id: 'vendors', label: 'Vendor & TPRM Risk', icon: 'fa-solid fa-handshake-simple', count: metrics?.vendors?.total_processors },
-      { id: 'cookies', label: 'Cookie Consent SDK', icon: 'fa-solid fa-cookie-bite' },
-      { id: 'policies', label: 'Policy Auto-Generator', icon: 'fa-solid fa-file-contract' },
     ];
 
-    if (userRole === 'corporate_admin') {
+    if (userRole === 'corporate_admin' || userRole === 'compliance_officer') {
       navItems.push({
         id: 'admin-users',
         label: 'Team & Role Governance',
         icon: 'fa-solid fa-users-gear',
         highlight: true,
+      });
+      navItems.push({
+        id: 'audit-logs',
+        label: 'Audit Trail & Logs',
+        icon: 'fa-solid fa-shield-halved',
+      });
+      navItems.push({
+        id: 'data-residency',
+        label: 'Data Residency Node',
+        icon: 'fa-solid fa-building-shield',
       });
     }
   }

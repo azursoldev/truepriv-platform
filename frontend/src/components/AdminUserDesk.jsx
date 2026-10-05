@@ -74,9 +74,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
   useEffect(() => {
     if (isAdmin) {
       loadData();
-      if (activeTab === 'audit-trail') {
-        loadAuditLogs();
-      }
+      loadAuditLogs();
     }
   }, [roleFilter, departmentFilter, activeTab]);
 
@@ -683,10 +681,10 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
             <i className="fa-solid fa-users text-slate-400"></i>
           </div>
           <div className="text-2xl font-extrabold font-mono text-slate-900 mt-1">
-            {summary?.total_users || users.length} <span className="text-xs text-slate-400 font-normal">/ {summary?.seat_capacity || 25} Seats</span>
+            {summary?.total_users ?? users.length} <span className="text-xs text-slate-400 font-normal">/ {summary?.seat_capacity ?? 25} Seats</span>
           </div>
           <div className="text-[11px] text-emerald-700 font-semibold mt-1">
-            {summary?.active_users || users.length} Active Accounts
+            {summary?.active_users ?? users.length} Active Accounts
           </div>
         </div>
 
@@ -696,7 +694,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
             <i className="fa-solid fa-building text-emerald-600"></i>
           </div>
           <div className="text-2xl font-extrabold font-mono text-slate-900 mt-1">
-            {summary?.admins || 2}
+            {summary?.admins ?? 0}
           </div>
           <div className="text-[11px] text-slate-500 mt-1">Full Organization Governance</div>
         </div>
@@ -707,7 +705,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
             <i className="fa-solid fa-shield-halved text-sky-600"></i>
           </div>
           <div className="text-2xl font-extrabold font-mono text-slate-900 mt-1">
-            {summary?.compliance_officers || 2}
+            {summary?.compliance_officers ?? 0}
           </div>
           <div className="text-[11px] text-slate-500 mt-1">RoPA, DPIA & DSAR Leads</div>
         </div>
@@ -721,7 +719,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
             </span>
           </div>
           <div className="text-2xl font-extrabold font-mono text-slate-900 mt-1">
-            {auditLogs.length || 7} Events
+            {summary?.total_audit_events ?? auditLogs.length} Events
           </div>
           <div className="text-[11px] text-emerald-700 font-semibold mt-1">Real-Time Telemetry Active</div>
         </div>

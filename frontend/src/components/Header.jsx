@@ -164,61 +164,19 @@ export default function Header({
           </div>
         )}
 
-        {/* 3. Action Buttons Segmented Toolbar */}
+        {/* 3. Action Buttons — Milestone 1-3 only */}
         <div className="flex items-center bg-slate-100/90 border border-slate-200 p-0.5 rounded-xl shadow-2xs gap-0.5 flex-shrink-0">
-          
-          {/* TruePriv AI Agent (Marquee Trigger) */}
-          <button
-            onClick={onOpenAiCopilot}
-            title="Open TruePriv Autonomous Privacy AI Agent"
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-extrabold text-sky-900 hover:text-sky-950 bg-sky-50 hover:bg-white border border-sky-200/80 rounded-lg transition-all shadow-2xs whitespace-nowrap"
-          >
-            <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
-            <i className="fa-solid fa-brain text-sky-600 text-xs"></i>
-            <span>TruePriv AI Agent</span>
-          </button>
 
-          {/* NDPA Wizard */}
-          <button
-            onClick={onOpenOnboarding}
-            title="Run NDPA Readiness & MDC Tier Calculator"
-            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-bold text-emerald-900 hover:text-emerald-950 hover:bg-white rounded-lg transition-all shadow-2xs whitespace-nowrap"
-          >
-            <i className="fa-solid fa-scale-balanced text-emerald-600 text-xs"></i>
-            <span className="hidden sm:inline">NDPA Wizard</span>
-          </button>
-
-          {/* Department Champions */}
+          {/* Department Champions — M3: Guest Invitations */}
           <button
             onClick={onOpenChampions}
             title="Invite Department Champions (HR, IT, Finance)"
-            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-bold text-purple-900 hover:text-purple-950 hover:bg-white rounded-lg transition-all shadow-2xs whitespace-nowrap"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-purple-900 hover:text-purple-950 bg-purple-50 hover:bg-white border border-purple-200/80 rounded-lg transition-all shadow-2xs whitespace-nowrap"
           >
             <i className="fa-solid fa-users text-purple-600 text-xs"></i>
             <span className="hidden sm:inline">Champions</span>
           </button>
 
-          {/* Public DSAR */}
-          <button
-            onClick={onOpenPublicPortal}
-            title="Open Hosted DSAR Self-Service Portal"
-            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-bold text-slate-700 hover:text-slate-900 hover:bg-white rounded-lg transition-all shadow-2xs whitespace-nowrap"
-          >
-            <i className="fa-solid fa-globe text-slate-500 text-xs"></i>
-            <span className="hidden sm:inline">Public DSAR</span>
-          </button>
-
-          {/* Milestone 2: Subscription & Paystack Billing */}
-          {onOpenBilling && (
-            <button
-              onClick={onOpenBilling}
-              title="Manage Plan & Statutory Compliance Entitlements"
-              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-bold text-amber-900 hover:text-amber-950 bg-amber-50 hover:bg-amber-100/80 border border-amber-300/80 rounded-lg transition-all shadow-2xs whitespace-nowrap cursor-pointer"
-            >
-              <i className="fa-solid fa-crown text-amber-600 text-xs"></i>
-              <span className="hidden sm:inline">Plan & Billing</span>
-            </button>
-          )}
         </div>
 
         {/* 4. User Profile & Guaranteed-Visible Logout */}

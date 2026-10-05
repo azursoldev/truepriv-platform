@@ -163,7 +163,7 @@ export default function PublicChampionIntakePortal({ token }) {
               <i className="fa-solid fa-circle-info text-sky-400"></i> What to do next:
             </p>
             <p>1. Ensure you copied the full link sent by your Data Protection Officer.</p>
-            <p>2. If the link expired (valid for 7 days by default), request a fresh link from your compliance team.</p>
+            <p>2. If the link expired (valid for 30 days by default), request a fresh link from your compliance team.</p>
           </div>
           <button
             onClick={() => window.location.reload()}

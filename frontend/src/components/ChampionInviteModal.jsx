@@ -6,6 +6,8 @@ export default function ChampionInviteModal({ onNavigateBack }) {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [department, setDepartment] = useState('HR');
+  const [role, setRole] = useState('dept_champion');
+  const [expiresDays, setExpiresDays] = useState(30);
   const [notes, setNotes] = useState('');
   const [copiedToken, setCopiedToken] = useState(null);
   const [latestInviteUrl, setLatestInviteUrl] = useState(null);
@@ -38,8 +40,9 @@ export default function ChampionInviteModal({ onNavigateBack }) {
       const res = await api.createInvitation({
         email,
         department_assigned: department,
+        assigned_role: role,
         notes,
-        expires_days: 7,
+        expires_days: expiresDays,
       });
 
       if (res.success) {
@@ -137,7 +140,7 @@ export default function ChampionInviteModal({ onNavigateBack }) {
           <div className="text-2xl font-extrabold font-mono text-amber-700 mt-1">
             {pendingCount}
           </div>
-          <div className="text-[11px] text-slate-500 mt-1">7-Day Expiry Window</div>
+          <div className="text-[11px] text-slate-500 mt-1">30-Day Expiry Window</div>
         </div>
       </div>
 
@@ -150,22 +153,50 @@ export default function ChampionInviteModal({ onNavigateBack }) {
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
                 <i className="fa-solid fa-paper-plane text-purple-600"></i>
-                <span>Generate Tokenized Champion Link</span>
+                <span>Generate Tokenized Guest Link</span>
               </h3>
-              <span className="text-[10px] text-purple-700 uppercase font-bold font-mono">7-Day Expiry</span>
+              <span className="text-[10px] text-purple-700 uppercase font-bold font-mono bg-purple-50 border border-purple-200 px-2 py-0.5 rounded">30-Day Expiration</span>
             </div>
 
             <form onSubmit={handleSendInvite} className="space-y-4 text-xs">
               <div>
-                <label className="block text-slate-700 font-bold mb-1">Champion Work Email</label>
+                <label className="block text-slate-700 font-bold mb-1">Guest / Champion Work Email</label>
                 <input
                   type="email"
                   required
-                  placeholder="e.g. hr.lead@company.ng"
+                  placeholder="e.g. auditor.lead@kpmg.ng or hr.lead@company.ng"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-semibold focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
                 />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-slate-700 font-bold mb-1">Access Role</label>
+                  <select
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-slate-900 font-bold focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                  >
+                    <option value="dept_champion">Department Champion</option>
+                    <option value="auditor_viewer">External Guest Auditor</option>
+                    <option value="guest_reviewer">Guest Reviewer</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-slate-700 font-bold mb-1">Expiration Window</label>
+                  <select
+                    value={expiresDays}
+                    onChange={(e) => setExpiresDays(Number(e.target.value))}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-slate-900 font-bold focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                  >
+                    <option value={30}>30 Days (Statutory)</option>
+                    <option value={14}>14 Days (Bi-Weekly)</option>
+                    <option value={7}>7 Days (Expedited)</option>
+                  </select>
+                </div>
               </div>
 
               <div>
@@ -181,32 +212,33 @@ export default function ChampionInviteModal({ onNavigateBack }) {
                   <option value="Operations">Operations & Business Support</option>
                   <option value="Legal">Legal, Risk & Regulatory Compliance</option>
                   <option value="Marketing">Marketing, Lead Gen & Analytics</option>
+                  <option value="Assurance">External Audit & Regulatory Assurance</option>
                 </select>
               </div>
 
               <div>
                 <label className="block text-slate-700 font-bold mb-1">Assignment Note & Guidance</label>
                 <textarea
-                  rows={3}
-                  placeholder="e.g. Please document all employee onboarding biometric records, third-party payroll processors, and CCTV logs for our annual NDPA RoPA inventory."
+                  rows={2}
+                  placeholder="e.g. Please document all department processing activities or review statutory evidence."
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
                 ></textarea>
               </div>
 
               <div className="p-3 bg-purple-50/70 border border-purple-200 rounded-xl text-[11px] text-purple-900">
-                <i className="fa-solid fa-lock mr-1 text-purple-600"></i>
-                Tokenized links bypass password creation and grant temporary scoped access strictly to their department's data intake form.
+                <i className="fa-solid fa-clock mr-1 text-purple-600"></i>
+                Tokenized links bypass password creation and enforce a strict 30-day guest expiration window under NDPA security guidelines.
               </div>
 
               <button
                 type="submit"
                 disabled={sending}
-                className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-md transition-all disabled:opacity-50"
+                className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-md transition-all disabled:opacity-50 cursor-pointer"
               >
                 <i className="fa-solid fa-key text-xs"></i>
-                <span>{sending ? 'Generating Access Token...' : 'Generate 7-Day Access Link'}</span>
+                <span>{sending ? 'Generating Access Token...' : `Generate ${expiresDays}-Day Secure Access Link`}</span>
               </button>
             </form>
           </div>

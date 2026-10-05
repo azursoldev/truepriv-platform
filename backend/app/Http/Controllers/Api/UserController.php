@@ -54,12 +54,18 @@ class UserController extends Controller
 
         $users = $query->orderBy('created_at', 'desc')->get();
 
+        $auditCount = AuditLog::query();
+        if ($tenantId && !$currentUser->isSuperAdmin()) {
+            $auditCount->where('tenant_id', $tenantId);
+        }
+
         $summary = [
             'total_users' => $users->count(),
             'active_users' => $users->where('is_active', true)->count(),
             'admins' => $users->whereIn('role', ['super_admin', 'corporate_admin'])->count(),
             'champions' => $users->where('role', 'dept_champion')->count(),
             'compliance_officers' => $users->where('role', 'compliance_officer')->count(),
+            'total_audit_events' => $auditCount->count(),
             'seat_capacity' => 25,
         ];
 
