@@ -20,7 +20,24 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Enforce 30-minute idle inactivity timeout on Sanctum Bearer tokens
+        // 1. Register Laravel Model Authorization Policies (Milestone 3)
+        \Illuminate\Support\Facades\Gate::policy(\App\Models\RopaActivity::class, \App\Policies\RopaActivityPolicy::class);
+        \Illuminate\Support\Facades\Gate::policy(\App\Models\DpiaAssessment::class, \App\Policies\DpiaAssessmentPolicy::class);
+        \Illuminate\Support\Facades\Gate::policy(\App\Models\DataBreach::class, \App\Policies\DataBreachPolicy::class);
+        \Illuminate\Support\Facades\Gate::policy(\App\Models\AuditProject::class, \App\Policies\AuditProjectPolicy::class);
+        \Illuminate\Support\Facades\Gate::policy(\App\Models\GuestInvitation::class, \App\Policies\GuestInvitationPolicy::class);
+        \Illuminate\Support\Facades\Gate::policy(\App\Models\User::class, \App\Policies\UserPolicy::class);
+
+        // 2. Global Authorization Gates
+        \Illuminate\Support\Facades\Gate::define('manage-tenant-security', function ($user) {
+            return in_array($user->role, ['super_admin', 'corporate_admin']);
+        });
+
+        \Illuminate\Support\Facades\Gate::define('certify-audits', function ($user) {
+            return in_array($user->role, ['super_admin', 'dpco_lead_auditor']);
+        });
+
+        // 3. Enforce 30-minute idle inactivity timeout on Sanctum Bearer tokens
         Sanctum::authenticateAccessTokensUsing(function ($accessToken, $isValid) {
             if (!$isValid) {
                 return false;

@@ -65,9 +65,10 @@ Route::prefix('v1')->group(function () {
             Route::post('/onboarding/submit', [OnboardingController::class, 'submitAnswers']);
             Route::get('/onboarding/classification', [OnboardingController::class, 'getClassification']);
 
-            // Department Champion Invitations
+            // Department Champion & Guest Invitations (Milestone 3: 30-Day Expiry)
             Route::get('/invitations', [ChampionInvitationController::class, 'index']);
             Route::post('/invitations', [ChampionInvitationController::class, 'store']);
+            Route::delete('/invitations/{id}', [ChampionInvitationController::class, 'destroy']);
 
             // Dual-Residency Data Localization
             Route::get('/localization/status', [LocalizationController::class, 'getStatus']);

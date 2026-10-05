@@ -66,6 +66,24 @@ class AuthController extends Controller
         // Enforce 12-hour absolute token expiration
         $token = $user->createToken('auth-token', ['*'], now()->addHours(12))->plainTextToken;
 
+        // Audit Logging Foundation: Capture authenticated login event (Milestone 3)
+        try {
+            \App\Models\AuditLog::create([
+                'tenant_id' => $user->tenant_id,
+                'user_id' => $user->id,
+                'action' => 'auth.login_success',
+                'entity_type' => User::class,
+                'entity_id' => $user->id,
+                'new_values' => [
+                    'email' => $user->email,
+                    'role' => $user->role,
+                ],
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+                'created_at' => now(),
+            ]);
+        } catch (\Throwable $e) {}
+
         return response()->json([
             'success' => true,
             'token' => $token,

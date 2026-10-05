@@ -31,13 +31,14 @@ class ChampionInvitationController extends Controller
     }
 
     /**
-     * Create a new tokenized Department Champion invitation.
+     * Create a new tokenized Department Champion or Guest Auditor invitation with 30-day expiration.
      */
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
             'email' => 'required|email|max:255',
-            'department_assigned' => 'required|string|max:100', // HR, IT, Finance, Operations, Legal, Marketing
+            'department_assigned' => 'nullable|string|max:100', // HR, IT, Finance, Operations, Legal, Marketing
+            'assigned_role' => 'nullable|string|in:dept_champion,auditor_viewer,guest_reviewer',
             'notes' => 'nullable|string',
             'expires_days' => 'nullable|integer|min:1|max:30',
         ]);
@@ -46,23 +47,44 @@ class ChampionInvitationController extends Controller
         $user = $request->user();
 
         $token = (string) Str::random(48);
-        $days = (int) ($request->expires_days ?? 7);
+        $days = (int) ($request->expires_days ?? 30); // Milestone 3: 30-day guest expiration baseline
+        $role = $validated['assigned_role'] ?? 'dept_champion';
+        $department = $validated['department_assigned'] ?? ($role === 'auditor_viewer' ? 'External Assurance' : 'Compliance');
 
         $invitation = GuestInvitation::create([
             'tenant_id' => $tenantId,
             'email' => $validated['email'],
-            'target_department' => $validated['department_assigned'],
-            'assigned_role' => 'dept_champion',
+            'target_department' => $department,
+            'assigned_role' => $role,
             'invitation_token' => $token,
             'invited_by_user_id' => $user->id,
             'expires_at' => now()->addDays($days),
+        ]);
+
+        // Audit Logging Foundation: Record security invitation event
+        \App\Models\AuditLog::create([
+            'tenant_id' => $tenantId,
+            'user_id' => $user->id,
+            'action' => 'guest.invited',
+            'entity_type' => GuestInvitation::class,
+            'entity_id' => $invitation->id,
+            'new_values' => [
+                'email' => $validated['email'],
+                'role' => $role,
+                'department' => $department,
+                'expires_at' => $invitation->expires_at->toIso8601String(),
+                'expires_days' => $days,
+            ],
+            'ip_address' => $request->ip(),
+            'user_agent' => $request->userAgent(),
+            'created_at' => now(),
         ]);
 
         $inviteUrl = url("/portal/champion-intake?token={$token}");
 
         return response()->json([
             'success' => true,
-            'message' => "Invitation generated for {$validated['email']} ({$validated['department_assigned']} Champion).",
+            'message' => "Secure 30-day invitation dispatched to {$validated['email']} (Role: {$role}).",
             'data' => $invitation,
             'invite_url' => $inviteUrl,
         ], 201);
@@ -147,6 +169,44 @@ class ChampionInvitationController extends Controller
             'success' => true,
             'message' => 'Department processing activity submitted for DPO review and verification.',
             'data' => $activity,
+        ]);
+    }
+
+    /**
+     * Revoke / Cancel a pending guest invitation.
+     */
+    public function destroy(Request $request, string $id): JsonResponse
+    {
+        $tenantId = app('current_tenant_id');
+        $user = $request->user();
+
+        $invitation = GuestInvitation::where('id', $id)
+            ->where('tenant_id', $tenantId)
+            ->firstOrFail();
+
+        $email = $invitation->email;
+        $role = $invitation->assigned_role;
+
+        $invitation->delete();
+
+        \App\Models\AuditLog::create([
+            'tenant_id' => $tenantId,
+            'user_id' => $user->id,
+            'action' => 'guest.revoked',
+            'entity_type' => GuestInvitation::class,
+            'entity_id' => $id,
+            'old_values' => [
+                'email' => $email,
+                'role' => $role,
+            ],
+            'ip_address' => $request->ip(),
+            'user_agent' => $request->userAgent(),
+            'created_at' => now(),
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => "Invitation for {$email} has been revoked.",
         ]);
     }
 }
