@@ -18,42 +18,46 @@ export default function Sidebar({
   let sectionTitle = 'Compliance Operations';
 
   if (isSuperAdmin) {
-    // Milestone 1-3: Super Admin — Platform & Tenant Management
-    sectionTitle = 'Global System Governance';
+    // Super Admin: Global Platform Authority & Tenant Management
+    sectionTitle = 'Global System Authority';
     navItems = [
-      { id: 'dashboard', label: 'Global Platform Hub', icon: 'fa-solid fa-gauge-high' },
-      { id: 'admin-users', label: 'Master User Governance', icon: 'fa-solid fa-users-gear', highlight: true },
-      { id: 'audit-logs', label: 'Security & Audit Logs', icon: 'fa-solid fa-shield-halved' },
-      { id: 'data-residency', label: 'Data Residency Node', icon: 'fa-solid fa-building-shield' },
+      { id: 'dashboard', label: 'Global Platform Hub', icon: 'fa-solid fa-crown', highlight: true },
+      { id: 'admin-users', label: 'Global Tenants & Users', icon: 'fa-solid fa-building-user' },
+      { id: 'audit-logs', label: 'Global Security Logs', icon: 'fa-solid fa-shield-halved' },
+      { id: 'data-residency', label: 'Platform Data Residency', icon: 'fa-solid fa-building-shield' },
     ];
   } else if (isDpo) {
-    // Milestone 1-3: Outsourced DPO — Multi-Client Portfolio & Governance (PDF Sec 9 & 10)
+    // Outsourced DPO: Multi-Client Portfolio & Advisory Workspace
     sectionTitle = 'DPO Advisory Console';
     navItems = [
-      { id: 'dashboard', label: 'DPO Practice Overview', icon: 'fa-solid fa-gauge-high' },
       { id: 'portfolio-desk', label: 'Client Workspaces Portfolio', icon: 'fa-solid fa-briefcase', highlight: true },
-      { id: 'admin-users', label: 'Team & Role Governance', icon: 'fa-solid fa-users-gear' },
-      { id: 'audit-logs', label: 'Audit Logs & Security', icon: 'fa-solid fa-shield-halved' },
-      { id: 'data-residency', label: 'Data Residency Node', icon: 'fa-solid fa-building-shield' },
+      { id: 'dashboard', label: 'DPO Practice Metrics', icon: 'fa-solid fa-chart-pie' },
+      { id: 'admin-users', label: 'Team Governance', icon: 'fa-solid fa-users-gear' },
+      { id: 'audit-logs', label: 'DPO Audit Trail', icon: 'fa-solid fa-shield-halved' },
     ];
   } else if (isDpco) {
-    // Milestone 1-3: DPCO Firm — Statutory Client Portfolio & Audit Suite (PDF Sec 10)
-    sectionTitle = 'DPCO Statutory Suite';
+    // DPCO Firm: Statutory Audit Client Portfolio & Suite
+    sectionTitle = 'Licensed DPCO Suite';
     navItems = [
+      { id: 'portfolio-desk', label: 'Client Audit Registry', icon: 'fa-solid fa-building-columns', highlight: true },
       { id: 'dashboard', label: 'Audit Practice Overview', icon: 'fa-solid fa-gauge-high' },
-      { id: 'portfolio-desk', label: 'Client Audit Workspaces', icon: 'fa-solid fa-briefcase', highlight: true },
-      { id: 'admin-users', label: 'Team & Role Governance', icon: 'fa-solid fa-users-gear' },
-      { id: 'audit-logs', label: 'Statutory Audit Logs', icon: 'fa-solid fa-shield-halved' },
-      { id: 'data-residency', label: 'Data Residency Node', icon: 'fa-solid fa-building-shield' },
+      { id: 'admin-users', label: 'Audit Staff Governance', icon: 'fa-solid fa-id-card-clip' },
+      { id: 'audit-logs', label: 'Statutory Audit Logs', icon: 'fa-solid fa-clipboard-check' },
+    ];
+  } else if (userRole === 'dept_champion') {
+    // Department Champion: Department Intake & Champion Portal
+    sectionTitle = 'Department Intake';
+    navItems = [
+      { id: 'dashboard', label: 'My Department Overview', icon: 'fa-solid fa-user-tag', highlight: true },
     ];
   } else {
-    // Milestone 1-3: Corporate — Dashboard + User Management + Security + Data Residency
+    // Corporate Controller (Admin / Officer): Company Compliance Operations
     sectionTitle = 'Corporate Operations';
     navItems = [
       { id: 'dashboard', label: 'Executive Overview', icon: 'fa-solid fa-gauge-high' },
     ];
 
-    if (userRole === 'corporate_admin' || userRole === 'compliance_officer') {
+    if (userRole === 'corporate_admin') {
       navItems.push({
         id: 'admin-users',
         label: 'Team & Role Governance',
@@ -62,9 +66,15 @@ export default function Sidebar({
       });
       navItems.push({
         id: 'audit-logs',
-        label: 'Audit Trail & Logs',
+        label: 'Security & Audit Logs',
         icon: 'fa-solid fa-shield-halved',
       });
+      navItems.push({
+        id: 'data-residency',
+        label: 'Data Residency Node',
+        icon: 'fa-solid fa-building-shield',
+      });
+    } else if (userRole === 'compliance_officer') {
       navItems.push({
         id: 'data-residency',
         label: 'Data Residency Node',
