@@ -18,7 +18,7 @@ export default function Sidebar({
   let sectionTitle = 'Compliance Operations';
 
   if (isSuperAdmin) {
-    // Super Admin: Global Platform Authority & Tenant Management
+    // Super Admin: Global Platform Authority, Tenant Management & Data Residency Node
     sectionTitle = 'Global System Authority';
     navItems = [
       { id: 'dashboard', label: 'Global Platform Hub', icon: 'fa-solid fa-crown', highlight: true },
@@ -32,7 +32,6 @@ export default function Sidebar({
     navItems = [
       { id: 'portfolio-desk', label: 'Client Workspaces Portfolio', icon: 'fa-solid fa-briefcase', highlight: true },
       { id: 'dashboard', label: 'DPO Practice Metrics', icon: 'fa-solid fa-chart-pie' },
-      { id: 'admin-users', label: 'Team Governance', icon: 'fa-solid fa-users-gear' },
       { id: 'audit-logs', label: 'DPO Audit Trail', icon: 'fa-solid fa-shield-halved' },
     ];
   } else if (isDpco) {
@@ -41,17 +40,16 @@ export default function Sidebar({
     navItems = [
       { id: 'portfolio-desk', label: 'Client Audit Registry', icon: 'fa-solid fa-building-columns', highlight: true },
       { id: 'dashboard', label: 'Audit Practice Overview', icon: 'fa-solid fa-gauge-high' },
-      { id: 'admin-users', label: 'Audit Staff Governance', icon: 'fa-solid fa-id-card-clip' },
       { id: 'audit-logs', label: 'Statutory Audit Logs', icon: 'fa-solid fa-clipboard-check' },
     ];
   } else if (userRole === 'dept_champion') {
-    // Department Champion: Department Intake & Champion Portal
+    // Department Champion: Department Intake
     sectionTitle = 'Department Intake';
     navItems = [
       { id: 'dashboard', label: 'My Department Overview', icon: 'fa-solid fa-user-tag', highlight: true },
     ];
   } else {
-    // Corporate Controller (Admin / Officer): Company Compliance Operations
+    // Corporate Controller: Company Compliance Operations
     sectionTitle = 'Corporate Operations';
     navItems = [
       { id: 'dashboard', label: 'Executive Overview', icon: 'fa-solid fa-gauge-high' },
@@ -69,16 +67,11 @@ export default function Sidebar({
         label: 'Security & Audit Logs',
         icon: 'fa-solid fa-shield-halved',
       });
-      navItems.push({
-        id: 'data-residency',
-        label: 'Data Residency Node',
-        icon: 'fa-solid fa-building-shield',
-      });
     } else if (userRole === 'compliance_officer') {
       navItems.push({
-        id: 'data-residency',
-        label: 'Data Residency Node',
-        icon: 'fa-solid fa-building-shield',
+        id: 'audit-logs',
+        label: 'Security & Audit Logs',
+        icon: 'fa-solid fa-shield-halved',
       });
     }
   }

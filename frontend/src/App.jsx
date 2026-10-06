@@ -218,15 +218,27 @@ export default function App() {
             />
           )}
 
-          {/* M3: Data Residency & Sovereign Node Control (PDF Sec 11) */}
+          {/* M3: Data Residency & Sovereign Node Control (PDF Sec 11) — Reserved for Super Admin */}
           {activeTab === 'data-residency' && (
-            <div className="space-y-6">
-              <div className="border-b border-slate-200 pb-4">
-                <h2 className="text-xl font-black text-slate-900">Data Residency & Sovereign Node Deployment</h2>
-                <p className="text-xs text-slate-500 mt-1">Configure in-country data localization, encryption standards, and cross-border statutory nodes as specified in PDF Section 11.</p>
+            user?.role === 'super_admin' ? (
+              <div className="space-y-6">
+                <div className="border-b border-slate-200 pb-4">
+                  <h2 className="text-xl font-black text-slate-900">Data Residency & Sovereign Node Deployment</h2>
+                  <p className="text-xs text-slate-500 mt-1">Configure in-country data localization, encryption standards, and cross-border statutory nodes as specified in PDF Section 11.</p>
+                </div>
+                <DataResidencyCard onResidencyChanged={() => refreshMetrics()} />
               </div>
-              <DataResidencyCard onResidencyChanged={() => refreshMetrics()} />
-            </div>
+            ) : (
+              <div className="bg-white border border-slate-200 rounded-3xl p-8 text-center max-w-2xl mx-auto my-8 shadow-xs">
+                <div className="w-16 h-16 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center mx-auto mb-4 text-2xl">
+                  <i className="fa-solid fa-lock"></i>
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 tracking-tight">Access Restricted: Super Admin Required</h3>
+                <p className="text-xs text-slate-600 mt-2 leading-relaxed">
+                  Platform Data Residency node controls are strictly reserved for <strong>Super Administrator</strong> accounts.
+                </p>
+              </div>
+            )
           )}
         </main>
       </div>
