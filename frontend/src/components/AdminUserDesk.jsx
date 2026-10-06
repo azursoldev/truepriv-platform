@@ -492,10 +492,14 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                     <option value="compliance_officer">Compliance Officer (RoPA, DPIA, DSAR)</option>
                     <option value="dept_champion">Department Champion (Data Inputs)</option>
                     <option value="auditor_viewer">Auditor Viewer (Read-Only Evidence)</option>
-                    <option value="dpco_lead_auditor">DPCO Lead Auditor (Statutory Audit)</option>
-                    <option value="dpco_staff">DPCO Staff Auditor</option>
-                    <option value="outsourced_dpo">Outsourced DPO Practice</option>
-                    <option value="super_admin">System Super Administrator</option>
+                    {currentUser?.role === 'super_admin' && (
+                      <>
+                        <option value="dpco_lead_auditor">DPCO Lead Auditor (Statutory Audit)</option>
+                        <option value="dpco_staff">DPCO Staff Auditor</option>
+                        <option value="outsourced_dpo">Outsourced DPO Practice</option>
+                        <option value="super_admin">System Super Administrator</option>
+                      </>
+                    )}
                   </select>
                 </div>
 
@@ -653,14 +657,16 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
             >
               <i className="fa-solid fa-tower-broadcast mr-1.5 text-slate-600"></i> Dynamic Live Logs
             </button>
-            <button
-              onClick={() => setActiveTab('matrix')}
-              className={`px-3 py-1.5 rounded-lg font-bold transition-all ${
-                activeTab === 'matrix' ? 'bg-white text-slate-900 shadow-2xs' : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              <i className="fa-solid fa-table-cells mr-1.5 text-slate-600"></i> Role Matrix
-            </button>
+            {currentUser?.role === 'super_admin' && (
+              <button
+                onClick={() => setActiveTab('matrix')}
+                className={`px-3 py-1.5 rounded-lg font-bold transition-all ${
+                  activeTab === 'matrix' ? 'bg-white text-slate-900 shadow-2xs' : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                <i className="fa-solid fa-table-cells mr-1.5 text-slate-600"></i> Platform Role Matrix
+              </button>
+            )}
           </div>
 
           <button
@@ -1056,9 +1062,14 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                     <option value="compliance_officer">Compliance Officer</option>
                     <option value="dept_champion">Department Champion</option>
                     <option value="auditor_viewer">Auditor Viewer</option>
-                    <option value="dpco_lead_auditor">DPCO Lead Auditor</option>
-                    <option value="dpco_staff">DPCO Staff</option>
-                    <option value="outsourced_dpo">Outsourced DPO</option>
+                    {currentUser?.role === 'super_admin' && (
+                      <>
+                        <option value="dpco_lead_auditor">DPCO Lead Auditor</option>
+                        <option value="dpco_staff">DPCO Staff</option>
+                        <option value="outsourced_dpo">Outsourced DPO</option>
+                        <option value="super_admin">Super Admin</option>
+                      </>
+                    )}
                   </select>
                 </div>
 
