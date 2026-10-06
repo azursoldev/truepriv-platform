@@ -38,11 +38,13 @@ export default function App() {
         setShowAuthModal(false);
 
         // Fetch accessible clients if DPO or DPCO
-        if (['outsourced_dpo', 'dpco_firm'].includes(meRes.tenant?.type)) {
+        const isDpoOrDpco = ['outsourced_dpo', 'dpco_firm', 'dpco_lead_auditor', 'dpco_staff'].includes(meRes.tenant?.type || meRes.user?.role);
+        if (isDpoOrDpco) {
           const pRes = await api.getPortfolioClients().catch(() => null);
           if (pRes && pRes.success) {
             setAccessibleClients(pRes.clients);
           }
+          setActiveTab('portfolio-desk');
         }
 
         // Fetch dashboard metrics
@@ -75,12 +77,29 @@ export default function App() {
     initApp();
   }, []);
 
+  // Auto-redirect guarded tabs if user does not have permission
+  useEffect(() => {
+    if (user) {
+      const isAdmin = ['super_admin', 'corporate_admin'].includes(user.role);
+      const isDpoOrDpco = ['outsourced_dpo', 'dpco_firm', 'dpco_lead_auditor', 'dpco_staff'].includes(tenant?.type || user.role);
+
+      if (!isAdmin && activeTab === 'admin-users') {
+        setActiveTab(isDpoOrDpco ? 'portfolio-desk' : 'dashboard');
+      }
+      if (user.role !== 'super_admin' && activeTab === 'data-residency') {
+        setActiveTab(isDpoOrDpco ? 'portfolio-desk' : 'dashboard');
+      }
+    }
+  }, [user, activeTab, tenant]);
+
   const handleLoginSuccess = (loggedInUser, loggedInTenant, clients = []) => {
     setUser(loggedInUser);
     setTenant(loggedInTenant);
     setAccessibleClients(clients);
     setShowAuthModal(false);
-    setActiveTab('dashboard'); // M2: Always go to dashboard after login
+
+    const isDpoOrDpco = ['outsourced_dpo', 'dpco_firm', 'dpco_lead_auditor', 'dpco_staff'].includes(loggedInTenant?.type || loggedInUser?.role);
+    setActiveTab(isDpoOrDpco ? 'portfolio-desk' : 'dashboard');
     refreshMetrics();
   };
 
@@ -92,7 +111,8 @@ export default function App() {
       if (meRes.success) {
         setTenant(meRes.tenant);
         await refreshMetrics();
-        setActiveTab('dashboard');
+        const isDpoOrDpco = ['outsourced_dpo', 'dpco_firm', 'dpco_lead_auditor', 'dpco_staff'].includes(meRes.tenant?.type || meRes.user.role);
+        setActiveTab(isDpoOrDpco ? 'portfolio-desk' : 'dashboard');
       }
     } catch (err) {
       console.error('Failed to switch tenant context:', err);
