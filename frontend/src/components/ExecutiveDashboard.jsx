@@ -111,7 +111,7 @@ export default function ExecutiveDashboard({
 
         {/* M3: Security Controls */}
         <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs">
-          <h3 className="text-base font-bold text-slate-900 mb-4">M3 — Security & Multi-Tenancy Controls</h3>
+          <h3 className="text-base font-bold text-slate-900 mb-4">Platform Security & Multi-Tenancy Controls</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {[
               { label: 'Tenant Isolation', icon: 'fa-layer-group', color: 'emerald', desc: 'TenantScope enforced on all queries' },
@@ -199,7 +199,7 @@ export default function ExecutiveDashboard({
 
         {/* M3 Security Status */}
         <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs">
-          <h3 className="text-base font-bold text-slate-900 mb-4">Security & Tenant Controls (Milestone 3)</h3>
+          <h3 className="text-base font-bold text-slate-900 mb-4">Security & Data Boundary Controls</h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[
               { label: 'Tenant Isolation', icon: 'fa-layer-group', status: 'Active' },
@@ -285,7 +285,7 @@ export default function ExecutiveDashboard({
 
         {/* M3 Security */}
         <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs">
-          <h3 className="text-base font-bold text-slate-900 mb-4">Security & Tenant Controls (Milestone 3)</h3>
+          <h3 className="text-base font-bold text-slate-900 mb-4">Security & Data Boundary Controls</h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[
               { label: 'Tenant Isolation', icon: 'fa-layer-group' },
@@ -387,10 +387,10 @@ export default function ExecutiveDashboard({
 
       </div>
 
-      {/* M3: Security Controls Status */}
+      {/* Security Controls Status */}
       <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs">
-        <h3 className="text-base font-bold text-slate-900 mb-1">Security Controls — Milestone 3</h3>
-        <p className="text-xs text-slate-500 mb-4">All Milestone 3 security features are active and verified.</p>
+        <h3 className="text-base font-bold text-slate-900 mb-1">Security & Data Boundary Controls</h3>
+        <p className="text-xs text-slate-500 mb-4">Enterprise-grade tenant isolation, RBAC policies, and audit logging active.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {[
             { label: 'Tenant Isolation', icon: 'fa-layer-group', desc: 'Data scoped per tenant' },
@@ -410,9 +410,9 @@ export default function ExecutiveDashboard({
         </div>
       </div>
 
-      {/* M2: Portal & Role Info */}
+      {/* Portal & Role Info */}
       <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs">
-        <h3 className="text-base font-bold text-slate-900 mb-4">Authentication & Role Permissions — Milestone 2</h3>
+        <h3 className="text-base font-bold text-slate-900 mb-4">Authentication & Role Privilege Governance</h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
             <i className="fa-solid fa-right-to-bracket text-slate-600 text-lg mb-2"></i>
