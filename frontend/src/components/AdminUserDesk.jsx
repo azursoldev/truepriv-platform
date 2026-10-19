@@ -87,12 +87,12 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
         </div>
         <h3 className="text-xl font-bold text-slate-900 tracking-tight">Access Restricted: Administrator Role Required</h3>
         <p className="text-xs text-slate-600 mt-2 leading-relaxed">
-          Your account is logged in as <span className="font-bold text-slate-900">{currentUser?.name}</span> with role <span className="font-mono font-bold text-emerald-700">[{currentUser?.role}]</span>.
+          Your account is logged in as <span className="font-bold text-slate-900">{currentUser?.name}</span> with role <span className="font-mono font-bold text-slate-800">[{currentUser?.role}]</span>.
           User provisioning, deprovisioning, role privilege configuration, and system telemetry are strictly reserved for <strong>Organization Administrators</strong>.
         </p>
         <div className="mt-6 p-4 bg-slate-50 border border-slate-200 rounded-2xl text-left text-xs text-slate-600">
           <div className="font-bold text-slate-800 mb-1 flex items-center gap-1.5">
-            <i className="fa-solid fa-shield-halved text-emerald-600"></i> NDPA 2023 Segregation-of-Duties:
+            <i className="fa-solid fa-shield-halved text-[#ea580c]"></i> Role-Based Access Governance:
           </div>
           Compliance Officers and Department Champions are restricted from modifying tenant access controls to prevent unauthorized privilege escalation.
         </div>
@@ -196,8 +196,8 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
         );
       case 'corporate_admin':
         return (
-          <span className="inline-flex items-center gap-1.5 text-[10px] font-bold bg-emerald-50 text-emerald-900 border border-emerald-300 px-2.5 py-0.5 rounded-full">
-            <i className="fa-solid fa-building text-[9px] text-emerald-600"></i> Corporate Admin
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-bold bg-orange-50 text-orange-900 border border-orange-200 px-2.5 py-0.5 rounded-full">
+            <i className="fa-solid fa-building text-[9px] text-[#ea580c]"></i> Corporate Admin
           </span>
         );
       case 'compliance_officer':
@@ -328,7 +328,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
               className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 ${
                 editingUser.is_active
                   ? 'bg-amber-50 hover:bg-amber-100 border-amber-200 text-amber-800'
-                  : 'bg-emerald-50 hover:bg-emerald-100 border-emerald-200 text-emerald-800'
+                  : 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
               }`}
             >
               <i className={`fa-solid ${editingUser.is_active ? 'fa-ban' : 'fa-check'}`}></i>
@@ -369,9 +369,9 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                     {editingUser.name}
                   </h1>
                   <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-0.5 rounded-full ${
-                    editingUser.is_active ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-800 border border-red-200'
+                    editingUser.is_active ? 'bg-slate-100 text-slate-800 border border-slate-200' : 'bg-red-50 text-red-800 border border-red-200'
                   }`}>
-                    <span className={`w-1.5 h-1.5 rounded-full ${editingUser.is_active ? 'bg-emerald-500' : 'bg-red-500'}`}></span>
+                    <span className={`w-1.5 h-1.5 rounded-full ${editingUser.is_active ? 'bg-[#ea580c]' : 'bg-red-500'}`}></span>
                     {editingUser.is_active ? 'Active Account' : 'Suspended Access'}
                   </span>
                 </div>
@@ -392,7 +392,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
               </div>
               <div className="border-l border-slate-200 pl-3">
                 <div className="text-[10px] text-slate-400 uppercase font-bold">2FA Security:</div>
-                <div className="text-emerald-700 font-bold">NDPA Enforced</div>
+                <div className="text-[#ea580c] font-bold">Enforced</div>
               </div>
             </div>
           </div>
@@ -408,7 +408,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
             <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs space-y-4">
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                  <i className="fa-solid fa-id-card text-emerald-600"></i>
+                  <i className="fa-solid fa-id-card text-slate-600"></i>
                   <span>Personal & Professional Profile</span>
                 </h3>
                 <span className="text-[10px] text-slate-400 uppercase font-bold">Editable</span>
@@ -422,7 +422,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                     required
                     value={editingUser.name}
                     onChange={(e) => setEditingUser({ ...editingUser, name: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-semibold focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-semibold focus:outline-none focus:border-[#ea580c] focus:bg-white transition-colors"
                   />
                 </div>
 
@@ -445,7 +445,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                       placeholder="+234 803 114 2290"
                       value={editingUser.phone || ''}
                       onChange={(e) => setEditingUser({ ...editingUser, phone: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c] focus:bg-white transition-colors"
                     />
                     <span className="text-[10px] text-slate-400 mt-0.5 block">Statutory SMS alerts</span>
                   </div>
@@ -456,7 +456,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                   <select
                     value={editingUser.department || 'Compliance & Risk'}
                     onChange={(e) => setEditingUser({ ...editingUser, department: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-semibold focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-semibold focus:outline-none focus:border-[#ea580c] focus:bg-white transition-colors"
                   >
                     <option value="Compliance & Risk">Compliance & Risk</option>
                     <option value="Information Technology">Information Technology (IT / SecOps)</option>
@@ -477,7 +477,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                   <i className="fa-solid fa-shield-halved text-blue-600"></i>
                   <span>Role & Access Privilege Governance</span>
                 </h3>
-                <span className="text-[10px] text-emerald-700 uppercase font-bold">Admin Authority</span>
+                <span className="text-[10px] text-[#ea580c] uppercase font-bold">Admin Authority</span>
               </div>
 
               <div className="space-y-3.5 text-xs">
@@ -486,7 +486,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                   <select
                     value={editingUser.role}
                     onChange={(e) => setEditingUser({ ...editingUser, role: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-bold focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-bold focus:outline-none focus:border-[#ea580c] focus:bg-white transition-colors"
                   >
                     <option value="corporate_admin">Corporate Admin (Full Org Control)</option>
                     <option value="compliance_officer">Compliance Officer (RoPA, DPIA, DSAR)</option>
@@ -545,7 +545,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                     type="checkbox"
                     checked={editingUser.is_active}
                     onChange={(e) => setEditingUser({ ...editingUser, is_active: e.target.checked })}
-                    className="w-5 h-5 accent-emerald-600 rounded cursor-pointer"
+                    className="w-5 h-5 accent-[#ea580c] rounded cursor-pointer"
                   />
                 </div>
 
@@ -556,7 +556,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                     placeholder="Leave blank to preserve existing password"
                     value={editingUser.new_password || ''}
                     onChange={(e) => setEditingUser({ ...editingUser, new_password: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c] focus:bg-white transition-colors"
                   />
                   <span className="text-[10px] text-slate-400 mt-0.5 block">Minimum 8 characters</span>
                 </div>
@@ -567,11 +567,11 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
             <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs space-y-4">
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                  <i className="fa-solid fa-list-check text-emerald-600"></i>
+                  <i className="fa-solid fa-list-check text-slate-600"></i>
                   <span>Effective Permissions</span>
                 </h3>
-                <span className="text-[10px] font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                  Real-Time
+                <span className="text-[10px] font-mono font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                  Active
                 </span>
               </div>
 
@@ -580,8 +580,8 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                   <div key={idx} className="p-2.5 rounded-xl border border-slate-100 bg-slate-50/60 flex items-center justify-between">
                     <span className="text-slate-800 font-medium">{p.name}</span>
                     {p.allowed ? (
-                      <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full flex items-center gap-1">
-                        <i className="fa-solid fa-check text-[9px]"></i> Granted
+                      <span className="text-[10px] font-bold text-slate-700 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full flex items-center gap-1">
+                        <i className="fa-solid fa-check text-[9px] text-slate-600"></i> Granted
                       </span>
                     ) : (
                       <span className="text-[10px] font-bold text-slate-400 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full flex items-center gap-1">
@@ -610,10 +610,10 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
       {/* Toast Notification */}
       {notification && (
         <div className={`p-4 rounded-2xl border text-xs font-semibold flex items-center justify-between shadow-xs animate-in fade-in ${
-          notification.type === 'success' ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-red-50 border-red-200 text-red-900'
+          notification.type === 'success' ? 'bg-orange-50 border-orange-200 text-orange-950' : 'bg-red-50 border-red-200 text-red-900'
         }`}>
           <div className="flex items-center gap-2">
-            <i className={`fa-solid ${notification.type === 'success' ? 'fa-circle-check text-emerald-600' : 'fa-circle-exclamation text-red-600'}`}></i>
+            <i className={`fa-solid ${notification.type === 'success' ? 'fa-circle-check text-[#ea580c]' : 'fa-circle-exclamation text-red-600'}`}></i>
             <span>{notification.message}</span>
           </div>
           <button onClick={() => setNotification(null)} className="text-slate-400 hover:text-slate-700 font-bold">&times;</button>
@@ -624,11 +624,11 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
       <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-7 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xs">
         <div>
           <div className="flex items-center gap-2 mb-1.5">
-            <span className="text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full font-mono flex items-center gap-1.5">
-              <i className="fa-solid fa-users-gear text-emerald-600 text-[10px]"></i>
-              <span>ADMIN USER & ROLE GOVERNANCE</span>
+            <span className="text-xs font-bold bg-orange-50 text-orange-800 border border-orange-200 px-2.5 py-0.5 rounded-full font-mono flex items-center gap-1.5">
+              <i className="fa-solid fa-users-gear text-[#ea580c] text-[10px]"></i>
+              <span>USER & ACCESS GOVERNANCE</span>
             </span>
-            <span className="text-xs text-slate-500 font-medium">NDPA 2023 RBAC System</span>
+            <span className="text-xs text-slate-500 font-medium">RBAC Security</span>
           </div>
           <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
             User Access & Permissions Desk
@@ -689,7 +689,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
           <div className="text-2xl font-extrabold font-mono text-slate-900 mt-1">
             {summary?.total_users ?? users.length} <span className="text-xs text-slate-400 font-normal">/ {summary?.seat_capacity ?? 25} Seats</span>
           </div>
-          <div className="text-[11px] text-emerald-700 font-semibold mt-1">
+          <div className="text-[11px] text-[#ea580c] font-semibold mt-1">
             {summary?.active_users ?? users.length} Active Accounts
           </div>
         </div>
@@ -697,7 +697,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
         <div className="p-5 bg-white border border-slate-200 rounded-2xl shadow-xs">
           <div className="flex items-center justify-between">
             <span className="text-[10px] text-slate-500 font-bold uppercase">Workspace Administrators</span>
-            <i className="fa-solid fa-building text-emerald-600"></i>
+            <i className="fa-solid fa-building text-[#ea580c]"></i>
           </div>
           <div className="text-2xl font-extrabold font-mono text-slate-900 mt-1">
             {summary?.admins ?? 0}
@@ -720,14 +720,14 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
           <div className="flex items-center justify-between">
             <span className="text-[10px] text-slate-500 font-bold uppercase">Live Audit Stream</span>
             <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#ea580c]"></span>
             </span>
           </div>
           <div className="text-2xl font-extrabold font-mono text-slate-900 mt-1">
             {summary?.total_audit_events ?? auditLogs.length} Events
           </div>
-          <div className="text-[11px] text-emerald-700 font-semibold mt-1">Real-Time Telemetry Active</div>
+          <div className="text-[11px] text-[#ea580c] font-semibold mt-1">Audit Stream Active</div>
         </div>
       </div>
 
@@ -821,7 +821,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                               {u.name.substring(0, 2).toUpperCase()}
                             </div>
                             <div>
-                              <div className="font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">{u.name}</div>
+                              <div className="font-bold text-slate-900 group-hover:text-[#ea580c] transition-colors">{u.name}</div>
                               <div className="text-[11px] text-slate-500">{u.email}</div>
                             </div>
                           </div>
@@ -841,9 +841,9 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
 
                         <td className="py-3.5 px-4 whitespace-nowrap">
                           <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                            u.is_active ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-800 border border-red-200'
+                            u.is_active ? 'bg-slate-100 text-slate-800 border border-slate-200' : 'bg-red-50 text-red-800 border border-red-200'
                           }`}>
-                            <span className={`w-1.5 h-1.5 rounded-full ${u.is_active ? 'bg-emerald-500' : 'bg-red-500'}`}></span>
+                            <span className={`w-1.5 h-1.5 rounded-full ${u.is_active ? 'bg-[#ea580c]' : 'bg-red-500'}`}></span>
                             {u.is_active ? 'Active' : 'Suspended'}
                           </span>
                         </td>
@@ -855,7 +855,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                               title="Open User Detail & Governance Page (Admin Only)"
                               className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 border border-slate-200 font-bold text-[11px] flex items-center gap-1"
                             >
-                              <i className="fa-solid fa-pen-to-square text-xs text-emerald-600"></i>
+                              <i className="fa-solid fa-pen-to-square text-xs text-[#ea580c]"></i>
                               <span>Detail</span>
                             </button>
 
@@ -865,7 +865,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                               className={`p-1.5 rounded-lg border text-xs ${
                                 u.is_active 
                                   ? 'bg-amber-50 hover:bg-amber-100 border-amber-200 text-amber-700' 
-                                  : 'bg-emerald-50 hover:bg-emerald-100 border-emerald-200 text-emerald-700'
+                                  : 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
                               }`}
                             >
                               <i className={`fa-solid ${u.is_active ? 'fa-ban' : 'fa-check'}`}></i>
@@ -898,14 +898,14 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
           <div className="bg-white border border-slate-200 p-4 rounded-2xl flex items-center justify-between shadow-xs">
             <div>
               <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <i className="fa-solid fa-tower-broadcast text-emerald-600"></i>
-                <span>Live Telemetry & Audit Stream</span>
+                <i className="fa-solid fa-tower-broadcast text-[#ea580c]"></i>
+                <span>Live Audit Stream</span>
               </h3>
-              <p className="text-xs text-slate-500 mt-0.5">Chronological immutable audit records of all user and compliance activities.</p>
+              <p className="text-xs text-slate-500 mt-0.5">Chronological audit records of all user and compliance activities.</p>
             </div>
             <button
               onClick={loadAuditLogs}
-              className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center gap-1.5"
+              className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center gap-1.5 cursor-pointer"
             >
               <i className="fa-solid fa-arrows-rotate text-xs"></i>
               <span>Refresh Logs</span>
@@ -924,7 +924,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                     <div className="flex items-start gap-3">
                       <div className="w-8 h-8 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">
                         <i className={`fa-solid ${
-                          log.action.includes('user') ? 'fa-user-shield text-emerald-600' :
+                          log.action.includes('user') ? 'fa-user-shield text-[#ea580c]' :
                           log.action.includes('ropa') ? 'fa-file-shield text-blue-600' :
                           log.action.includes('dpia') ? 'fa-shield-halved text-purple-600' :
                           log.action.includes('breach') ? 'fa-triangle-exclamation text-amber-600' :
@@ -965,8 +965,8 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
         <div className="space-y-4">
           <div className="bg-white border border-slate-200 p-4 rounded-2xl shadow-xs">
             <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-              <i className="fa-solid fa-table-cells text-emerald-600"></i>
-              <span>NDPA 2023 Statutory Role-Based Access Matrix (8 Personas)</span>
+              <i className="fa-solid fa-table-cells text-[#ea580c]"></i>
+              <span>Role-Based Access Matrix</span>
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">
               Granular permission allocation enforcing strict separation of duties across controllers, DPOs, and DPCO auditors.
@@ -993,7 +993,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                       <td className="py-3.5 px-4 text-slate-600 leading-relaxed max-w-sm">
                         {r.description}
                       </td>
-                      <td className="py-3.5 px-4 font-mono font-bold text-emerald-700 whitespace-nowrap">
+                      <td className="py-3.5 px-4 font-mono font-bold text-slate-800 whitespace-nowrap">
                         {r.active_user_count} Users
                       </td>
                       <td className="py-3.5 px-4 text-[11px] text-slate-500">
@@ -1017,7 +1017,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
           <div className="w-full max-w-lg bg-white border border-slate-200 rounded-3xl p-6 shadow-2xl space-y-4">
             <div className="flex items-center justify-between border-b border-slate-200 pb-3">
               <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <i className="fa-solid fa-user-plus text-emerald-600"></i>
+                <i className="fa-solid fa-user-plus text-[#ea580c]"></i>
                 <span>Provision New User Account</span>
               </h3>
               <button onClick={() => setShowInviteModal(false)} className="text-slate-400 hover:text-slate-700">
@@ -1034,7 +1034,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                   placeholder="e.g. Babatunde Lawal"
                   value={inviteForm.name}
                   onChange={(e) => setInviteForm({ ...inviteForm, name: e.target.value })}
-                  className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
+                  className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c]"
                 />
               </div>
 
@@ -1046,7 +1046,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                   placeholder="b.lawal@organization.ng"
                   value={inviteForm.email}
                   onChange={(e) => setInviteForm({ ...inviteForm, email: e.target.value })}
-                  className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
+                  className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c]"
                 />
               </div>
 
@@ -1056,7 +1056,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                   <select
                     value={inviteForm.role}
                     onChange={(e) => setInviteForm({ ...inviteForm, role: e.target.value })}
-                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
+                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c]"
                   >
                     <option value="corporate_admin">Corporate Admin</option>
                     <option value="compliance_officer">Compliance Officer</option>
@@ -1078,7 +1078,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                   <select
                     value={inviteForm.department}
                     onChange={(e) => setInviteForm({ ...inviteForm, department: e.target.value })}
-                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
+                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c]"
                   >
                     <option value="Compliance & Risk">Compliance & Risk</option>
                     <option value="Information Technology">Information Technology</option>
@@ -1098,7 +1098,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                     placeholder="+234 803 114 2290"
                     value={inviteForm.phone}
                     onChange={(e) => setInviteForm({ ...inviteForm, phone: e.target.value })}
-                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
+                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c]"
                   />
                 </div>
                 <div>
@@ -1108,7 +1108,7 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                     required
                     value={inviteForm.password}
                     onChange={(e) => setInviteForm({ ...inviteForm, password: e.target.value })}
-                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
+                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c]"
                   />
                 </div>
               </div>
@@ -1117,13 +1117,13 @@ export default function AdminUserDesk({ currentUser, onRefreshMetrics }) {
                 <button
                   type="button"
                   onClick={() => setShowInviteModal(false)}
-                  className="px-4 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl text-xs font-bold"
+                  className="px-4 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl text-xs font-bold cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold shadow-xs"
+                  className="px-4 py-2 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer transition-colors"
                 >
                   Provision User Access
                 </button>

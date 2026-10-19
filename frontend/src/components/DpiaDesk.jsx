@@ -91,7 +91,7 @@ export default function DpiaDesk({ onRefreshMetrics }) {
       case 'medium':
         return <span className="text-[11px] bg-yellow-50 text-yellow-800 border border-yellow-200 px-2 py-0.5 rounded-full font-bold font-mono">MEDIUM RISK</span>;
       default:
-        return <span className="text-[11px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded-full font-bold font-mono">LOW RESIDUAL</span>;
+        return <span className="text-[11px] bg-slate-100 text-slate-800 border border-slate-200 px-2 py-0.5 rounded-full font-bold font-mono">LOW RESIDUAL</span>;
     }
   };
 
@@ -100,7 +100,7 @@ export default function DpiaDesk({ onRefreshMetrics }) {
       {/* Toast Notification */}
       {notification && (
         <div className={`p-4 rounded-2xl flex items-center justify-between text-xs font-semibold shadow-xs ${
-          notification.type === 'success' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-800 border border-red-200'
+          notification.type === 'success' ? 'bg-orange-50 text-orange-900 border border-orange-200' : 'bg-red-50 text-red-800 border border-red-200'
         }`}>
           <span>{notification.message}</span>
           <button onClick={() => setNotification(null)} className="text-slate-400 hover:text-slate-700 font-bold">&times;</button>
@@ -111,19 +111,19 @@ export default function DpiaDesk({ onRefreshMetrics }) {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Data Protection Impact Assessments (DPIA)</h2>
-            <span className="text-[11px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded font-mono font-bold">
-              NDPA SEC 28
+            <h2 className="text-xl font-bold text-slate-900 tracking-tight">Data Protection Impact Assessments (DPIA)</h2>
+            <span className="text-[11px] bg-orange-50 text-[#ea580c] border border-orange-200 px-2 py-0.5 rounded font-sans font-bold">
+              Risk Assessment
             </span>
           </div>
-          <p className="text-xs text-slate-600 mt-0.5">
+          <p className="text-xs text-slate-500 mt-0.5">
             5×5 Risk matrix evaluation, automated screening triggers, and formal DPO/DPCO sign-off seals.
           </p>
         </div>
 
         <button
           onClick={() => setShowCreateModal(true)}
-          className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs"
+          className="px-4 py-2 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs"
         >
           <i className="fa-solid fa-plus text-xs"></i>
           <span>New DPIA Assessment</span>
@@ -145,12 +145,12 @@ export default function DpiaDesk({ onRefreshMetrics }) {
             <div
               key={dpia.id}
               onClick={() => setSelectedDpia(dpia)}
-              className="bg-white border border-slate-200 hover:border-emerald-500/80 rounded-3xl p-5 cursor-pointer transition-all shadow-xs space-y-4 group"
+              className="bg-white border border-slate-200 hover:border-[#ea580c]/60 rounded-3xl p-5 cursor-pointer transition-all shadow-xs space-y-4 group"
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <span className="text-[10px] font-mono text-slate-500 uppercase font-bold">DPIA #{dpia.id.substring(0, 8)}</span>
-                  <h3 className="text-base font-bold text-slate-900 group-hover:text-emerald-800 transition-colors mt-0.5">
+                  <h3 className="text-base font-bold text-slate-900 group-hover:text-[#ea580c] transition-colors mt-0.5">
                     {dpia.title}
                   </h3>
                 </div>
@@ -173,11 +173,11 @@ export default function DpiaDesk({ onRefreshMetrics }) {
 
                 <div className="border-l border-slate-200 pl-3">
                   <div className="text-[10px] text-slate-500 font-bold uppercase">Residual Risk (Post-Control)</div>
-                  <div className="text-sm font-mono font-extrabold text-emerald-700 mt-0.5">
+                  <div className="text-sm font-mono font-extrabold text-slate-900 mt-0.5">
                     {dpia.residual_risk_score} / 25
                   </div>
-                  <div className="text-[10px] text-emerald-800 font-bold mt-0.5 flex items-center gap-1">
-                    <i className="fa-solid fa-shield-check text-emerald-600 text-xs"></i>
+                  <div className="text-[10px] text-slate-700 font-bold mt-0.5 flex items-center gap-1">
+                    <i className="fa-solid fa-shield-check text-[#ea580c] text-xs"></i>
                     <span>Safeguards Applied</span>
                   </div>
                 </div>
@@ -187,9 +187,9 @@ export default function DpiaDesk({ onRefreshMetrics }) {
               <div className="flex items-center justify-between text-xs pt-1 border-t border-slate-100">
                 <span className="text-slate-500">Sign-off Status:</span>
                 <span className={`font-semibold capitalize flex items-center gap-1.5 ${
-                  dpia.dpo_sign_off_status === 'approved' ? 'text-emerald-700 font-bold' : 'text-amber-700 font-bold'
+                  dpia.dpo_sign_off_status === 'approved' ? 'text-slate-900 font-bold' : 'text-amber-700 font-bold'
                 }`}>
-                  <i className={`fa-solid ${dpia.dpo_sign_off_status === 'approved' ? 'fa-stamp text-emerald-600' : 'fa-clock text-amber-600'} text-xs`}></i>
+                  <i className={`fa-solid ${dpia.dpo_sign_off_status === 'approved' ? 'fa-stamp text-[#ea580c]' : 'fa-clock text-amber-600'} text-xs`}></i>
                   <span>{dpia.dpo_sign_off_status === 'approved' ? 'DPO Approved & Sealed' : 'Pending Review'}</span>
                 </span>
               </div>
@@ -205,7 +205,7 @@ export default function DpiaDesk({ onRefreshMetrics }) {
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-slate-200">
                 <div>
-                  <span className="text-[10px] font-mono uppercase bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded border border-emerald-200 font-bold">
+                  <span className="text-[10px] font-mono uppercase bg-slate-100 text-slate-800 px-2 py-0.5 rounded border border-slate-200 font-bold">
                     DPIA Assessment Review
                   </span>
                   <h3 className="text-lg font-bold text-slate-900 mt-1">{selectedDpia.title}</h3>
@@ -242,8 +242,8 @@ export default function DpiaDesk({ onRefreshMetrics }) {
                   <label className="text-slate-600 font-bold block mb-1">Applied Technical & Organizational Safeguards:</label>
                   <div className="space-y-1">
                     {selectedDpia.mitigation_measures?.map((m, i) => (
-                      <div key={i} className="p-2 bg-emerald-50 text-emerald-900 border border-emerald-200 rounded-lg flex items-center gap-2 font-medium">
-                        <i className="fa-solid fa-circle-check text-emerald-600 text-xs"></i>
+                      <div key={i} className="p-2 bg-slate-50 text-slate-900 border border-slate-200 rounded-lg flex items-center gap-2 font-medium">
+                        <i className="fa-solid fa-circle-check text-[#ea580c] text-xs"></i>
                         <span>{m}</span>
                       </div>
                     ))}
@@ -261,22 +261,22 @@ export default function DpiaDesk({ onRefreshMetrics }) {
                     </div>
                     <div>
                       <div className="text-[10px] text-slate-500 uppercase font-bold">Residual Risk Score</div>
-                      <div className="text-xl font-extrabold font-mono text-emerald-700">{selectedDpia.residual_risk_score} / 25</div>
+                      <div className="text-xl font-extrabold font-mono text-slate-900">{selectedDpia.residual_risk_score} / 25</div>
                       <div className="text-[10px] text-slate-600">Likelihood: {selectedDpia.residual_likelihood} &bull; Impact: {selectedDpia.residual_impact}</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Digital Signature & Seal */}
-                <div className="p-4 bg-purple-50/70 border border-purple-200 rounded-2xl text-xs space-y-1.5">
-                  <div className="font-bold text-purple-950 flex items-center gap-1.5">
-                    <i className="fa-solid fa-stamp text-purple-700"></i>
+                <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl text-xs space-y-1.5">
+                  <div className="font-bold text-slate-900 flex items-center gap-1.5">
+                    <i className="fa-solid fa-stamp text-[#ea580c]"></i>
                     <span>DPO & DPCO Statutory Digital Seal</span>
                   </div>
-                  <div className="text-[11px] text-purple-900 font-mono">
+                  <div className="text-[11px] text-slate-600 font-mono">
                     SHA-256: 8f9b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b
                   </div>
-                  <div className="text-[10px] text-purple-700">
+                  <div className="text-[10px] text-slate-500">
                     Timestamp: {selectedDpia.dpo_signed_off_at || 'March 2027'} &bull; Verified under NDPC Framework
                   </div>
                 </div>
@@ -297,7 +297,7 @@ export default function DpiaDesk({ onRefreshMetrics }) {
                 </button>
                 <button
                   onClick={() => handleSignOff(selectedDpia.id, 'approved')}
-                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-xs"
+                  className="px-4 py-2 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl text-xs font-bold shadow-xs"
                 >
                   Sign & Approve DPIA
                 </button>
@@ -327,7 +327,7 @@ export default function DpiaDesk({ onRefreshMetrics }) {
                   placeholder="e.g. AI-Powered Facial KYC & Biometric Verification Pipeline"
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
+                  className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c]"
                 />
               </div>
 
@@ -339,7 +339,7 @@ export default function DpiaDesk({ onRefreshMetrics }) {
                   placeholder="Describe the processing operation and risks to data subjects..."
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
+                  className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c]"
                 />
               </div>
 
@@ -378,7 +378,7 @@ export default function DpiaDesk({ onRefreshMetrics }) {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold shadow-xs"
+                  className="px-4 py-2 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl text-xs font-bold shadow-xs"
                 >
                   Save Assessment
                 </button>

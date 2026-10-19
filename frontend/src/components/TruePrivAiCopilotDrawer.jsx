@@ -185,10 +185,10 @@ export default function TruePrivAiCopilotDrawer({ isOpen, onClose }) {
                     Statutory Compliance Score
                   </div>
                   <div className="flex items-baseline gap-2 mt-1">
-                    <span className="text-3xl font-black font-mono text-emerald-400">
+                    <span className="text-3xl font-black font-mono text-orange-400">
                       {scanResult?.score ? `${scanResult.score}%` : '85%'}
                     </span>
-                    <span className="text-xs text-emerald-500 font-bold">
+                    <span className="text-xs text-orange-400 font-bold">
                       NDPA Verified
                     </span>
                   </div>
@@ -200,7 +200,7 @@ export default function TruePrivAiCopilotDrawer({ isOpen, onClose }) {
                 <button
                   disabled={scanning}
                   onClick={handleRunScan}
-                  className="px-4 py-2 bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-500 hover:to-indigo-500 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg disabled:opacity-50 transition-all cursor-pointer"
+                  className="px-4 py-2 bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-500 hover:from-indigo-500 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg disabled:opacity-50 transition-all cursor-pointer"
                 >
                   <i className={`fa-solid fa-arrows-rotate ${scanning ? 'animate-spin' : ''}`}></i>
                   <span>{scanning ? 'Analyzing Desks...' : 'Re-Run AI Scan'}</span>
@@ -224,7 +224,7 @@ export default function TruePrivAiCopilotDrawer({ isOpen, onClose }) {
                   </div>
                   <div className="p-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-center">
                     <div className="text-[10px] text-slate-500 font-bold">Proofs</div>
-                    <div className="text-sm font-black font-mono text-emerald-400 mt-0.5">{scanResult.metrics_summary.consents_logged}</div>
+                    <div className="text-sm font-black font-mono text-orange-400 mt-0.5">{scanResult.metrics_summary.consents_logged}</div>
                   </div>
                 </div>
               )}
@@ -246,7 +246,7 @@ export default function TruePrivAiCopilotDrawer({ isOpen, onClose }) {
                         ? 'bg-amber-950/30 border-amber-800/50 text-amber-200'
                         : f.severity === 'medium'
                         ? 'bg-sky-950/30 border-sky-800/50 text-sky-200'
-                        : 'bg-emerald-950/20 border-emerald-800/40 text-emerald-200'
+                        : 'bg-orange-950/20 border-orange-800/40 text-orange-200'
                     }`}
                   >
                     <div className="flex items-center justify-between font-bold">
@@ -255,7 +255,7 @@ export default function TruePrivAiCopilotDrawer({ isOpen, onClose }) {
                           f.severity === 'critical' ? 'bg-red-500/20 text-red-400 border border-red-500/40' :
                           f.severity === 'high' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/40' :
                           f.severity === 'medium' ? 'bg-sky-500/20 text-sky-400 border border-sky-500/40' :
-                          'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
+                          'bg-orange-500/20 text-orange-400 border border-orange-500/40'
                         }`}>
                           {f.severity}
                         </span>
@@ -404,7 +404,7 @@ export default function TruePrivAiCopilotDrawer({ isOpen, onClose }) {
                     <div key={item.id} className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-xs space-y-1">
                       <div className="flex items-center justify-between font-bold">
                         <span className="text-sky-400 font-mono uppercase text-[10px]">{item.decision_type}</span>
-                        <span className="text-emerald-400 text-[10px] bg-emerald-950/80 border border-emerald-800 px-2 py-0.5 rounded font-mono">
+                        <span className="text-orange-400 text-[10px] bg-orange-950/80 border border-orange-800 px-2 py-0.5 rounded font-mono">
                           Verified (Conf: {item.confidence_score * 100}%)
                         </span>
                       </div>

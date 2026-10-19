@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import ExecutiveDashboard from './components/ExecutiveDashboard';
 import AdminUserDesk from './components/AdminUserDesk';          // M1: RBAC
@@ -10,6 +9,13 @@ import AuthModal from './components/AuthModal';                  // M2: Login/Re
 import MyProfileDetailDesk from './components/MyProfileDetailDesk'; // M2: Profile Types
 import PortfolioDesk from './components/PortfolioDesk';          // M2: DPO & DPCO Portals (PDF Sec 10)
 import DataResidencyCard from './components/DataResidencyCard';  // M3: Data Residency (PDF Sec 11)
+import RopaDesk from './components/RopaDesk';                    // M2/M3: Processing
+import VendorDesk from './components/VendorDesk';                // M2/M3: Vendors
+import DsarDesk from './components/DsarDesk';
+import BreachDesk from './components/BreachDesk';
+import DpiaDesk from './components/DpiaDesk';
+import ModulePreviewDesk from './components/ModulePreviewDesk';  // TruePriv Screens
+import SubscriptionBillingModal from './components/SubscriptionBillingModal'; // Milestone 4: Subscriptions & Billing
 import { api, getAuthToken, removeAuthToken, setActiveTenantId } from './lib/api';
 
 export default function App() {
@@ -17,9 +23,12 @@ export default function App() {
   const [tenant, setTenant] = useState(null);
   const [accessibleClients, setAccessibleClients] = useState([]);
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [settingsSubTab, setSettingsSubTab] = useState('users');
   const [metrics, setMetrics] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const initApp = async () => {
     setLoading(true);
@@ -44,7 +53,6 @@ export default function App() {
           if (pRes && pRes.success) {
             setAccessibleClients(pRes.clients);
           }
-          setActiveTab('portfolio-desk');
         }
 
         // Fetch dashboard metrics
@@ -77,29 +85,12 @@ export default function App() {
     initApp();
   }, []);
 
-  // Auto-redirect guarded tabs if user does not have permission
-  useEffect(() => {
-    if (user) {
-      const isAdmin = ['super_admin', 'corporate_admin'].includes(user.role);
-      const isDpoOrDpco = ['outsourced_dpo', 'dpco_firm', 'dpco_lead_auditor', 'dpco_staff'].includes(tenant?.type || user.role);
-
-      if (!isAdmin && activeTab === 'admin-users') {
-        setActiveTab(isDpoOrDpco ? 'portfolio-desk' : 'dashboard');
-      }
-      if (user.role !== 'super_admin' && activeTab === 'data-residency') {
-        setActiveTab(isDpoOrDpco ? 'portfolio-desk' : 'dashboard');
-      }
-    }
-  }, [user, activeTab, tenant]);
-
   const handleLoginSuccess = (loggedInUser, loggedInTenant, clients = []) => {
     setUser(loggedInUser);
     setTenant(loggedInTenant);
     setAccessibleClients(clients);
     setShowAuthModal(false);
-
-    const isDpoOrDpco = ['outsourced_dpo', 'dpco_firm', 'dpco_lead_auditor', 'dpco_staff'].includes(loggedInTenant?.type || loggedInUser?.role);
-    setActiveTab(isDpoOrDpco ? 'portfolio-desk' : 'dashboard');
+    setActiveTab('dashboard');
     refreshMetrics();
   };
 
@@ -111,8 +102,7 @@ export default function App() {
       if (meRes.success) {
         setTenant(meRes.tenant);
         await refreshMetrics();
-        const isDpoOrDpco = ['outsourced_dpo', 'dpco_firm', 'dpco_lead_auditor', 'dpco_staff'].includes(meRes.tenant?.type || meRes.user.role);
-        setActiveTab(isDpoOrDpco ? 'portfolio-desk' : 'dashboard');
+        setActiveTab('dashboard');
       }
     } catch (err) {
       console.error('Failed to switch tenant context:', err);
@@ -132,9 +122,7 @@ export default function App() {
     setShowAuthModal(true);
   };
 
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-
-  // Standalone Public Champion Intake Portal (Bypasses Admin Login)
+  // Standalone Public Champion Intake Portal
   const urlParams = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
   const intakeToken = urlParams.get('token');
   const isChampionIntakeRoute = typeof window !== 'undefined' && (
@@ -148,88 +136,120 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center text-slate-700 space-y-3">
-        <div className="w-10 h-10 rounded-xl border-2 border-emerald-600 border-t-transparent animate-spin" />
-        <div className="text-xs font-mono tracking-wider text-slate-500">Loading Truepriv Platform...</div>
+      <div className="min-h-screen bg-[#f8fafc] flex flex-col items-center justify-center text-slate-700 space-y-3">
+        <div className="w-9 h-9 rounded-xl border-2 border-[#ea580c] border-t-transparent animate-spin" />
+        <div className="text-xs font-mono tracking-wider text-slate-500">Loading TruePriv Workspace...</div>
       </div>
     );
   }
 
-  // Standalone Full-Screen 2-Column Authentication Page (Matches User's Mockup)
   if (!user || showAuthModal) {
     return <AuthModal onLoginSuccess={handleLoginSuccess} />;
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col selection:bg-emerald-500 selection:text-white">
-      {/* Top Navigation — M1-M3 */}
-      <Header
-        user={user}
+    <div className="min-h-screen bg-[#f8fafc] text-slate-900 flex antialiased">
+      
+      {/* 1. Left Sidebar Navigation (Matches TruePriv Screenshot) */}
+      <Sidebar
+        activeTab={activeTab}
+        onTabChange={(tabId) => {
+          if (tabId === 'billing') {
+            setShowSubscriptionModal(true);
+            return;
+          }
+          setActiveTab(tabId);
+        }}
         tenant={tenant}
+        user={user}
         accessibleClients={accessibleClients}
         onSwitchTenant={handleSwitchTenant}
         onLogout={handleLogout}
-        onOpenChampions={() => setActiveTab('champions-desk')} // M3: Guest Invitations
-        onOpenProfile={() => setActiveTab('my-profile')}       // M2: Profile
-        isSidebarCollapsed={sidebarCollapsed}
-        onToggleSidebar={() => setSidebarCollapsed(!sidebarCollapsed)}
+        isCollapsed={sidebarCollapsed}
+        onToggle={() => setSidebarCollapsed(!sidebarCollapsed)}
       />
 
-      {/* Main Layout */}
-      <div className="flex flex-1">
-        {/* Side Navigation */}
-        <Sidebar
-          activeTab={activeTab}
-          onTabChange={setActiveTab}
-          tenantType={tenant?.type}
-          userRole={user?.role}
-          metrics={metrics}
-          isCollapsed={sidebarCollapsed}
-          onToggle={() => setSidebarCollapsed(!sidebarCollapsed)}
-        />
+      {/* 2. Main Content Workspace */}
+      <div className="flex-1 flex flex-col min-w-0 min-h-screen overflow-x-hidden">
+        
+        {/* Mobile Top Toggle Header (hidden on desktop) */}
+        <div className="md:hidden bg-white border-b border-slate-200/90 px-4 py-3 flex items-center justify-between sticky top-0 z-10">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+              className="p-1.5 text-slate-500 hover:text-slate-900 rounded-lg hover:bg-slate-50"
+            >
+              <i className="fa-solid fa-bars text-sm"></i>
+            </button>
+            <span className="text-sm font-bold text-slate-900">TruePriv</span>
+          </div>
+          <span className="text-xs font-medium text-slate-500 truncate max-w-[150px]">
+            {tenant?.name || 'DPCO TEST ACCOUNT'}
+          </span>
+        </div>
 
-        {/* Dynamic Main Workspace Content */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
-          {/* M2: Dashboard Structures */}
-          {activeTab === 'dashboard' && (
+        {/* Workspace Top Bar (With Subscription & Plan Action) */}
+        <div className="bg-white border-b border-slate-200/90 px-4 sm:px-8 py-3.5 flex items-center justify-between sticky top-0 z-10">
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-bold text-slate-800 hidden sm:inline">Workspace:</span>
+            <span className="text-xs font-semibold text-slate-900 bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-lg">
+              {tenant?.name || 'APEX MICROFINANCE BANK NIGERIA'}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setShowSubscriptionModal(true)}
+              className="px-3.5 py-1.5 rounded-xl bg-orange-50 hover:bg-orange-100 text-[#ea580c] border border-orange-200 text-xs font-bold flex items-center gap-2 transition-all shadow-2xs cursor-pointer"
+            >
+              <i className="fa-solid fa-credit-card"></i>
+              <span>Subscription & Plans</span>
+              <span className="px-1.5 py-0.2 bg-[#ea580c] text-white rounded text-[10px] font-mono">
+                365-Day Plan
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* Dynamic Workspace Container */}
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
+          
+          {/* A. Overview (Exact Client Screenshot Match) */}
+          {(activeTab === 'dashboard' || activeTab === 'overview') && (
             <ExecutiveDashboard
               metrics={metrics}
               userRole={user?.role}
               tenantType={tenant?.type}
+              tenant={tenant}
               onNavigate={setActiveTab}
             />
           )}
 
-          {/* M1+M3: User & Role Management + RBAC */}
-          {activeTab === 'admin-users' && (
-            <AdminUserDesk currentUser={user} onRefreshMetrics={refreshMetrics} />
-          )}
-
-          {/* M3: Audit Logging Foundation */}
-          {activeTab === 'audit-logs' && (
-            <AuditDesk onRefreshMetrics={refreshMetrics} />
-          )}
-
-          {/* M3: Guest Invitations (Champions) */}
-          {activeTab === 'champions-desk' && (
-            <ChampionInviteModal
-              onNavigateBack={() => setActiveTab('dashboard')}
-            />
-          )}
-
-          {/* M2: Profile Types */}
-          {activeTab === 'my-profile' && (
-            <MyProfileDetailDesk
-              user={user}
+          {/* B. My work */}
+          {activeTab === 'work' && (
+            <ModulePreviewDesk
+              moduleKey="work"
+              title="My work & Actions"
+              subtitle="See the tasks, assessments, and statutory deadlines that need your attention."
+              badge="Work Queue"
               tenant={tenant}
-              onUpdateUser={(updatedUser) => {
-                setUser(updatedUser);
-              }}
-              onNavigateBack={() => setActiveTab('dashboard')}
+              onNavigate={setActiveTab}
             />
           )}
 
-          {/* M2: DPO & DPCO Multi-Client Portfolio Workspace (PDF Sec 10) */}
+          {/* C. Calendar */}
+          {activeTab === 'calendar' && (
+            <ModulePreviewDesk
+              moduleKey="calendar"
+              title="Compliance Calendar"
+              subtitle="Track statutory audit deadlines, recurring review cycles, and guest token expirations."
+              badge="Schedule"
+              tenant={tenant}
+              onNavigate={setActiveTab}
+            />
+          )}
+
+          {/* D. Client portfolio (M2: DPO & DPCO Console) */}
           {activeTab === 'portfolio-desk' && (
             <PortfolioDesk
               onSwitchTenant={handleSwitchTenant}
@@ -238,30 +258,245 @@ export default function App() {
             />
           )}
 
-          {/* M3: Data Residency & Sovereign Node Control (PDF Sec 11) — Reserved for Super Admin */}
-          {activeTab === 'data-residency' && (
-            user?.role === 'super_admin' ? (
-              <div className="space-y-6">
-                <div className="border-b border-slate-200 pb-4">
-                  <h2 className="text-xl font-black text-slate-900">Data Residency & Sovereign Node Deployment</h2>
-                  <p className="text-xs text-slate-500 mt-1">Configure in-country data localization, encryption standards, and cross-border statutory nodes as specified in PDF Section 11.</p>
-                </div>
-                <DataResidencyCard onResidencyChanged={() => refreshMetrics()} />
-              </div>
-            ) : (
-              <div className="bg-white border border-slate-200 rounded-3xl p-8 text-center max-w-2xl mx-auto my-8 shadow-xs">
-                <div className="w-16 h-16 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center mx-auto mb-4 text-2xl">
-                  <i className="fa-solid fa-lock"></i>
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 tracking-tight">Access Restricted: Super Admin Required</h3>
-                <p className="text-xs text-slate-600 mt-2 leading-relaxed">
-                  Platform Data Residency node controls are strictly reserved for <strong>Super Administrator</strong> accounts.
-                </p>
-              </div>
-            )
+          {/* E. Processing activities (RoPA) */}
+          {activeTab === 'processing' && (
+            <RopaDesk onRefreshMetrics={refreshMetrics} />
           )}
+
+          {/* F. Systems */}
+          {activeTab === 'systems' && (
+            <ModulePreviewDesk
+              moduleKey="systems"
+              title="Systems & Data Assets"
+              subtitle="Maintain systems, servers, and data repositories used across your processing records."
+              badge="Asset Inventory"
+              tenant={tenant}
+              onNavigate={setActiveTab}
+            />
+          )}
+
+          {/* G. Vendors */}
+          {activeTab === 'vendors' && (
+            <VendorDesk onRefreshMetrics={refreshMetrics} />
+          )}
+
+          {/* H. Transfers */}
+          {activeTab === 'transfers' && (
+            <ModulePreviewDesk
+              moduleKey="transfers"
+              title="International Data Transfers"
+              subtitle="Assess cross-border personal data transfers and document legal safeguards under NDPA Section 41–43."
+              badge="Cross-Border"
+              tenant={tenant}
+              onNavigate={setActiveTab}
+            />
+          )}
+
+          {/* I. Contracts */}
+          {activeTab === 'contracts' && (
+            <ModulePreviewDesk
+              moduleKey="contracts"
+              title="Privacy Contracts & DPAs"
+              subtitle="Track data processing addendums, processor agreements, and privacy clauses."
+              badge="Agreements"
+              tenant={tenant}
+              onNavigate={setActiveTab}
+            />
+          )}
+
+          {/* J. Assessments Group */}
+          {activeTab === 'dpia' && (
+            <DpiaDesk onRefreshMetrics={refreshMetrics} />
+          )}
+          {activeTab === 'lia' && (
+            <ModulePreviewDesk
+              moduleKey="lia"
+              title="Legitimate Interest Assessment (LIA)"
+              subtitle="Evaluate necessity, proportionality, and balancing tests before relying on legitimate interests."
+              badge="Assessment"
+              tenant={tenant}
+              onNavigate={setActiveTab}
+            />
+          )}
+          {activeTab === 'tia' && (
+            <ModulePreviewDesk
+              moduleKey="tia"
+              title="Transfer Impact Assessment (TIA)"
+              subtitle="Assess destination country adequacy, supplementary measures, and third-party access risks."
+              badge="Cross-Border"
+              tenant={tenant}
+              onNavigate={setActiveTab}
+            />
+          )}
+          {activeTab === 'vra' && (
+            <ModulePreviewDesk
+              moduleKey="vra"
+              title="Vendor Risk Assessment (VRA)"
+              subtitle="Evaluate third-party processor security safeguards, DPAs, and compliance posture."
+              badge="Vendor Risk"
+              tenant={tenant}
+              onNavigate={setActiveTab}
+            />
+          )}
+
+          {/* K. Respond Group */}
+          {activeTab === 'dsar' && (
+            <DsarDesk onRefreshMetrics={refreshMetrics} />
+          )}
+          {activeTab === 'breach' && (
+            <BreachDesk onRefreshMetrics={refreshMetrics} />
+          )}
+          {activeTab === 'regulatory-filings' && (
+            <ModulePreviewDesk
+              moduleKey="reports"
+              title="Regulatory Filings & CAR Desk"
+              subtitle="Prepare validated compliance packages, DPCO audit returns, and statutory NDPC filings."
+              badge="Statutory"
+              tenant={tenant}
+              onNavigate={setActiveTab}
+            />
+          )}
+
+          {/* L. Improve Group */}
+          {['risks', 'controls', 'actions', 'evidence', 'audits', 'training', 'dpo-prog'].includes(activeTab) && (
+            <ModulePreviewDesk
+              moduleKey={activeTab === 'actions' ? 'work' : 'systems'}
+              title={
+                activeTab === 'risks' ? 'Privacy Risk Register' :
+                activeTab === 'controls' ? 'Technical & Organizational Controls' :
+                activeTab === 'actions' ? 'Remediation Actions & Tasks' :
+                activeTab === 'evidence' ? 'Compliance Evidence Vault' :
+                activeTab === 'audits' ? 'Statutory Audit Fieldwork' :
+                activeTab === 'training' ? 'Staff Training & Acknowledgements' : 'DPO Advisory Programme'
+              }
+              subtitle="NDPA compliance governance and operational remediation tracking."
+              badge="Governance"
+              tenant={tenant}
+              onNavigate={setActiveTab}
+            />
+          )}
+
+          {/* M. Consultancy Group */}
+          {activeTab === 'prospects' && (
+            <ModulePreviewDesk
+              moduleKey="work"
+              title="Client Prospects & Pre-Onboarding"
+              subtitle="Assess potential clients, send questionnaire invitations, and evaluate initial tier classification."
+              badge="Consultancy"
+              tenant={tenant}
+              onNavigate={setActiveTab}
+            />
+          )}
+
+          {/* N. Reports */}
+          {activeTab === 'reports' && (
+            <ModulePreviewDesk
+              moduleKey="reports"
+              title="Reports & Executive Analytics"
+              subtitle="Generate executive privacy summaries, statutory RoPA exports, and evidence bundles."
+              badge="Reporting"
+              tenant={tenant}
+              onNavigate={setActiveTab}
+            />
+          )}
+
+          {/* K. Settings (M1-M3: Users, RBAC, Audit Logs, Guest Links, Data Residency) */}
+          {activeTab === 'settings' && (
+            <div className="space-y-6">
+              
+              {/* Settings Navigation Tabs */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200/90 pb-3">
+                <div>
+                  <h1 className="text-xl font-bold tracking-tight text-slate-900">Workspace Settings & Governance</h1>
+                  <p className="text-xs text-slate-500 mt-1">Configure staff access, review security audit trails, and manage tenant preferences.</p>
+                </div>
+
+                <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl text-xs font-medium self-start sm:self-auto">
+                  <button
+                    onClick={() => setSettingsSubTab('users')}
+                    className={`px-3 py-1.5 rounded-lg transition-all ${
+                      settingsSubTab === 'users' ? 'bg-white text-slate-900 font-bold shadow-2xs' : 'text-slate-600 hover:text-slate-900'
+                    }`}
+                  >
+                    <i className="fa-solid fa-users-gear mr-1.5 text-slate-500"></i> Users & Roles
+                  </button>
+                  <button
+                    onClick={() => setSettingsSubTab('audit')}
+                    className={`px-3 py-1.5 rounded-lg transition-all ${
+                      settingsSubTab === 'audit' ? 'bg-white text-slate-900 font-bold shadow-2xs' : 'text-slate-600 hover:text-slate-900'
+                    }`}
+                  >
+                    <i className="fa-solid fa-shield-halved mr-1.5 text-slate-500"></i> Audit Logs
+                  </button>
+                  <button
+                    onClick={() => setSettingsSubTab('guests')}
+                    className={`px-3 py-1.5 rounded-lg transition-all ${
+                      settingsSubTab === 'guests' ? 'bg-white text-slate-900 font-bold shadow-2xs' : 'text-slate-600 hover:text-slate-900'
+                    }`}
+                  >
+                    <i className="fa-solid fa-user-plus mr-1.5 text-slate-500"></i> Guest Links
+                  </button>
+                  {user?.role === 'super_admin' && (
+                    <button
+                      onClick={() => setSettingsSubTab('residency')}
+                      className={`px-3 py-1.5 rounded-lg transition-all ${
+                        settingsSubTab === 'residency' ? 'bg-white text-slate-900 font-bold shadow-2xs' : 'text-slate-600 hover:text-slate-900'
+                      }`}
+                    >
+                      <i className="fa-solid fa-building-shield mr-1.5 text-slate-500"></i> Data Residency
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Subtab Content */}
+              {settingsSubTab === 'users' && (
+                <AdminUserDesk currentUser={user} onRefreshMetrics={refreshMetrics} />
+              )}
+              {settingsSubTab === 'audit' && (
+                <AuditDesk onRefreshMetrics={refreshMetrics} />
+              )}
+              {settingsSubTab === 'guests' && (
+                <ChampionInviteModal onNavigateBack={() => setSettingsSubTab('users')} />
+              )}
+              {settingsSubTab === 'residency' && user?.role === 'super_admin' && (
+                <div className="space-y-4">
+                  <div className="border-b border-slate-200 pb-3">
+                    <h2 className="text-base font-bold text-slate-900">Platform Data Residency Node</h2>
+                    <p className="text-xs text-slate-500 mt-0.5">Dual-residency in-country localization control under NDPA Section 20.</p>
+                  </div>
+                  <DataResidencyCard onResidencyChanged={refreshMetrics} />
+                </div>
+              )}
+
+            </div>
+          )}
+
+          {/* L. Help centre */}
+          {activeTab === 'help' && (
+            <ModulePreviewDesk
+              moduleKey="help"
+              title="Help Centre & Regulatory Guidance"
+              subtitle="Quick reference documentation for NDPA 2023 compliance, role duties, and data protection workflows."
+              badge="Documentation"
+              tenant={tenant}
+              onNavigate={setActiveTab}
+            />
+          )}
+
         </main>
       </div>
+
+      {/* Milestone 4: Multi-Gateway Subscription & Billing Modal */}
+      <SubscriptionBillingModal
+        isOpen={showSubscriptionModal}
+        onClose={() => setShowSubscriptionModal(false)}
+        onSubscriptionUpdated={() => {
+          refreshMetrics();
+          initApp();
+        }}
+      />
+
     </div>
   );
 }

@@ -46,7 +46,7 @@ export default function DsarDesk({ onOpenPublicPortal, onRefreshMetrics }) {
 
   const getSlaBadge = (daysRemaining, status) => {
     if (status === 'completed') {
-      return <span className="text-[11px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full font-bold">✓ Resolved within SLA</span>;
+      return <span className="text-[11px] bg-slate-100 text-slate-800 border border-slate-200 px-2.5 py-0.5 rounded-full font-bold">✓ Resolved within SLA</span>;
     }
     if (status === 'rejected') {
       return <span className="text-[11px] bg-slate-100 text-slate-600 border border-slate-200 px-2.5 py-0.5 rounded-full font-bold">Rejected</span>;
@@ -80,7 +80,7 @@ export default function DsarDesk({ onOpenPublicPortal, onRefreshMetrics }) {
       {/* Toast Notification */}
       {notification && (
         <div className={`p-4 rounded-2xl flex items-center justify-between text-xs font-semibold shadow-xs ${
-          notification.type === 'success' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-800 border border-red-200'
+          notification.type === 'success' ? 'bg-orange-50 text-orange-900 border border-orange-200' : 'bg-red-50 text-red-800 border border-red-200'
         }`}>
           <span>{notification.message}</span>
           <button onClick={() => setNotification(null)} className="text-slate-400 hover:text-slate-700 font-bold">&times;</button>
@@ -91,21 +91,21 @@ export default function DsarDesk({ onOpenPublicPortal, onRefreshMetrics }) {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">30-Day Statutory DSAR Management Desk</h2>
-            <span className="text-[11px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded font-mono font-bold">
-              NDPA SEC 34
+            <h2 className="text-xl font-bold text-slate-900 tracking-tight">Data Subject Access Requests (DSAR)</h2>
+            <span className="text-[11px] bg-orange-50 text-[#ea580c] border border-orange-200 px-2 py-0.5 rounded font-sans font-bold">
+              Rights Management
             </span>
           </div>
-          <p className="text-xs text-slate-600 mt-0.5">
-            Automated statutory countdown, identity verification, and multi-channel fulfillment workflow.
+          <p className="text-xs text-slate-500 mt-0.5">
+            Automated 30-day statutory countdown, identity verification, and fulfillment workflow.
           </p>
         </div>
 
         <button
           onClick={onOpenPublicPortal}
-          className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs"
+          className="px-4 py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs"
         >
-          <i className="fa-solid fa-globe text-xs"></i>
+          <i className="fa-solid fa-globe text-slate-500 text-xs"></i>
           <span>Public DSAR Portal</span>
         </button>
       </div>
@@ -125,16 +125,16 @@ export default function DsarDesk({ onOpenPublicPortal, onRefreshMetrics }) {
             <div
               key={dsar.id}
               onClick={() => setSelectedDsar(dsar)}
-              className="bg-white border border-slate-200 hover:border-emerald-500/80 rounded-2xl p-5 cursor-pointer transition-all shadow-xs space-y-3 group"
+              className="bg-white border border-slate-200 hover:border-[#ea580c]/60 rounded-2xl p-5 cursor-pointer transition-all shadow-xs space-y-3 group"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-700 border border-purple-200 flex items-center justify-center font-bold text-xs">
+                  <div className="w-10 h-10 rounded-xl bg-orange-50 text-[#ea580c] border border-orange-200 flex items-center justify-center font-bold text-xs">
                     <i className="fa-solid fa-user-shield text-sm"></i>
                   </div>
                   <div>
                     <span className="text-[10px] font-mono text-slate-500 uppercase font-bold">Ticket #{dsar.ticket_number || dsar.id.substring(0, 8)}</span>
-                    <h3 className="text-sm font-bold text-slate-900 group-hover:text-emerald-800 transition-colors">
+                    <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#ea580c] transition-colors">
                       {dsar.data_subject_name} &bull; <span className="text-slate-600 font-normal">{dsar.data_subject_email}</span>
                     </h3>
                   </div>
@@ -177,7 +177,7 @@ export default function DsarDesk({ onOpenPublicPortal, onRefreshMetrics }) {
 
             <div className="space-y-3 text-xs">
               <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
-                <div className="font-bold text-slate-900">Request Type: <span className="uppercase font-mono text-emerald-800">{selectedDsar.request_type?.replace(/_/g, ' ')}</span></div>
+                <div className="font-bold text-slate-900">Request Type: <span className="uppercase font-mono text-slate-800">{selectedDsar.request_type?.replace(/_/g, ' ')}</span></div>
                 <div className="text-slate-600">Details: {selectedDsar.request_details}</div>
               </div>
 
@@ -188,7 +188,7 @@ export default function DsarDesk({ onOpenPublicPortal, onRefreshMetrics }) {
                   placeholder="Record your investigation findings, verified identities, and response payload..."
                   value={responseNotes}
                   onChange={(e) => setResponseNotes(e.target.value)}
-                  className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
+                  className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c]"
                 />
               </div>
 
@@ -203,7 +203,7 @@ export default function DsarDesk({ onOpenPublicPortal, onRefreshMetrics }) {
                 <button
                   type="button"
                   onClick={() => handleUpdateStatus(selectedDsar.id, 'completed')}
-                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs shadow-xs"
+                  className="px-4 py-2 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl font-bold text-xs shadow-xs"
                 >
                   Fulfill & Resolve within SLA
                 </button>

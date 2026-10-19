@@ -71,7 +71,7 @@ export default function PublicDsarPortal({ tenant, onNavigateBack }) {
         </div>
 
         <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 p-2.5 rounded-2xl">
-          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></div>
+          <div className="w-2 h-2 rounded-full bg-[#ea580c] animate-ping"></div>
           <span className="text-xs font-mono font-bold text-slate-800">30-Day Statutory SLA Active</span>
         </div>
       </div>
@@ -79,12 +79,12 @@ export default function PublicDsarPortal({ tenant, onNavigateBack }) {
       {/* Success View */}
       {successResult ? (
         <div className="bg-white border border-slate-200 rounded-3xl p-8 sm:p-12 text-center shadow-xs space-y-6 max-w-2xl mx-auto">
-          <div className="w-20 h-20 rounded-3xl bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center justify-center mx-auto text-3xl shadow-xs">
+          <div className="w-20 h-20 rounded-3xl bg-orange-50 text-[#ea580c] border border-orange-200 flex items-center justify-center mx-auto text-3xl shadow-xs">
             <i className="fa-solid fa-circle-check"></i>
           </div>
 
           <div>
-            <span className="text-xs font-mono font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-full uppercase">
+            <span className="text-xs font-mono font-bold bg-orange-50 text-orange-800 border border-orange-200 px-3 py-1 rounded-full uppercase">
               Statutory Intake Confirmed
             </span>
             <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight mt-3">
@@ -98,7 +98,7 @@ export default function PublicDsarPortal({ tenant, onNavigateBack }) {
           <div className="p-5 bg-slate-50 border border-slate-200 rounded-2xl text-left space-y-3 text-xs">
             <div className="flex items-center justify-between pb-2 border-b border-slate-200">
               <span className="text-slate-500 font-medium">Tracking Ticket Reference:</span>
-              <strong className="font-mono text-base text-emerald-700 font-extrabold">{successResult.ticket_number}</strong>
+              <strong className="font-mono text-base text-[#ea580c] font-extrabold">{successResult.ticket_number}</strong>
             </div>
             <div className="flex items-center justify-between pb-2 border-b border-slate-200">
               <span className="text-slate-500 font-medium">Statutory SLA Deadline:</span>
@@ -140,9 +140,9 @@ export default function PublicDsarPortal({ tenant, onNavigateBack }) {
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
                   <i className="fa-solid fa-shield-halved text-sky-600"></i>
-                  <span>Exercise NDPA Statutory Right</span>
+                  <span>Exercise Statutory Right</span>
                 </h3>
-                <span className="text-[10px] text-emerald-700 font-mono font-bold">Section 34</span>
+                <span className="text-[10px] text-[#ea580c] font-mono font-bold">Section 34</span>
               </div>
 
               {error && (
@@ -234,11 +234,11 @@ export default function PublicDsarPortal({ tenant, onNavigateBack }) {
                   ></textarea>
                 </div>
 
-                <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-start gap-3">
-                  <i className="fa-solid fa-lock text-emerald-600 mt-0.5"></i>
+                <div className="p-4 bg-orange-50 border border-orange-200 rounded-2xl flex items-start gap-3">
+                  <i className="fa-solid fa-lock text-[#ea580c] mt-0.5"></i>
                   <div>
-                    <div className="font-bold text-emerald-950">Statutory 30-Day SLA Enforced:</div>
-                    <div className="text-[11px] text-emerald-800 mt-0.5">
+                    <div className="font-bold text-orange-950">Statutory 30-Day SLA Enforced:</div>
+                    <div className="text-[11px] text-orange-900 mt-0.5">
                       As mandated under Section 34 of the Nigeria Data Protection Act 2023, your request will be evaluated, processed, and fulfilled within 30 calendar days at no statutory fee.
                     </div>
                   </div>
@@ -247,7 +247,7 @@ export default function PublicDsarPortal({ tenant, onNavigateBack }) {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                  className="w-full py-3.5 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl text-xs font-bold shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                 >
                   <i className="fa-solid fa-paper-plane text-xs"></i>
                   <span>{submitting ? 'Transmitting Request...' : 'Submit Statutory Privacy Request'}</span>
@@ -279,7 +279,7 @@ export default function PublicDsarPortal({ tenant, onNavigateBack }) {
 
                 <div className="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 space-y-1">
                   <div className="font-bold text-slate-900 flex items-center gap-1.5">
-                    <i className="fa-solid fa-pen-to-square text-emerald-600"></i>
+                    <i className="fa-solid fa-pen-to-square text-[#ea580c]"></i>
                     <span>Right to Rectification (§35)</span>
                   </div>
                   <p className="text-[11px] text-slate-600 leading-relaxed">

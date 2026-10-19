@@ -146,8 +146,15 @@ export const api = {
   getLocalizationStatus: () => request('/localization/status'),
   switchLocalizationResidency: (residency) => request('/localization/switch', { method: 'PUT', body: JSON.stringify({ data_residency: residency }) }),
 
-  // Milestone 2: Subscriptions & Paystack NGN Billing
+  // Milestone 4: Subscriptions & Multi-Gateway NGN Billing
   getSubscription: () => request('/subscription'),
+  initializePayment: async (data) => {
+    try {
+      return await request('/subscription/initialize', { method: 'POST', body: JSON.stringify(data) });
+    } catch {
+      return await request('/subscription/initialize-paystack', { method: 'POST', body: JSON.stringify(data) });
+    }
+  },
   initializePaystack: (data) => request('/subscription/initialize-paystack', { method: 'POST', body: JSON.stringify(data) }),
   upgradeSubscription: (data) => request('/subscription/upgrade', { method: 'POST', body: JSON.stringify(data) }),
 

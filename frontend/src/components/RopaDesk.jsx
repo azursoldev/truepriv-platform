@@ -131,7 +131,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
   const getStatusBadge = (status) => {
     switch (status) {
       case 'approved_active':
-        return <span className="text-[11px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full font-semibold flex items-center gap-1"><i className="fa-solid fa-circle-check text-emerald-600 text-[10px]"></i> Approved Active</span>;
+        return <span className="text-[11px] bg-slate-100 text-slate-800 border border-slate-200 px-2.5 py-0.5 rounded-full font-semibold flex items-center gap-1"><i className="fa-solid fa-circle-check text-slate-600 text-[10px]"></i> Approved</span>;
       case 'verified_by_dpo':
         return <span className="text-[11px] bg-sky-50 text-sky-800 border border-sky-200 px-2.5 py-0.5 rounded-full font-semibold flex items-center gap-1"><i className="fa-solid fa-shield-halved text-sky-600 text-[10px]"></i> DPO Verified</span>;
       case 'reviewed_by_dept':
@@ -146,7 +146,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
       {/* Notification Toast */}
       {notification && (
         <div className={`p-4 rounded-2xl flex items-center justify-between text-xs font-semibold shadow-xs ${
-          notification.type === 'success' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-800 border border-red-200'
+          notification.type === 'success' ? 'bg-orange-50 text-orange-900 border border-orange-200' : 'bg-red-50 text-red-800 border border-red-200'
         }`}>
           <span>{notification.message}</span>
           <button onClick={() => setNotification(null)} className="text-slate-400 hover:text-slate-700 font-bold">&times;</button>
@@ -157,12 +157,12 @@ export default function RopaDesk({ onRefreshMetrics }) {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Record of Processing Activities (RoPA)</h2>
-            <span className="text-[11px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded font-mono font-bold">
-              NDPA SEC 24
+            <h2 className="text-xl font-bold text-slate-900 tracking-tight">Record of Processing Activities (RoPA)</h2>
+            <span className="text-[11px] bg-orange-50 text-[#ea580c] border border-orange-200 px-2 py-0.5 rounded font-sans font-bold">
+              Processing Inventory
             </span>
           </div>
-          <p className="text-xs text-slate-600 mt-0.5">
+          <p className="text-xs text-slate-500 mt-0.5">
             Maintain regulatory inventory of all personal data flows, legal bases, retention schedules, and safeguards.
           </p>
         </div>
@@ -171,15 +171,15 @@ export default function RopaDesk({ onRefreshMetrics }) {
           {/* 1-Click Industry Preset Autofill Button */}
           <button
             onClick={() => setShowAutoFillModal(true)}
-            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-xs transition-all"
+            className="px-3.5 py-2 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 rounded-xl text-xs font-semibold flex items-center gap-2 shadow-2xs transition-all"
           >
-            <i className="fa-solid fa-wand-magic-sparkles text-xs"></i>
-            <span>1-Click Industry Autofill</span>
+            <i className="fa-solid fa-wand-magic-sparkles text-slate-500 text-xs"></i>
+            <span>Industry Presets</span>
           </button>
 
           <button
             onClick={() => setShowCreateModal(true)}
-            className="px-3.5 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs"
+            className="px-4 py-2 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs"
           >
             <i className="fa-solid fa-plus text-xs"></i>
             <span>New Activity</span>
@@ -205,7 +205,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
           <select
             value={departmentFilter}
             onChange={(e) => setDepartmentFilter(e.target.value)}
-            className="bg-slate-50 border border-slate-200 text-slate-700 text-xs rounded-xl px-3 py-1.5 focus:outline-none focus:border-emerald-600"
+            className="bg-slate-50 border border-slate-200 text-slate-700 text-xs rounded-xl px-3 py-1.5 focus:outline-none focus:border-[#ea580c]"
           >
             <option value="">All Departments</option>
             <option value="Compliance & Risk">Compliance & Risk</option>
@@ -218,7 +218,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="bg-slate-50 border border-slate-200 text-slate-700 text-xs rounded-xl px-3 py-1.5 focus:outline-none focus:border-emerald-600"
+            className="bg-slate-50 border border-slate-200 text-slate-700 text-xs rounded-xl px-3 py-1.5 focus:outline-none focus:border-[#ea580c]"
           >
             <option value="">All Statuses</option>
             <option value="draft">Draft</option>
@@ -264,7 +264,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
                     onClick={() => setSelectedActivity(act)}
                   >
                     <td className="py-3.5 px-4">
-                      <div className="font-bold text-slate-900 group-hover:text-emerald-800 transition-colors">
+                      <div className="font-bold text-slate-900 group-hover:text-[#ea580c] transition-colors">
                         {act.process_name}
                       </div>
                       <div className="text-[11px] text-slate-600 line-clamp-1 mt-0.5">
@@ -314,8 +314,8 @@ export default function RopaDesk({ onRefreshMetrics }) {
                         {act.status !== 'approved_active' && (
                           <button
                             onClick={() => handleUpdateStatus(act.id, act.status === 'draft' ? 'verified_by_dpo' : 'approved_active')}
-                            title={act.status === 'draft' ? 'Verify as DPO' : 'Approve for NDPC RoPA'}
-                            className="p-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-700"
+                            title={act.status === 'draft' ? 'Verify as DPO' : 'Approve for RoPA'}
+                            className="p-1.5 rounded-lg bg-orange-50 hover:bg-orange-100 border border-orange-200 text-[#ea580c]"
                           >
                             <i className="fa-solid fa-check text-xs"></i>
                           </button>
@@ -344,7 +344,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-slate-200">
                 <div>
-                  <span className="text-[10px] font-mono uppercase bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded border border-emerald-200 font-bold">
+                  <span className="text-[10px] font-mono uppercase bg-slate-100 text-slate-800 px-2 py-0.5 rounded border border-slate-200 font-bold">
                     RoPA Record #{selectedActivity.id.substring(0, 8)}
                   </span>
                   <h3 className="text-lg font-bold text-slate-900 mt-1">{selectedActivity.process_name}</h3>
@@ -374,7 +374,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
                   </div>
                   <div>
                     <label className="text-slate-600 font-bold block mb-1">Legal Basis (NDPA Sec 25):</label>
-                    <div className="text-emerald-800 font-bold bg-slate-50 p-2.5 rounded-xl border border-slate-200 uppercase font-mono">
+                    <div className="text-slate-900 font-bold bg-slate-50 p-2.5 rounded-xl border border-slate-200 uppercase font-mono">
                       {selectedActivity.legal_basis?.replace(/_/g, ' ')}
                     </div>
                   </div>
@@ -433,9 +433,9 @@ export default function RopaDesk({ onRefreshMetrics }) {
                 </button>
                 <button
                   onClick={() => handleUpdateStatus(selectedActivity.id, 'approved_active')}
-                  className="px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-xs"
+                  className="px-3 py-2 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl text-xs font-bold shadow-xs"
                 >
-                  Approve for NDPC
+                  Approve Record
                 </button>
               </div>
             </div>
@@ -449,8 +449,8 @@ export default function RopaDesk({ onRefreshMetrics }) {
           <div className="w-full max-w-lg bg-white border border-slate-200 rounded-3xl p-6 shadow-2xl space-y-4">
             <div className="flex items-center justify-between border-b border-slate-200 pb-3">
               <div className="flex items-center gap-2">
-                <i className="fa-solid fa-wand-magic-sparkles text-emerald-600 text-base"></i>
-                <h3 className="text-base font-bold text-slate-900">1-Click Nigerian Industry RoPA Presets</h3>
+                <i className="fa-solid fa-wand-magic-sparkles text-[#ea580c] text-base"></i>
+                <h3 className="text-base font-bold text-slate-900">Industry RoPA Presets</h3>
               </div>
               <button onClick={() => setShowAutoFillModal(false)} className="text-slate-400 hover:text-slate-700">
                 <i className="fa-solid fa-xmark text-base"></i>
@@ -468,16 +468,16 @@ export default function RopaDesk({ onRefreshMetrics }) {
                   onClick={() => setSelectedTemplate(tpl.slug)}
                   className={`p-3 rounded-xl border cursor-pointer transition-all flex items-center justify-between ${
                     selectedTemplate === tpl.slug 
-                      ? 'border-emerald-600 bg-emerald-50/70 text-emerald-900' 
+                      ? 'border-[#ea580c] bg-orange-50/70 text-orange-950 font-bold' 
                       : 'border-slate-200 hover:bg-slate-50 text-slate-700'
                   }`}
                 >
                   <div>
-                    <div className="text-xs font-bold">{tpl.industry_name}</div>
-                    <div className="text-[11px] text-slate-500">{tpl.default_ropa?.length || 0} pre-configured processing items</div>
+                    <div className="text-xs">{tpl.industry_name}</div>
+                    <div className="text-[11px] text-slate-500 font-normal">{tpl.default_ropa?.length || 0} pre-configured processing items</div>
                   </div>
                   {selectedTemplate === tpl.slug && (
-                    <i className="fa-solid fa-circle-check text-emerald-600 text-sm"></i>
+                    <i className="fa-solid fa-circle-check text-[#ea580c] text-sm"></i>
                   )}
                 </div>
               ))}
@@ -492,7 +492,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
               </button>
               <button
                 onClick={handleApplyTemplate}
-                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-xs"
+                className="px-4 py-2 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl text-xs font-bold shadow-xs"
               >
                 Apply Industry Template
               </button>
@@ -521,7 +521,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
                   placeholder="e.g. Employee Payroll Processing & Tax Remittance"
                   value={formData.process_name}
                   onChange={(e) => setFormData({ ...formData, process_name: e.target.value })}
-                  className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
+                  className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c]"
                 />
               </div>
 
@@ -531,7 +531,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
                   <select
                     value={formData.department}
                     onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
+                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c]"
                   >
                     <option value="Operations">Operations</option>
                     <option value="Compliance & Risk">Compliance & Risk</option>
@@ -547,7 +547,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
                   <select
                     value={formData.legal_basis}
                     onChange={(e) => setFormData({ ...formData, legal_basis: e.target.value })}
-                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
+                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c]"
                   >
                     <option value="contract">Performance of Contract</option>
                     <option value="legal_obligation">Legal Obligation</option>
@@ -567,7 +567,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
                   placeholder="Explain why this data is collected and processed..."
                   value={formData.business_purpose}
                   onChange={(e) => setFormData({ ...formData, business_purpose: e.target.value })}
-                  className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
+                  className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c]"
                 />
               </div>
 
@@ -579,7 +579,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
                     required
                     value={formData.storage_location}
                     onChange={(e) => setFormData({ ...formData, storage_location: e.target.value })}
-                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
+                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c]"
                   />
                 </div>
                 <div>
@@ -589,7 +589,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
                     required
                     value={formData.retention_period}
                     onChange={(e) => setFormData({ ...formData, retention_period: e.target.value })}
-                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
+                    className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c]"
                   />
                 </div>
               </div>
@@ -604,7 +604,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold shadow-xs"
+                  className="px-4 py-2 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl text-xs font-bold shadow-xs"
                 >
                   Record Activity
                 </button>

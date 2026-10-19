@@ -37,10 +37,11 @@ export default function DataResidencyCard({ onResidencyChanged }) {
     setMessage(null);
     try {
       const res = await api.switchLocalizationResidency(targetResidency);
+      const isTargetOnshore = ['local_nigeria', 'local_galaxy_backbone'].includes(targetResidency);
       if (res.success) {
         setMessage({
           type: 'success',
-          text: `Data residency successfully switched to ${targetResidency === 'local_galaxy_backbone' ? '🇳🇬 Galaxy Backbone Nigeria' : '☁️ AWS eu-west-1 (Ireland)'}.`
+          text: `Data residency successfully switched to ${isTargetOnshore ? '🇳🇬 Galaxy Backbone Nigeria' : '☁️ AWS eu-west-1 (Ireland)'}.`
         });
         setShowSwitchModal(false);
         await fetchStatus();
@@ -62,7 +63,7 @@ export default function DataResidencyCard({ onResidencyChanged }) {
     <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-7 shadow-xs relative overflow-hidden">
       {/* Background Sovereign Watermark Accent */}
       <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20 ${
-        isOnshore ? 'bg-emerald-500/10' : 'bg-sky-500/10'
+        isOnshore ? 'bg-orange-500/10' : 'bg-sky-500/10'
       }`}></div>
 
       {/* Header Row */}
@@ -70,7 +71,7 @@ export default function DataResidencyCard({ onResidencyChanged }) {
         <div className="flex items-center gap-3">
           <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-xs ${
             isOnshore 
-              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' 
+              ? 'bg-orange-50 text-orange-700 border border-orange-200' 
               : 'bg-sky-50 text-sky-700 border border-sky-200'
           }`}>
             <i className={`fa-solid ${isOnshore ? 'fa-building-shield' : 'fa-cloud-arrow-up'}`}></i>
@@ -80,10 +81,10 @@ export default function DataResidencyCard({ onResidencyChanged }) {
               <h3 className="text-base font-bold text-slate-900">Dual-Residency Data Localization</h3>
               <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wide border flex items-center gap-1 ${
                 isOnshore
-                  ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
+                  ? 'bg-orange-50 text-orange-800 border-orange-300'
                   : 'bg-sky-50 text-sky-800 border-sky-300'
               }`}>
-                <span className={`w-1.5 h-1.5 rounded-full ${isOnshore ? 'bg-emerald-600 animate-pulse' : 'bg-sky-600'}`}></span>
+                <span className={`w-1.5 h-1.5 rounded-full ${isOnshore ? 'bg-orange-600 animate-pulse' : 'bg-sky-600'}`}></span>
                 {isOnshore ? '🇳🇬 Onshore Sovereign Node' : '☁️ Global AWS Node'}
               </span>
             </div>
@@ -97,7 +98,7 @@ export default function DataResidencyCard({ onResidencyChanged }) {
         <div>
           <button
             onClick={() => handleOpenSwitchModal(isOnshore ? 'global_aws' : 'local_galaxy_backbone')}
-            className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all shadow-xs flex items-center gap-2 cursor-pointer"
+            className="px-4 py-2 bg-slate-900 hover:bg-[#ea580c] text-white rounded-xl text-xs font-bold transition-all shadow-xs flex items-center gap-2 cursor-pointer"
           >
             <i className="fa-solid fa-arrows-rotate text-xs"></i>
             <span>Switch to {isOnshore ? 'Global AWS (Ireland)' : 'Galaxy Backbone (Nigeria)'}</span>
@@ -109,10 +110,10 @@ export default function DataResidencyCard({ onResidencyChanged }) {
       {message && (
         <div className={`mt-4 p-3.5 rounded-xl text-xs flex items-center gap-2.5 animate-in fade-in ${
           message.type === 'success'
-            ? 'bg-emerald-50 border border-emerald-200 text-emerald-800'
+            ? 'bg-orange-50 border border-orange-200 text-orange-900'
             : 'bg-rose-50 border border-rose-200 text-rose-800'
         }`}>
-          <i className={`fa-solid ${message.type === 'success' ? 'fa-circle-check text-emerald-600' : 'fa-triangle-exclamation text-rose-600'}`}></i>
+          <i className={`fa-solid ${message.type === 'success' ? 'fa-circle-check text-orange-600' : 'fa-triangle-exclamation text-rose-600'}`}></i>
           <span className="font-medium">{message.text}</span>
         </div>
       )}
@@ -140,8 +141,8 @@ export default function DataResidencyCard({ onResidencyChanged }) {
             <span className="text-sm font-black text-slate-900 block truncate">
               {isOnshore ? 'Tier 1 Sovereign Onshore' : 'Tier 2 Global Enterprise'}
             </span>
-            <span className="text-[11px] text-emerald-700 font-bold block mt-0.5 flex items-center gap-1">
-              <i className="fa-solid fa-check-double text-[10px]"></i>
+            <span className="text-[11px] text-slate-700 font-bold block mt-0.5 flex items-center gap-1">
+              <i className="fa-solid fa-check-double text-[10px] text-[#ea580c]"></i>
               NDPA Section 20 Certified
             </span>
           </div>
@@ -194,7 +195,7 @@ export default function DataResidencyCard({ onResidencyChanged }) {
               <p>
                 You are about to switch your organization's primary data storage location to:{' '}
                 <strong className="text-slate-900 font-bold">
-                  {targetResidency === 'local_galaxy_backbone'
+                  {['local_nigeria', 'local_galaxy_backbone'].includes(targetResidency)
                     ? '🇳🇬 Local Onshore (Galaxy Backbone / MainOne Nigeria)'
                     : '☁️ Global Cloud (AWS eu-west-1 Ireland)'}
                 </strong>.
@@ -226,7 +227,7 @@ export default function DataResidencyCard({ onResidencyChanged }) {
               <button
                 onClick={handleConfirmSwitch}
                 disabled={switching}
-                className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all shadow-xs flex items-center gap-2 disabled:opacity-50"
+                className="px-5 py-2.5 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl text-xs font-bold transition-all shadow-xs flex items-center gap-2 disabled:opacity-50"
               >
                 {switching ? (
                   <>

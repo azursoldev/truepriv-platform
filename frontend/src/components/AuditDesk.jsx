@@ -102,7 +102,7 @@ export default function AuditDesk({ onRefreshMetrics }) {
       {/* Toast Notification */}
       {notification && (
         <div className={`p-4 rounded-2xl flex items-center justify-between text-xs font-semibold shadow-xs ${
-          notification.type === 'success' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-800 border border-red-200'
+          notification.type === 'success' ? 'bg-orange-50 text-orange-900 border border-orange-200' : 'bg-red-50 text-red-800 border border-red-200'
         }`}>
           <span>{notification.message}</span>
           <button onClick={() => setNotification(null)} className="text-slate-400 hover:text-slate-700 font-bold">&times;</button>
@@ -113,13 +113,13 @@ export default function AuditDesk({ onRefreshMetrics }) {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Statutory NDPC Compliance Audit & Remediation Desk</h2>
-            <span className="text-[11px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded font-mono font-bold">
-              GAID v1.2
+            <h2 className="text-xl font-bold text-slate-900 tracking-tight">Compliance Audit & Remediation</h2>
+            <span className="text-[11px] bg-orange-50 text-[#ea580c] border border-orange-200 px-2 py-0.5 rounded font-sans font-bold">
+              Audits
             </span>
           </div>
-          <p className="text-xs text-slate-600 mt-0.5">
-            Annual statutory verification, 5-domain checklist scoring, evidence vault, and certified NDPC filing packs.
+          <p className="text-xs text-slate-500 mt-0.5">
+            Annual statutory verification, checklist scoring, evidence vault, and audit reporting.
           </p>
         </div>
 
@@ -127,7 +127,7 @@ export default function AuditDesk({ onRefreshMetrics }) {
           {activeProject && (
             <button
               onClick={handleCertify}
-              className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all"
+              className="px-4 py-2 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all"
             >
               <i className="fa-solid fa-stamp text-xs"></i>
               <span>Certify Audit Filing</span>
@@ -162,7 +162,7 @@ export default function AuditDesk({ onRefreshMetrics }) {
               <div className="flex items-center gap-4">
                 <div className="text-right">
                   <div className="text-[10px] text-slate-500 uppercase font-bold">Audit Completion Score</div>
-                  <div className="text-2xl font-extrabold font-mono text-emerald-700 mt-0.5">
+                  <div className="text-2xl font-extrabold font-mono text-[#ea580c] mt-0.5">
                     {activeProject.overall_audit_score}%
                   </div>
                 </div>
@@ -175,7 +175,7 @@ export default function AuditDesk({ onRefreshMetrics }) {
                 <i className="fa-solid fa-clock text-amber-600 text-sm"></i>
                 <span className="text-slate-700">Mandatory Annual Filing Deadline: <strong className="text-slate-900">March 15, 2027</strong></span>
               </div>
-              <span className="text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full">
+              <span className="text-[11px] font-semibold bg-slate-100 text-slate-800 border border-slate-200 px-2.5 py-0.5 rounded-full">
                 Audit Status: {activeProject.status?.replace(/_/g, ' ').toUpperCase()}
               </span>
             </div>
@@ -214,7 +214,7 @@ export default function AuditDesk({ onRefreshMetrics }) {
                               className={`px-2.5 py-1 rounded-lg text-xs font-bold capitalize border transition-all ${
                                 item.status === st
                                   ? st === 'compliant'
-                                    ? 'bg-emerald-600 text-white border-emerald-700 shadow-2xs'
+                                    ? 'bg-[#ea580c] text-white border-[#ea580c] shadow-2xs'
                                     : st === 'partially_compliant'
                                     ? 'bg-amber-500 text-white border-amber-600 shadow-2xs'
                                     : 'bg-red-600 text-white border-red-700 shadow-2xs'

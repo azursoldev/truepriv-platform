@@ -74,8 +74,9 @@ Route::prefix('v1')->group(function () {
             Route::get('/localization/status', [LocalizationController::class, 'getStatus']);
             Route::put('/localization/switch', [LocalizationController::class, 'switchResidency']);
 
-            // Milestone 2: Subscriptions & Paystack NGN Billing
+            // Milestone 4: Subscriptions & Multi-Gateway NGN Billing
             Route::get('/subscription', [SubscriptionController::class, 'show']);
+            Route::post('/subscription/initialize', [SubscriptionController::class, 'initializePayment']);
             Route::post('/subscription/initialize-paystack', [SubscriptionController::class, 'initializePaystack']);
             Route::post('/subscription/upgrade', [SubscriptionController::class, 'upgrade']);
 

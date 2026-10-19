@@ -73,14 +73,14 @@ export default function PortfolioDesk({ onSwitchTenant, tenantType, userRole }) 
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">
-              {isDpco ? 'Licensed DPCO Client Audit Portfolio' : 'Outsourced DPO Multi-Client Desk'}
+            <h2 className="text-xl font-bold text-slate-900 tracking-tight">
+              {isDpco ? 'Client Audit Portfolio' : 'Client Portfolio'}
             </h2>
-            <span className={`text-[11px] ${isDpco ? 'bg-indigo-50 text-indigo-800 border-indigo-200' : 'bg-purple-50 text-purple-800 border-purple-200'} border px-2 py-0.5 rounded font-mono font-bold`}>
-              {isDpco ? 'DPCO AUDIT SUITE' : 'MULTI-TENANT ISOLATED'}
+            <span className="text-[11px] bg-orange-50 text-[#ea580c] border border-orange-200 px-2 py-0.5 rounded font-sans font-bold">
+              Consultancy
             </span>
           </div>
-          <p className="text-xs text-slate-600 mt-0.5">
+          <p className="text-xs text-slate-500 mt-0.5">
             {isDpco
               ? 'Statutory NDPC annual compliance audit filing registry, fieldwork checklists, and certified client returns.'
               : 'Switch between client corporate workspaces in 1 click with strict data boundary isolation.'}
@@ -94,7 +94,7 @@ export default function PortfolioDesk({ onSwitchTenant, tenantType, userRole }) 
             placeholder="Filter clients by name or sector..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-white border border-slate-300 rounded-xl pl-8 pr-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-emerald-600 shadow-2xs"
+            className="w-full bg-white border border-slate-300 rounded-xl pl-8 pr-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-[#ea580c] shadow-2xs"
           />
         </div>
       </div>
@@ -112,20 +112,20 @@ export default function PortfolioDesk({ onSwitchTenant, tenantType, userRole }) 
           filtered.map((client) => (
             <div
               key={client.client_id}
-              className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs space-y-4 flex flex-col justify-between hover:border-purple-300 transition-all"
+              className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs space-y-4 flex flex-col justify-between hover:border-[#ea580c]/50 transition-all"
             >
               <div>
                 <div className="flex items-start justify-between gap-2 mb-2">
-                  <div className="w-10 h-10 rounded-2xl bg-slate-900 text-emerald-400 font-bold text-sm flex items-center justify-center shadow-xs">
+                  <div className="w-10 h-10 rounded-2xl bg-slate-900 text-white font-bold text-sm flex items-center justify-center shadow-xs">
                     {client.client_name.substring(0, 2).toUpperCase()}
                   </div>
-                  <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
-                    {client.compliance_score}% NDPA
+                  <span className="text-xs font-mono font-bold text-slate-900 bg-slate-100 border border-slate-200 px-2.5 py-0.5 rounded-full">
+                    {client.compliance_score}%
                   </span>
                 </div>
 
                 <h3 className="text-base font-bold text-slate-900 mt-1">{client.client_name}</h3>
-                <div className="text-xs text-slate-500 mt-0.5">{client.industry} &bull; MDC Tier: <span className="uppercase font-mono font-semibold">{client.mdc_tier}</span></div>
+                <div className="text-xs text-slate-500 mt-0.5">{client.industry} &bull; Tier: <span className="uppercase font-mono font-semibold">{client.mdc_tier}</span></div>
 
                 <div className="mt-4 grid grid-cols-2 gap-2 p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs">
                   <div>
@@ -141,7 +141,7 @@ export default function PortfolioDesk({ onSwitchTenant, tenantType, userRole }) 
 
               <button
                 onClick={() => onSwitchTenant(client.client_id)}
-                className="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-xs transition-all"
+                className="w-full py-2.5 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-xs transition-all"
               >
                 <span>Switch to Client Workspace</span>
                 <i className="fa-solid fa-arrow-right text-xs"></i>

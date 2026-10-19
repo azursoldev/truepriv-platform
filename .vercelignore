@@ -1,0 +1,9 @@
+backend/
+vendor/
+node_modules/
+scratch/
+tools/
+.git/
+*.zip
+*.mp4
+*.pdf

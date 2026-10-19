@@ -85,8 +85,8 @@ export default function UserProfileModal({ isOpen, onClose, user, onUpdateUser }
 
         {/* Notifications */}
         {successMsg && (
-          <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-xl text-xs font-semibold flex items-center gap-2">
-            <i className="fa-solid fa-circle-check text-emerald-600"></i>
+          <div className="p-3 bg-orange-50 border border-orange-200 text-orange-950 rounded-xl text-xs font-semibold flex items-center gap-2">
+            <i className="fa-solid fa-circle-check text-[#ea580c]"></i>
             <span>{successMsg}</span>
           </div>
         )}
@@ -107,7 +107,7 @@ export default function UserProfileModal({ isOpen, onClose, user, onUpdateUser }
               required
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-semibold focus:outline-none focus:border-emerald-600 focus:bg-white"
+              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-semibold focus:outline-none focus:border-[#ea580c] focus:bg-white"
             />
           </div>
 
@@ -130,7 +130,7 @@ export default function UserProfileModal({ isOpen, onClose, user, onUpdateUser }
                 placeholder="+234 803 114 2290"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white"
+                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c] focus:bg-white"
               />
               <span className="text-[10px] text-slate-400 mt-0.5 block">For 72h incident SMS alerts</span>
             </div>
@@ -142,7 +142,7 @@ export default function UserProfileModal({ isOpen, onClose, user, onUpdateUser }
               <select
                 value={formData.department}
                 onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-semibold focus:outline-none focus:border-emerald-600 focus:bg-white"
+                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-semibold focus:outline-none focus:border-[#ea580c] focus:bg-white"
               >
                 <option value="Compliance & Risk">Compliance & Risk</option>
                 <option value="Information Technology">Information Technology (IT / SecOps)</option>
@@ -183,7 +183,7 @@ export default function UserProfileModal({ isOpen, onClose, user, onUpdateUser }
                   placeholder="••••••••••••"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-slate-900 focus:outline-none focus:border-[#ea580c] focus:bg-white"
                 />
               </div>
 
@@ -194,7 +194,7 @@ export default function UserProfileModal({ isOpen, onClose, user, onUpdateUser }
                   placeholder="••••••••••••"
                   value={formData.confirmPassword}
                   onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-slate-900 focus:outline-none focus:border-[#ea580c] focus:bg-white"
                 />
               </div>
             </div>
@@ -213,7 +213,7 @@ export default function UserProfileModal({ isOpen, onClose, user, onUpdateUser }
             <button
               type="submit"
               disabled={loading}
-              className="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold shadow-md transition-all flex items-center gap-2 disabled:opacity-50"
+              className="px-5 py-2.5 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl font-bold shadow-md transition-all flex items-center gap-2 disabled:opacity-50"
             >
               <i className="fa-solid fa-floppy-disk text-xs"></i>
               <span>{loading ? 'Saving Changes...' : 'Save Profile Changes'}</span>

@@ -52,8 +52,8 @@ export default function Header({
         );
       default:
         return (
-          <span className="inline-flex items-center gap-1 text-[9px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-1.5 py-0.5 rounded whitespace-nowrap">
-            <i className="fa-solid fa-building text-[8px]"></i> MDC
+          <span className="inline-flex items-center gap-1 text-[9px] font-bold bg-slate-100 text-slate-800 border border-slate-200 px-1.5 py-0.5 rounded whitespace-nowrap">
+            <i className="fa-solid fa-building text-[8px]"></i> Corporate
           </span>
         );
     }
@@ -73,18 +73,18 @@ export default function Header({
         </button>
 
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-700 flex items-center justify-center text-white font-bold text-sm shadow-2xs">
+          <div className="w-8 h-8 rounded-xl bg-[#ea580c] flex items-center justify-center text-white font-bold text-sm shadow-xs">
             <i className="fa-solid fa-shield-halved"></i>
           </div>
           <div>
             <div className="flex items-center gap-1.5">
               <span className="text-sm font-black tracking-tight text-slate-900">TRUEPRIV</span>
-              <span className="text-[9px] font-bold bg-emerald-100 text-emerald-800 px-1.5 py-0.2 rounded font-mono">
-                NDPA 2023
+              <span className="text-[9px] font-bold bg-orange-50 text-[#ea580c] border border-orange-200 px-1.5 py-0.2 rounded font-sans">
+                Enterprise
               </span>
             </div>
-            <div className="text-[10px] text-slate-400 font-mono leading-none">
-              Truepriv Technologies &bull; truepriv.com
+            <div className="text-[10px] text-slate-400 font-sans leading-none">
+              Privacy & Compliance Platform
             </div>
           </div>
         </div>
@@ -125,7 +125,7 @@ export default function Header({
               <div className="absolute top-full left-0 mt-2 w-72 bg-white border border-slate-200 rounded-2xl shadow-xl z-50 overflow-hidden animate-in fade-in duration-100">
                 <div className="p-2.5 bg-slate-50 border-b border-slate-100 text-[11px] font-bold text-slate-700 flex items-center justify-between">
                   <span>Switch Client Workspace</span>
-                  <span className="text-emerald-600 font-mono">{accessibleClients.length} Clients</span>
+                  <span className="text-[#ea580c] font-sans font-bold">{accessibleClients.length} Clients</span>
                 </div>
 
                 <div className="max-h-60 overflow-y-auto py-1 divide-y divide-slate-100">
@@ -139,7 +139,7 @@ export default function Header({
                           setDropdownOpen(false);
                         }}
                         className={`w-full text-left px-3 py-2 flex items-center justify-between hover:bg-slate-50 transition-colors ${
-                          isCurrent ? 'bg-emerald-50/70 border-l-2 border-emerald-600' : ''
+                          isCurrent ? 'bg-orange-50/70 border-l-2 border-[#ea580c]' : ''
                         }`}
                       >
                         <div>
@@ -147,11 +147,11 @@ export default function Header({
                           <div className="text-[10px] text-slate-500 flex items-center gap-1.5 mt-0.5 whitespace-nowrap">
                             <span>{client.industry}</span>
                             <span>&bull;</span>
-                            <span className="text-emerald-700 font-mono font-semibold">{client.compliance_score}%</span>
+                            <span className="text-orange-700 font-sans font-semibold">{client.compliance_score}%</span>
                           </div>
                         </div>
                         {isCurrent ? (
-                          <i className="fa-solid fa-check text-emerald-600 text-xs"></i>
+                          <i className="fa-solid fa-check text-[#ea580c] text-xs"></i>
                         ) : (
                           <i className="fa-solid fa-chevron-right text-slate-300 text-[10px]"></i>
                         )}
@@ -165,46 +165,46 @@ export default function Header({
         )}
 
         {/* 3. Action Buttons — Milestone 1-3 only */}
-        <div className="flex items-center bg-slate-100/90 border border-slate-200 p-0.5 rounded-xl shadow-2xs gap-0.5 flex-shrink-0">
+        <div className="flex items-center gap-1.5 flex-shrink-0">
 
           {/* Department Champions — M3: Guest Invitations */}
           <button
             onClick={onOpenChampions}
-            title="Invite Department Champions (HR, IT, Finance)"
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-purple-900 hover:text-purple-950 bg-purple-50 hover:bg-white border border-purple-200/80 rounded-lg transition-all shadow-2xs whitespace-nowrap"
+            title="Invite Department Champions"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg transition-all shadow-2xs whitespace-nowrap"
           >
-            <i className="fa-solid fa-users text-purple-600 text-xs"></i>
+            <i className="fa-solid fa-users text-slate-500 text-xs"></i>
             <span className="hidden sm:inline">Champions</span>
           </button>
 
         </div>
 
-        {/* 4. User Profile & Guaranteed-Visible Logout */}
+        {/* 4. User Profile & Logout */}
         <div className="flex items-center gap-1.5 pl-1 sm:pl-2 border-l border-slate-200 flex-shrink-0">
           
-          {/* User Badge with Full Name & Role (Click to Edit Profile) */}
+          {/* User Badge with Full Name & Role */}
           <button
             onClick={onOpenProfile}
-            title="Click to Edit My Profile & Account Settings"
+            title="Account Settings"
             className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-slate-50 hover:bg-slate-100 hover:border-slate-300 border border-slate-200 whitespace-nowrap flex-shrink-0 transition-all cursor-pointer group text-left"
           >
             {user?.avatar_url ? (
               <img
                 src={user.avatar_url}
                 alt={user.name}
-                className="w-7 h-7 rounded-lg object-cover border border-emerald-500/50 flex-shrink-0"
+                className="w-7 h-7 rounded-lg object-cover border border-orange-500/50 flex-shrink-0"
               />
             ) : (
-              <div className="w-7 h-7 rounded-lg bg-slate-900 group-hover:bg-emerald-700 flex items-center justify-center font-bold text-xs text-white flex-shrink-0 transition-colors">
+              <div className="w-7 h-7 rounded-lg bg-slate-900 group-hover:bg-[#ea580c] flex items-center justify-center font-bold text-xs text-white flex-shrink-0 transition-colors">
                 {user?.name ? user.name.substring(0, 2).toUpperCase() : 'TU'}
               </div>
             )}
             <div className="hidden lg:flex flex-col justify-center text-left">
-              <div className="text-xs font-bold text-slate-900 leading-tight whitespace-nowrap group-hover:text-emerald-700 transition-colors">
-                {user?.name || 'System Administrator'}
+              <div className="text-xs font-bold text-slate-900 leading-tight whitespace-nowrap group-hover:text-[#ea580c] transition-colors">
+                {user?.name || 'Administrator'}
               </div> 
-              <div className="text-[9px] text-slate-500 capitalize font-semibold leading-tight mt-0.5 whitespace-nowrap">
-                {user?.role?.replace(/_/g, ' ') || 'Super Admin'}
+              <div className="text-[9px] text-slate-500 capitalize font-medium leading-tight mt-0.5 whitespace-nowrap">
+                {user?.role?.replace(/_/g, ' ') || 'Corporate Admin'}
               </div>
             </div>
           </button>

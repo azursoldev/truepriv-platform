@@ -1,196 +1,282 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 export default function Sidebar({ 
   activeTab, 
   onTabChange, 
-  tenantType, 
-  userRole,
-  metrics, 
+  tenant,
+  user,
+  accessibleClients = [],
+  onSwitchTenant,
+  onLogout,
   isCollapsed, 
   onToggle 
 }) {
-  const isSuperAdmin = userRole === 'super_admin';
-  const isCorporate = tenantType === 'corporate' || ['corporate_admin', 'compliance_officer', 'dept_champion'].includes(userRole);
-  const isDpo = tenantType === 'outsourced_dpo' || userRole === 'outsourced_dpo';
-  const isDpco = tenantType === 'dpco_firm' || ['dpco_lead_auditor', 'dpco_staff'].includes(userRole);
+  const [workspaceDropdownOpen, setWorkspaceDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
-  let navItems = [];
-  let sectionTitle = 'Compliance Operations';
-
-  if (isSuperAdmin) {
-    // Super Admin: Global Platform Authority, Tenant Management & Data Residency Node
-    sectionTitle = 'Global System Authority';
-    navItems = [
-      { id: 'dashboard', label: 'Global Platform Hub', icon: 'fa-solid fa-crown', highlight: true },
-      { id: 'admin-users', label: 'Global Tenants & Users', icon: 'fa-solid fa-building-user' },
-      { id: 'audit-logs', label: 'Global Security Logs', icon: 'fa-solid fa-shield-halved' },
-      { id: 'data-residency', label: 'Platform Data Residency', icon: 'fa-solid fa-building-shield' },
-    ];
-  } else if (isDpo) {
-    // Outsourced DPO: Multi-Client Portfolio & Advisory Workspace
-    sectionTitle = 'DPO Advisory Console';
-    navItems = [
-      { id: 'portfolio-desk', label: 'Client Workspaces Portfolio', icon: 'fa-solid fa-briefcase', highlight: true },
-      { id: 'dashboard', label: 'DPO Practice Metrics', icon: 'fa-solid fa-chart-pie' },
-      { id: 'audit-logs', label: 'DPO Audit Trail', icon: 'fa-solid fa-shield-halved' },
-    ];
-  } else if (isDpco) {
-    // DPCO Firm: Statutory Audit Client Portfolio & Suite
-    sectionTitle = 'Licensed DPCO Suite';
-    navItems = [
-      { id: 'portfolio-desk', label: 'Client Audit Registry', icon: 'fa-solid fa-building-columns', highlight: true },
-      { id: 'dashboard', label: 'Audit Practice Overview', icon: 'fa-solid fa-gauge-high' },
-      { id: 'audit-logs', label: 'Statutory Audit Logs', icon: 'fa-solid fa-clipboard-check' },
-    ];
-  } else if (userRole === 'dept_champion') {
-    // Department Champion: Department Intake
-    sectionTitle = 'Department Intake';
-    navItems = [
-      { id: 'dashboard', label: 'My Department Overview', icon: 'fa-solid fa-user-tag', highlight: true },
-    ];
-  } else {
-    // Corporate Controller: Company Compliance Operations
-    sectionTitle = 'Corporate Operations';
-    navItems = [
-      { id: 'dashboard', label: 'Executive Overview', icon: 'fa-solid fa-gauge-high' },
-    ];
-
-    if (userRole === 'corporate_admin') {
-      navItems.push({
-        id: 'admin-users',
-        label: 'Team & Role Governance',
-        icon: 'fa-solid fa-users-gear',
-        highlight: true,
-      });
-      navItems.push({
-        id: 'audit-logs',
-        label: 'Security & Audit Logs',
-        icon: 'fa-solid fa-shield-halved',
-      });
-    } else if (userRole === 'compliance_officer') {
-      navItems.push({
-        id: 'audit-logs',
-        label: 'Security & Audit Logs',
-        icon: 'fa-solid fa-shield-halved',
-      });
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setWorkspaceDropdownOpen(false);
+      }
     }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const isSuperAdmin = user?.role === 'super_admin';
+  const isConsultancy = tenant?.type === 'outsourced_dpo' || tenant?.type === 'dpco_firm' || user?.role === 'outsourced_dpo' || user?.role === 'dpco_lead_auditor' || user?.role === 'dpco_staff';
+
+  const accountTypeLabel = isSuperAdmin 
+    ? 'Global authority account' 
+    : isConsultancy 
+    ? 'Consultancy account' 
+    : 'Organisation account';
+
+  // 1. WORKSPACE GROUP
+  const workspaceItems = [
+    { id: 'dashboard', label: 'Overview', icon: 'fa-solid fa-table-cells-large' },
+    { id: 'work', label: 'My work', icon: 'fa-regular fa-file-lines' },
+    { id: 'calendar', label: 'Calendar', icon: 'fa-regular fa-calendar' },
+  ];
+  // Client Portfolio is ONLY visible for Consultant accounts (DPO & DPCO)
+  if (isConsultancy || isSuperAdmin) {
+    workspaceItems.push({ id: 'portfolio-desk', label: 'Client portfolio', icon: 'fa-regular fa-folder-closed' });
   }
+
+  // 2. INVENTORY GROUP
+  const inventoryItems = [
+    { id: 'processing', label: 'Processing activities', icon: 'fa-solid fa-database' },
+    { id: 'systems', label: 'Systems', icon: 'fa-solid fa-layer-group' },
+    { id: 'vendors', label: 'Vendors', icon: 'fa-solid fa-building' },
+    { id: 'transfers', label: 'Transfers', icon: 'fa-solid fa-arrow-right-arrow-left' },
+    { id: 'contracts', label: 'Contracts', icon: 'fa-solid fa-file-contract' },
+  ];
+
+  // 3. ASSESSMENTS GROUP (Grouped under Assessments per client screenshot)
+  const assessmentItems = [
+    { id: 'dpia', label: 'DPIA', icon: 'fa-solid fa-clipboard-check' },
+    { id: 'lia', label: 'LIA', icon: 'fa-solid fa-scale-balanced' },
+    { id: 'tia', label: 'TIA', icon: 'fa-solid fa-earth-africa' },
+    { id: 'vra', label: 'VRA', icon: 'fa-solid fa-expand' },
+  ];
+
+  // 4. RESPOND GROUP
+  const respondItems = [
+    { id: 'dsar', label: 'Rights requests', icon: 'fa-regular fa-circle-check' },
+    { id: 'breach', label: 'Incidents', icon: 'fa-regular fa-shield' },
+    { id: 'regulatory-filings', label: 'Regulatory filings', icon: 'fa-regular fa-file-lines' },
+  ];
+
+  // 5. IMPROVE GROUP
+  const improveItems = [
+    { id: 'risks', label: 'Risks', icon: 'fa-solid fa-layer-group' },
+    { id: 'controls', label: 'Controls', icon: 'fa-solid fa-shield-halved' },
+    { id: 'actions', label: 'Actions', icon: 'fa-solid fa-list-check' },
+    { id: 'evidence', label: 'Evidence', icon: 'fa-regular fa-eye' },
+    { id: 'audits', label: 'Audits', icon: 'fa-solid fa-building-columns' },
+    { id: 'training', label: 'Training', icon: 'fa-solid fa-graduation-cap' },
+  ];
+  if (isConsultancy || isSuperAdmin) {
+    improveItems.push({ id: 'dpo-prog', label: 'DPO programme', icon: 'fa-solid fa-user-shield' });
+  }
+
+  // 6. CONSULTANCY GROUP (Strictly for Consultant accounts only)
+  const consultancyItems = [];
+  if (isConsultancy || isSuperAdmin) {
+    consultancyItems.push({ id: 'prospects', label: 'Prospects', icon: 'fa-solid fa-briefcase' });
+  }
+
+  // 7. BOTTOM STANDALONE ITEMS
+  const bottomItems = [
+    { id: 'reports', label: 'Reports', icon: 'fa-regular fa-file-lines' },
+    { id: 'settings', label: 'Settings', icon: 'fa-solid fa-gear' },
+    { id: 'billing', label: 'Subscription & Plans', icon: 'fa-solid fa-credit-card' },
+    { id: 'help', label: 'Help centre', icon: 'fa-regular fa-circle-question' },
+  ];
+
+  const renderNavSection = (title, items) => {
+    if (!items || items.length === 0) return null;
+    return (
+      <div className="space-y-0.5 pt-2">
+        {!isCollapsed && title && (
+          <div className="text-[10px] font-bold text-slate-400 tracking-wider uppercase px-3 py-1 select-none">
+            {title}
+          </div>
+        )}
+        {items.map((item) => {
+          const isActive = activeTab === item.id || (item.id === 'dashboard' && activeTab === 'overview');
+          return (
+            <button
+              key={item.id}
+              onClick={() => onTabChange(item.id)}
+              title={isCollapsed ? item.label : undefined}
+              className={`w-full flex items-center ${
+                isCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2'
+              } rounded-xl text-xs font-medium transition-all ${
+                isActive
+                  ? 'bg-[#fff7ed] text-[#ea580c] font-bold shadow-2xs'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+              }`}
+            >
+              <i className={`${item.icon} text-sm ${isActive ? 'text-[#ea580c]' : 'text-slate-400'} flex-shrink-0 w-4 text-center`}></i>
+              {!isCollapsed && <span className="truncate">{item.label}</span>}
+            </button>
+          );
+        })}
+      </div>
+    );
+  };
 
   return (
     <aside 
       className={`${
-        isCollapsed ? 'w-18' : 'w-64'
-      } transition-all duration-300 ease-in-out border-r border-slate-200 bg-white flex flex-col justify-between p-3 min-h-[calc(100vh-4rem)] shadow-2xs flex-shrink-0`}
+        isCollapsed ? 'w-20' : 'w-64'
+      } transition-all duration-300 ease-in-out border-r border-slate-200/90 bg-white flex flex-col justify-between min-h-screen h-screen sticky top-0 shadow-2xs flex-shrink-0 z-20`}
     >
-      <div className="space-y-4">
+      <div className="flex flex-col flex-1 overflow-y-auto">
         
-        {/* Navigation Header & Collapse/Expand Toggle */}
-        <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'justify-between px-2'} mb-1`}>
-          {!isCollapsed && (
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-              {sectionTitle}
-            </span>
+        {/* 1. Brand Logo */}
+        <div className="p-4 pb-2 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-[#ea580c] flex items-center justify-center text-white font-black text-lg shadow-xs select-none">
+              T
+            </div>
+            {!isCollapsed && (
+              <span className="text-xl font-bold tracking-tight text-slate-900">
+                TruePriv
+              </span>
+            )}
+          </div>
+          {onToggle && (
+            <button
+              onClick={onToggle}
+              title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+              className="text-slate-400 hover:text-slate-700 p-1 rounded-lg text-xs md:hidden"
+            >
+              <i className={`fa-solid ${isCollapsed ? 'fa-angles-right' : 'fa-angles-left'}`}></i>
+            </button>
           )}
-          <button
-            onClick={onToggle}
-            title={isCollapsed ? "Expand Sidebar Menu" : "Collapse Sidebar Menu"}
-            className="w-7 h-7 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-500 hover:text-slate-900 transition-all flex items-center justify-center text-xs"
-          >
-            <i className={`fa-solid ${isCollapsed ? 'fa-angles-right' : 'fa-angles-left'}`}></i>
-          </button>
         </div>
 
-        {/* Navigation Item List */}
-        <nav className="space-y-1">
-          {navItems.map((item) => {
-            const isActive = activeTab === item.id;
-
-            return (
+        {/* 2. Workspace Selector */}
+        {!isCollapsed && (
+          <div className="px-4 py-3" ref={dropdownRef}>
+            <div className="text-[10px] font-bold text-slate-400 tracking-wider uppercase mb-1.5 select-none">
+              WORKSPACE
+            </div>
+            <div className="relative">
               <button
-                key={item.id}
-                onClick={() => onTabChange(item.id)}
-                title={isCollapsed ? item.label : undefined}
-                className={`w-full flex items-center ${
-                  isCollapsed ? 'justify-center p-2.5' : 'justify-between px-3 py-2.5'
-                } rounded-xl text-sm font-medium transition-all group relative ${
-                  isActive
-                    ? 'bg-emerald-50 text-emerald-900 border border-emerald-200 font-semibold shadow-2xs'
-                    : item.highlight
-                    ? 'bg-purple-50 text-purple-800 border border-purple-200 hover:bg-purple-100'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 border border-transparent'
-                }`}
+                onClick={() => accessibleClients.length > 1 && setWorkspaceDropdownOpen(!workspaceDropdownOpen)}
+                className={`w-full flex items-center justify-between px-3 py-2 bg-white border border-slate-200 ${
+                  accessibleClients.length > 1 ? 'hover:border-slate-300 cursor-pointer' : 'cursor-default'
+                } rounded-xl text-left shadow-2xs transition-all`}
               >
-                <div className="flex items-center gap-3">
-                  <i className={`${item.icon} text-sm transition-colors ${
-                    isActive ? 'text-emerald-700' : item.highlight ? 'text-purple-600' : 'text-slate-400 group-hover:text-slate-700'
-                  }`}></i>
-                  
-                  {!isCollapsed && (
-                    <span className="truncate max-w-[140px] text-left text-xs">{item.label}</span>
-                  )}
-                </div>
-
-                {/* Badges / Counts */}
-                {!isCollapsed ? (
-                  <div className="flex items-center gap-1.5 flex-shrink-0">
-                    {item.badge && (
-                      <span className="text-[10px] font-mono bg-emerald-100 text-emerald-800 border border-emerald-200 px-1.5 py-0.2 rounded font-semibold">
-                        {item.badge}
-                      </span>
-                    )}
-                    {item.count !== undefined && item.count > 0 && (
-                      <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full font-bold ${
-                        item.alert 
-                          ? 'bg-red-100 text-red-700 border border-red-200 animate-pulse' 
-                          : item.urgent 
-                          ? 'bg-amber-100 text-amber-800 border border-amber-200' 
-                          : 'bg-slate-100 text-slate-700 border border-slate-200'
-                      }`}>
-                        {item.count}
-                      </span>
-                    )}
-                  </div>
-                ) : (
-                  /* Compact Dot Indicator when collapsed */
-                  (item.count > 0 || item.alert || item.urgent) && (
-                    <span className={`absolute top-1 right-1 w-2 h-2 rounded-full ${
-                      item.alert ? 'bg-red-500 animate-ping' : item.urgent ? 'bg-amber-500' : 'bg-emerald-500'
-                    }`} />
-                  )
+                <span className="text-xs font-bold text-slate-800 uppercase tracking-tight truncate">
+                  {tenant?.name || (isConsultancy ? 'DPCO TEST ACCOUNT' : 'APEX MICROFINANCE BANK')}
+                </span>
+                {accessibleClients.length > 1 && (
+                  <i className="fa-solid fa-chevron-down text-[10px] text-slate-400 ml-1.5 flex-shrink-0"></i>
                 )}
               </button>
-            );
-          })}
+
+              <div className="text-xs text-slate-500 mt-1 pl-0.5">
+                {accountTypeLabel}
+              </div>
+
+              {/* Accessible Clients Dropdown */}
+              {workspaceDropdownOpen && accessibleClients.length > 1 && (
+                <div className="absolute top-full left-0 right-0 mt-1.5 bg-white border border-slate-200 rounded-2xl shadow-xl p-2 z-50 animate-in fade-in space-y-1">
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-2 py-1">
+                    Switch Workspace
+                  </div>
+                  {accessibleClients.map((client) => {
+                    const isSelected = (client.tenant_id || client.id) === tenant?.id;
+                    return (
+                      <button
+                        key={client.tenant_id || client.id}
+                        onClick={() => {
+                          onSwitchTenant(client.tenant_id || client.id);
+                          setWorkspaceDropdownOpen(false);
+                        }}
+                        className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium flex items-center justify-between transition-all ${
+                          isSelected ? 'bg-orange-50 text-orange-700 font-bold' : 'hover:bg-slate-50 text-slate-700'
+                        }`}
+                      >
+                        <span className="truncate">{client.tenant_name || client.name}</span>
+                        {isSelected && <i className="fa-solid fa-check text-[10px] text-orange-600"></i>}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* 3. Navigation Sections (Matching Client's Exact Groupings) */}
+        <nav className="px-3 py-2 space-y-2 flex-1 pb-4">
+          {renderNavSection(null, workspaceItems)}
+          {renderNavSection('INVENTORY', inventoryItems)}
+          {renderNavSection('ASSESSMENTS', assessmentItems)}
+          {renderNavSection('RESPOND', respondItems)}
+          {renderNavSection('IMPROVE', improveItems)}
+          {consultancyItems.length > 0 && renderNavSection('CONSULTANCY', consultancyItems)}
+          
+          {/* Bottom Standalone items */}
+          <div className="pt-2 border-t border-slate-100">
+            {bottomItems.map((item) => {
+              const isActive = activeTab === item.id || (item.id === 'settings' && ['admin-users', 'audit-logs', 'champions-desk', 'data-residency', 'my-profile'].includes(activeTab));
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => onTabChange(item.id)}
+                  title={isCollapsed ? item.label : undefined}
+                  className={`w-full flex items-center ${
+                    isCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2'
+                  } rounded-xl text-xs font-medium transition-all ${
+                    isActive
+                      ? 'bg-[#fff7ed] text-[#ea580c] font-bold shadow-2xs'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                  }`}
+                >
+                  <i className={`${item.icon} text-sm ${isActive ? 'text-[#ea580c]' : 'text-slate-400'} flex-shrink-0 w-4 text-center`}></i>
+                  {!isCollapsed && <span className="truncate">{item.label}</span>}
+                </button>
+              );
+            })}
+          </div>
         </nav>
       </div>
 
-      {/* Statutory Footer Badge */}
-      <div className={`rounded-2xl border border-slate-200 bg-slate-50 ${isCollapsed ? 'p-2 text-center' : 'p-3'}`}>
-        <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-2 mb-1'}`}>
-          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-ping flex-shrink-0" />
+      {/* 4. Bottom User Profile Capsule */}
+      <div className="p-3 border-t border-slate-100 bg-white">
+        <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'justify-between'} gap-2`}>
+          <div className="flex items-center gap-2.5 overflow-hidden">
+            <div className="w-8 h-8 rounded-full bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-center font-bold text-xs flex-shrink-0 select-none">
+              {user?.name ? user.name.charAt(0).toUpperCase() : 'E'}
+            </div>
+            {!isCollapsed && (
+              <div className="min-w-0">
+                <div className="text-xs font-bold text-slate-900 truncate">
+                  {user?.name || 'Esmee de Jong'}
+                </div>
+                <div className="text-[11px] text-slate-400 truncate">
+                  {user?.email || 'esmee.dejong92@gmail.com'}
+                </div>
+              </div>
+            )}
+          </div>
           {!isCollapsed && (
-            <span className="text-xs font-bold text-slate-800">
-              {isSuperAdmin ? 'Truepriv Authority' : isDpo ? 'DPO Advisory Mode' : isDpco ? 'Licensed DPCO Suite' : 'NDPA 2023 Active'}
-            </span>
+            <button 
+              onClick={onLogout} 
+              className="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer"
+              title="Sign out of TruePriv"
+            >
+              <i className="fa-solid fa-arrow-right-from-bracket text-sm"></i>
+            </button>
           )}
         </div>
-        {!isCollapsed && (
-          <>
-            <p className="text-[10px] text-slate-500 leading-tight mt-1">
-              {isSuperAdmin 
-                ? 'Master authority console with global multi-tenant controls.' 
-                : isDpo
-                ? 'Multi-client data protection officer advisory engine active.'
-                : isDpco
-                ? 'Statutory annual compliance audit & certification active.'
-                : 'Rule-based 80% automation engine active. Review &rarr; Approve.'}
-            </p>
-            <div className="mt-2 pt-2 border-t border-slate-200/80 flex items-center justify-between text-[9px] text-slate-400 font-mono">
-              <span>NDPC GAID v1.2</span>
-              <span>SLA SEC-40</span>
-            </div>
-          </>
-        )}
       </div>
     </aside>
   );

@@ -141,7 +141,7 @@ export default function PublicChampionIntakePortal({ token }) {
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center justify-center p-6">
-        <div className="w-12 h-12 border-3 border-emerald-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+        <div className="w-12 h-12 border-3 border-orange-500 border-t-transparent rounded-full animate-spin mb-4"></div>
         <h2 className="text-base font-semibold text-slate-300">Verifying Department Privacy Token...</h2>
         <p className="text-xs text-slate-500 mt-1">Connecting to TruePriv Compliance Sovereign Node</p>
       </div>
@@ -167,7 +167,7 @@ export default function PublicChampionIntakePortal({ token }) {
           </div>
           <button
             onClick={() => window.location.reload()}
-            className="mt-6 w-full py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl transition-all"
+            className="mt-6 w-full py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl transition-all cursor-pointer"
           >
             Retry Verification
           </button>
@@ -179,12 +179,12 @@ export default function PublicChampionIntakePortal({ token }) {
   // 3. Success / Already Accepted View
   if (submitSuccess) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-6 selection:bg-emerald-500 selection:text-white">
-        <div className="max-w-lg w-full bg-slate-900 border border-emerald-500/30 rounded-3xl p-8 text-center shadow-2xl">
-          <div className="w-16 h-16 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-2xl flex items-center justify-center mx-auto mb-5 animate-bounce">
+      <div className="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-6 selection:bg-orange-500 selection:text-white">
+        <div className="max-w-lg w-full bg-slate-900 border border-orange-500/30 rounded-3xl p-8 text-center shadow-2xl">
+          <div className="w-16 h-16 bg-orange-500/10 border border-orange-500/30 text-orange-400 rounded-2xl flex items-center justify-center mx-auto mb-5 animate-bounce">
             <i className="fa-solid fa-shield-check text-3xl"></i>
           </div>
-          <span className="px-3 py-1 bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 rounded-full text-[11px] font-bold tracking-wide uppercase">
+          <span className="px-3 py-1 bg-orange-950/80 text-orange-300 border border-orange-500/40 rounded-full text-[11px] font-bold tracking-wide uppercase">
             Submission Confirmed
           </span>
           <h2 className="text-xl font-bold text-white mt-3 mb-2">Department Processing Recorded</h2>
@@ -199,7 +199,7 @@ export default function PublicChampionIntakePortal({ token }) {
             </div>
             <div className="flex justify-between items-center text-xs pb-2 border-b border-slate-800">
               <span className="text-slate-400">Department:</span>
-              <span className="font-bold text-emerald-400">{invitation?.department}</span>
+              <span className="font-bold text-orange-400">{invitation?.department}</span>
             </div>
             <div className="flex justify-between items-center text-xs pb-2 border-b border-slate-800">
               <span className="text-slate-400">Champion:</span>
@@ -213,9 +213,9 @@ export default function PublicChampionIntakePortal({ token }) {
             </div>
           </div>
 
-          <div className="p-4 bg-emerald-950/20 border border-emerald-500/20 rounded-2xl text-left text-xs text-slate-300 space-y-1.5">
-            <p className="font-semibold text-emerald-300 flex items-center gap-2">
-              <i className="fa-solid fa-circle-check text-emerald-400"></i> Next Step:
+          <div className="p-4 bg-orange-950/20 border border-orange-500/20 rounded-2xl text-left text-xs text-slate-300 space-y-1.5">
+            <p className="font-semibold text-orange-300 flex items-center gap-2">
+              <i className="fa-solid fa-circle-check text-orange-400"></i> Next Step:
             </p>
             <p className="text-slate-400 text-[11px] leading-relaxed">
               Your Data Protection Officer (DPO) will review this inventory for NDPA Section 24 compliance and merge it into the official Record of Processing Activities (ROPA). You may now close this window.
@@ -228,23 +228,23 @@ export default function PublicChampionIntakePortal({ token }) {
 
   // 4. Main Public Intake Form View
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center py-10 px-4 sm:px-6 selection:bg-emerald-500 selection:text-white">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center py-10 px-4 sm:px-6 selection:bg-orange-500 selection:text-white">
       {/* Container */}
       <div className="max-w-3xl w-full space-y-6">
 
         {/* Top Header Card */}
         <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
+          <div className="absolute top-0 right-0 w-80 h-80 bg-orange-500/5 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
             <div className="flex items-center gap-3.5">
-              <div className="w-12 h-12 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-2xl flex items-center justify-center shadow-inner">
+              <div className="w-12 h-12 bg-orange-500/10 border border-orange-500/30 text-orange-400 rounded-2xl flex items-center justify-center shadow-inner">
                 <i className="fa-solid fa-users-gear text-xl"></i>
               </div>
               <div>
-                <span className="text-[11px] font-bold text-emerald-400 tracking-wider uppercase flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                  NDPA Compliance Champion Intake
+                <span className="text-[11px] font-bold text-orange-400 tracking-wider uppercase flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse"></span>
+                  Compliance Champion Intake
                 </span>
                 <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">
                   Department Data Processing Register
@@ -268,7 +268,7 @@ export default function PublicChampionIntakePortal({ token }) {
             </div>
             <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800/80">
               <span className="text-slate-500 text-[10px] block uppercase font-medium">Assigned Champion</span>
-              <span className="font-bold text-emerald-400 truncate block mt-0.5">{invitation?.email}</span>
+              <span className="font-bold text-orange-400 truncate block mt-0.5">{invitation?.email}</span>
             </div>
             <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800/80">
               <span className="text-slate-500 text-[10px] block uppercase font-medium">Statutory Authority</span>
@@ -277,7 +277,7 @@ export default function PublicChampionIntakePortal({ token }) {
           </div>
 
           <p className="text-xs text-slate-400 mt-4 leading-relaxed bg-slate-950/40 p-3.5 rounded-xl border border-slate-800/60">
-            <i className="fa-solid fa-shield-halved text-emerald-400 mr-1.5"></i>
+            <i className="fa-solid fa-shield-halved text-orange-400 mr-1.5"></i>
             As your department's designated Privacy Champion, please record the personal data processing activities conducted within your department (e.g. employee records, client onboarding, vendor management). This information will be reviewed by your DPO to maintain your organization's statutory compliance.
           </p>
         </div>
@@ -296,7 +296,7 @@ export default function PublicChampionIntakePortal({ token }) {
           {/* Section 1: Process Identity */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 pb-2 border-b border-slate-800">
-              <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold">1</span>
+              <span className="w-5 h-5 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center text-xs font-bold">1</span>
               <h3 className="text-sm font-bold text-white tracking-wide">Processing Activity Details</h3>
             </div>
 
@@ -311,7 +311,7 @@ export default function PublicChampionIntakePortal({ token }) {
                   placeholder="e.g., Staff Payroll & Pension Disbursement, Customer KYC Verification, Sales Outreach"
                   value={formData.process_name}
                   onChange={(e) => setFormData({ ...formData, process_name: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all"
+                  className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#ea580c] focus:ring-1 focus:ring-[#ea580c] transition-all"
                 />
               </div>
 
@@ -325,7 +325,7 @@ export default function PublicChampionIntakePortal({ token }) {
                   placeholder="Why does your department collect and use this data? (e.g., Monthly compensation, tax deduction, statutory audit reporting)"
                   value={formData.business_purpose}
                   onChange={(e) => setFormData({ ...formData, business_purpose: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all leading-relaxed"
+                  className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#ea580c] focus:ring-1 focus:ring-[#ea580c] transition-all leading-relaxed"
                 />
               </div>
             </div>
@@ -334,7 +334,7 @@ export default function PublicChampionIntakePortal({ token }) {
           {/* Section 2: Lawful Basis under NDPA */}
           <div className="space-y-3">
             <div className="flex items-center gap-2 pb-2 border-b border-slate-800">
-              <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold">2</span>
+              <span className="w-5 h-5 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center text-xs font-bold">2</span>
               <h3 className="text-sm font-bold text-white tracking-wide">Lawful Basis under NDPA 2023</h3>
             </div>
 
@@ -347,13 +347,13 @@ export default function PublicChampionIntakePortal({ token }) {
                     onClick={() => setFormData({ ...formData, legal_basis: lb.value })}
                     className={`p-3.5 rounded-2xl border cursor-pointer transition-all flex flex-col justify-between ${
                       isSelected
-                        ? 'bg-emerald-950/40 border-emerald-500 text-white shadow-sm ring-1 ring-emerald-500'
+                        ? 'bg-orange-950/40 border-[#ea580c] text-white shadow-sm ring-1 ring-[#ea580c]'
                         : 'bg-slate-950/70 border-slate-800 hover:border-slate-700 text-slate-300'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1.5">
                       <span className="text-xs font-bold flex items-center gap-2">
-                        <i className={`fa-solid fa-${isSelected ? 'circle-check text-emerald-400' : 'circle text-slate-600'} text-xs`}></i>
+                        <i className={`fa-solid fa-${isSelected ? 'circle-check text-orange-400' : 'circle text-slate-600'} text-xs`}></i>
                         {lb.label}
                       </span>
                     </div>
@@ -368,7 +368,7 @@ export default function PublicChampionIntakePortal({ token }) {
           <div className="space-y-3">
             <div className="flex items-center justify-between pb-2 border-b border-slate-800">
               <div className="flex items-center gap-2">
-                <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold">3</span>
+                <span className="w-5 h-5 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center text-xs font-bold">3</span>
                 <h3 className="text-sm font-bold text-white tracking-wide">
                   Personal Data Elements Processed <span className="text-rose-400">*</span>
                 </h3>
@@ -387,9 +387,9 @@ export default function PublicChampionIntakePortal({ token }) {
                     type="button"
                     key={elem}
                     onClick={() => handleToggleElement(elem)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 ${
+                    className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
                       active
-                        ? 'bg-emerald-500/20 border border-emerald-500/50 text-emerald-300'
+                        ? 'bg-orange-500/20 border border-orange-500/50 text-orange-300'
                         : 'bg-slate-950 border border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200'
                     }`}
                   >
@@ -409,12 +409,12 @@ export default function PublicChampionIntakePortal({ token }) {
                   value={customElementInput}
                   onChange={(e) => setCustomElementInput(e.target.value)}
                   onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleAddCustomElement(e); } }}
-                  className="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+                  className="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#ea580c]"
                 />
                 <button
                   type="button"
                   onClick={handleAddCustomElement}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl transition-all"
+                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded-xl transition-all cursor-pointer"
                 >
                   Add
                 </button>
@@ -433,7 +433,7 @@ export default function PublicChampionIntakePortal({ token }) {
                       <button
                         type="button"
                         onClick={() => handleRemoveElement(elem)}
-                        className="text-slate-500 group-hover:text-rose-400 transition-colors"
+                        className="text-slate-500 group-hover:text-rose-400 transition-colors cursor-pointer"
                       >
                         <i className="fa-solid fa-xmark text-[10px]"></i>
                       </button>
@@ -447,7 +447,7 @@ export default function PublicChampionIntakePortal({ token }) {
           {/* Section 4: Storage & Retention */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 pb-2 border-b border-slate-800">
-              <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold">4</span>
+              <span className="w-5 h-5 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center text-xs font-bold">4</span>
               <h3 className="text-sm font-bold text-white tracking-wide">Storage, Retention & Systems</h3>
             </div>
 
@@ -462,7 +462,7 @@ export default function PublicChampionIntakePortal({ token }) {
                   placeholder="e.g., BambooHR Cloud, Internal Shared Drive, File Cabinets"
                   value={formData.storage_location}
                   onChange={(e) => setFormData({ ...formData, storage_location: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+                  className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#ea580c]"
                 />
               </div>
 
@@ -476,7 +476,7 @@ export default function PublicChampionIntakePortal({ token }) {
                   placeholder="e.g., 7 Years post-termination, 1 Year after KYC, Indefinite"
                   value={formData.retention_period}
                   onChange={(e) => setFormData({ ...formData, retention_period: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+                  className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#ea580c]"
                 />
               </div>
             </div>
@@ -490,7 +490,7 @@ export default function PublicChampionIntakePortal({ token }) {
                 placeholder="Mention any access controls (e.g. 2FA, encrypted drives, restricted folder permissions)..."
                 value={formData.notes}
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 leading-relaxed"
+                className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#ea580c] leading-relaxed"
               />
             </div>
           </div>
@@ -498,14 +498,14 @@ export default function PublicChampionIntakePortal({ token }) {
           {/* Submit Action */}
           <div className="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-[11px] text-slate-400">
-              <i className="fa-solid fa-lock text-emerald-400 mr-1.5"></i>
+              <i className="fa-solid fa-lock text-orange-400 mr-1.5"></i>
               Your submission will be securely transmitted directly to your DPO.
             </p>
 
             <button
               type="submit"
               disabled={submitting}
-              className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-emerald-600/20 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              className="w-full sm:w-auto px-8 py-3.5 bg-[#ea580c] hover:bg-[#c2410c] text-white font-bold text-xs rounded-xl shadow-lg shadow-orange-600/20 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
             >
               {submitting ? (
                 <>

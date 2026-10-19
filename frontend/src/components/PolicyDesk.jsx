@@ -69,7 +69,7 @@ export default function PolicyDesk({ tenant }) {
       {/* Toast Notification */}
       {notification && (
         <div className={`p-4 rounded-2xl flex items-center justify-between text-xs font-semibold shadow-xs ${
-          notification.type === 'success' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-800 border border-red-200'
+          notification.type === 'success' ? 'bg-orange-50 text-orange-900 border border-orange-200' : 'bg-red-50 text-red-800 border border-red-200'
         }`}>
           <span>{notification.message}</span>
           <button onClick={() => setNotification(null)} className="text-slate-400 hover:text-slate-700 font-bold">&times;</button>
@@ -80,13 +80,13 @@ export default function PolicyDesk({ tenant }) {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Statutory Policy & Privacy Notice Auto-Generator</h2>
-            <span className="text-[11px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded font-mono font-bold">
-              NDPA TEMPLATES
+            <h2 className="text-xl font-bold text-slate-900 tracking-tight">Policies & Privacy Notices</h2>
+            <span className="text-[11px] bg-orange-50 text-[#ea580c] border border-orange-200 px-2 py-0.5 rounded font-sans font-bold">
+              Policies
             </span>
           </div>
-          <p className="text-xs text-slate-600 mt-0.5">
-            Auto-generate compliant Nigerian legal documentation tailored directly from your active RoPA database.
+          <p className="text-xs text-slate-500 mt-0.5">
+            Compliant legal documentation and policy schedules tailored to your processing operations.
           </p>
         </div>
       </div>
@@ -112,13 +112,13 @@ export default function PolicyDesk({ tenant }) {
                 }}
                 className={`p-4 rounded-2xl border cursor-pointer transition-all shadow-2xs ${
                   isSelected
-                    ? 'bg-emerald-50/80 border-emerald-500 ring-2 ring-emerald-500/20'
+                    ? 'bg-orange-50/80 border-[#ea580c] ring-2 ring-orange-500/20'
                     : 'bg-white border-slate-200 hover:bg-slate-50'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1">
                   <h4 className="text-xs font-bold text-slate-900">{pt.label}</h4>
-                  <i className="fa-solid fa-wand-magic-sparkles text-emerald-600 text-xs"></i>
+                  <i className="fa-solid fa-wand-magic-sparkles text-[#ea580c] text-xs"></i>
                 </div>
                 <p className="text-[11px] text-slate-600 leading-relaxed">{pt.desc}</p>
               </div>

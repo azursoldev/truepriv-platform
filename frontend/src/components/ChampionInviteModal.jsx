@@ -85,13 +85,13 @@ export default function ChampionInviteModal({ onNavigateBack }) {
           <div className="h-5 w-px bg-slate-200 hidden sm:block"></div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold bg-purple-50 text-purple-800 border border-purple-200 px-2.5 py-0.5 rounded-full font-mono flex items-center gap-1.5">
-                <i className="fa-solid fa-users text-purple-600 text-[10px]"></i>
-                <span>NDPA SECTION 24 INTAKE DESK</span>
+              <span className="text-xs font-bold bg-orange-50 text-[#ea580c] border border-orange-200 px-2.5 py-0.5 rounded-full font-sans flex items-center gap-1.5">
+                <i className="fa-solid fa-users text-[#ea580c] text-[10px]"></i>
+                <span>Department Intake</span>
               </span>
             </div>
-            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight mt-1">
-              Department Champions Invitation & Intake Desk
+            <h2 className="text-xl font-bold text-slate-900 tracking-tight mt-1">
+              Department Champions & Guest Intake
             </h2>
             <p className="text-xs text-slate-500">
               Decentralize compliance data collection by issuing tokenized intake links to HR, IT, Finance, and Operations leads.
@@ -113,7 +113,7 @@ export default function ChampionInviteModal({ onNavigateBack }) {
         <div className="p-5 bg-white border border-slate-200 rounded-2xl shadow-xs">
           <div className="flex items-center justify-between">
             <span className="text-[10px] text-slate-500 font-bold uppercase">Total Issued Tokens</span>
-            <i className="fa-solid fa-link text-purple-500"></i>
+            <i className="fa-solid fa-link text-slate-400"></i>
           </div>
           <div className="text-2xl font-extrabold font-mono text-slate-900 mt-1">
             {invitations.length}
@@ -124,12 +124,12 @@ export default function ChampionInviteModal({ onNavigateBack }) {
         <div className="p-5 bg-white border border-slate-200 rounded-2xl shadow-xs">
           <div className="flex items-center justify-between">
             <span className="text-[10px] text-slate-500 font-bold uppercase">Accepted & Logged</span>
-            <i className="fa-solid fa-circle-check text-emerald-600"></i>
+            <i className="fa-solid fa-circle-check text-[#ea580c]"></i>
           </div>
-          <div className="text-2xl font-extrabold font-mono text-emerald-700 mt-1">
+          <div className="text-2xl font-extrabold font-mono text-slate-900 mt-1">
             {acceptedCount}
           </div>
-          <div className="text-[11px] text-emerald-700 font-semibold mt-1">RoPA Activities Ingested</div>
+          <div className="text-[11px] text-slate-500 font-medium mt-1">RoPA Activities Ingested</div>
         </div>
 
         <div className="p-5 bg-white border border-slate-200 rounded-2xl shadow-xs">
@@ -167,7 +167,7 @@ export default function ChampionInviteModal({ onNavigateBack }) {
                   placeholder="e.g. auditor.lead@kpmg.ng or hr.lead@company.ng"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-semibold focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-semibold focus:outline-none focus:border-[#ea580c] focus:bg-white transition-colors"
                 />
               </div>
 
@@ -177,7 +177,7 @@ export default function ChampionInviteModal({ onNavigateBack }) {
                   <select
                     value={role}
                     onChange={(e) => setRole(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-slate-900 font-bold focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-slate-900 font-bold focus:outline-none focus:border-[#ea580c] focus:bg-white transition-colors"
                   >
                     <option value="dept_champion">Department Champion</option>
                     <option value="auditor_viewer">External Guest Auditor</option>
@@ -190,7 +190,7 @@ export default function ChampionInviteModal({ onNavigateBack }) {
                   <select
                     value={expiresDays}
                     onChange={(e) => setExpiresDays(Number(e.target.value))}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-slate-900 font-bold focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-slate-900 font-bold focus:outline-none focus:border-[#ea580c] focus:bg-white transition-colors"
                   >
                     <option value={30}>30 Days (Statutory)</option>
                     <option value={14}>14 Days (Bi-Weekly)</option>
@@ -204,7 +204,7 @@ export default function ChampionInviteModal({ onNavigateBack }) {
                 <select
                   value={department}
                   onChange={(e) => setDepartment(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-bold focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-bold focus:outline-none focus:border-[#ea580c] focus:bg-white transition-colors"
                 >
                   <option value="HR">Human Resources (HR & Payroll Processing)</option>
                   <option value="IT">Information Technology & Cloud Infrastructure</option>
@@ -223,19 +223,19 @@ export default function ChampionInviteModal({ onNavigateBack }) {
                   placeholder="e.g. Please document all department processing activities or review statutory evidence."
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-slate-900 focus:outline-none focus:border-[#ea580c] focus:bg-white transition-colors"
                 ></textarea>
               </div>
 
-              <div className="p-3 bg-purple-50/70 border border-purple-200 rounded-xl text-[11px] text-purple-900">
-                <i className="fa-solid fa-clock mr-1 text-purple-600"></i>
+              <div className="p-3 bg-orange-50/70 border border-orange-200 rounded-xl text-[11px] text-orange-950">
+                <i className="fa-solid fa-clock mr-1 text-[#ea580c]"></i>
                 Tokenized links bypass password creation and enforce a strict 30-day guest expiration window under NDPA security guidelines.
               </div>
 
               <button
                 type="submit"
                 disabled={sending}
-                className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-md transition-all disabled:opacity-50 cursor-pointer"
+                className="w-full py-3 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-md transition-all disabled:opacity-50 cursor-pointer"
               >
                 <i className="fa-solid fa-key text-xs"></i>
                 <span>{sending ? 'Generating Access Token...' : `Generate ${expiresDays}-Day Secure Access Link`}</span>
@@ -245,10 +245,10 @@ export default function ChampionInviteModal({ onNavigateBack }) {
 
           {/* Newly Generated URL Banner */}
           {latestInviteUrl && (
-            <div className="p-5 bg-emerald-50 border border-emerald-300 rounded-3xl space-y-2 animate-in fade-in shadow-xs">
+            <div className="p-5 bg-orange-50 border border-orange-300 rounded-3xl space-y-2 animate-in fade-in shadow-xs">
               <div className="flex items-center justify-between">
-                <div className="text-xs font-bold text-emerald-950 flex items-center gap-1.5">
-                  <i className="fa-solid fa-circle-check text-emerald-600"></i>
+                <div className="text-xs font-bold text-orange-950 flex items-center gap-1.5">
+                  <i className="fa-solid fa-circle-check text-[#ea580c]"></i>
                   <span>Invitation Link Generated:</span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -256,22 +256,22 @@ export default function ChampionInviteModal({ onNavigateBack }) {
                     href={latestInviteUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="px-3 py-1 bg-white hover:bg-slate-100 border border-emerald-300 text-emerald-900 rounded-lg text-xs font-bold flex items-center gap-1 shadow-2xs"
+                    className="px-3 py-1 bg-white hover:bg-slate-100 border border-orange-200 text-orange-900 rounded-lg text-xs font-bold flex items-center gap-1 shadow-2xs"
                   >
-                    <i className="fa-solid fa-arrow-up-right-from-square text-xs text-emerald-700"></i>
+                    <i className="fa-solid fa-arrow-up-right-from-square text-xs text-[#ea580c]"></i>
                     <span>Open Form</span>
                   </a>
                   <button
                     type="button"
                     onClick={() => handleCopy(latestInviteUrl, 'latest')}
-                    className="px-3 py-1 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-bold flex items-center gap-1 cursor-pointer"
+                    className="px-3 py-1 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-lg text-xs font-bold flex items-center gap-1 cursor-pointer"
                   >
                     <i className="fa-solid fa-copy text-xs"></i>
                     <span>{copiedToken === 'latest' ? 'Copied!' : 'Copy Link'}</span>
                   </button>
                 </div>
               </div>
-              <div className="p-2.5 bg-white border border-emerald-200 rounded-xl text-[11px] font-mono text-slate-800 break-all select-all">
+              <div className="p-2.5 bg-white border border-orange-200 rounded-xl text-[11px] font-mono text-slate-800 break-all select-all">
                 {latestInviteUrl}
               </div>
             </div>
@@ -283,7 +283,7 @@ export default function ChampionInviteModal({ onNavigateBack }) {
           <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <i className="fa-solid fa-list-check text-emerald-600"></i>
+                <i className="fa-solid fa-list-check text-slate-700"></i>
                 <span>Active Department Intake Invitations</span>
               </h3>
               <span className="text-xs font-mono font-bold text-slate-500">
@@ -293,7 +293,7 @@ export default function ChampionInviteModal({ onNavigateBack }) {
 
             {loading ? (
               <div className="py-12 text-center text-slate-500 text-xs">
-                <i className="fa-solid fa-circle-notch fa-spin text-lg text-emerald-600 mb-2"></i>
+                <i className="fa-solid fa-circle-notch fa-spin text-lg text-[#ea580c] mb-2"></i>
                 <p>Loading active invitations...</p>
               </div>
             ) : invitations.length === 0 ? (
@@ -307,7 +307,7 @@ export default function ChampionInviteModal({ onNavigateBack }) {
                 {invitations.map((inv) => (
                   <div key={inv.id} className="p-4 bg-slate-50 hover:bg-slate-100/80 border border-slate-200 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-colors">
                     <div className="flex items-start sm:items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-purple-100 text-purple-900 flex items-center justify-center font-bold text-xs flex-shrink-0 shadow-2xs">
+                      <div className="w-10 h-10 rounded-xl bg-orange-100 text-orange-950 flex items-center justify-center font-bold text-xs flex-shrink-0 shadow-2xs">
                         {inv.department_assigned}
                       </div>
                       <div>
@@ -316,9 +316,9 @@ export default function ChampionInviteModal({ onNavigateBack }) {
                           <span>Dept: <strong className="text-slate-800">{inv.department_assigned}</strong></span>
                           <span>&bull;</span>
                           <span className={`inline-flex items-center gap-1 font-bold ${
-                            inv.status === 'accepted' ? 'text-emerald-700' : 'text-amber-700'
+                            inv.status === 'accepted' ? 'text-slate-900' : 'text-amber-700'
                           }`}>
-                            <span className={`w-1.5 h-1.5 rounded-full ${inv.status === 'accepted' ? 'bg-emerald-500' : 'bg-amber-500'}`}></span>
+                            <span className={`w-1.5 h-1.5 rounded-full ${inv.status === 'accepted' ? 'bg-[#ea580c]' : 'bg-amber-500'}`}></span>
                             {inv.status === 'accepted' ? 'Accepted / Data Logged' : 'Pending Intake'}
                           </span>
                         </div>
@@ -347,7 +347,7 @@ export default function ChampionInviteModal({ onNavigateBack }) {
                         className="px-3 py-1.5 bg-white hover:bg-slate-200 border border-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
                         title="Copy Invite URL"
                       >
-                        <i className="fa-solid fa-copy text-xs text-purple-600"></i>
+                        <i className="fa-solid fa-copy text-xs text-[#ea580c]"></i>
                         <span>{copiedToken === inv.id ? 'Copied Link!' : 'Copy Link'}</span>
                       </button>
                     </div>

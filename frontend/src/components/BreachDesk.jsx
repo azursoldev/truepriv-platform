@@ -97,7 +97,7 @@ export default function BreachDesk({ onRefreshMetrics }) {
       {/* Toast Notification */}
       {notification && (
         <div className={`p-4 rounded-2xl flex items-center justify-between text-xs font-semibold shadow-xs ${
-          notification.type === 'success' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-800 border border-red-200'
+          notification.type === 'success' ? 'bg-orange-50 text-orange-900 border border-orange-200' : 'bg-red-50 text-red-800 border border-red-200'
         }`}>
           <span>{notification.message}</span>
           <button onClick={() => setNotification(null)} className="text-slate-400 hover:text-slate-700 font-bold">&times;</button>
@@ -108,12 +108,12 @@ export default function BreachDesk({ onRefreshMetrics }) {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">72-Hour Statutory Breach Response Desk</h2>
-            <span className="text-[11px] bg-red-50 text-red-700 border border-red-200 px-2 py-0.5 rounded font-mono font-bold">
-              NDPA SEC 40
+            <h2 className="text-xl font-bold text-slate-900 tracking-tight">Breach Incident Management</h2>
+            <span className="text-[11px] bg-red-50 text-red-700 border border-red-200 px-2 py-0.5 rounded font-sans font-bold">
+              72-Hour Response
             </span>
           </div>
-          <p className="text-xs text-slate-600 mt-0.5">
+          <p className="text-xs text-slate-500 mt-0.5">
             Strict 72-hour countdown clocks, root-cause forensics, data subject notifications, and NDPC Form 1 filing packs.
           </p>
         </div>
@@ -160,8 +160,8 @@ export default function BreachDesk({ onRefreshMetrics }) {
                 {/* Statutory Regulatory Live Clock Badge & Actions */}
                 <div className="flex flex-wrap items-center gap-2">
                   {b.is_ndpc_notified ? (
-                    <span className="text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-2xl flex items-center gap-1.5">
-                      <i className="fa-solid fa-circle-check text-emerald-600"></i>
+                    <span className="text-xs font-bold bg-slate-100 text-slate-800 border border-slate-200 px-3 py-1.5 rounded-2xl flex items-center gap-1.5">
+                      <i className="fa-solid fa-circle-check text-slate-600"></i>
                       <span>NDPC Notified ({b.ndpc_reference_number || 'REF-CONFIRMED'})</span>
                     </span>
                   ) : (
@@ -176,7 +176,7 @@ export default function BreachDesk({ onRefreshMetrics }) {
                     className="px-3 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all cursor-pointer"
                     title="Generate NDPC Statutory Form 1 Filing Pack"
                   >
-                    <i className="fa-solid fa-file-shield text-emerald-400"></i>
+                    <i className="fa-solid fa-file-shield text-slate-300"></i>
                     <span>NDPC Form 1 Pack</span>
                   </button>
                 </div>
@@ -193,7 +193,7 @@ export default function BreachDesk({ onRefreshMetrics }) {
                 </div>
                 <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl">
                   <div className="text-[10px] text-slate-500 font-bold uppercase">Containment Status</div>
-                  <div className="text-sm font-bold text-emerald-700 mt-0.5">Contained & Isolated</div>
+                  <div className="text-sm font-bold text-slate-900 mt-0.5">Contained & Isolated</div>
                 </div>
               </div>
             </div>
@@ -242,7 +242,7 @@ export default function BreachDesk({ onRefreshMetrics }) {
               <button
                 type="button"
                 onClick={() => handleNotifyNdpc(selectedBreach.id)}
-                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs"
+                className="px-4 py-2 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs transition-colors"
               >
                 <i className="fa-solid fa-paper-plane text-xs"></i>
                 <span>Record Official NDPC Filing</span>

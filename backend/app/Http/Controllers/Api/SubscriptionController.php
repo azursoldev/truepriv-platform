@@ -126,7 +126,58 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * Initialize Paystack transaction payload.
+     * Multi-Gateway Initialization (Paystack, Flutterwave, Bank Transfer).
+     */
+    public function initializePayment(Request $request): JsonResponse
+    {
+        $request->validate([
+            'plan_tier' => 'required|in:growth_enterprise,dpo_unlimited,dpco_audit_suite',
+            'billing_cycle' => 'required|in:annual,monthly',
+            'gateway' => 'nullable|in:paystack,flutterwave,bank_transfer',
+        ]);
+
+        $gateway = $request->input('gateway', 'paystack');
+        $tenantId = app('current_tenant_id');
+        $tenant = Tenant::findOrFail($tenantId);
+        $user = $request->user();
+
+        $tierConfig = self::PLAN_PRICING[$request->plan_tier];
+        $price = $request->billing_cycle === 'annual' ? $tierConfig['annual_ngn'] : $tierConfig['monthly_ngn'];
+
+        $prefix = match($gateway) {
+            'flutterwave' => 'TP-FLW-',
+            'bank_transfer' => 'TP-BNK-',
+            default => 'TP-PSTK-',
+        };
+        $reference = $prefix . strtoupper(Str::random(12));
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'reference' => $reference,
+                'gateway' => $gateway,
+                'amount_kobo' => (int) ($price * 100),
+                'amount_ngn' => $price,
+                'plan_tier' => $request->plan_tier,
+                'plan_name' => $tierConfig['name'],
+                'billing_cycle' => $request->billing_cycle,
+                'email' => $user->email,
+                'tenant_name' => $tenant->name,
+                'paystack_public_key' => config('services.paystack.public_key', 'pk_test_truepriv_compliance_2026'),
+                'flutterwave_public_key' => config('services.flutterwave.public_key', 'FLWPUBK_TEST-truepriv-2026-X'),
+                'bank_details' => [
+                    'bank_name' => 'Apex Microfinance Bank / Wema Bank',
+                    'account_name' => 'TruePriv Compliance Technologies Ltd',
+                    'account_number' => '0123456789',
+                    'sort_code' => '035150103',
+                    'narration_code' => $reference,
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * Initialize Paystack transaction payload (legacy fallback).
      */
     public function initializePaystack(Request $request): JsonResponse
     {

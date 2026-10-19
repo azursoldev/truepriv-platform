@@ -106,7 +106,7 @@ export default function VendorDesk({ onRefreshMetrics }) {
       case 'functional':
         return <span className="text-[10px] bg-sky-50 text-sky-800 border border-sky-200 px-2 py-0.5 rounded font-bold">Functional Tool</span>;
       default:
-        return <span className="text-[10px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded font-bold">Strictly Necessary</span>;
+        return <span className="text-[10px] bg-slate-100 text-slate-800 border border-slate-200 px-2 py-0.5 rounded font-bold">Strictly Necessary</span>;
     }
   };
 
@@ -115,7 +115,7 @@ export default function VendorDesk({ onRefreshMetrics }) {
       {/* Toast Notification */}
       {notification && (
         <div className={`p-4 rounded-2xl flex items-center justify-between text-xs font-semibold shadow-xs ${
-          notification.type === 'success' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-800 border border-red-200'
+          notification.type === 'success' ? 'bg-orange-50 text-orange-900 border border-orange-200' : 'bg-red-50 text-red-800 border border-red-200'
         }`}>
           <span>{notification.message}</span>
           <button onClick={() => setNotification(null)} className="text-slate-400 hover:text-slate-700 font-bold">&times;</button>
@@ -126,16 +126,13 @@ export default function VendorDesk({ onRefreshMetrics }) {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Third-Party Data Processors & Cookie Tracker Discovery</h2>
-            <span className="text-[11px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded font-mono font-bold">
-              NDPA SEC 29 & 42
-            </span>
-            <span className="text-[11px] bg-sky-50 text-sky-800 border border-sky-200 px-2 py-0.5 rounded font-mono font-bold">
-              TRUEPRIV DISCOVERY
+            <h2 className="text-xl font-bold text-slate-900 tracking-tight">Third-Party Processors & Vendors</h2>
+            <span className="text-[11px] bg-orange-50 text-[#ea580c] border border-orange-200 px-2 py-0.5 rounded font-sans font-bold">
+              Vendor Inventory
             </span>
           </div>
-          <p className="text-xs text-slate-600 mt-0.5">
-            Maintain inventory of external vendors, automatically discover and map website cookies to third-party processors, and verify signed DPAs.
+          <p className="text-xs text-slate-500 mt-0.5">
+            Maintain inventory of external vendors, process categories, transfer destinations, and executed DPAs.
           </p>
         </div>
 
@@ -144,15 +141,15 @@ export default function VendorDesk({ onRefreshMetrics }) {
           <button
             onClick={handleDiscoverCookies}
             disabled={discovering}
-            className="px-3.5 py-2 bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-700 hover:to-indigo-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer disabled:opacity-50"
+            className="px-3.5 py-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer disabled:opacity-50"
           >
-            <i className={`fa-solid fa-radar ${discovering ? 'animate-spin' : ''}`}></i>
-            <span>{discovering ? 'Discovering Trackers...' : '⚡ TruePriv Auto-Discover Cookies'}</span>
+            <i className={`fa-solid fa-radar text-slate-500 ${discovering ? 'animate-spin' : ''}`}></i>
+            <span>{discovering ? 'Discovering Trackers...' : 'Auto-Discover Trackers'}</span>
           </button>
 
           <button
             onClick={() => setShowCreateModal(true)}
-            className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs"
+            className="px-4 py-2 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs"
           >
             <i className="fa-solid fa-plus text-xs"></i>
             <span>Add Processor</span>
@@ -170,7 +167,7 @@ export default function VendorDesk({ onRefreshMetrics }) {
         </button>
         <button
           onClick={() => setSelectedCategoryFilter('strictly_necessary')}
-          className={`px-3 py-1.5 rounded-lg transition-all ${selectedCategoryFilter === 'strictly_necessary' ? 'bg-white text-emerald-800 shadow-xs' : 'hover:text-slate-900'}`}
+          className={`px-3 py-1.5 rounded-lg transition-all ${selectedCategoryFilter === 'strictly_necessary' ? 'bg-white text-slate-900 shadow-xs' : 'hover:text-slate-900'}`}
         >
           Strictly Necessary
         </button>
@@ -220,7 +217,7 @@ export default function VendorDesk({ onRefreshMetrics }) {
                     <h3 className="text-base font-bold text-slate-900 mt-0.5">{v.vendor_name}</h3>
                   </div>
                   <span className={`text-[11px] font-mono uppercase px-2 py-0.5 rounded-full font-bold ${
-                    v.risk_rating === 'high' || v.risk_rating === 'critical' ? 'bg-red-50 text-red-700 border border-red-200' : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                    v.risk_rating === 'high' || v.risk_rating === 'critical' ? 'bg-red-50 text-red-700 border border-red-200' : 'bg-slate-100 text-slate-800 border border-slate-200'
                   }`}>
                     {v.risk_rating} Risk
                   </span>
@@ -257,11 +254,11 @@ export default function VendorDesk({ onRefreshMetrics }) {
                 {/* DPA Status */}
                 <div className={`p-2.5 rounded-xl border flex items-center justify-between text-xs font-semibold ${
                   v.dpa_signed 
-                    ? 'bg-emerald-50 text-emerald-900 border-emerald-200'
+                    ? 'bg-slate-50 text-slate-900 border-slate-200'
                     : 'bg-amber-50 text-amber-900 border-amber-200'
                 }`}>
                   <span className="flex items-center gap-1.5">
-                    <i className="fa-solid fa-file-contract text-emerald-600"></i>
+                    <i className="fa-solid fa-file-contract text-[#ea580c]"></i>
                     <span>Executed DPA on File</span>
                   </span>
                   <span className="text-[10px] font-mono font-bold">
@@ -304,7 +301,7 @@ export default function VendorDesk({ onRefreshMetrics }) {
                   placeholder="e.g. Google Analytics or Paystack Payments"
                   value={formData.vendor_name}
                   onChange={(e) => setFormData({ ...formData, vendor_name: e.target.value })}
-                  className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-emerald-600"
+                  className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c]"
                 />
               </div>
 

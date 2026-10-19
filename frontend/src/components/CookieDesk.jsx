@@ -23,7 +23,7 @@ export default function CookieDesk({ tenant }) {
 
   const [formData, setFormData] = useState({
     domain: 'https://apexmfb.ng',
-    theme_color: '#059669',
+    theme_color: '#ea580c',
     position: 'bottom_bar',
     privacy_policy_url: 'https://apexmfb.ng/privacy',
     company_display_name: 'Apex Microfinance Bank',
@@ -31,7 +31,7 @@ export default function CookieDesk({ tenant }) {
   });
 
   const COLOR_PRESETS = [
-    { name: 'PwC / NDPC Emerald', color: '#059669' },
+    { name: 'TruePriv Orange', color: '#ea580c' },
     { name: 'TruePriv Sky Blue', color: '#0284c7' },
     { name: 'Enterprise Indigo', color: '#4f46e5' },
     { name: 'Ruby Crimson', color: '#e11d48' },
@@ -55,7 +55,7 @@ export default function CookieDesk({ tenant }) {
         setEmbedCode(bRes.embed_code);
         setFormData({
           domain: bRes.banner.domain || 'https://apexmfb.ng',
-          theme_color: bRes.banner.theme_color || '#059669',
+          theme_color: bRes.banner.theme_color || '#ea580c',
           position: bRes.banner.position || 'bottom_bar',
           privacy_policy_url: bRes.banner.privacy_policy_url || 'https://apexmfb.ng/privacy',
           company_display_name: bRes.banner.company_display_name || 'Apex Microfinance Bank',
@@ -82,7 +82,7 @@ export default function CookieDesk({ tenant }) {
     try {
       const res = await api.updateCookieConfig(formData);
       if (res.success) {
-        setNotification({ type: 'success', message: 'TruePriv CMP banner configuration updated & deployed.' });
+        setNotification({ type: 'success', message: 'Cookie banner configuration updated & deployed.' });
         if (res.embed_code) setEmbedCode(res.embed_code);
         loadData();
       }
@@ -131,7 +131,7 @@ export default function CookieDesk({ tenant }) {
       {/* Toast Notification */}
       {notification && (
         <div className={`p-4 rounded-2xl flex items-center justify-between text-xs font-semibold shadow-xs ${
-          notification.type === 'success' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-800 border border-red-200'
+          notification.type === 'success' ? 'bg-orange-50 text-orange-900 border border-orange-200' : 'bg-red-50 text-red-800 border border-red-200'
         }`}>
           <span>{notification.message}</span>
           <button onClick={() => setNotification(null)} className="text-slate-400 hover:text-slate-700 font-bold">&times;</button>
@@ -142,16 +142,13 @@ export default function CookieDesk({ tenant }) {
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5 flex-wrap">
-            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">TruePriv Consent & Preference Suite (CMP)</h2>
-            <span className="text-[10px] bg-sky-50 text-sky-700 border border-sky-200 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">
-              TruePriv CMP Standard
-            </span>
-            <span className="text-[10px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">
-              NDPA SEC 26 COMPLIANT
+            <h2 className="text-xl font-bold text-slate-900 tracking-tight">Consent & Cookie Preferences</h2>
+            <span className="text-[10px] bg-orange-50 text-[#ea580c] border border-orange-200 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">
+              CMP Module
             </span>
           </div>
-          <p className="text-xs text-slate-600 mt-1">
-            Design interactive consent banners, test live preferences in real-time, gate tracking scripts without GTM, and track statutory telemetry.
+          <p className="text-xs text-slate-500 mt-1">
+            Configure cookie consent banners, test preference categories in real-time, and manage tracking scripts.
           </p>
         </div>
 
@@ -161,15 +158,15 @@ export default function CookieDesk({ tenant }) {
             onClick={() => setActiveTab('builder')}
             className={`px-3 py-1.5 rounded-lg transition-all ${activeTab === 'builder' ? 'bg-white text-slate-900 shadow-xs font-bold' : 'hover:text-slate-900'}`}
           >
-            <i className="fa-solid fa-paintbrush mr-1.5 text-sky-600"></i>
+            <i className="fa-solid fa-paintbrush mr-1.5 text-slate-600"></i>
             Interactive Builder & Preview
           </button>
           <button
             onClick={() => setActiveTab('analytics')}
             className={`px-3 py-1.5 rounded-lg transition-all ${activeTab === 'analytics' ? 'bg-white text-slate-900 shadow-xs font-bold' : 'hover:text-slate-900'}`}
           >
-            <i className="fa-solid fa-chart-pie mr-1.5 text-emerald-600"></i>
-            Telemetry & Telemetry Logs
+            <i className="fa-solid fa-chart-pie mr-1.5 text-[#ea580c]"></i>
+            Telemetry & Consent Logs
           </button>
           <button
             onClick={() => setActiveTab('script-blocking')}
@@ -186,13 +183,13 @@ export default function CookieDesk({ tenant }) {
         <div className="p-4 bg-white border border-slate-200 rounded-2xl shadow-xs">
           <div className="flex items-center justify-between text-[11px] font-bold text-slate-500 uppercase tracking-wider">
             <span>Total Logged Consents</span>
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-[#ea580c] animate-pulse"></span>
           </div>
           <div className="text-2xl font-black font-mono text-slate-900 mt-1">
             {analytics?.total_consents?.toLocaleString() || '248'}
           </div>
           <div className="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
-            <i className="fa-solid fa-cloud-arrow-down text-emerald-600"></i>
+            <i className="fa-solid fa-cloud-arrow-down text-[#ea580c]"></i>
             <span>Async queue ingestion</span>
           </div>
         </div>
@@ -200,11 +197,15 @@ export default function CookieDesk({ tenant }) {
         <div className="p-4 bg-white border border-slate-200 rounded-2xl shadow-xs">
           <div className="flex items-center justify-between text-[11px] font-bold text-slate-500 uppercase tracking-wider">
             <span>Overall Opt-In Rate</span>
-            <span className="text-[10px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-bold">Industry Avg: 85%</span>
+            <span className="text-[10px] bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded font-bold">Standard</span>
           </div>
-          <div className="text-2xl font-black font-mono text-emerald-600 mt-1">
+          <div className="text-2xl font-black font-mono text-slate-900 mt-1">
             {analytics?.acceptance_rate ? `${analytics.acceptance_rate}%` : '88.5%'}
           </div>
+          <div className="text-[11px] text-slate-500 mt-1">
+            Accepts optional categories
+          </div>
+        </div>
           <div className="text-[11px] text-slate-500 mt-1">
             Accepts optional categories
           </div>
@@ -390,11 +391,11 @@ export default function CookieDesk({ tenant }) {
             {/* Mockup Frame Header */}
             <div className="bg-slate-900 rounded-t-3xl p-3 px-4 flex items-center justify-between border-b border-slate-800">
               <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
-                <span className="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
-                <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-slate-700 inline-block"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-slate-700 inline-block"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-slate-700 inline-block"></span>
                 <span className="text-[11px] font-mono text-slate-400 ml-2 flex items-center gap-1.5">
-                  <i className="fa-solid fa-lock text-[10px] text-emerald-400"></i>
+                  <i className="fa-solid fa-lock text-[10px] text-slate-400"></i>
                   {formData.domain || 'https://client-site.com'}
                 </span>
               </div>
@@ -447,15 +448,15 @@ export default function CookieDesk({ tenant }) {
 
               {/* Simulation Result Alert when Banner is Dismissed */}
               {simConsentState && (
-                <div className="absolute top-6 left-6 right-6 bg-slate-900/90 border border-emerald-500/40 backdrop-blur-md rounded-2xl p-4 text-xs shadow-xl animate-fade-in flex items-center justify-between z-20">
+                <div className="absolute top-6 left-6 right-6 bg-slate-900/90 border border-[#ea580c]/40 backdrop-blur-md rounded-2xl p-4 text-xs shadow-xl animate-fade-in flex items-center justify-between z-20">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+                    <div className="w-8 h-8 rounded-xl bg-[#ea580c]/20 text-[#ea580c] flex items-center justify-center font-bold">
                       <i className="fa-solid fa-shield-check"></i>
                     </div>
                     <div>
                       <div className="font-bold text-slate-100 flex items-center gap-2">
                         <span>Proof of Consent Logged to DB</span>
-                        <span className="text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-700 px-2 py-0.5 rounded font-mono">202 Accepted</span>
+                        <span className="text-[10px] bg-orange-950 text-orange-400 border border-orange-700 px-2 py-0.5 rounded font-mono">202 Accepted</span>
                       </div>
                       <div className="text-[11px] text-slate-400 mt-0.5">
                         Active: Necessary (Locked)
@@ -662,10 +663,10 @@ export default function CookieDesk({ tenant }) {
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-bold text-slate-700">
                   <span>Strictly Necessary</span>
-                  <span className="font-mono text-emerald-600">100%</span>
+                  <span className="font-mono text-[#ea580c]">100%</span>
                 </div>
                 <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-                  <div className="bg-emerald-500 h-full rounded-full" style={{ width: '100%' }}></div>
+                  <div className="bg-[#ea580c] h-full rounded-full" style={{ width: '100%' }}></div>
                 </div>
                 <p className="text-[10px] text-slate-500">Statutory mandatory requirement</p>
               </div>
@@ -773,8 +774,8 @@ export default function CookieDesk({ tenant }) {
                             {new Date(log.consented_at || log.created_at).toLocaleString()}
                           </td>
                           <td className="py-3 px-3 text-right">
-                            <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
-                              <i className="fa-solid fa-check"></i> Ingested
+                            <span className="inline-flex items-center gap-1 text-[10px] font-bold text-slate-700 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full">
+                              <i className="fa-solid fa-check text-slate-600"></i> Ingested
                             </span>
                           </td>
                         </tr>
@@ -801,8 +802,8 @@ export default function CookieDesk({ tenant }) {
                         <td className="py-3 px-3 font-mono text-[11px] text-slate-500">{row.ip.substring(0, 16)}...</td>
                         <td className="py-3 px-3 text-slate-500 text-[11px]">{row.time}</td>
                         <td className="py-3 px-3 text-right">
-                          <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
-                            <i className="fa-solid fa-check"></i> Verified
+                          <span className="inline-flex items-center gap-1 text-[10px] font-bold text-slate-700 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full">
+                            <i className="fa-solid fa-check text-slate-600"></i> Verified
                           </span>
                         </td>
                       </tr>
@@ -852,7 +853,7 @@ export default function CookieDesk({ tenant }) {
 
               <div className="p-3 bg-slate-900 rounded-xl border border-slate-800 text-slate-200 font-mono text-[11px] space-y-2">
                 <div className="text-slate-400 font-bold">// 3. Query consent programmatically in JS:</div>
-                <div className="text-emerald-300">
+                <div className="text-sky-300">
                   {`if (window.DPConsent && window.DPConsent.hasConsented('analytics')) {
   // Safe to load custom analytics telemetry
 }`}
@@ -881,7 +882,7 @@ export default function CookieDesk({ tenant }) {
                 Copy and paste this single line before the closing <code>&lt;/body&gt;</code> tag on any HTML, WordPress, Webflow, React, or Laravel site.
               </p>
 
-              <div className="mt-4 p-4 bg-slate-950 text-emerald-400 font-mono text-[11px] rounded-2xl overflow-x-auto border border-slate-800 leading-relaxed select-all">
+              <div className="mt-4 p-4 bg-slate-950 text-orange-400 font-mono text-[11px] rounded-2xl overflow-x-auto border border-slate-800 leading-relaxed select-all">
                 {embedCode || `<script src="http://127.0.0.1:8000/embeds/dp-consent.js" data-tenant-id="${tenant?.id || 'ten_xyz'}" data-company-name="${formData.company_display_name}" data-primary-color="${formData.theme_color}" data-position="${formData.position}" data-privacy-url="${formData.privacy_policy_url}"></script>`}
               </div>
             </div>
@@ -889,7 +890,7 @@ export default function CookieDesk({ tenant }) {
             <div className="space-y-2">
               <button
                 onClick={handleCopy}
-                className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-xs transition-all"
+                className="w-full py-3 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
               >
                 <i className="fa-solid fa-copy text-xs"></i>
                 <span>{copied ? 'Copied to Clipboard!' : 'Copy Integration Snippet'}</span>

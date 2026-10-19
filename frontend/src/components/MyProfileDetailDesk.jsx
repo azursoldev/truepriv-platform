@@ -101,8 +101,8 @@ export default function MyProfileDetailDesk({ user, tenant, onUpdateUser, onNavi
         );
       case 'corporate_admin':
         return (
-          <span className="inline-flex items-center gap-1.5 text-xs font-bold bg-emerald-50 text-emerald-900 border border-emerald-300 px-3 py-1 rounded-full">
-            <i className="fa-solid fa-building text-xs text-emerald-600"></i> Corporate Admin
+          <span className="inline-flex items-center gap-1.5 text-xs font-bold bg-orange-50 text-orange-900 border border-orange-200 px-3 py-1 rounded-full">
+            <i className="fa-solid fa-building text-xs text-[#ea580c]"></i> Corporate Admin
           </span>
         );
       case 'dpco_lead_auditor':
@@ -134,7 +134,7 @@ export default function MyProfileDetailDesk({ user, tenant, onUpdateUser, onNavi
         <div className="flex items-center gap-3">
           <button
             onClick={onNavigateBack}
-            className="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5"
+            className="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer"
           >
             <i className="fa-solid fa-arrow-left text-xs"></i>
             <span>Back to Dashboard</span>
@@ -152,7 +152,7 @@ export default function MyProfileDetailDesk({ user, tenant, onUpdateUser, onNavi
         <button
           onClick={handleSubmit}
           disabled={loading}
-          className="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold shadow-md transition-all flex items-center gap-2 disabled:opacity-50"
+          className="px-6 py-2.5 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl text-xs font-bold shadow-md transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
         >
           <i className="fa-solid fa-floppy-disk text-xs"></i>
           <span>{loading ? 'Saving Changes...' : 'Save Profile Changes'}</span>
@@ -161,9 +161,9 @@ export default function MyProfileDetailDesk({ user, tenant, onUpdateUser, onNavi
 
       {/* Notifications */}
       {successMsg && (
-        <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-2xl text-xs font-semibold flex items-center justify-between shadow-xs">
+        <div className="p-4 bg-orange-50 border border-orange-200 text-orange-950 rounded-2xl text-xs font-semibold flex items-center justify-between shadow-xs">
           <div className="flex items-center gap-2">
-            <i className="fa-solid fa-circle-check text-emerald-600 text-sm"></i>
+            <i className="fa-solid fa-circle-check text-[#ea580c] text-sm"></i>
             <span>{successMsg}</span>
           </div>
           <button onClick={() => setSuccessMsg(null)} className="text-slate-400 hover:text-slate-700">&times;</button>
@@ -191,7 +191,7 @@ export default function MyProfileDetailDesk({ user, tenant, onUpdateUser, onNavi
                 <img
                   src={formData.avatar_url}
                   alt={formData.name}
-                  className="w-20 h-20 rounded-3xl object-cover border-2 border-emerald-500 shadow-md"
+                  className="w-20 h-20 rounded-3xl object-cover border-2 border-[#ea580c] shadow-md"
                 />
               ) : (
                 <div className="w-20 h-20 rounded-3xl bg-slate-900 text-white flex items-center justify-center font-extrabold text-2xl shadow-md">
@@ -201,7 +201,7 @@ export default function MyProfileDetailDesk({ user, tenant, onUpdateUser, onNavi
 
               {/* Status Badge */}
               <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-white border-2 border-white shadow-xs flex items-center justify-center">
-                <span className="w-3.5 h-3.5 rounded-full bg-emerald-500"></span>
+                <span className="w-3.5 h-3.5 rounded-full bg-[#ea580c]"></span>
               </div>
             </div>
 
@@ -210,7 +210,7 @@ export default function MyProfileDetailDesk({ user, tenant, onUpdateUser, onNavi
                 <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
                   {formData.name || 'User Profile'}
                 </h1>
-                <span className="text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full font-mono">
+                <span className="text-[10px] font-bold bg-slate-100 text-slate-800 border border-slate-200 px-2.5 py-0.5 rounded-full font-mono">
                   Verified Identity
                 </span>
               </div>
@@ -228,7 +228,7 @@ export default function MyProfileDetailDesk({ user, tenant, onUpdateUser, onNavi
           <div className="bg-slate-50 border border-slate-200 p-4 rounded-2xl w-full lg:w-auto space-y-3">
             <div className="flex items-center justify-between gap-4">
               <span className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-                <i className="fa-solid fa-camera text-emerald-600"></i>
+                <i className="fa-solid fa-camera text-[#ea580c]"></i>
                 <span>Profile Photo (DP) Studio</span>
               </span>
               {formData.avatar_url && (
@@ -270,7 +270,7 @@ export default function MyProfileDetailDesk({ user, tenant, onUpdateUser, onNavi
                     onClick={() => handleSelectPreset(preset.url)}
                     title={preset.label}
                     className={`w-9 h-9 rounded-xl overflow-hidden border-2 transition-all hover:scale-105 ${
-                      formData.avatar_url === preset.url ? 'border-emerald-600 ring-2 ring-emerald-500/30' : 'border-slate-200 opacity-80 hover:opacity-100'
+                      formData.avatar_url === preset.url ? 'border-[#ea580c] ring-2 ring-[#ea580c]/30' : 'border-slate-200 opacity-80 hover:opacity-100'
                     }`}
                   >
                     <img src={preset.url} alt={preset.label} className="w-full h-full object-cover" />
@@ -293,7 +293,7 @@ export default function MyProfileDetailDesk({ user, tenant, onUpdateUser, onNavi
           <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <i className="fa-solid fa-id-card text-emerald-600"></i>
+                <i className="fa-solid fa-id-card text-slate-600"></i>
                 <span>Personal & Professional Profile</span>
               </h3>
               <span className="text-[10px] text-slate-400 uppercase font-bold">Live Editable</span>
@@ -307,7 +307,7 @@ export default function MyProfileDetailDesk({ user, tenant, onUpdateUser, onNavi
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-semibold focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-semibold focus:outline-none focus:border-[#ea580c] focus:bg-white transition-colors"
                 />
               </div>
 
@@ -330,7 +330,7 @@ export default function MyProfileDetailDesk({ user, tenant, onUpdateUser, onNavi
                     placeholder="+234 803 114 2290"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c] focus:bg-white transition-colors"
                   />
                   <span className="text-[10px] text-slate-400 mt-0.5 block">For statutory 72h SMS alerts</span>
                 </div>
@@ -341,7 +341,7 @@ export default function MyProfileDetailDesk({ user, tenant, onUpdateUser, onNavi
                 <select
                   value={formData.department}
                   onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-semibold focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 font-semibold focus:outline-none focus:border-[#ea580c] focus:bg-white transition-colors"
                 >
                   <option value="Compliance & Risk">Compliance & Risk</option>
                   <option value="Information Technology">Information Technology (IT / SecOps)</option>
@@ -399,7 +399,7 @@ export default function MyProfileDetailDesk({ user, tenant, onUpdateUser, onNavi
                   placeholder="••••••••••••"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c] focus:bg-white transition-colors"
                 />
               </div>
 
@@ -410,16 +410,16 @@ export default function MyProfileDetailDesk({ user, tenant, onUpdateUser, onNavi
                   placeholder="••••••••••••"
                   value={formData.confirmPassword}
                   onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-emerald-600 focus:bg-white transition-colors"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-[#ea580c] focus:bg-white transition-colors"
                 />
               </div>
 
-              <div className="p-3 bg-emerald-50/70 border border-emerald-200 rounded-xl flex items-center justify-between">
+              <div className="p-3 bg-orange-50/70 border border-orange-200 rounded-xl flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <i className="fa-solid fa-shield-check text-emerald-600"></i>
-                  <span className="font-bold text-emerald-950">Statutory 2FA Protection</span>
+                  <i className="fa-solid fa-shield-check text-[#ea580c]"></i>
+                  <span className="font-bold text-orange-950">Statutory 2FA Protection</span>
                 </div>
-                <span className="text-[10px] font-bold text-emerald-800 font-mono">ENFORCED</span>
+                <span className="text-[10px] font-bold text-orange-800 font-mono">ENFORCED</span>
               </div>
             </div>
           </div>
@@ -439,7 +439,7 @@ export default function MyProfileDetailDesk({ user, tenant, onUpdateUser, onNavi
                   <div className="font-bold text-slate-900">72-Hour Breach Emergency SMS</div>
                   <div className="text-[10px] text-slate-500">Urgent notification on Section 40 breach incidents</div>
                 </div>
-                <input type="checkbox" defaultChecked className="w-4 h-4 accent-emerald-600 rounded" />
+                <input type="checkbox" defaultChecked className="w-4 h-4 accent-[#ea580c] rounded" />
               </label>
 
               <label className="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between cursor-pointer">
@@ -447,7 +447,7 @@ export default function MyProfileDetailDesk({ user, tenant, onUpdateUser, onNavi
                   <div className="font-bold text-slate-900">30-Day DSAR SLA Alerts</div>
                   <div className="text-[10px] text-slate-500">Reminders when data subject requests reach 20 days</div>
                 </div>
-                <input type="checkbox" defaultChecked className="w-4 h-4 accent-emerald-600 rounded" />
+                <input type="checkbox" defaultChecked className="w-4 h-4 accent-[#ea580c] rounded" />
               </label>
 
               <label className="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between cursor-pointer">
@@ -455,7 +455,7 @@ export default function MyProfileDetailDesk({ user, tenant, onUpdateUser, onNavi
                   <div className="font-bold text-slate-900">Weekly Executive Digest</div>
                   <div className="text-[10px] text-slate-500">Summary of RoPA additions and DPIA sign-offs</div>
                 </div>
-                <input type="checkbox" defaultChecked className="w-4 h-4 accent-emerald-600 rounded" />
+                <input type="checkbox" defaultChecked className="w-4 h-4 accent-[#ea580c] rounded" />
               </label>
             </div>
           </div>
