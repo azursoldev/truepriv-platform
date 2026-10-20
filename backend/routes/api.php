@@ -44,6 +44,11 @@ Route::prefix('v1')->group(function () {
     Route::get('/public/invitations/{token}', [ChampionInvitationController::class, 'resolvePublicToken']);
     Route::post('/public/invitations/{token}/submit', [ChampionInvitationController::class, 'submitDepartmentData']);
 
+    // 2B. Automated Payment Gateway Webhooks (Paystack & Flutterwave)
+    Route::post('/subscription/webhook/paystack', [SubscriptionController::class, 'handlePaystackWebhook']);
+    Route::post('/subscription/webhook/flutterwave', [SubscriptionController::class, 'handleFlutterwaveWebhook']);
+    Route::post('/subscription/webhook', [SubscriptionController::class, 'handlePaystackWebhook']);
+
     // 3. Authenticated API Routes
     Route::middleware(['auth:sanctum', 'idle_timeout'])->group(function () {
 
@@ -79,6 +84,12 @@ Route::prefix('v1')->group(function () {
             Route::post('/subscription/initialize', [SubscriptionController::class, 'initializePayment']);
             Route::post('/subscription/initialize-paystack', [SubscriptionController::class, 'initializePaystack']);
             Route::post('/subscription/upgrade', [SubscriptionController::class, 'upgrade']);
+            Route::post('/subscription/admin-override', [SubscriptionController::class, 'adminOverride']);
+            Route::match(['get', 'post'], '/subscription/verify', [SubscriptionController::class, 'verifyPayment']);
+            Route::post('/subscription/bank-transfer/upload', [SubscriptionController::class, 'uploadBankTransferProof']);
+            Route::get('/subscription/bank-transfers/pending', [SubscriptionController::class, 'getPendingBankTransfers']);
+            Route::post('/subscription/bank-transfers/{id}/approve', [SubscriptionController::class, 'approveBankTransfer']);
+            Route::post('/subscription/bank-transfers/{id}/reject', [SubscriptionController::class, 'rejectBankTransfer']);
 
             // RoPA (Record of Processing Activities)
             Route::get('/ropa', [RopaController::class, 'index']);

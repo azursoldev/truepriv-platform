@@ -24,76 +24,127 @@ export default function Sidebar({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const isSuperAdmin = user?.role === 'super_admin';
-  const isConsultancy = tenant?.type === 'outsourced_dpo' || tenant?.type === 'dpco_firm' || user?.role === 'outsourced_dpo' || user?.role === 'dpco_lead_auditor' || user?.role === 'dpco_staff';
+  const userRole = user?.role || 'corporate_admin';
+  const isSuperAdmin = userRole === 'super_admin';
+  const isCorporateAdmin = userRole === 'corporate_admin';
+  const isComplianceOfficer = userRole === 'compliance_officer';
+  const isDpo = userRole === 'outsourced_dpo';
+  const isDpco = userRole === 'dpco_lead_auditor' || userRole === 'dpco_staff' || tenant?.type === 'dpco_firm';
+  const isConsultancy = isDpo || isDpco || tenant?.type === 'outsourced_dpo';
+  const isChampion = userRole === 'dept_champion';
 
   const accountTypeLabel = isSuperAdmin 
     ? 'Global authority account' 
     : isConsultancy 
     ? 'Consultancy account' 
+    : isComplianceOfficer
+    ? 'Compliance officer seat'
+    : isChampion
+    ? 'Department champion seat'
     : 'Organisation account';
+
+  // Role permissions
+  const canAccessClientPortfolio = isConsultancy || isSuperAdmin;
+  const canAccessDpoProgramme = isDpo || isSuperAdmin;
+  const canAccessProspects = isConsultancy || isSuperAdmin;
+  const canAccessBilling = isSuperAdmin || isCorporateAdmin;
+  const canAccessSettings = isSuperAdmin || isCorporateAdmin;
 
   // 1. WORKSPACE GROUP
   const workspaceItems = [
     { id: 'dashboard', label: 'Overview', icon: 'fa-solid fa-table-cells-large' },
     { id: 'work', label: 'My work', icon: 'fa-regular fa-file-lines' },
-    { id: 'calendar', label: 'Calendar', icon: 'fa-regular fa-calendar' },
   ];
-  // Client Portfolio is ONLY visible for Consultant accounts (DPO & DPCO)
-  if (isConsultancy || isSuperAdmin) {
+  if (!isChampion) {
+    workspaceItems.push({ id: 'calendar', label: 'Calendar', icon: 'fa-regular fa-calendar' });
+  }
+  // Client Portfolio is ONLY visible for Consultant accounts (DPO & DPCO) & Super Admin
+  if (canAccessClientPortfolio) {
     workspaceItems.push({ id: 'portfolio-desk', label: 'Client portfolio', icon: 'fa-regular fa-folder-closed' });
   }
 
   // 2. INVENTORY GROUP
-  const inventoryItems = [
-    { id: 'processing', label: 'Processing activities', icon: 'fa-solid fa-database' },
-    { id: 'systems', label: 'Systems', icon: 'fa-solid fa-layer-group' },
-    { id: 'vendors', label: 'Vendors', icon: 'fa-solid fa-building' },
-    { id: 'transfers', label: 'Transfers', icon: 'fa-solid fa-arrow-right-arrow-left' },
-    { id: 'contracts', label: 'Contracts', icon: 'fa-solid fa-file-contract' },
-  ];
+  const inventoryItems = isChampion 
+    ? [
+        { id: 'processing', label: 'Processing activities', icon: 'fa-solid fa-database' },
+      ]
+    : isDpco 
+    ? [
+        { id: 'processing', label: 'Processing activities', icon: 'fa-solid fa-database' },
+        { id: 'systems', label: 'Systems', icon: 'fa-solid fa-layer-group' },
+        { id: 'contracts', label: 'Contracts', icon: 'fa-solid fa-file-contract' },
+      ]
+    : [
+        { id: 'processing', label: 'Processing activities', icon: 'fa-solid fa-database' },
+        { id: 'systems', label: 'Systems', icon: 'fa-solid fa-layer-group' },
+        { id: 'vendors', label: 'Vendors', icon: 'fa-solid fa-building' },
+        { id: 'transfers', label: 'Transfers', icon: 'fa-solid fa-arrow-right-arrow-left' },
+        { id: 'contracts', label: 'Contracts', icon: 'fa-solid fa-file-contract' },
+      ];
 
-  // 3. ASSESSMENTS GROUP (Grouped under Assessments per client screenshot)
-  const assessmentItems = [
-    { id: 'dpia', label: 'DPIA', icon: 'fa-solid fa-clipboard-check' },
-    { id: 'lia', label: 'LIA', icon: 'fa-solid fa-scale-balanced' },
-    { id: 'tia', label: 'TIA', icon: 'fa-solid fa-earth-africa' },
-    { id: 'vra', label: 'VRA', icon: 'fa-solid fa-expand' },
-  ];
+  // 3. ASSESSMENTS GROUP
+  const assessmentItems = isChampion 
+    ? [] 
+    : [
+        { id: 'dpia', label: 'DPIA', icon: 'fa-solid fa-clipboard-check' },
+        { id: 'lia', label: 'LIA', icon: 'fa-solid fa-scale-balanced' },
+        { id: 'tia', label: 'TIA', icon: 'fa-solid fa-earth-africa' },
+        { id: 'vra', label: 'VRA', icon: 'fa-solid fa-expand' },
+      ];
 
   // 4. RESPOND GROUP
-  const respondItems = [
-    { id: 'dsar', label: 'Rights requests', icon: 'fa-regular fa-circle-check' },
-    { id: 'breach', label: 'Incidents', icon: 'fa-regular fa-shield' },
-    { id: 'regulatory-filings', label: 'Regulatory filings', icon: 'fa-regular fa-file-lines' },
-  ];
+  const respondItems = isChampion 
+    ? [] 
+    : isDpco 
+    ? [
+        { id: 'regulatory-filings', label: 'Regulatory filings', icon: 'fa-regular fa-file-lines' },
+      ]
+    : [
+        { id: 'dsar', label: 'Rights requests', icon: 'fa-regular fa-circle-check' },
+        { id: 'breach', label: 'Incidents', icon: 'fa-regular fa-shield' },
+        { id: 'regulatory-filings', label: 'Regulatory filings', icon: 'fa-regular fa-file-lines' },
+      ];
 
   // 5. IMPROVE GROUP
-  const improveItems = [
-    { id: 'risks', label: 'Risks', icon: 'fa-solid fa-layer-group' },
-    { id: 'controls', label: 'Controls', icon: 'fa-solid fa-shield-halved' },
-    { id: 'actions', label: 'Actions', icon: 'fa-solid fa-list-check' },
-    { id: 'evidence', label: 'Evidence', icon: 'fa-regular fa-eye' },
-    { id: 'audits', label: 'Audits', icon: 'fa-solid fa-building-columns' },
-    { id: 'training', label: 'Training', icon: 'fa-solid fa-graduation-cap' },
-  ];
-  if (isConsultancy || isSuperAdmin) {
+  const improveItems = isChampion
+    ? []
+    : isDpco
+    ? [
+        { id: 'controls', label: 'Controls', icon: 'fa-solid fa-shield-halved' },
+        { id: 'evidence', label: 'Evidence', icon: 'fa-regular fa-eye' },
+        { id: 'audits', label: 'Audits', icon: 'fa-solid fa-building-columns' },
+      ]
+    : [
+        { id: 'risks', label: 'Risks', icon: 'fa-solid fa-layer-group' },
+        { id: 'controls', label: 'Controls', icon: 'fa-solid fa-shield-halved' },
+        { id: 'actions', label: 'Actions', icon: 'fa-solid fa-list-check' },
+        { id: 'evidence', label: 'Evidence', icon: 'fa-regular fa-eye' },
+        { id: 'audits', label: 'Audits', icon: 'fa-solid fa-building-columns' },
+        { id: 'training', label: 'Training', icon: 'fa-solid fa-graduation-cap' },
+      ];
+
+  if (canAccessDpoProgramme) {
     improveItems.push({ id: 'dpo-prog', label: 'DPO programme', icon: 'fa-solid fa-user-shield' });
   }
 
-  // 6. CONSULTANCY GROUP (Strictly for Consultant accounts only)
+  // 6. CONSULTANCY GROUP (Strictly for Consultant accounts and Super Admin only)
   const consultancyItems = [];
-  if (isConsultancy || isSuperAdmin) {
+  if (canAccessProspects) {
     consultancyItems.push({ id: 'prospects', label: 'Prospects', icon: 'fa-solid fa-briefcase' });
   }
 
-  // 7. BOTTOM STANDALONE ITEMS
-  const bottomItems = [
-    { id: 'reports', label: 'Reports', icon: 'fa-regular fa-file-lines' },
-    { id: 'settings', label: 'Settings', icon: 'fa-solid fa-gear' },
-    { id: 'billing', label: 'Subscription & Plans', icon: 'fa-solid fa-credit-card' },
-    { id: 'help', label: 'Help centre', icon: 'fa-regular fa-circle-question' },
-  ];
+  // 7. BOTTOM STANDALONE ITEMS (Strictly Role Permission Guarded)
+  const bottomItems = [];
+  if (!isChampion) {
+    bottomItems.push({ id: 'reports', label: 'Reports', icon: 'fa-regular fa-file-lines' });
+  }
+  if (canAccessSettings) {
+    bottomItems.push({ id: 'settings', label: 'Settings', icon: 'fa-solid fa-gear' });
+  }
+  if (canAccessBilling) {
+    bottomItems.push({ id: 'billing', label: 'Subscription & Plans', icon: 'fa-solid fa-credit-card' });
+  }
+  bottomItems.push({ id: 'help', label: 'Help centre', icon: 'fa-regular fa-circle-question' });
 
   const renderNavSection = (title, items) => {
     if (!items || items.length === 0) return null;
@@ -263,6 +314,38 @@ export default function Sidebar({
                 </div>
                 <div className="text-[11px] text-slate-400 truncate">
                   {user?.email || 'esmee.dejong92@gmail.com'}
+                </div>
+                <div className="mt-0.5">
+                  {isSuperAdmin && (
+                    <span className="inline-flex items-center gap-1 text-[9px] font-bold text-amber-800 bg-amber-50 border border-amber-300 px-1.5 py-0.2 rounded">
+                      <i className="fa-solid fa-crown text-[8px] text-amber-600"></i> Super Admin
+                    </span>
+                  )}
+                  {isCorporateAdmin && (
+                    <span className="inline-flex items-center gap-1 text-[9px] font-bold text-[#ea580c] bg-orange-50 border border-orange-200 px-1.5 py-0.2 rounded">
+                      Corporate Admin
+                    </span>
+                  )}
+                  {isComplianceOfficer && (
+                    <span className="inline-flex items-center gap-1 text-[9px] font-bold text-blue-700 bg-blue-50 border border-blue-200 px-1.5 py-0.2 rounded">
+                      Compliance Officer
+                    </span>
+                  )}
+                  {isDpo && (
+                    <span className="inline-flex items-center gap-1 text-[9px] font-bold text-sky-700 bg-sky-50 border border-sky-200 px-1.5 py-0.2 rounded">
+                      Outsourced DPO
+                    </span>
+                  )}
+                  {isDpco && (
+                    <span className="inline-flex items-center gap-1 text-[9px] font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 px-1.5 py-0.2 rounded">
+                      DPCO Auditor
+                    </span>
+                  )}
+                  {isChampion && (
+                    <span className="inline-flex items-center gap-1 text-[9px] font-bold text-purple-700 bg-purple-50 border border-purple-200 px-1.5 py-0.2 rounded">
+                      Dept Champion
+                    </span>
+                  )}
                 </div>
               </div>
             )}

@@ -157,6 +157,11 @@ export const api = {
   },
   initializePaystack: (data) => request('/subscription/initialize-paystack', { method: 'POST', body: JSON.stringify(data) }),
   upgradeSubscription: (data) => request('/subscription/upgrade', { method: 'POST', body: JSON.stringify(data) }),
+  adminOverrideSubscription: (data) => request('/subscription/admin-override', { method: 'POST', body: JSON.stringify(data) }),
+  uploadBankTransferProof: (data) => request('/subscription/bank-transfer/upload', { method: 'POST', body: JSON.stringify(data) }),
+  getPendingBankTransfers: () => request('/subscription/bank-transfers/pending'),
+  approveBankTransfer: (id) => request(`/subscription/bank-transfers/${id}/approve`, { method: 'POST' }),
+  rejectBankTransfer: (id, reason) => request(`/subscription/bank-transfers/${id}/reject`, { method: 'POST', body: JSON.stringify({ reason }) }),
 
   // User & Role Management / Administration
   getUsers: (params = '') => request(`/users${params}`),

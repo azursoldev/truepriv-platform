@@ -349,6 +349,19 @@ export default function AuthModal({ onLoginSuccess }) {
                       <div className="text-xs font-bold text-slate-900 truncate">DPCO Auditor</div>
                       <div className="text-[10px] text-slate-400 truncate">lead.partner@vanguarddpco.ng</div>
                     </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setDemoUser('dpo@apexmfb.ng')}
+                      className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer col-span-2 ${
+                        email === 'dpo@apexmfb.ng'
+                          ? 'border-[#ea580c] bg-orange-50/60 shadow-2xs'
+                          : 'border-slate-200 hover:border-slate-300 bg-white'
+                      }`}
+                    >
+                      <div className="text-xs font-bold text-slate-900 truncate">Compliance Officer</div>
+                      <div className="text-[10px] text-slate-400 truncate">dpo@apexmfb.ng (Amina Bello • Internal Officer)</div>
+                    </button>
                   </div>
                 </div>
 

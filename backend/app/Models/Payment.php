@@ -21,6 +21,12 @@ class Payment extends Model
         'currency',
         'gateway_status',
         'paid_at',
+        'proof_document_path',
+        'depositor_name',
+        'bank_name',
+        'admin_notes',
+        'reviewed_by',
+        'reviewed_at',
     ];
 
     protected $casts = [
