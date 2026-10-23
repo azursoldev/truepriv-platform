@@ -190,6 +190,10 @@ class Tenant extends Model
         return $this->subscriptions()
             ->where('status', 'active')
             ->whereIn('plan_tier', ['growth_enterprise', 'dpo_unlimited', 'dpco_audit_suite'])
+            ->where(function ($query) {
+                $query->whereNull('current_period_end')
+                    ->orWhere('current_period_end', '>', now());
+            })
             ->exists();
     }
 

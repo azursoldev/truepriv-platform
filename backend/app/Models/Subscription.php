@@ -38,4 +38,24 @@ class Subscription extends Model
     {
         return $this->hasMany(Payment::class);
     }
+
+    public function isExpired(): bool
+    {
+        return $this->status === 'expired' || ($this->current_period_end && $this->current_period_end->isPast());
+    }
+
+    public function isInGracePeriod(): bool
+    {
+        if ($this->status === 'grace_period') return true;
+        if ($this->isExpired() && $this->current_period_end) {
+            return $this->current_period_end->diffInDays(now()) <= 7;
+        }
+        return false;
+    }
+
+    public function daysRemaining(): int
+    {
+        if (!$this->current_period_end) return 0;
+        return max(0, (int) now()->diffInDays($this->current_period_end, false));
+    }
 }

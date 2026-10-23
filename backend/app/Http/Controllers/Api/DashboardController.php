@@ -76,8 +76,24 @@ class DashboardController extends Controller
             }
         }
 
+        $latestSub = $tenant ? $tenant->subscriptions()->latest()->first() : null;
+        $subPayload = null;
+        if ($latestSub) {
+            $daysLeft = $latestSub->daysRemaining();
+            $subPayload = [
+                'plan_tier' => $latestSub->plan_tier,
+                'status' => $latestSub->status,
+                'is_expired' => $latestSub->isExpired(),
+                'is_grace_period' => $latestSub->isInGracePeriod(),
+                'days_remaining' => $daysLeft,
+                'can_export_reports' => $tenant->canExportComplianceReports(),
+                'current_period_end' => $latestSub->current_period_end ? $latestSub->current_period_end->toIso8601String() : null,
+            ];
+        }
+
         return response()->json([
             'success' => true,
+            'subscription' => $subPayload,
             'tenant' => [
                 'id' => $tenant->id,
                 'name' => $tenant->name,

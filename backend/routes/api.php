@@ -43,6 +43,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/public/consents/verify/{proofHash}', [OmnichannelConsentController::class, 'verifyProof']);
     Route::get('/public/invitations/{token}', [ChampionInvitationController::class, 'resolvePublicToken']);
     Route::post('/public/invitations/{token}/submit', [ChampionInvitationController::class, 'submitDepartmentData']);
+    Route::get('/public/invoices/{reference}', [SubscriptionController::class, 'downloadInvoiceReceipt']);
 
     // 2B. Automated Payment Gateway Webhooks (Paystack & Flutterwave)
     Route::post('/subscription/webhook/paystack', [SubscriptionController::class, 'handlePaystackWebhook']);
@@ -90,6 +91,8 @@ Route::prefix('v1')->group(function () {
             Route::get('/subscription/bank-transfers/pending', [SubscriptionController::class, 'getPendingBankTransfers']);
             Route::post('/subscription/bank-transfers/{id}/approve', [SubscriptionController::class, 'approveBankTransfer']);
             Route::post('/subscription/bank-transfers/{id}/reject', [SubscriptionController::class, 'rejectBankTransfer']);
+            Route::get('/subscription/invoices', [SubscriptionController::class, 'getInvoices']);
+            Route::get('/subscription/invoices/{reference}/download', [SubscriptionController::class, 'downloadInvoiceReceipt']);
 
             // RoPA (Record of Processing Activities)
             Route::get('/ropa', [RopaController::class, 'index']);

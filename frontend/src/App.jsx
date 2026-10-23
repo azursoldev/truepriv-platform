@@ -28,6 +28,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [dismissGlobalSubBanner, setDismissGlobalSubBanner] = useState(false);
 
   const initApp = async () => {
     setLoading(true);
@@ -162,6 +163,13 @@ export default function App() {
   const canAccessBilling = isSuperAdmin || isCorporateAdmin;
   const canAccessSettings = isSuperAdmin || isCorporateAdmin;
 
+  // Milestone 4 Point 5: Global Expiration & Warning Alert Status
+  const sub = metrics?.subscription;
+  const isGlobalExpired = sub?.is_expired || sub?.status === 'expired' || (sub?.days_remaining === 0 && sub?.plan_tier !== 'starter_corporate' && sub?.status !== 'grace_period');
+  const isGlobalGrace = sub?.is_grace_period || sub?.status === 'grace_period';
+  const isGlobalUrgent = !isGlobalExpired && !isGlobalGrace && sub?.days_remaining > 0 && sub?.days_remaining <= 7 && sub?.plan_tier !== 'starter_corporate';
+  const showGlobalAlert = !dismissGlobalSubBanner && (isGlobalExpired || isGlobalGrace || isGlobalUrgent) && activeTab !== 'billing';
+
   const renderAccessDenied = (featureTitle, requiredRoleText) => (
     <div className="max-w-2xl mx-auto my-12 bg-white border border-slate-200/90 rounded-3xl p-8 text-center shadow-xs animate-in fade-in">
       <div className="w-14 h-14 bg-rose-50 border border-rose-200 text-rose-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4">
@@ -290,6 +298,57 @@ export default function App() {
             )}
           </div>
         </div>
+
+        {/* Milestone 4 Point 5: Top Global Subscription Expiry & Compliance Lock Banner */}
+        {showGlobalAlert && (
+          <div className={`px-4 sm:px-6 py-2.5 text-xs font-bold transition-all shadow-xs flex items-center justify-between gap-3 ${
+            isGlobalExpired 
+              ? 'bg-rose-600 text-white' 
+              : isGlobalGrace 
+                ? 'bg-amber-600 text-white' 
+                : 'bg-orange-600 text-white'
+          }`}>
+            <div className="flex items-center gap-2.5 max-w-5xl mx-auto flex-1">
+              <span className="w-6 h-6 rounded-lg bg-white/20 flex items-center justify-center text-xs flex-shrink-0 animate-pulse">
+                <i className={`fa-solid ${isGlobalExpired ? 'fa-lock' : isGlobalGrace ? 'fa-hourglass-half' : 'fa-triangle-exclamation'}`}></i>
+              </span>
+              <span className="font-semibold text-[11px] sm:text-xs">
+                {isGlobalExpired && (
+                  <span>
+                    <strong>COMPLIANCE EXPORT LOCK ENFORCED:</strong> Your organization's statutory NDPA subscription has expired. Official NDPC PDF/CSV reports and auditor digital seal exports are locked.
+                  </span>
+                )}
+                {isGlobalGrace && (
+                  <span>
+                    <strong>STATUTORY GRACE PERIOD ACTIVE:</strong> Your annual compliance subscription cycle has concluded. Settle renewal payment within 7 days to avoid automated regulatory export lockdown.
+                  </span>
+                )}
+                {isGlobalUrgent && (
+                  <span>
+                    <strong>CRITICAL NOTICE:</strong> Only {sub?.days_remaining} days remaining on your TruePriv statutory license before regulatory compliance export restriction.
+                  </span>
+                )}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <button
+                onClick={() => setActiveTab('billing')}
+                className="px-3 py-1 rounded-lg bg-white text-slate-900 hover:bg-slate-100 text-[11px] font-black tracking-tight transition-all shadow-2xs flex items-center gap-1.5 cursor-pointer"
+              >
+                <span>{isGlobalExpired ? 'Reactivate Now' : 'Renew Subscription'}</span>
+                <i className="fa-solid fa-arrow-right text-[9px]"></i>
+              </button>
+              <button
+                onClick={() => setDismissGlobalSubBanner(true)}
+                className="w-6 h-6 rounded-lg hover:bg-white/20 flex items-center justify-center text-white/80 hover:text-white transition-all cursor-pointer text-xs"
+                title="Dismiss Banner"
+              >
+                &times;
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Dynamic Workspace Container */}
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">

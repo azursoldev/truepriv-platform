@@ -244,13 +244,22 @@ class AuditController extends Controller
             ], 403);
         }
 
-        // 2. Subscription Entitlement Gate: Restrict official PDF/CSV export for Trial / Starter tier
+        // 2. Subscription Entitlement Gate: Restrict official PDF/CSV export for Expired or Starter tier
         if (!$isSuperAdmin && (!$activeTenant || !$activeTenant->canExportComplianceReports())) {
+            $isExpired = false;
+            $sub = $activeTenant ? $activeTenant->subscriptions()->latest()->first() : null;
+            if ($sub && ($sub->status === 'expired' || ($sub->current_period_end && $sub->current_period_end->isPast()))) {
+                $isExpired = true;
+            }
+
             return response()->json([
                 'success' => false,
-                'error' => 'trial_export_restricted',
-                'message' => 'Official compliance report export (PDF/CSV) is restricted on the Starter Trial tier. Please upgrade to a paid subscription (Growth Enterprise or DPO Unlimited) to download official statutory audit filings.',
+                'error' => $isExpired ? 'subscription_expired_locked' : 'trial_export_restricted',
+                'message' => $isExpired
+                    ? 'Compliance Export Lock Enforced: Your organization\'s TruePriv subscription has expired. Official NDPC PDF/CSV audit packs and auditor verification seals are locked. Please renew your subscription to resume statutory filing downloads.'
+                    : 'Official compliance report export (PDF/CSV) requires an active statutory tier (Growth Enterprise or DPCO Practice). Please upgrade your plan to unlock certified NDPC filings.',
                 'upgrade_required' => true,
+                'is_expired' => $isExpired,
             ], 403);
         }
 

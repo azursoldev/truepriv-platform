@@ -162,6 +162,8 @@ export const api = {
   getPendingBankTransfers: () => request('/subscription/bank-transfers/pending'),
   approveBankTransfer: (id) => request(`/subscription/bank-transfers/${id}/approve`, { method: 'POST' }),
   rejectBankTransfer: (id, reason) => request(`/subscription/bank-transfers/${id}/reject`, { method: 'POST', body: JSON.stringify({ reason }) }),
+  getInvoices: () => request('/subscription/invoices'),
+  getInvoiceDownloadUrl: (ref) => `/api/v1/subscription/invoices/${ref}/download`,
 
   // User & Role Management / Administration
   getUsers: (params = '') => request(`/users${params}`),
