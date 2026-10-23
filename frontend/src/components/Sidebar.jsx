@@ -156,7 +156,27 @@ export default function Sidebar({
           </div>
         )}
         {items.map((item) => {
-          const isActive = activeTab === item.id || (item.id === 'dashboard' && activeTab === 'overview');
+          const isVoidItem = ['risks', 'controls', 'actions', 'evidence', 'audits', 'training', 'dpo-prog'].includes(item.id);
+          const isActive = !isVoidItem && (activeTab === item.id || (item.id === 'dashboard' && activeTab === 'overview'));
+
+          if (isVoidItem) {
+            return (
+              <a
+                key={item.id}
+                href="javascript:void(0)"
+                onClick={(e) => {
+                  e.preventDefault();
+                }}
+                className={`w-full flex items-center ${
+                  isCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2'
+                } rounded-xl text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all cursor-pointer select-none`}
+              >
+                <i className={`${item.icon} text-sm text-slate-400 flex-shrink-0 w-4 text-center`}></i>
+                {!isCollapsed && <span className="truncate">{item.label}</span>}
+              </a>
+            );
+          }
+
           return (
             <button
               key={item.id}
@@ -164,7 +184,7 @@ export default function Sidebar({
               title={isCollapsed ? item.label : undefined}
               className={`w-full flex items-center ${
                 isCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2'
-              } rounded-xl text-xs font-medium transition-all ${
+              } rounded-xl text-xs font-medium transition-all cursor-pointer ${
                 isActive
                   ? 'bg-[#fff7ed] text-[#ea580c] font-bold shadow-2xs'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'

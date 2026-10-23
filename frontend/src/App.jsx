@@ -500,38 +500,7 @@ export default function App() {
             />
           )}
 
-          {/* L. Improve Group */}
-          {['risks', 'controls', 'actions', 'evidence', 'audits', 'training'].includes(activeTab) && (
-            <ModulePreviewDesk
-              moduleKey={activeTab === 'actions' ? 'work' : 'systems'}
-              title={
-                activeTab === 'risks' ? 'Privacy Risk Register' :
-                activeTab === 'controls' ? 'Technical & Organizational Controls' :
-                activeTab === 'actions' ? 'Remediation Actions & Tasks' :
-                activeTab === 'evidence' ? 'Compliance Evidence Vault' :
-                activeTab === 'audits' ? 'Statutory Audit Fieldwork' :
-                'Staff Training & Acknowledgements'
-              }
-              subtitle="NDPA compliance governance and operational remediation tracking."
-              badge="Governance"
-              tenant={tenant}
-              onNavigate={setActiveTab}
-            />
-          )}
-          {activeTab === 'dpo-prog' && (
-            canAccessDpoProgramme ? (
-              <ModulePreviewDesk
-                moduleKey="systems"
-                title="DPO Advisory Programme"
-                subtitle="NDPA compliance governance and operational remediation tracking."
-                badge="Governance"
-                tenant={tenant}
-                onNavigate={setActiveTab}
-              />
-            ) : (
-              renderAccessDenied('DPO Advisory Programme', 'Certified Data Protection Officers or Super Admin')
-            )
-          )}
+          {/* L. Improve Group (Upcoming Milestones - Inactive) */}
 
           {/* M. Consultancy Group */}
           {activeTab === 'prospects' && (
