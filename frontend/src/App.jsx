@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Sidebar from './components/Sidebar';
 import ExecutiveDashboard from './components/ExecutiveDashboard';
 import AdminUserDesk from './components/AdminUserDesk';          // M1: RBAC
@@ -16,6 +16,7 @@ import BreachDesk from './components/BreachDesk';
 import DpiaDesk from './components/DpiaDesk';
 import ModulePreviewDesk from './components/ModulePreviewDesk';  // TruePriv Screens
 import SubscriptionBillingDesk from './components/SubscriptionBillingDesk'; // Milestone 4: Subscriptions & Billing Full Page
+import InteractiveTourGuide from './components/InteractiveTourGuide';      // Interactive Dashboard Tour & Guidance
 import { api, getAuthToken, removeAuthToken, setActiveTenantId } from './lib/api';
 
 export default function App() {
@@ -29,6 +30,20 @@ export default function App() {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [dismissGlobalSubBanner, setDismissGlobalSubBanner] = useState(false);
+  const [isTourOpen, setIsTourOpen] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const profileMenuRef = useRef(null);
+
+  // Close profile dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (profileMenuRef.current && !profileMenuRef.current.contains(e.target)) {
+        setIsProfileMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const initApp = async () => {
     setLoading(true);
@@ -57,6 +72,13 @@ export default function App() {
 
         // Fetch dashboard metrics
         await refreshMetrics();
+
+        // Trigger welcome onboarding tour if first visit and not dismissed
+        const tourCompleted = localStorage.getItem('truepriv_tour_completed');
+        const tourDismissed = sessionStorage.getItem('truepriv_tour_dismissed');
+        if (!tourCompleted && !tourDismissed) {
+          setIsTourOpen(true);
+        }
       }
     } catch (err) {
       console.warn('Session expired or unauthenticated:', err);
@@ -234,7 +256,7 @@ export default function App() {
         <div className="bg-white border-b border-slate-200/90 px-4 sm:px-8 py-3.5 flex items-center justify-between sticky top-0 z-10">
           <div className="flex items-center gap-3">
             <span className="text-xs font-bold text-slate-800 hidden sm:inline">Workspace:</span>
-            <span className="text-xs font-semibold text-slate-900 bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-lg">
+            <span id="tour-workspace" className="text-xs font-semibold text-slate-900 bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-lg">
               {tenant?.name || (isSuperAdmin ? 'GLOBAL PLATFORM ROOT' : 'APEX MICROFINANCE BANK NIGERIA')}
             </span>
             {isSuperAdmin && (
@@ -245,19 +267,31 @@ export default function App() {
             )}
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
+            {/* Interactive Guided Tour / Tooltips Button */}
+            <button
+              id="tour-header-guide"
+              onClick={() => setIsTourOpen(true)}
+              title="Start Interactive Portal Walkthrough"
+              className="px-3 py-1.5 rounded-xl border border-orange-200 hover:border-orange-300 bg-orange-50/70 hover:bg-orange-100 text-[#ea580c] text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer"
+            >
+              <i className="fa-solid fa-compass text-[#ea580c]"></i>
+              <span>Guided Tour</span>
+            </button>
+
             {/* Subscription & Plans: Super Admin & Corporate Admin only */}
             {canAccessBilling && (
               <button
+                id="tour-header-billing"
                 onClick={() => setActiveTab('billing')}
                 className={`px-3.5 py-1.5 rounded-xl border text-xs font-bold flex items-center gap-2 transition-all shadow-2xs cursor-pointer ${
                   activeTab === 'billing'
                     ? 'bg-[#ea580c] text-white border-[#ea580c]'
-                    : 'bg-orange-50 hover:bg-orange-100 text-[#ea580c] border-orange-200'
+                    : 'bg-white hover:bg-slate-50 text-slate-800 border-slate-200'
                 }`}
               >
-                <i className="fa-solid fa-credit-card"></i>
-                <span>Subscription & Plans</span>
+                <i className="fa-solid fa-credit-card text-[#ea580c]"></i>
+                <span className="hidden sm:inline">Subscription & Plans</span>
                 <span className={`px-1.5 py-0.2 rounded text-[10px] font-mono ${
                   activeTab === 'billing' ? 'bg-white/20 text-white' : 'bg-[#ea580c] text-white'
                 }`}>
@@ -265,6 +299,170 @@ export default function App() {
                 </span>
               </button>
             )}
+
+            {/* User Profile & Workspace Settings Dropdown */}
+            <div className="relative" ref={profileMenuRef}>
+              <button
+                id="tour-header-profile"
+                onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+                title="Account Settings & Profile"
+                className={`flex items-center gap-2 pl-2 pr-2.5 py-1.5 rounded-xl border transition-all cursor-pointer shadow-2xs group ${
+                  isProfileMenuOpen
+                    ? 'border-[#ea580c] bg-orange-50/60 ring-2 ring-orange-500/20'
+                    : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50 bg-white'
+                }`}
+              >
+                <div className="w-6 h-6 rounded-lg bg-[#ea580c] text-white flex items-center justify-center text-xs font-black font-mono shadow-2xs">
+                  {user?.name ? user.name.charAt(0).toUpperCase() : 'T'}
+                </div>
+                <div className="text-left hidden md:block">
+                  <div className="text-xs font-bold text-slate-800 leading-none group-hover:text-[#ea580c] transition-colors">
+                    {user?.name || 'Tunde Bakare'}
+                  </div>
+                </div>
+                <i className={`fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200 ${isProfileMenuOpen ? 'rotate-180 text-[#ea580c]' : ''}`}></i>
+              </button>
+
+              {/* Profile & Settings Dropdown Menu */}
+              {isProfileMenuOpen && (
+                <div className="absolute right-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-slate-200/90 py-2 z-50 animate-in fade-in zoom-in-95 duration-150">
+                  {/* User Identity Header */}
+                  <div className="px-4 py-3 border-b border-slate-100 flex items-center gap-3 bg-slate-50/60">
+                    <div className="w-10 h-10 rounded-xl bg-[#ea580c] text-white flex items-center justify-center text-base font-black font-mono shadow-xs flex-shrink-0">
+                      {user?.name ? user.name.charAt(0).toUpperCase() : 'T'}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-xs font-bold text-slate-900 truncate">
+                        {user?.name || 'Tunde Bakare'}
+                      </div>
+                      <div className="text-[11px] text-slate-500 truncate">
+                        {user?.email || 'compliance@apexmfb.ng'}
+                      </div>
+                      <div className="inline-block px-2 py-0.5 mt-1 rounded text-[10px] font-bold bg-orange-50 text-orange-700 border border-orange-200 uppercase tracking-tight">
+                        {user?.role?.replace(/_/g, ' ') || 'Corporate Admin'}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Settings & Team Access Group */}
+                  <div className="py-1.5 px-1.5 space-y-0.5">
+                    <div className="px-2.5 py-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider font-mono">
+                      Settings & Governance
+                    </div>
+                    
+                    <button
+                      onClick={() => {
+                        setActiveTab('settings');
+                        setSettingsSubTab('users');
+                        setIsProfileMenuOpen(false);
+                      }}
+                      className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-all text-left cursor-pointer"
+                    >
+                      <i className="fa-solid fa-gear text-slate-400 w-4 text-center"></i>
+                      <span>Workspace Settings</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setActiveTab('settings');
+                        setSettingsSubTab('users');
+                        setIsProfileMenuOpen(false);
+                      }}
+                      className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-all text-left cursor-pointer"
+                    >
+                      <i className="fa-solid fa-users-gear text-slate-400 w-4 text-center"></i>
+                      <span>Users & Roles (RBAC)</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setActiveTab('settings');
+                        setSettingsSubTab('audit');
+                        setIsProfileMenuOpen(false);
+                      }}
+                      className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-all text-left cursor-pointer"
+                    >
+                      <i className="fa-solid fa-shield-halved text-slate-400 w-4 text-center"></i>
+                      <span>Security Audit Logs</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setActiveTab('settings');
+                        setSettingsSubTab('guests');
+                        setIsProfileMenuOpen(false);
+                      }}
+                      className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-all text-left cursor-pointer"
+                    >
+                      <i className="fa-solid fa-user-plus text-slate-400 w-4 text-center"></i>
+                      <span>Guest Link Invitations</span>
+                    </button>
+
+                    {isSuperAdmin && (
+                      <button
+                        onClick={() => {
+                          setActiveTab('settings');
+                          setSettingsSubTab('residency');
+                          setIsProfileMenuOpen(false);
+                        }}
+                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-all text-left cursor-pointer"
+                      >
+                        <i className="fa-solid fa-building-shield text-slate-400 w-4 text-center"></i>
+                        <span>Data Residency Node</span>
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Billing & Documentation Group */}
+                  <div className="py-1.5 px-1.5 border-t border-slate-100 space-y-0.5">
+                    <div className="px-2.5 py-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider font-mono">
+                      Billing & Resources
+                    </div>
+
+                    <button
+                      onClick={() => {
+                        setActiveTab('billing');
+                        setIsProfileMenuOpen(false);
+                      }}
+                      className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-all text-left cursor-pointer"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <i className="fa-solid fa-credit-card text-slate-400 w-4 text-center"></i>
+                        <span>Subscription & Plans</span>
+                      </div>
+                      <span className="px-1.5 py-0.2 rounded text-[10px] font-mono bg-[#ea580c] text-white font-bold">
+                        365-Day Plan
+                      </span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setActiveTab('help');
+                        setIsProfileMenuOpen(false);
+                      }}
+                      className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-all text-left cursor-pointer"
+                    >
+                      <i className="fa-regular fa-circle-question text-slate-400 w-4 text-center"></i>
+                      <span>Help Centre & Guides</span>
+                    </button>
+                  </div>
+
+                  {/* Sign Out */}
+                  <div className="pt-1.5 px-1.5 border-t border-slate-100">
+                    <button
+                      onClick={() => {
+                        setIsProfileMenuOpen(false);
+                        handleLogout();
+                      }}
+                      className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 transition-all text-left cursor-pointer"
+                    >
+                      <i className="fa-solid fa-arrow-right-from-bracket text-rose-500 w-4 text-center"></i>
+                      <span>Sign Out</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
 
             {/* Client Portfolio shortcut for DPO / DPCO */}
             {canAccessClientPortfolio && !canAccessBilling && (
@@ -352,6 +550,7 @@ export default function App() {
 
         {/* Dynamic Workspace Container */}
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
+          <div id={`tour-page-${activeTab}`} className="h-full">
           
           {/* A. Overview (Exact Client Screenshot Match) */}
           {(activeTab === 'dashboard' || activeTab === 'overview') && (
@@ -361,6 +560,7 @@ export default function App() {
               tenantType={tenant?.type}
               tenant={tenant}
               onNavigate={setActiveTab}
+              onOpenTour={() => setIsTourOpen(true)}
             />
           )}
 
@@ -408,14 +608,16 @@ export default function App() {
 
           {/* F. Systems */}
           {activeTab === 'systems' && (
-            <ModulePreviewDesk
-              moduleKey="systems"
-              title="Systems & Data Assets"
-              subtitle="Maintain systems, servers, and data repositories used across your processing records."
-              badge="Asset Inventory"
-              tenant={tenant}
-              onNavigate={setActiveTab}
-            />
+            <div id="tour-systems-inventory">
+              <ModulePreviewDesk
+                moduleKey="systems"
+                title="Systems & Data Assets"
+                subtitle="Maintain systems, servers, and data repositories used across your processing records."
+                badge="Asset Inventory"
+                tenant={tenant}
+                onNavigate={setActiveTab}
+              />
+            </div>
           )}
 
           {/* G. Vendors */}
@@ -631,9 +833,19 @@ export default function App() {
               renderAccessDenied('Subscription & Plans', 'Corporate Administrators and Super Administrators')
             )
           )}
+          </div>
 
         </main>
       </div>
+
+      {/* Interactive Tour Guide Walkthrough Modal & Tooltips */}
+      <InteractiveTourGuide
+        isOpen={isTourOpen}
+        onClose={() => setIsTourOpen(false)}
+        onComplete={() => setIsTourOpen(false)}
+        activeTab={activeTab}
+        onNavigate={setActiveTab}
+      />
 
     </div>
   );

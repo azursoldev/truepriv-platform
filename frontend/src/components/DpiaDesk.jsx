@@ -108,7 +108,7 @@ export default function DpiaDesk({ onRefreshMetrics }) {
       )}
 
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div id="tour-dpia-desk" className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
             <h2 className="text-xl font-bold text-slate-900 tracking-tight">Data Protection Impact Assessments (DPIA)</h2>

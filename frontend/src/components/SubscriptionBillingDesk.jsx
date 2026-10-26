@@ -1028,7 +1028,7 @@ export default function SubscriptionBillingDesk({ onRefreshMetrics, onNavigate, 
       )}
 
       {/* 3. Milestone 4 Point 4: 365-Day Subscription Lifecycle & Account Activation Desk */}
-      <div className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-7 shadow-xs space-y-6 animate-in fade-in">
+      <div id="tour-billing-card" className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-7 shadow-xs space-y-6 animate-in fade-in">
         
         {/* Top Header: License Badge & Countdown Pill */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-100">
@@ -1597,7 +1597,7 @@ export default function SubscriptionBillingDesk({ onRefreshMetrics, onNavigate, 
         </div>
       ) : (
         /* STEP 1: PLANS SELECTION & PRICING GRID */
-        <div className="space-y-6">
+        <div id="tour-billing-pricing" className="space-y-6">
           
           {/* Billing Cycle Switcher */}
           <div className="flex items-center justify-center">
@@ -1860,7 +1860,7 @@ export default function SubscriptionBillingDesk({ onRefreshMetrics, onNavigate, 
 
       {/* 5. Milestone 4 Point 6: Payment History & Tax Invoice Ledger Desk */}
       {!selectedPlanForCheckout && (
-        <div className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-7 shadow-xs space-y-5 animate-in fade-in">
+        <div id="tour-billing-ledger" className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-7 shadow-xs space-y-5 animate-in fade-in">
           
           {/* Header & Filter Controls */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-100">

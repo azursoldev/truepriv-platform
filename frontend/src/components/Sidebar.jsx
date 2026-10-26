@@ -177,9 +177,14 @@ export default function Sidebar({
             );
           }
 
+          const getTourId = (id) => {
+            return `tour-nav-${id}`;
+          };
+
           return (
             <button
               key={item.id}
+              id={getTourId(item.id)}
               onClick={() => onTabChange(item.id)}
               title={isCollapsed ? item.label : undefined}
               className={`w-full flex items-center ${
@@ -238,6 +243,7 @@ export default function Sidebar({
             </div>
             <div className="relative">
               <button
+                id="tour-workspace-selector"
                 onClick={() => accessibleClients.length > 1 && setWorkspaceDropdownOpen(!workspaceDropdownOpen)}
                 className={`w-full flex items-center justify-between px-3 py-2 bg-white border border-slate-200 ${
                   accessibleClients.length > 1 ? 'hover:border-slate-300 cursor-pointer' : 'cursor-default'
@@ -286,7 +292,7 @@ export default function Sidebar({
         )}
 
         {/* 3. Navigation Sections (Matching Client's Exact Groupings) */}
-        <nav className="px-3 py-2 space-y-2 flex-1 pb-4">
+        <nav id="tour-sidebar-nav" className="px-3 py-2 space-y-2 flex-1 pb-4">
           {renderNavSection(null, workspaceItems)}
           {renderNavSection('INVENTORY', inventoryItems)}
           {renderNavSection('ASSESSMENTS', assessmentItems)}
@@ -301,6 +307,7 @@ export default function Sidebar({
               return (
                 <button
                   key={item.id}
+                  id={item.id === 'billing' ? 'tour-billing-tab' : undefined}
                   onClick={() => onTabChange(item.id)}
                   title={isCollapsed ? item.label : undefined}
                   className={`w-full flex items-center ${
@@ -321,7 +328,7 @@ export default function Sidebar({
       </div>
 
       {/* 4. Bottom User Profile Capsule */}
-      <div className="p-3 border-t border-slate-100 bg-white">
+      <div id="tour-sidebar-user" className="p-3 border-t border-slate-100 bg-white">
         <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'justify-between'} gap-2`}>
           <div className="flex items-center gap-2.5 overflow-hidden">
             <div className="w-8 h-8 rounded-full bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-center font-bold text-xs flex-shrink-0 select-none">

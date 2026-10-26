@@ -6,6 +6,7 @@ export default function ExecutiveDashboard({
   tenantType,
   tenant,
   onNavigate,
+  onOpenTour,
 }) {
   const isSuperAdmin = userRole === 'super_admin';
   const tenantName = tenant?.name || 'DPCO TEST ACCOUNT';
@@ -19,10 +20,10 @@ export default function ExecutiveDashboard({
     <div className="space-y-6 animate-in fade-in pb-10">
       
       {/* 1. Four Top Metric Cards (Matches Screenshot Pixel-by-Pixel) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div id="tour-metric-cards" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
         {/* Card 1: Source records */}
-        <div className="p-5 bg-white border border-slate-200/90 rounded-2xl shadow-2xs hover:border-slate-300 transition-all">
+        <div id="tour-metric-source" className="p-5 bg-white border border-slate-200/90 rounded-2xl shadow-2xs hover:border-slate-300 transition-all">
           <div className="flex items-center justify-between">
             <span className="text-xs font-medium text-slate-500">Source records</span>
             <i className="fa-solid fa-database text-slate-400 text-sm"></i>
@@ -36,7 +37,7 @@ export default function ExecutiveDashboard({
         </div>
 
         {/* Card 2: Prepared drafts */}
-        <div className="p-5 bg-white border border-slate-200/90 rounded-2xl shadow-2xs hover:border-slate-300 transition-all">
+        <div id="tour-metric-drafts" className="p-5 bg-white border border-slate-200/90 rounded-2xl shadow-2xs hover:border-slate-300 transition-all">
           <div className="flex items-center justify-between">
             <span className="text-xs font-medium text-slate-500">Prepared drafts</span>
             <i className="fa-solid fa-bolt text-slate-400 text-sm"></i>
@@ -50,7 +51,7 @@ export default function ExecutiveDashboard({
         </div>
 
         {/* Card 3: Facts reused */}
-        <div className="p-5 bg-white border border-slate-200/90 rounded-2xl shadow-2xs hover:border-slate-300 transition-all">
+        <div id="tour-metric-facts" className="p-5 bg-white border border-slate-200/90 rounded-2xl shadow-2xs hover:border-slate-300 transition-all">
           <div className="flex items-center justify-between">
             <span className="text-xs font-medium text-slate-500">Facts reused</span>
             <i className="fa-solid fa-link text-slate-400 text-sm"></i>
@@ -64,7 +65,7 @@ export default function ExecutiveDashboard({
         </div>
 
         {/* Card 4: Needs a decision */}
-        <div className="p-5 bg-white border border-slate-200/90 rounded-2xl shadow-2xs hover:border-slate-300 transition-all">
+        <div id="tour-metric-decisions" className="p-5 bg-white border border-slate-200/90 rounded-2xl shadow-2xs hover:border-slate-300 transition-all">
           <div className="flex items-center justify-between">
             <span className="text-xs font-medium text-slate-500">Needs a decision</span>
             <i className="fa-solid fa-check text-slate-400 text-sm"></i>
@@ -83,10 +84,11 @@ export default function ExecutiveDashboard({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
         {/* Left Column: Your decision queue */}
-        <div className="lg:col-span-7 space-y-4">
+        <div id="tour-decision-queue" className="lg:col-span-7 space-y-4">
           <div className="flex items-center justify-between px-1">
             <h2 className="text-base font-bold text-slate-900">Your decision queue</h2>
             <button 
+              id="tour-decision-allwork"
               onClick={() => onNavigate('work')}
               className="text-xs font-semibold text-[#ea580c] hover:text-[#c2410c] hover:underline transition-all cursor-pointer"
             >
@@ -96,6 +98,7 @@ export default function ExecutiveDashboard({
 
           {/* Primary Decision Card matching screenshot */}
           <div 
+            id="tour-decision-card"
             onClick={() => onNavigate('contracts')}
             className="p-4 bg-white border border-slate-200/90 hover:border-slate-300 rounded-2xl shadow-2xs hover:shadow-xs transition-all cursor-pointer flex items-center justify-between gap-4 group"
           >
@@ -122,7 +125,7 @@ export default function ExecutiveDashboard({
         </div>
 
         {/* Right Column: One source, connected outputs */}
-        <div className="lg:col-span-5">
+        <div id="tour-connected-outputs" className="lg:col-span-5">
           <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs space-y-4">
             <h3 className="text-sm font-bold text-slate-900">
               One source, connected outputs
@@ -132,6 +135,7 @@ export default function ExecutiveDashboard({
               
               {/* Output 1: Vendor -> VRA */}
               <div 
+                id="tour-output-vendor"
                 onClick={() => onNavigate('vendors')}
                 className="flex items-start gap-3 p-2 rounded-xl hover:bg-slate-50 cursor-pointer transition-colors"
               >
@@ -150,6 +154,7 @@ export default function ExecutiveDashboard({
 
               {/* Output 2: Activity -> DPIA / LIA */}
               <div 
+                id="tour-output-activity"
                 onClick={() => onNavigate('processing')}
                 className="flex items-start gap-3 p-2 rounded-xl hover:bg-slate-50 cursor-pointer transition-colors"
               >
@@ -168,6 +173,7 @@ export default function ExecutiveDashboard({
 
               {/* Output 3: Transfer -> TIA */}
               <div 
+                id="tour-output-transfer"
                 onClick={() => onNavigate('transfers')}
                 className="flex items-start gap-3 p-2 rounded-xl hover:bg-slate-50 cursor-pointer transition-colors"
               >
@@ -186,6 +192,7 @@ export default function ExecutiveDashboard({
 
               {/* Output 4: Request -> response task */}
               <div 
+                id="tour-output-request"
                 onClick={() => onNavigate('work')}
                 className="flex items-start gap-3 p-2 rounded-xl hover:bg-slate-50 cursor-pointer transition-colors"
               >
@@ -204,6 +211,7 @@ export default function ExecutiveDashboard({
 
               {/* Output 5: Incident -> triage task */}
               <div 
+                id="tour-output-incident"
                 onClick={() => onNavigate('work')}
                 className="flex items-start gap-3 p-2 rounded-xl hover:bg-slate-50 cursor-pointer transition-colors"
               >
@@ -223,7 +231,7 @@ export default function ExecutiveDashboard({
             </div>
 
             {/* Subtle disclaimer note */}
-            <div className="pt-3 border-t border-slate-100 text-[11px] text-slate-400 leading-relaxed">
+            <div id="tour-output-disclaimer" className="pt-3 border-t border-slate-100 text-[11px] text-slate-400 leading-relaxed">
               Screening rules identify work to review. They do not make final legal decisions.
             </div>
 

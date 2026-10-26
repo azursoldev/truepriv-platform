@@ -20,24 +20,24 @@ export default function ModulePreviewDesk({
         return (
           <div className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="p-4 bg-white border border-slate-200/90 rounded-2xl shadow-2xs">
+              <div id="tour-work-assigned" className="p-4 bg-white border border-slate-200/90 rounded-2xl shadow-2xs">
                 <span className="text-xs text-slate-500 font-medium">Assigned to me</span>
                 <div className="text-2xl font-extrabold text-slate-900 mt-1">2</div>
                 <span className="text-[11px] text-amber-700 font-semibold">1 urgent item</span>
               </div>
-              <div className="p-4 bg-white border border-slate-200/90 rounded-2xl shadow-2xs">
+              <div id="tour-work-review" className="p-4 bg-white border border-slate-200/90 rounded-2xl shadow-2xs">
                 <span className="text-xs text-slate-500 font-medium">Under Review</span>
                 <div className="text-2xl font-extrabold text-slate-900 mt-1">1</div>
                 <span className="text-[11px] text-slate-400">Awaiting independent review</span>
               </div>
-              <div className="p-4 bg-white border border-slate-200/90 rounded-2xl shadow-2xs">
+              <div id="tour-work-completed" className="p-4 bg-white border border-slate-200/90 rounded-2xl shadow-2xs">
                 <span className="text-xs text-slate-500 font-medium">Completed this month</span>
                 <div className="text-2xl font-extrabold text-slate-900 mt-1">5</div>
                 <span className="text-[11px] text-slate-700 font-semibold">100% on schedule</span>
               </div>
             </div>
 
-            <div className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs space-y-3">
+            <div id="tour-work-queue" className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs space-y-3">
               <h3 className="text-sm font-bold text-slate-900">Active Task Queue</h3>
               <div className="space-y-2.5">
                 {[

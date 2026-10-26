@@ -12,6 +12,7 @@ export default function Header({
   onOpenProfile,
   onOpenAiCopilot,
   onOpenBilling,
+  onOpenTour,
   isSidebarCollapsed,
   onToggleSidebar
 }) {
@@ -95,6 +96,7 @@ export default function Header({
         {tenant && (
           <div className="relative" ref={dropdownRef}>
             <button
+              id="tour-workspace"
               onClick={() => accessibleClients.length > 1 && setDropdownOpen(!dropdownOpen)}
               className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border transition-all text-left ${
                 accessibleClients.length > 1
@@ -164,11 +166,23 @@ export default function Header({
           </div>
         )}
 
-        {/* 3. Action Buttons — Milestone 1-3 only */}
+        {/* 3. Action Buttons */}
         <div className="flex items-center gap-1.5 flex-shrink-0">
+
+          {/* Interactive Guided Tour / Tooltips */}
+          <button
+            id="tour-header-tour-btn"
+            onClick={onOpenTour}
+            title="Start Interactive Portal Tour"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-[#ea580c] bg-white hover:bg-orange-50/60 border border-slate-200 hover:border-orange-200 rounded-lg transition-all shadow-2xs whitespace-nowrap cursor-pointer"
+          >
+            <i className="fa-solid fa-compass text-[#ea580c] text-xs"></i>
+            <span className="hidden sm:inline">Guide Tour</span>
+          </button>
 
           {/* Department Champions — M3: Guest Invitations */}
           <button
+            id="tour-header-champions"
             onClick={onOpenChampions}
             title="Invite Department Champions"
             className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg transition-all shadow-2xs whitespace-nowrap"

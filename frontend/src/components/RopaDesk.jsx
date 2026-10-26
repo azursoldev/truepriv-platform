@@ -154,7 +154,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
       )}
 
       {/* Header & 1-Click Automation Bar */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div id="tour-ropa-header" className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
             <h2 className="text-xl font-bold text-slate-900 tracking-tight">Record of Processing Activities (RoPA)</h2>
@@ -170,6 +170,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
         <div className="flex items-center gap-2.5">
           {/* 1-Click Industry Preset Autofill Button */}
           <button
+            id="tour-ropa-presets"
             onClick={() => setShowAutoFillModal(true)}
             className="px-3.5 py-2 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 rounded-xl text-xs font-semibold flex items-center gap-2 shadow-2xs transition-all"
           >
@@ -178,6 +179,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
           </button>
 
           <button
+            id="tour-ropa-new-activity"
             onClick={() => setShowCreateModal(true)}
             className="px-4 py-2 bg-[#ea580c] hover:bg-[#c2410c] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs"
           >
@@ -188,7 +190,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
       </div>
 
       {/* Filter & Search Bar */}
-      <div className="bg-white border border-slate-200 p-4 rounded-2xl flex flex-wrap items-center justify-between gap-3 shadow-xs">
+      <div id="tour-ropa-search-filters" className="bg-white border border-slate-200 p-4 rounded-2xl flex flex-wrap items-center justify-between gap-3 shadow-xs">
         <div className="flex items-center gap-2 flex-1 min-w-[240px]">
           <i className="fa-solid fa-magnifying-glass text-slate-400 text-xs"></i>
           <input
@@ -230,7 +232,7 @@ export default function RopaDesk({ onRefreshMetrics }) {
       </div>
 
       {/* RoPA Interactive Data Table */}
-      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
+      <div id="tour-ropa-table" className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 uppercase tracking-wider font-bold">
@@ -257,9 +259,10 @@ export default function RopaDesk({ onRefreshMetrics }) {
                   </td>
                 </tr>
               ) : (
-                activities.map((act) => (
+                activities.map((act, idx) => (
                   <tr 
                     key={act.id} 
+                    id={idx === 0 ? "tour-ropa-first-row" : undefined}
                     className="hover:bg-slate-50/80 transition-colors cursor-pointer group"
                     onClick={() => setSelectedActivity(act)}
                   >
