@@ -21,7 +21,7 @@ export const COMPREHENSIVE_TOUR_STEPS = [
   {
     id: 'header-tour-btn',
     tab: 'dashboard',
-    targetId: 'tour-header-tour-btn',
+    targetId: 'tour-header-guide',
     pageName: 'Top Bar',
     sectionBadge: 'BUTTON 2 • GUIDED TOUR',
     icon: 'fa-solid fa-compass',
@@ -33,25 +33,11 @@ export const COMPREHENSIVE_TOUR_STEPS = [
     ],
   },
   {
-    id: 'header-champions-btn',
-    tab: 'dashboard',
-    targetId: 'tour-header-champions',
-    pageName: 'Top Bar',
-    sectionBadge: 'BUTTON 3 • GUEST INTAKE',
-    icon: 'fa-solid fa-user-plus',
-    title: 'Department Champions Guest Invites',
-    meaning: 'Generate tokenized, time-limited invitation links for department heads (HR, IT, Sales) to input departmental data flows without full system access.',
-    bullets: [
-      'Secure 30-day time-limited guest invitations',
-      'Eliminates password sharing for departmental data collection',
-    ],
-  },
-  {
     id: 'header-billing-btn',
     tab: 'dashboard',
     targetId: 'tour-header-billing',
     pageName: 'Top Bar',
-    sectionBadge: 'BUTTON 4 • 365-DAY LICENSE',
+    sectionBadge: 'BUTTON 3 • 365-DAY LICENSE',
     icon: 'fa-solid fa-credit-card',
     title: 'Subscription Status & Checkout',
     meaning: 'Monitors your 365-day statutory compliance license. Click anytime to view pricing plans, renew via Paystack/Flutterwave, or download tax invoices.',
@@ -65,7 +51,7 @@ export const COMPREHENSIVE_TOUR_STEPS = [
     tab: 'dashboard',
     targetId: 'tour-header-profile',
     pageName: 'Top Bar',
-    sectionBadge: 'MENU 5 • PROFILE & SETTINGS',
+    sectionBadge: 'MENU 4 • PROFILE & SETTINGS',
     icon: 'fa-solid fa-user-gear',
     title: 'Profile & Governance Dropdown',
     meaning: 'Your workspace settings control room. Access User Roles (RBAC), Security Audit Trails, Guest Link Invites, and 1-click Sign Out.',
@@ -746,11 +732,13 @@ export default function InteractiveTourGuide({
 
     const updatePositionAndSpotlight = () => {
       let targetEl = document.getElementById(currentStep.targetId);
-      if (!targetEl) {
+      if (!targetEl && currentStep.targetId === `tour-page-${currentStep.tab}`) {
         targetEl = document.getElementById(`tour-page-${currentStep.tab}`);
       }
 
       if (targetEl) {
+        const isWholeScreen = targetEl.offsetWidth >= window.innerWidth * 0.85 && targetEl.offsetHeight >= window.innerHeight * 0.85;
+
         targetEl.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
         const rect = targetEl.getBoundingClientRect();
         const padding = 8;
@@ -763,7 +751,11 @@ export default function InteractiveTourGuide({
           right: rect.right + padding,
         };
 
-        setSpotlightRect(boundedRect);
+        if (isWholeScreen) {
+          setSpotlightRect(null);
+        } else {
+          setSpotlightRect(boundedRect);
+        }
 
         // Compute Tethered Tooltip Coordinates with Arrow Pointer
         const popoverWidth = Math.min(310, window.innerWidth - 32);
